@@ -1,0 +1,5 @@
+
+correccion de las graficas de sedema, filtrar por año
+que se pueda ver los viajes por vehiculo en sedema
+descarga masiva de manifiestos
+avisos de manifisto valido
