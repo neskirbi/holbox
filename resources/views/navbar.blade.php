@@ -1,5 +1,5 @@
-<div class="bg-light" style=" height:60px; width:100%;  ">
-    <a class="navbar-brand" href="{{url('home')}}"><img src="{{asset('images/logot.png')}}" height="55px" style="margin-left:10px;"></a>
+<div class="bg-light" style=" height:60px; width:100%;   ">
+    <!--<a class="navbar-brand" href="{{url('home')}}"><img src="{{asset('images/logot.png')}}" height="55px" style="margin-left:10px;"></a>-->
     <div class=" float-right">
         <nav class="navbar navbar-expand-md navbar-light navbar-loght">
             <!--<a class="navbar-brand" href="home">Concretos</a>-->
@@ -40,10 +40,7 @@
 
                     </li>-->
 
-                    <li class="nav-item">
-                        <a class="nav-link"  href="{{url('microgeneradores')}}">Microgeneradores </a>
-                    </li>
-
+               
                     <li class="nav-item">
                         <a class="nav-link"  href="{{url('registropage')}}">Registrarse </a>
                     </li>

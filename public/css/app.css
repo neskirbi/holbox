@@ -3885,6 +3885,7 @@ input[type=button].btn-block {
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
+  font-weight: bold;
 }
 .nav-link:hover, .nav-link:focus {
   text-decoration: none;
@@ -3996,7 +3997,7 @@ input[type=button].btn-block {
 }
 
 .extra-nav{
-  background-color: #F8F9FA;
+  background-color: #f8f9fa00;
 }
 
 .navbar-nav .nav-link {
@@ -6197,7 +6198,7 @@ button.bg-danger:focus {
 }
 
 .bg-light {
-  background-color: #f8f9fa !important;
+  background-color: #569C31 !important;
 }
 
 a.bg-light:hover, a.bg-light:focus,
