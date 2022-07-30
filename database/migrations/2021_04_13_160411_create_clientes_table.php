@@ -23,8 +23,6 @@ class CreateClientesTable extends Migration
             $table->boolean('puedepospago')->default(false);
             $table->boolean('confirmacion')->default(0);
             $table->rememberToken();            
-            $table->string("CodigoSAP",50)->default('');
-            $table->datetime("ProcesadoSAP")->default(null);
             $table->timestamps();
         });
     }

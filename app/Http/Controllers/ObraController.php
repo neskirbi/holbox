@@ -270,7 +270,6 @@ class ObraController extends Controller
     public function RegistroObra(){
         $generadores = Generador::all()
         ->where('id_cliente',Auth::guard('clientes')->user()->id)
-        ->where('borrado','1')
         ->where('verificado','1');
         
 

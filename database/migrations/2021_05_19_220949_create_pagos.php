@@ -32,8 +32,6 @@ class CreatePagos extends Migration
             $table->string('detalle',150)->default('');
             $table->integer('status')->default(1);
             
-            $table->string("CodigoSAP",50)->default('');
-            $table->datetime("ProcesadoSAP")->default(null);
             $table->timestamps();
 
             

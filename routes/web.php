@@ -470,7 +470,7 @@ Route::get('catalogo', 'App\Http\Controllers\PedidoController@Catalogo');
  * Rutas para informacion de SEDEMA
  */
 
- 
+ /*
 Route::resource('plantas','App\Http\Controllers\Sedema\PlantaController');
 Route::get('PagosSedemaPlanta','App\Http\Controllers\Sedema\PlantaController@PagosSedemaPlanta');
 Route::get('CitasSedemaPlanta','App\Http\Controllers\Sedema\PlantaController@CitasSedemaPlanta');
@@ -495,7 +495,7 @@ Route::get('quitaradminsedema/{id}', 'App\Http\Controllers\Sedema\AdministradorC
 
 
 Route::get('GraficasPagosClienteSedema/{con}/{id}','App\Http\Controllers\Sedema\GeneradorController@GraficasPagosClienteSedema');
-
+*/
 
 
 /**
@@ -512,10 +512,10 @@ Route::get('confirmaciont/{id}','App\Http\Controllers\LoginController@Confirmaci
  * Pagos cliente
  */
 
-Route::post('PagoCliente', 'App\Http\Controllers\PagosController@PagoCliente');
+//Route::post('PagoCliente', 'App\Http\Controllers\PagosController@PagoCliente');
 
 
-Route::get('ContratoRC/{id}', 'App\Http\Controllers\FormatosController@ContratoRC');
+//Route::get('ContratoRC/{id}', 'App\Http\Controllers\FormatosController@ContratoRC');
 //Route::get('ContratoRCT/{id}', 'App\Http\Controllers\FormatosController@ContratoRCT');
 
 
@@ -526,18 +526,18 @@ Route::get('ContratoRC/{id}', 'App\Http\Controllers\FormatosController@ContratoR
 Route::get('TCRecitrackTrasporte',function(){
     return view('formatos.TCRecitrackTrasporte');
 });
-
+/*
 Route::get('citarev/{id}/{admin}','App\Http\Controllers\Android\CitaController@CitaRev');
 Route::put('citaconfirmacion/{id}/{admin}','App\Http\Controllers\Android\CitaController@CitaConfirmacion');
 Route::get('ConfirmacionChofer/{id}','App\Http\Controllers\Android\RecitrackTransporte\Choferes\LoginController@Confirmacion');
-
+*/
 
 
  /**
   * Micreogeneradores
   */
 
-  Route::resource('microgeneradores','App\Http\Controllers\Mgeneradores\MgeneradoresController');
+  //Route::resource('microgeneradores','App\Http\Controllers\Mgeneradores\MgeneradoresController');
   
 
   /**
@@ -559,7 +559,7 @@ Route::get('ConfirmacionChofer/{id}','App\Http\Controllers\Android\RecitrackTran
     * Rutas generales
     */
 
-    
+    /*
     Route::get('boleta/{id}', 'App\Http\Controllers\General\CitaController@boleta');
     Route::get('manifiesto/{id}', 'App\Http\Controllers\General\CitaController@manifiesto'); 
     Route::get('terminacion/{id}', 'App\Http\Controllers\General\ObraController@terminacion'); 
@@ -571,7 +571,7 @@ Route::get('ConfirmacionChofer/{id}','App\Http\Controllers\Android\RecitrackTran
 
     Route::get('firma/{id}', 'App\Http\Controllers\CitasController@FirmaTransporte');
     Route::post('firma/{id}', 'App\Http\Controllers\CitasController@Entregar');
-
+*/
 
 
     /**

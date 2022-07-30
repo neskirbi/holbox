@@ -74,10 +74,6 @@ class CreateGeneradores extends Migration
             /**
              * datos del sistema
              */
-            $table->integer("borrado")->default(1);
-            
-            $table->string("CodigoSAP",50)->default('');
-            $table->datetime("ProcesadoSAP")->default(null);
             $table->timestamps();
         });
     }

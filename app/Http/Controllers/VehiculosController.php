@@ -21,7 +21,6 @@ class VehiculosController extends Controller
         $vehiculos = DB::table('clientes')
         ->join('vehiculos', 'vehiculos.id_cliente', '=', 'clientes.id')
         ->where('clientes.id',Auth::guard('clientes')->user()->id)
-        ->where('vehiculos.borrado',1)
         ->select('vehiculos.id','vehiculos.vehiculo','vehiculos.marca','vehiculos.modelo','vehiculos.matricula','vehiculos.borrado')
         ->get();
 
