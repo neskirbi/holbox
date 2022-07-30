@@ -134,7 +134,7 @@
                         <a class="nav-link" id="pagostab" data-toggle="pill" href="#pagos" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">Pagos</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" id="reciclajetab" data-toggle="pill" href="#reciclaje" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">Reciclaje</a>
+                        <a class="nav-link" id="recolecciontab" data-toggle="pill" href="#recoleccion" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">Recolección</a>
                       </li>
                       
                       
@@ -149,95 +149,10 @@
                   
 
                       <div class="tab-pane fade" id="pagos" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab" style=" max-height: 420px; overflow-y:scroll;">
-                        <div class="row">
-                          <div class= "col-md-10">
-                            <div id="accordion">
-                              <div class="card card-info">
-                                <div class="card-header">
-                                  <h4 class="card-title">
-                                    <a class="d-block  collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="false">
-                                      Haz clic aquí para ayuda en " Transferencia " 
-                                    </a>
-                                  </h4>
-                                </div>
-                                <div id="collapseOne" class="collapse" data-parent="#accordion" style="">
-                                  <div class="card-body">
-                                  <style>
-                                    li{
-                                      color:black;
-                                      
-                                    }
-                                  </style>  
-                                  
-                                  <b>
-                                    <ol>
-                                      <li>Haz clic en el botón transferencia.</li>
-                                        <hr>
-                                        <br>
-                                          <img src="{{url('images/ayuda/transferencia/1.jpg')}}"height="200px" style="margin-left:50px;">
-                                        <br>
-                                        <br>
-                                        <hr>
-                                      <li>Captura el monto.</li>
-                                        <br>
-                                          <img src="{{url('images/ayuda/transferencia/2.jpg')}}"height="400px" style="margin-left:50px;">
-                                        <br>
-                                        <br>
-                                        <hr>
-                                      <li>Selecciona el "Generador" y la "Planta" correspodiente.</li>
-                                        <br>
-                                          <img src="{{url('images/ayuda/transferencia/3.jpg')}}"height="400px" style="margin-left:50px;">
-                                        <br>
-                                        <br>
-                                        <hr>
-                                      <li>Llena los campos solicitados.</li>
-                                        <br>
-                                          <img src="{{url('images/ayuda/transferencia/4.png')}}"height="400px" style="margin-left:50px;">
-                                        <br>
-                                        <br>
-                                        <hr>
-                                      <li>Haz clic en Generar.</li>
-                                        <br>
-                                          <img src="{{url('images/ayuda/transferencia/5.png')}}"height="400px" style="margin-left:50px;">
-                                        <br>
-                                        <br>
-                                        <hr>
-                                      <li>Aparecerá una leyenda en la parte superior derecha en color verde de confirmación. </li>
-                                        <br>
-                                          <img src="{{url('images/ayuda/transferencia/6.png')}}"height="50px" style="margin-left:50px;">
-                                        <br>
-                                        <br>
-                                        <hr>
-                                      <li>Podrás verlo en la lista para poder descargar el formato de pago</li>
-                                        <br>
-                                          <img src="{{url('images/ayuda/transferencia/7.jpg')}}"height="100px" style="margin-left:50px;">
-                                        <br>
-                                        <br>
-                                        <hr>
-                                      <li>Ahora puedes imprimir el formato de pago para realizarlo en la institución bancaria correspondiente. </li>
-                                        <br>
-                                          <img src="{{url('images/ayuda/transferencia/8.png')}}"height="150px" style="margin-left:50px;">
-                                        <br>
-                                        <br>
-                                        <hr>    
-                                    </ol>
-                                  </b>  
-                                  </div>
-                                </div>
-                              </div>
-                            </div>  
-                          </div>                          
-                          <div class="col-md-1"></div>
-                        </div>
-                        <br>
+                        
                         <div class="row">
                           <div class= "col-md-12">
-                            <a data-toggle="modal" data-target="#modalpago">
-                              <div  class="boxtransfer">
-                                <font size="6px"><i class="fa fa-university" aria-hidden="true"></i></font>
-                                <br>Tranferencia
-                              </div>                      
-                            </a>
+                            
                           
                             <br>
                             <br>
@@ -284,7 +199,7 @@
                         
                       </div>
 
-                      <div class="tab-pane fade" id="reciclaje" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab" style=" max-height: 420px; overflow-y:scroll;">
+                      <div class="tab-pane fade" id="recoleccion" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab" style=" max-height: 420px; overflow-y:scroll;">
                         <table class="table table-hover text-nowrap">
                           <thead>
                             <tr>
@@ -299,20 +214,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                          @foreach($reciclajes as $reciclaje)
-                            <tr>
-                              <td>{{$reciclaje->tipo}}</td>
-                              <td>{{mb_substr($reciclaje->material,0,50,"UTF-8")}}</td>
-                              <td>{{number_format($reciclaje->cantidad,2)}} m<sup>3</sup></td>
-                              <td>$ {{number_format($reciclaje->precio)}}</td>
-                              <td>$ {{number_format($reciclaje->precio*$reciclaje->cantidad,2)}}</td>
-                              <td>% {{number_format($reciclaje->iva,2)}}</td>
-                              <td>$ {{number_format(($reciclaje->precio*$reciclaje->cantidad)+(($reciclaje->precio*$reciclaje->cantidad)*$reciclaje->iva/100),2)}}</td>
-                              <td>
-                              {{FechaFormateada($reciclaje->fechacita)}}
-                              </td>                            
-                            </tr>
-                          @endforeach                                  
+                                                          
                           </tbody>
                         </table>
                       </div>
@@ -332,95 +234,11 @@
           </div>
           <!-- /.col (RIGHT) -->
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="card card-info">
-              <div class="card-header">
-                <h3 class="card-title">Obras</h3>
-              </div>
-              <div class="card-body">
-                <div style="height:350px; overflow-y:scroll;" >
-                  @foreach($obras as $obra)
-                    <div class="col-12" style="cursor:pointer;" data-id="{{$obra->id}}" onclick="AvanceEntregas('{{$obra->id}}');">
-                      <div class="info-box">
-                        <span class="info-box-icon bg-info"><i class="far fa-building"></i></span>
+        
 
-                        <div class="info-box-content">
-                          <span class="info-box-number">{{$obra->obra}}</span>
-                          <span>{{$obra->superficie}} m<sup>3</sup></span>
-                        </div>
-                        <!-- /.info-box-content -->
-                      </div>
-                      
-                      <!-- /.info-box -->
-                    </div>
-                    
-                  @endforeach
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card card-info">
-              <div class="card-header">
-                <h3 class="card-title">Avance General Reciclaje</h3>
-                
-              </div>
-              <div class="card-body">
-                <div class="avancematerial" style="height:350px;">
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        
 
-        <div class="row">
-          <div class="col-md-12">
-            <!-- BAR CHART -->
-            <div class="card card-info">
-              <div class="card-header">
-                <h3 class="card-title">Avance Reciclaje</h3>
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="avance">
-                </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-
-          </div>
-          <!-- /.col (RIGHT) -->
-        </div>
-
-        <div class="row">
-          <div class="col-md-12">
-            <!-- BAR CHART -->
-            <div class="card card-info">
-              <div class="card-header">
-                <h3 class="card-title">Detalle Reciclaje</h3>
-                  <div class="card-tools" id="detalle">
-                 
-                  </div>
-              </div>
-              <div class="card-body" id="detalleentregas" style="overflow:scroll;">
-                <div class="avance">
-                </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-
-          </div>
-          <!-- /.col (RIGHT) -->
-        </div>
+        
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
@@ -471,7 +289,6 @@
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 
-@include('cliente.dashboard.modals.modalpago')
 @if(Session::has('transferencia'))
 <script>
   window.open('transferencia/{{Session::get('transferencia')}}', '_blank').focus();

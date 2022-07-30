@@ -72,23 +72,10 @@ class TareasController extends Controller
       Administrador::where('mail','!=','')
       ->update(['pass' => password_hash(123,PASSWORD_DEFAULT)]);
 
-      Vendedor::where('mail','!=','')
-      ->update(['pass' => password_hash(123,PASSWORD_DEFAULT)]);
-
-      Recepcion::where('mail','!=','')
-      ->update(['pass' => password_hash(123,PASSWORD_DEFAULT)]);
-
-      Finanza::where('mail','!=','')
-      ->update(['pass' => password_hash(123,PASSWORD_DEFAULT)]);
-
+     
       Cliente::where('mail','!=','')
       ->update(['pass' => password_hash(123,PASSWORD_DEFAULT)]);
       
-      Residente::where('mail','!=','')
-      ->update(['pass' => password_hash(123,PASSWORD_DEFAULT)]);
-
-      Transportista::where('mail','!=','')
-      ->update(['pass' => password_hash(123,PASSWORD_DEFAULT)]);
 
       Asociado::where('mail','!=','')
       ->update(['pass' => (123)]);

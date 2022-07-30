@@ -10,13 +10,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Models\Asociado;
 use App\Models\Cliente;
 use App\Models\Administrador;
-use App\Models\Vendedor;
-use App\Models\Recepcion;
-use App\Models\Finanza;
-use App\Models\Sedema;
 use App\Models\Configuracion;
-use App\Models\CategoriaMaterial;
-use App\Models\Residente;
 use App\Models\Token;
 use App\Mail\MailRecuperar;
 use App\Models\Director;
@@ -39,7 +33,6 @@ class LoginController extends Controller
         if(strlen($request->mail)==0 || strlen($request->pass)==0){
             return redirect('acceso')->with('error', '¡Campos vacios!');
         }
-
         
         $asociado = Asociado::where([
             'mail' => $request->mail, 
@@ -260,41 +253,8 @@ class LoginController extends Controller
             return redirect('home');
         }
 
-        $vendedor = Vendedor::where([
-            'mail' => $request->mail
-        ])->first();
+       
 
-        if($vendedor){
-            if(!password_verify($request->pass,$vendedor->pass)){
-                return redirect('loginpage')->with('error', '¡Error de contraseña!');
-            }
-            Auth::guard('vendedores')->login($vendedor);
-            return redirect('home');
-        }
-
-        $recepcion = Recepcion::where([
-            'mail' => $request->mail
-        ])->first();
-
-        if($recepcion){
-            if(!password_verify($request->pass,$recepcion->pass)){
-                return redirect('loginpage')->with('error', '¡Error de contraseña!');
-            }
-            Auth::guard('recepciones')->login($recepcion);
-            return redirect('home');
-        }
-
-        $finanza = Finanza::where([
-            'mail' => $request->mail
-        ])->first();
-
-        if($finanza){
-            if(!password_verify($request->pass,$finanza->pass)){
-                return redirect('loginpage')->with('error', '¡Error de contraseña!');
-            }
-            Auth::guard('finanzas')->login($finanza);
-            return redirect('home');
-        }
 
         $cliente = Cliente::where([
             'mail' => $request->mail
@@ -308,41 +268,7 @@ class LoginController extends Controller
             return redirect('home');
         }
 
-        $residente = Residente::where([
-            'mail' => $request->mail
-        ])->first();
-
-        if($residente){
-            if(!password_verify($request->pass,$residente->pass)){
-                return redirect('loginpage')->with('error', '¡Error de contraseña!');
-            }
-            Auth::guard('residentes')->login($residente);
-            return redirect('home');
-        }
-
-        $sedema = Sedema::where([
-            'mail' => $request->mail
-        ])->first();
-
-        if($sedema){
-            if($request->pass!=$sedema->pass){
-                return redirect('loginpage')->with('error', '¡Error de contraseña!');
-            }
-            Auth::guard('sedemas')->login($sedema);
-            return redirect('home');
-        }
-
-        $transportista = Transportista::where([
-            'mail' => $request->mail
-        ])->first();
-
-        if($transportista){
-            if(!password_verify($request->pass,$transportista->pass)){
-                return redirect('loginpage')->with('error', '¡Error de contraseña!');
-            }
-            Auth::guard('transportistas')->login($transportista);
-            return redirect('home');
-        }
+     
 
         return redirect('loginpage')->with('error', '¡Correo no registrado!');
     }

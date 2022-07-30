@@ -22,7 +22,8 @@ class GeneradorController extends Controller
      */
     public function index()
     {
-        //
+        $generadores=Generador::paginate(15);
+        return view('administracion.generadores.generadores',['generadores'=>$generadores]);
     }
 
     /**
@@ -171,6 +172,7 @@ class GeneradorController extends Controller
         
         }
 
+        $generdor->verificado=1;
         if($generador->save()){
             $token=new Token();        
             $token->id=$id;
@@ -195,7 +197,8 @@ class GeneradorController extends Controller
      */
     public function show($id)
     {
-        //
+        $generador = Generador::find($id);
+        return view('administracion.generadores.generador',['generador'=>$generador]);
     }
 
     /**
@@ -218,7 +221,120 @@ class GeneradorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //return $request;
+        $generador=Generador::find($id);
+
+        $generador->razonsocial = $request->razonsocial;
+        //$generador->fisicaomoral = $request->fisicaomoral;
+        $generador->rfc = $request->rfc;
+
+        if(isset($request->rfcpdf)){
+            $generador->rfcpdf=$generador->id.'.pdf';
+            if(!GuardarArchivos($request->rfcpdf,'/documentos/generadores/rfc/empresa',$generador->rfcpdf)){
+                return Redirect::back()->with('error', 'Error al guardar RFC del generador.');
+            }
+        }
+
+        $generador->calle = $request->calle;
+        $generador->numeroext = $request->numeroext;
+        $generador->numeroint = $request->numeroint;
+        $generador->colonia = $request->colonia;
+        $generador->entidad = $request->entidad;
+        $generador->municipio = $request->municipio;
+        $generador->cp = $request->cp;
+        $generador->telefono = $request->telefono;
+        $generador->celular = $request->celular;
+        $generador->mail = $request->mail;
+        $generador->mail2 = $request->mail2;
+
+        if($generador->fisicaomoral=="Moral"){
+
+            /**
+             * Representante Persona Moral
+             */
+            $generador->nombresrepre = $request->nombresrepre;
+            $generador->apellidosrepre = $request->apellidosrepre;
+            $generador->nacionalidadrepre = $request->nacionalidadrepre;
+            $generador->identificacionrepre = $request->identificacionrepre;
+
+            if(isset($request->identificacionreprepdf)){
+                $generador->identificacionreprepdf=$generador->id.'.pdf';
+                if(!GuardarArchivos($request->identificacionreprepdf,'/documentos/generadores/identificaciones/representante',$generador->identificacionreprepdf)){
+                    return Redirect::back()->with('error', 'Error al guardar RFC del generador.');
+                }
+            }
+            
+            $generador->rfcrepre = $request->rfcrepre;
+
+            if(isset($request->rfcreprepdf)){
+                $generador->rfcreprepdf=$generador->id.'.pdf';
+                if(!GuardarArchivos($request->rfcreprepdf,'/documentos/generadores/rfc/representante',$generador->rfcreprepdf)){
+                    return Redirect::back()->with('error', 'Error al guardar RFC del generador.');
+                }
+            }
+            
+            /**
+             * Empresa Persona Moral
+             */
+            $generador->fechaconst = $request->fechaconst;
+            $generador->numeroactacont = $request->numeroactacont;
+
+             
+            if(isset($request->numeroactacontpdf)){
+                $generador->numeroactacontpdf=$generador->id.'.pdf';
+                if(!GuardarArchivos($request->numeroactacontpdf,'/documentos/generadores/actas/empresa',$generador->numeroactacontpdf)){
+                    return Redirect::back()->with('error', 'Error al guardar RFC del generador.');
+                }
+            }
+
+            if(isset($request->podernotarial)){
+                if(!GuardarArchivos($request->podernotarial,'/documentos/generadores/actas/poder',$generador->id.'.pdf')){
+                    return Redirect::back()->with('error', 'Error al guardar el poder notarial del generador.');
+                }
+            }
+
+
+            if(isset($request->domicilioempresapdf)){
+                $generador->domicilioempresapdf=$generador->id.'.pdf';
+                if(!GuardarArchivos($request->domicilioempresapdf,'/documentos/generadores/comprobantedomicilio/empresa',$generador->domicilioempresapdf)){
+                    return Redirect::back()->with('error', 'Error al guardar RFC del generador.');
+                }
+            }
+
+            $generador->notario = $request->notario;
+            //$generador->numeronotario = $request->numeronotario;
+            $generador->numeronotaria = $request->numeronotaria;
+            $generador->entidadnotaria = $request->entidadnotaria;
+
+            
+        }
+
+        if($generador->fisicaomoral=="Física"){
+            /**
+             * Datos Persona Fisica
+             */
+            $generador->nombresfisica = $request->nombresfisica;
+            $generador->apellidosfisica = $request->apellidosfisica;
+            $generador->nacionalidadfisica = $request->nacionalidadfisica;
+            $generador->identificacionfisica = $request->identificacionfisica;
+
+             
+            if(isset($request->identificacionfisicapdf)){
+                $generador->identificacionfisicapdf=$generador->id.'.pdf';
+                if(!GuardarArchivos($request->identificacionfisicapdf,'/documentos/generadores/identificaciones/personafisica',$generador->identificacionfisicapdf)){
+                    return Redirect::back()->with('error', 'Error al guardar RFC del generador.');
+                }
+            }
+        
+        }
+
+        if($generador->save()){
+            return Redirect::back()->with('success', 'Se guardo correctamente.');
+        }else{
+            return Redirect::back()->with('error', 'Error al crear el registro.');
+        }
+
+        
     }
 
     /**

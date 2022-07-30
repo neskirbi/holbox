@@ -127,10 +127,10 @@
           @if(TieneNegociosAdmin())
           
           <li class="nav-item">
-            <a href="{{ url('generador/create') }}" class="nav-link">
-              <i class="nav-icon fa fa-user" aria-hidden="true"></i>
+            <a href="{{ url('generador') }}" class="nav-link">
+              <i class="nav-icon fa fa-group" aria-hidden="true"></i>
               <p>
-                Registrar Generador
+                Generadores
               </p>
             </a>
           </li>

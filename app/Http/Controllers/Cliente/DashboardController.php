@@ -39,51 +39,30 @@ class DashboardController extends Controller
         ->orderby('pagos.created_at','desc')
         ->get();
 
-        $reciclajes = DB::table('clientes')
-        ->join('generadores','generadores.id_cliente','=','clientes.id')
-        ->join('obras','obras.id_generador','=','generadores.id')
-        ->join('citas','citas.id_obra','=','obras.id')
-        ->where('clientes.id',Auth::guard('clientes')->user()->id)
-        ->where('citas.confirmacion','!=',2)
-        ->orderBy('fechacita', 'desc')
-        ->select('obras.obra',DB::raw("'Reciclaje' as tipo"),'fechacita','planta','citas.confirmacion','material as material','cantidad','unidades','precio','iva')
-        ->get();       
-        
-        
-        $obras= DB::table('clientes')
-        ->join('generadores','generadores.id_cliente','=','clientes.id')
-        ->join('obras','obras.id_generador','=','generadores.id')
-        ->where('clientes.id',Auth::guard('clientes')->user()->id)
-        ->select('obras.id','obras.obra','obras.superficie','obras.id_planta')
-        ->orderby('obras.obra','asc')
-        ->get();
         
         
         
         $pago = Pago(Auth::guard('clientes')->user()->id);
-        $reciclaje=Reciclaje(Auth::guard('clientes')->user()->id);
         
-        $compenzado=Compenzado(Auth::guard('clientes')->user()->id);
-        $pedido=Pedidos(Auth::guard('clientes')->user()->id);
-        $gasto=$reciclaje+$pedido;
+        $gasto=0;
         
 
-        $saldo=$pago-$reciclaje;
+        $saldo=$pago;
 
         $id_plantas=array();
-        foreach($obras as $obra){
-            $id_plantas[]=$obra->id_planta;
-        }
+
+        $compenzado=0;
+       
 
         $plantas=Planta::wherein('id',$id_plantas)->orderby('planta','asc')->get();
 
-        return view('cliente.dashboard.dashboard',['generadores'=>$generadores,'obras'=>$obras,
+        return view('cliente.dashboard.dashboard',['generadores'=>$generadores,
         'saldo'=>$saldo,
         'pagodetalles'=>$pagodetalles,
         'pago'=>$pago,
         'gasto'=>$gasto,
         'compenzado'=>$compenzado,
-        'reciclajes'=>$reciclajes,'plantas'=>$plantas]);
+        'plantas'=>$plantas]);
     }
 
     /**
@@ -165,9 +144,9 @@ class DashboardController extends Controller
         ->groupby('year','month')
         ->get();
 
-        $gastos=GastosMesaMes(Auth::guard('clientes')->user()->id,$year);
+        $gastos=0;
 
-        $pedidos=PedidosMesaMes(Auth::guard('clientes')->user()->id,$year);
+        $pedidos=0;
 
         return view('cliente.dashboard.frames.graficapagos',[
         'filtros'=>$request,

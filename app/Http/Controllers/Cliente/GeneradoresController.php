@@ -28,7 +28,6 @@ class GeneradoresController extends Controller
     {
         $generadores = DB::table('generadores')
         ->where('id_cliente',Auth::guard('clientes')->user()->id)
-        ->where('borrado','1')        
         ->orderby('created_at','desc')
         ->get();
         //return $generadores;
@@ -203,18 +202,7 @@ class GeneradoresController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id){
-        $generador=Generador::find($id);
-        if($generador->verificado==1){
-            return redirect('generadores')->with('error', 'Error: No se puede borrar un generador verificado.');           
-        }else{
-            $generador->borrado=0;
-
-            if($generador->save()){
-                return redirect('generadores')->with('success', 'Generador borrado.');
-            }else{
-                return redirect('generadores')->with('error', 'Error al eliminar registro.');
-            }
-        }
+      
         
     }
 

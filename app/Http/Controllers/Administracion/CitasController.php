@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Recepcion;
+namespace App\Http\Controllers\Administracion;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
@@ -14,7 +14,7 @@ use App\Models\Planta;
 use App\Models\CondicionMaterial;
 use App\Models\Configuracion;
 use App\Models\Obra;
-use App\Models\Recepcion;
+use App\Models\Administrador;
 use Redirect;
 
 class CitasController extends Controller
@@ -22,7 +22,7 @@ class CitasController extends Controller
 
     
     public function __construct(){
-        //$this->middleware('administradorlogged');
+        $this->middleware('administradorlogged');
     }
     /**
      * Display a listing of the resource.
@@ -43,27 +43,27 @@ class CitasController extends Controller
 
         $citas_count = DB::table('citas')
         ->join('obras','obras.id','=','citas.id_obra')
-        ->where('obras.id_planta','=',Auth::guard('recepciones')->user()->id_planta)
+        ->where('obras.id_planta','=',GetIdPlanta())
         ->where('citas.borrado',1)
         ->count();
 
         $citas_pendientes_count = DB::table('citas')
         ->join('obras','obras.id','=','citas.id_obra')
-        ->where('obras.id_planta','=',Auth::guard('recepciones')->user()->id_planta)
+        ->where('obras.id_planta','=',GetIdPlanta())
             ->where('citas.borrado',1)
                 ->where('citas.confirmacion',0)
                     ->count();
 
         $citas_asistidas_count = DB::table('citas')
         ->join('obras','obras.id','=','citas.id_obra')
-        ->where('obras.id_planta','=',Auth::guard('recepciones')->user()->id_planta)
+        ->where('obras.id_planta','=',GetIdPlanta())
             ->where('citas.borrado',1)
                 ->where('citas.confirmacion',1)
                     ->count();
 
         $citas_falta_count = DB::table('citas')
         ->join('obras','obras.id','=','citas.id_obra')
-        ->where('obras.id_planta','=',Auth::guard('recepciones')->user()->id_planta)
+        ->where('obras.id_planta','=',GetIdPlanta())
             ->where('citas.borrado',1)
                 ->where('citas.confirmacion',2)
                     ->count();
@@ -71,14 +71,14 @@ class CitasController extends Controller
         $citas = DB::table('citas')
         ->join('obras','obras.id','=','citas.id_obra')
         ->join('generadores','generadores.id','=','obras.id_generador')
-        ->where('obras.id_planta','=',Auth::guard('recepciones')->user()->id_planta)
+        ->where('obras.id_planta','=',GetIdPlanta())
         ->where('obras.obra','like','%'.$filtros->obra.'%')
         ->orderBy('citas.fechacita', 'desc')
         ->select('generadores.razonsocial','citas.id','citas.obra',DB::raw("'Reciclaje' as tipo"),'citas.fechacita','citas.planta','citas.confirmacion','citas.material as material','citas.matricula')
         ->paginate(10);
 
 
-        return view('recepcion.citas.citas',['citas'=>$citas,
+        return view('administracion.citas.citas',['citas'=>$citas,
         'citas_count'=>$citas_count,
         'citas_pendientes_count'=>$citas_pendientes_count,
         'citas_asistidas_count'=>$citas_asistidas_count,
@@ -140,7 +140,7 @@ class CitasController extends Controller
         $qrimage= ('images/qr/boleta/'.$cita->qr);
         \QRCode::text('reci-track.mx/boleta/'.$id)->setOutfile($qrimage)->png(); 
 
-        return view('recepcion.citas.citarev', ['cita'=>$cita,'materialobra'=>$materialobra,'materialesobra'=>$materialesobra]);
+        return view('administracion.citas.citarev', ['cita'=>$cita,'materialobra'=>$materialobra,'materialesobra'=>$materialesobra]);
     
         
     }
@@ -165,18 +165,16 @@ class CitasController extends Controller
      */
     public function update(Request $request, $id){        
         //return $request;
-        if(Auth::guard('recepciones')->user()->firma==''){            
-            return Redirect::back()->with('error', 'Error al guardar, no ha guardado su firma de administrador, la puede guardar en Configuración -> Cuenta.');
+        if(Auth::guard('administradores')->user()->firma==''){            
+            return Redirect::back()->with('error', 'Error al guardar, no ha guardado su firma de administrador, la puede guardar en configuración->cuenta.');
         }
 
         
-        $recepcion=Recepcion::find(Auth::guard('recepciones')->user()->id);
+        $administrador=Administrador::find(Auth::guard('administradores')->user()->id);
         $cita=Cita::find($id);
-        $cita->recibio=$recepcion->nombre;
-        $cita->firmarecibio=$recepcion->firma;
-        $cita->cargo=$recepcion->cargo;
-        $cita->nombrecompleto=$request->nombrecompleto;
-        $cita->firmachof=$request->firmachof;
+        $cita->recibio=$administrador->administrador;
+        $cita->firmarecibio=$administrador->firma;
+        $cita->cargo=$administrador->cargo;
 
         /**
          * Busco en los materiales de la obra para cmbiarlo, si no lo registraron se va a gregar a la obra
@@ -203,10 +201,10 @@ class CitasController extends Controller
         $cita->cantidad=$request->cantidad;
         $cita->observacion=$request->observacion;
         if(strlen($cita->recibio)==0){
-            $cita->recibio=Auth::guard('recepciones')->user()->administrador;
+            $cita->recibio=Auth::guard('administradores')->user()->administrador;
         }
         if(strlen($cita->cargo)==0){
-            $cita->cargo=Auth::guard('recepciones')->user()->cargo;
+            $cita->cargo=Auth::guard('administradores')->user()->cargo;
         }
 
 
@@ -225,7 +223,7 @@ class CitasController extends Controller
         
         if($cita->save()){
             Entregado($cita);
-            Historial('citas',$cita->id,Auth::guard('recepciones')->user()->id,'Confirmación de Cita','');
+            Historial('citas',$cita->id,Auth::guard('administradores')->user()->id,'Confirmación de Cita','');
             return Redirect::back()->with('success', 'Cita confirmada.');
         }else{
             return Redirect::back()->with('error', 'Error al guardar.');

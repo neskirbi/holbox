@@ -58,60 +58,7 @@
 
           <!--Menu obras-->
 
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-building"></i>
-              <p>
-                Obra
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview" style="display: none;">
-              @if(TieneObras())
-              <li class="nav-item">
-                <a href="{{ url('obras') }}" class="nav-link">
-                <i class="fa fa-building" aria-hidden="true"></i>
-                  <p>
-                    Mis Obras
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ url('residentes') }}" class="nav-link">
-                <i class="fa fa-group" aria-hidden="true"></i>
-                  <p>
-                    Residentes
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ url('citas') }}" class="nav-link">
-                <i class="fa fa-recycle" aria-hidden="true"></i>
-                  <p>
-                    Reciclaje
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ url('pedidos') }}" class="nav-link">
-                <i class="fa fa-tags" aria-hidden="true"></i>
-                  <p>
-                    Pedidos
-                  </p>
-                </a>
-              </li>
-              @else
-              <li class="nav-item">
-                <a href="{{ url('registroobra') }}" class="nav-link">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                  <p>
-                    Registrar
-                  </p>
-                </a>
-              </li>              
-              @endif
-            </ul>
-          </li>
+        
 
           <!--Menu Negocios-->
           

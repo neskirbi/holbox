@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  @include('finanzas.header')
+  @include('administracion.header')
   <title>CSMX | Generadores</title>
 
   
@@ -12,11 +12,11 @@
 
   <!-- Navbar -->
  
-  @include('finanzas.navigations.navigation')
+  @include('administracion.navigations.navigation')
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  @include('finanzas.sidebars.sidebar')
+  @include('administracion.sidebars.sidebar')
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -41,16 +41,16 @@
                       Filtros <i class="fa fa-sliders" aria-hidden="true"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" style="width:300px;">
-                      <form class="px-4 py-3" action="{{url('generadoresfi')}}" method="GET">
+                      <form class="px-4 py-3" action="{{url('generador')}}" method="GET">
                         <div class="input-group mb-3">
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-building"></i></span>
                           </div>
-                          <input type="text" class="form-control" name="generador" id="generador" placeholder="Generador" @if(isset($filtros->razonsocial)) value="{{$filtros->razonsocial}}" @endif >
+                          <input type="text" class="form-control" name="generador" id="generador" placeholder="Generador" @if(isset($filtros->generador)) value="{{$filtros->generador}}" @endif >
                         </div>
 
                         <div class="dropdown-divider"></div>
-                        <a href="generadoresfi" class="btn btn-default btn-sm">Limpiar</a>
+                        <a href="generador" class="btn btn-default btn-sm">Limpiar</a>
                         <button type="submit" class="btn btn-info btn-sm float-right">Aplicar</button>
                         
                       </form>
@@ -61,43 +61,47 @@
                 
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-12" style="overflow-x:scroll;">
-                    @if(count($generadores))
-                    <table class="table table-hover text-nowrap">
-                      <thead>
-                        <tr>
-                        <th>Razón Social</th>
-                        <th>Residuos Declarados</th>
-                        <th>Residuos Entregados</th>
-                        <th>Residuos Pendientes</th>
-                        </tr>
-                      </thead>
-                      <tbody>
+              <div class="card-body" style="overflow-x: scroll;">
+              <a class="btn btn-primary" href="{{url('generador/create')}}">+ Generador</a>
+                
+                @if(count($generadores))
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                    <th>Razón social</th>
+                    <th>RFC</th>
+                    <th>Persona</th> 
+                    <th>Estatus</th> 
+                    <th></th> 
+                    </tr>
+                  </thead>
+                  <tbody>
+                  
+                    @foreach($generadores as $generador)
+                      <tr>
+                      <td>{{$generador->razonsocial}}</td>
+                      <td>{{$generador->rfc}}</td>
+                      <td>{{$generador->fisicaomoral}}</td>
+                      <td>@if($generador->verificado==0)
+                        <small class="badge badge-warning"><i class="fa fa-exclamation" aria-hidden="true"></i> Pendiente</small>
+                        @else
+                        <small class="badge badge-success"><i class="fa fa-check" aria-hidden="true"></i>  Verificado</small>
+                        @endif</td>
+                      <td>
+                      <a href="generador/{{$generador->id}}" class="btn btn-info btn-sm d-inline p-2" ><i class="fa fa-eye" aria-hidden="true"></i> Revisar</a>
+                     
+                    </td>
+                    </tr>
+                    @endforeach
                     
-                        @foreach($generadores as $generador)
-                        <tr>
-                          <td title="{{$generador->razonsocial}}"><a href="generadoresfi/{{$generador->id}}">{{strlen($generador->razonsocial)<30 ? $generador->razonsocial : mb_substr($generador->razonsocial,0,29,"UTF-8").' ...'}}</a></td>
-                          <td title="Declarados:{{number_format($generador->cantidadobra,2)}} m<sup>3</sup>">{{number_format($generador->cantidadobra,2)}} m<sup>3</sup></td>
-                          <td title="Entregados:{{number_format($generador->entregado,2)}} m<sup>3</sup>">{{number_format($generador->entregado,2)}} m<sup>3</sup></td>                          
-                          <td title="Pendientes:{{number_format($generador->cantidadobra-$generador->entregado,2)}} m<sup>3</sup>">{{number_format($generador->cantidadobra-$generador->entregado,2)}} m<sup>3</sup></td>
-                          
-                        </tr>
-                        @endforeach
-                        
-                      </tbody>
-                    </table>
-                    @endif
-                  </div>
-                </div>
-                
-                
+                  </tbody>
+                </table>
+                @endif
               </div>
-              <!-- /.card-body -->
               <div class="card-footer">
               {{ $generadores->appends($_GET)->links('pagination::bootstrap-4') }}
               </div>
+              <!-- /.card-body -->
             </div>
             <!-- /.card -->
           </div>
@@ -156,7 +160,7 @@
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App, funcion de sidebar -->
 <script src="dist/js/adminlte.js"></script>
-
-@include('finanzas.footer')
+@include('cliente.generadores.modals.modalgenerador')
+@include('administracion.footer')
 </body>
 </html>

@@ -240,8 +240,7 @@ function PuedeGastar($id_obra,$monto){
     }
 
     $pago = PagoPorObra($id_obra);
-    $reciclaje = GastoReciclajeObra($id_obra);
-    $pedidos = GastoPedidosObra($id_obra);
+    $recoleccion = GastoRecoleccion($id_negocio);
     
     if(($pago-$reciclaje-$monto-$pedidos)<-2){
         return false;
@@ -264,123 +263,18 @@ function PagoPorObra($id_obra){
 
 }
 
-function GastoReciclajeObra($id_obra){
-    $citas = DB::table('obras')
-        ->leftjoin('citas','citas.id_obra','=','obras.id')
-        ->where('obras.id',$id_obra) 
-        ->where('citas.confirmacion','!=',2)
-        ->select( DB::raw('SUM((citas.precio*citas.cantidad)+((citas.precio*citas.cantidad)*citas.iva/100)) as monto'))
-        ->first();
-    
-
-    $gasto=$citas->monto;
-    /**
-     * Ya viene con descuento al agregar la obra
-     */
-    
-    return $gasto;
-    
-
-}
-
-
-function GastoPedidosObra($id_obra){
-    $pedidos = DB::table('obras')
-        ->leftjoin('pedidos','pedidos.id_obra','=','obras.id')
-        ->where('obras.id',$id_obra)
-        ->where('pedidos.confirmacion','!=',0)
-        ->select( DB::raw('SUM((pedidos.total)) as monto'))
-        ->first();
-    
-
-    return $pedidos->monto;    
-    
-
-}
 
 
 
 
 
-function TieneLimite($id_obra,$cantidad){
 
-    $citas = DB::table('obras')
-    ->where('obras.id',$id_obra)
-    ->select('obras.limite', DB::raw("(select sum(cantidad) from citas where id_obra='".$id_obra."' and month(created_at)=month(now())  and confirmacion!=2) as cantidad"))
-    ->first();
-
-    
-    //return $cantidad."<<<>>>".$citas->cantidad."<<<>>>".$citas->limite;
-
-
-    if($citas->limite==0){
-        return false;
-    }
-    
-    if(($citas->cantidad+$cantidad)<=$citas->limite)
-    {
-        return false;
-    }
-
-    if(($citas->cantidad+$cantidad)>=$citas->limite)
-    {
-        return true;
-    }
-
-    
-}
-
-function TieneLimite2($id_obra){
-
-    $citas = DB::table('obras')
-    ->where('obras.id',$id_obra)
-    ->select('obras.limite', DB::raw("(select sum(cantidad) from citas where id_obra='".$id_obra."' and month(created_at)=month(now())  and confirmacion!=2) as cantidad"))
-    ->first();
-
-    
-    return "Acumulado: ".$citas->cantidad." Limite".$citas->limite;
-
-
-    
-}
 
 /**
  * Valida si tiene transporte disponible en sus pedidos
  */
 
-function TieneTransporte($id_obra){
-    $transporte=DB::table('obras')
-        ->where('id',$id_obra)
-        ->where('transporte',1)
-        ->get();
-    
-    if(count($transporte)){
-        $pedido=DB::table('pedidos')
-            ->join('detallepedidos','detallepedidos.id_pedido','=','pedidos.id')
-            ->select('detallepedidos.id','detallepedidos.disponible')
-            ->where('detallepedidos.id_obra',$id_obra)
-            ->where('detallepedidos.disponible',1)  
-            ->where('pedidos.confirmacion',2)
-            ->first();
 
-        if($pedido){
-            /**
-             * No es el id del pedido, se esta usando el id del detalle
-             */
-            DB::table('detallepedidos')
-            ->where('id', $pedido->id)
-            ->update([
-                'disponible' => 0
-            ]);     
-            return true;
-        }else{
-            return false;
-        }
-        
-    }
-
-    return true;
-} 
 
 /**
  * Pagos por cliente, no importa que planta 
@@ -414,133 +308,10 @@ function PagoPorPlanta($id_cliente,$id_planta){
 
 
 
-/**
- * Citas a reciclaje por cliente , no importa que planta 
- */
-function Reciclaje($id_cliente){
-    $citas = DB::table('clientes')
-        ->leftjoin('generadores','generadores.id_cliente','=','clientes.id')
-        ->leftjoin('obras','obras.id_generador','=','generadores.id')
-        ->leftjoin('citas','citas.id_obra','=','obras.id')
-        ->where('clientes.id',$id_cliente)     
-        ->where('citas.confirmacion','!=',2)
-        ->select( DB::raw('SUM((citas.precio*citas.cantidad)+((citas.precio*citas.cantidad)*citas.iva/100)) as monto'))
-        ->first();
-    
-
-    return $citas->monto;
-
-}
-
-function Compenzado($id_cliente){
-    $citas = DB::table('clientes')
-        ->leftjoin('generadores','generadores.id_cliente','=','clientes.id')
-        ->leftjoin('obras','obras.id_generador','=','generadores.id')
-        ->leftjoin('citas','citas.id_obra','=','obras.id')
-        ->where('clientes.id',$id_cliente)     
-        ->where('citas.confirmacion','!=',2)
-        ->where('obras.esalcaldia','=',1)
-        ->select( DB::raw('SUM((citas.precio*citas.cantidad)+((citas.precio*citas.cantidad)*citas.iva/100)) as monto'))
-        ->first();
-    
-
-    return $citas->monto;
-
-}
-
-/**
- * Citas a reciclaje por cliente y por planta
- */
-function GastoReciclaje($id_cliente,$id_planta){
-    $citas = DB::table('clientes')
-        ->leftjoin('generadores','generadores.id_cliente','=','clientes.id')
-        ->leftjoin('obras','obras.id_generador','=','generadores.id')
-        ->leftjoin('citas','citas.id_obra','=','obras.id')
-        ->where('clientes.id',$id_cliente)
-        ->where('obras.id_planta',$id_planta)
-        ->where('obras.contrato',1)   
-        ->where('citas.confirmacion','!=',2)
-        ->select( DB::raw('SUM((citas.precio*citas.cantidad)+((citas.precio*citas.cantidad)*citas.iva/100)) as monto'))
-        ->first();
-    
-
-    $gasto=$citas->monto;
-    /**
-     * Ya viene con descuento al agregar la obra
-     */
-    
-    return $gasto;
-    
-
-}
 
 
-function Pedidos($id_cliente){
-    $pedidos = DB::table('clientes')
-        ->leftjoin('generadores','generadores.id_cliente','=','clientes.id')
-        ->leftjoin('obras','obras.id_generador','=','generadores.id')
-        ->leftjoin('pedidos','pedidos.id_obra','=','obras.id')
-        ->where('clientes.id',$id_cliente)     
-        ->where('pedidos.confirmacion','!=',0)
-        ->select( DB::raw('SUM((pedidos.total)) as monto'))
-        ->first();
-    
 
-    return $pedidos->monto;
 
-}
-
-/**
- * Gasto cliente y por planta de pedidos de productos(incluye transporte)
- */
-function GastoPedidos($id_cliente,$id_planta){
-    $pedidos = DB::table('clientes')
-        ->leftjoin('generadores','generadores.id_cliente','=','clientes.id')
-        ->leftjoin('obras','obras.id_generador','=','generadores.id')
-        ->leftjoin('pedidos','pedidos.id_obra','=','obras.id')
-        ->where('clientes.id',$id_cliente)
-        ->where('obras.id_planta',$id_planta)
-        ->where('obras.contrato',1)
-        ->where('pedidos.confirmacion','!=',0)
-        ->select( DB::raw('SUM((pedidos.total)) as monto'))
-        ->first();
-    
-
-    return $pedidos->monto;    
-    
-
-}
-
-function GastosMesaMes($id_cliente,$year){
-    return $gastos=DB::table('clientes')
-        ->leftjoin('generadores','generadores.id_cliente','=','clientes.id')
-        ->leftjoin('obras','obras.id_generador','=','generadores.id')
-        ->leftjoin('citas','citas.id_obra','=','obras.id')
-        ->where('clientes.id',$id_cliente)        
-        ->where('citas.confirmacion','!=',2)
-        ->whereraw('YEAR(citas.created_at) = \''.$year.'\'')
-        //->select('clientes.id as cli','obras.id as idobra','citas.id as idddd','materialesobra.id as mate', 'materialesobra.precio','materialesobra.cantidad')
-        ->select(DB::raw('YEAR(citas.created_at) year, MONTH(citas.created_at) month'), DB::raw('SUM((citas.precio*citas.cantidad)+((citas.precio*citas.cantidad)*citas.iva/100)) as monto'))
-        ->groupby('year','month')
-        ->get();    
-
-}
-
-function PedidosMesaMes($id_cliente,$year){
-    return $gastos=DB::table('clientes')
-        ->leftjoin('generadores','generadores.id_cliente','=','clientes.id')
-        ->leftjoin('obras','obras.id_generador','=','generadores.id')
-        ->leftjoin('pedidos','pedidos.id_obra','=','obras.id')
-        ->where('clientes.id',$id_cliente)        
-        ->where('pedidos.confirmacion','!=',0)
-        ->whereraw('YEAR(pedidos.created_at) = \''.$year.'\'')
-        //->select('clientes.id as cli','obras.id as idobra','pedidos.id as idddd','materialesobra.id as mate', 'materialesobra.precio','materialesobra.cantidad')
-        ->select(DB::raw('YEAR(pedidos.created_at) year, MONTH(pedidos.created_at) month'), DB::raw('SUM(pedidos.total) as monto'))
-        ->groupby('year','month')
-        ->get();
-    
-
-}
 
 function Descuento($monto,$id_cliente){
     
@@ -555,21 +326,8 @@ function Descuento($monto,$id_cliente){
     }
 }
 
-function PuedePosPago($id_obra){
-    
-    $obra = DB::table('obras')
-        ->where('id',$id_obra)
-        ->select('puedepospago')
-        ->first();
 
-    if($obra)
-    {
-        return $obra->puedepospago;
-    }else{
-        return false;
-    }
-    
-}
+
 
 function CantidadLetras($numero){
     $formatterES = new NumberFormatter("Es", NumberFormatter::SPELLOUT);
@@ -649,17 +407,8 @@ function TieneNegociosAdmin(){
         ->get();
     return count($plantas);
 }
-function TieneObras(){
 
-    $obras=DB::table('clientes')
-        ->join('generadores','generadores.id_cliente','=','clientes.id')
-        ->join('obras','obras.id_generador','=','generadores.id')
-        ->select('obras.id')
-        ->where('clientes.id',Auth::guard('clientes')->user()->id)
-        ->get();
-        return count($obras);
-   
-}
+
 
 function TieneNegocios(){
 

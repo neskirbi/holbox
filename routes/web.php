@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ConfirmacionMail;
 use App\Models\Token;
-use App\Models\TipoObra;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,7 +32,7 @@ Route::get('home', function () {
     }   
 
     if(Auth::guard('administradores')->check()){
-        return redirect('pagos');
+        return redirect('generador');
     }  
 
     if(Auth::guard('vendedores')->check()){
@@ -165,22 +165,30 @@ Route::get('GraficasPagosCliente','App\Http\Controllers\Cliente\DashboardControl
 Route::resource('generadores', 'App\Http\Controllers\Cliente\GeneradoresController');
 
 Route::get('registrogenerador','App\Http\Controllers\RegistroGeneradoresController@index');
-Route::get('registroobra','App\Http\Controllers\ObraController@RegistroObra');
 
 
-Route::resource('obras','App\Http\Controllers\ObraController');
-Route::put('cargarplan/{id}', 'App\Http\Controllers\ObraController@CargarPlan');
+
+
+
+
+
+
 
 Route::resource('vehiculos', 'App\Http\Controllers\VehiculosController');
 
-Route::resource('citas', 'App\Http\Controllers\CitasController');
 
 
-Route::get('reciclaje', 'App\Http\Controllers\CitasController@Reciclaje');
-Route::post('citareciclaje', 'App\Http\Controllers\CitasController@CitaReciclaje');
 
-Route::post('citarecoleccion', 'App\Http\Controllers\CitasController@CitaRecoleccion');
-Route::get('recoleccion', 'App\Http\Controllers\CitasController@Recoleccion');
+
+
+
+
+
+
+
+
+
+
 
 
 Route::get('terminos/{direccion}/{fechaini}/{fechafin}/{generador}/{total}', 'App\Http\Controllers\TerminosyCondicionesController@terminosycondiciones');
@@ -206,8 +214,10 @@ Route::get('manifiestoalcaldia/{id}',[FormatosController::class,'manifiestoalcal
  */
 Route::resource('generadorasoc', 'App\Http\Controllers\Asociacion\GeneradorController');
 Route::resource('catalogosasoc', 'App\Http\Controllers\Asociacion\CatalogosController');
-Route::resource('obrasasoc', 'App\Http\Controllers\Asociacion\ObraController');
-Route::resource('citasasoc', 'App\Http\Controllers\Asociacion\CitasController');
+
+
+
+
 
 Route::resource('plantasasoc','App\Http\Controllers\Asociacion\PlantaController');
 
@@ -223,7 +233,8 @@ Route::get('quitarsedema/{id}','App\Http\Controllers\Asociacion\SedemaController
 /**Rutas para Directores */
 
 Route::resource('graficas', 'App\Http\Controllers\Director\DashboardController');
-Route::resource('contratosdetalle','App\Http\Controllers\Director\ObraController');
+
+
 Route::get('pagosdirector','App\Http\Controllers\Director\DashboardController@Pagos');
 
 Route::get('GraficaPagosDiretor','App\Http\Controllers\Director\DashboardController@GraficaPagosDiretor');
@@ -257,11 +268,9 @@ Route::resource('catalogos', 'App\Http\Controllers\Administracion\CatalogoContro
 
 Route::resource('generador', 'App\Http\Controllers\Administracion\GeneradorController');
 
-Route::resource('obra', 'App\Http\Controllers\Administracion\ObraController');
-Route::post('CargarContrato/{id}', 'App\Http\Controllers\Administracion\ObraController@CargarContrato');
-Route::get('ValidarObra/{id}', 'App\Http\Controllers\Administracion\ObraController@ValidarObra');
 
-Route::resource('citasadmin', 'App\Http\Controllers\Administracion\CitasController');
+
+
 
 Route::resource('citasfecha', 'App\Http\Controllers\Administracion\CitasFechaController');
 
@@ -312,7 +321,8 @@ Route::get('GraficasMaterialMesVendedor','App\Http\Controllers\Vendedor\Dashboar
 Route::get('ReporteMensualvendedor/{month}/{year}','App\Http\Controllers\Vendedor\DashboardController@ReporteMensualvendedor');
 
 
-Route::resource('obrav','App\Http\Controllers\Vendedor\ObraController');
+
+
 
 Route::resource('pagosv', 'App\Http\Controllers\Vendedor\PagoController');
 
@@ -327,8 +337,8 @@ Route::get('agregar','App\Http\Controllers\Vendedor\ProductoController@Agregar')
 Route::get('productofotos/{id}','App\Http\Controllers\Vendedor\ProductoController@FotosProductos');
 
 
-Route::resource('transporte','App\Http\Controllers\Vendedor\TransporteController');
-Route::get('cargar','App\Http\Controllers\Vendedor\TransporteController@Cargar');
+
+
 
 
 Route::post('RechazarPedido/{id}','App\Http\Controllers\Vendedor\VentaController@RechazarPedido');
@@ -342,16 +352,16 @@ Route::resource('reporteven', 'App\Http\Controllers\Vendedor\ReporteController')
 
 
 
-Route::resource('materiales', 'App\Http\Controllers\Vendedor\MaterialController');
 
 
-Route::post('guardarcategoriamaterialadm', 'App\Http\Controllers\Vendedor\MaterialController@GuardarCategoriaMaterial');
-Route::put('actualizacategoriamaterialadm/{id}', 'App\Http\Controllers\Vendedor\MaterialController@ActualizaCategoriaMaterial');
-Route::get('borrarcategoriamaterialadm/{id}', 'App\Http\Controllers\Vendedor\MaterialController@BorrarCategoriaMaterial');
 
-Route::post('guardarmaterialadm', 'App\Http\Controllers\Vendedor\MaterialController@GuardarMaterial');
-Route::put('actualizamaterialadm/{id}', 'App\Http\Controllers\Vendedor\MaterialController@ActualizaMaterial');
-Route::get('borrarmaterialadm/{id}', 'App\Http\Controllers\Vendedor\MaterialController@BorrarMaterial');
+
+
+
+
+
+
+
 
 
 Route::get('PassResetAdmin',function(){
@@ -359,22 +369,7 @@ Route::get('PassResetAdmin',function(){
 });
 
 
-/**
- * Rutas para recepcion
- */
-
  
-Route::resource('cita', 'App\Http\Controllers\Recepcion\CitasController');
-Route::resource('reportesre', 'App\Http\Controllers\Recepcion\ReporteController');
-Route::resource('configuracionnes', 'App\Http\Controllers\Recepcion\ConfiguracionController');
-Route::post('configuracioncuentanes', 'App\Http\Controllers\Recepcion\ConfiguracionController@ConfiguracionCuenta');
-Route::post('CambioPassnes/{id}', 'App\Http\Controllers\Recepcion\ConfiguracionController@CambioPass');
-
-
-
-
-Route::resource('microgeneradoresa','App\Http\Controllers\Recepcion\MgeneradoresController');
-Route::get('ConfirmarMicro/{id}','App\Http\Controllers\Recepcion\MgeneradoresController@ConfirmarMicro');
 
 
 
@@ -384,14 +379,14 @@ Route::get('ConfirmarMicro/{id}','App\Http\Controllers\Recepcion\MgeneradoresCon
  */
 
 Route::resource('pagosfi', 'App\Http\Controllers\Finanzas\PagoController');
-Route::resource('obrasfi', 'App\Http\Controllers\Finanzas\ObraController');
+
+
 Route::resource('generadoresfi', 'App\Http\Controllers\Finanzas\GeneradorController');
 Route::resource('kpifi', 'App\Http\Controllers\Finanzas\KpiController');
-Route::resource('materialesfi', 'App\Http\Controllers\Finanzas\MaterialController');
+
 Route::resource('reportesfi', 'App\Http\Controllers\Finanzas\ReporteController');
 
 
-Route::get('ReporteObrasFinanzas','App\Http\Controllers\Finanzas\ReporteController@Geppettos');
 
 
 /**
@@ -417,10 +412,10 @@ Route::post('GuardarPassAdmin/{id}','App\Http\Controllers\LoginController@Guarda
 /**
  * Rutas para guardar catalogo que todas apuntan al controlador Asociacion\CatalogosController.
  */
-Route::post('guardarplanta', 'App\Http\Controllers\Asociacion\CatalogosController@GuardarPlanta');
 
-Route::post('guardartipoobra', 'App\Http\Controllers\Asociacion\CatalogosController@GuardarTipoobra');
-Route::get('borrartipoobra/{id}', 'App\Http\Controllers\Asociacion\CatalogosController@BorrarTipoobra');
+
+
+
 
 
 Route::post('guardarcategoriamaterial', 'App\Http\Controllers\Asociacion\CatalogosController@GuardarCategoriaMaterial');
@@ -434,8 +429,6 @@ Route::post('guardarcondicion', 'App\Http\Controllers\Asociacion\CatalogosContro
 Route::get('borrarcondicion/{id}', 'App\Http\Controllers\Asociacion\CatalogosController@BorrarCondicion');
 
 
-
-//Route::get('borrarproducto/{id}', 'App\Http\Controllers\Asociacion\CatalogosController@BorrarProducto');
 
 /**
  * Confirmaciones de generadores, obras y no se que mas vaya a haber
@@ -455,47 +448,6 @@ Route::get('transferencia/{id}', 'App\Http\Controllers\FormatosController@Transf
 
 
 
-/**
- * Rutas para residentes
- */
-
-Route::resource('residentes', 'App\Http\Controllers\ResidenteController');
-Route::get('registroresidente', 'App\Http\Controllers\ResidenteController@RegistroResidente');
-Route::resource('pedidos', 'App\Http\Controllers\PedidoController');
-Route::get('carrito', 'App\Http\Controllers\PedidoController@Carrito');
-Route::get('QuitardelCarrito/{id}','App\Http\Controllers\PedidoController@QuitardelCarrito');
-
-Route::get('catalogo', 'App\Http\Controllers\PedidoController@Catalogo');
-/**
- * Rutas para informacion de SEDEMA
- */
-
- /*
-Route::resource('plantas','App\Http\Controllers\Sedema\PlantaController');
-Route::get('PagosSedemaPlanta','App\Http\Controllers\Sedema\PlantaController@PagosSedemaPlanta');
-Route::get('CitasSedemaPlanta','App\Http\Controllers\Sedema\PlantaController@CitasSedemaPlanta');
-
-Route::resource('sedemag', 'App\Http\Controllers\Sedema\GeneradorController');
-Route::get('sedemag/{con}/{id}', 'App\Http\Controllers\Sedema\GeneradorController@show');
-Route::get('sedemad/{con}/{id}', 'App\Http\Controllers\Sedema\GeneradorController@Dashboard');
-
-Route::resource('sedemao', 'App\Http\Controllers\Sedema\ObraController');
-Route::get('sedemao/{con}/{id}', 'App\Http\Controllers\Sedema\ObraController@show');
-
-Route::get('reporte/{con}/{id}', 'App\Http\Controllers\Sedema\ObraController@Reporte');
-Route::get('reporteobra/{id}', 'App\Http\Controllers\ObraController@ReporteObra');
-
-
-Route::resource('configuraciones', 'App\Http\Controllers\Sedema\ConfiguracionController');
-Route::post('DatosCuentaEdit', 'App\Http\Controllers\Sedema\ConfiguracionController@DatosCuentaEdit');
-
-
-Route::resource('admsedema', 'App\Http\Controllers\Sedema\AdministradorController');
-Route::get('quitaradminsedema/{id}', 'App\Http\Controllers\Sedema\AdministradorController@QuitarAdmin');
-
-
-Route::get('GraficasPagosClienteSedema/{con}/{id}','App\Http\Controllers\Sedema\GeneradorController@GraficasPagosClienteSedema');
-*/
 
 
 /**
@@ -508,15 +460,6 @@ Route::get('confirmacion/{id}','App\Http\Controllers\LoginController@Confirmacio
 
 Route::get('confirmaciont/{id}','App\Http\Controllers\LoginController@Confirmaciont');
 
-/**
- * Pagos cliente
- */
-
-//Route::post('PagoCliente', 'App\Http\Controllers\PagosController@PagoCliente');
-
-
-//Route::get('ContratoRC/{id}', 'App\Http\Controllers\FormatosController@ContratoRC');
-//Route::get('ContratoRCT/{id}', 'App\Http\Controllers\FormatosController@ContratoRCT');
 
 
 
@@ -526,19 +469,10 @@ Route::get('confirmaciont/{id}','App\Http\Controllers\LoginController@Confirmaci
 Route::get('TCRecitrackTrasporte',function(){
     return view('formatos.TCRecitrackTrasporte');
 });
-/*
-Route::get('citarev/{id}/{admin}','App\Http\Controllers\Android\CitaController@CitaRev');
-Route::put('citaconfirmacion/{id}/{admin}','App\Http\Controllers\Android\CitaController@CitaConfirmacion');
-Route::get('ConfirmacionChofer/{id}','App\Http\Controllers\Android\RecitrackTransporte\Choferes\LoginController@Confirmacion');
-*/
 
 
- /**
-  * Micreogeneradores
-  */
 
-  //Route::resource('microgeneradores','App\Http\Controllers\Mgeneradores\MgeneradoresController');
-  
+
 
   /**
    * 
@@ -555,24 +489,7 @@ Route::get('ConfirmacionChofer/{id}','App\Http\Controllers\Android\RecitrackTran
    Route::get('reportehoteles','App\Http\Controllers\Encuestas\HotelController@reportehoteles');
    Route::get('reporterestaurantes','App\Http\Controllers\Encuestas\RestauranteController@reporterestaurantes');
 
-   /**
-    * Rutas generales
-    */
-
-    /*
-    Route::get('boleta/{id}', 'App\Http\Controllers\General\CitaController@boleta');
-    Route::get('manifiesto/{id}', 'App\Http\Controllers\General\CitaController@manifiesto'); 
-    Route::get('terminacion/{id}', 'App\Http\Controllers\General\ObraController@terminacion'); 
-    
-    Route::get('manifiestodescarga/{id}', 'App\Http\Controllers\General\CitaController@manifiestodescarga');   
-    Route::get('manifiestos/{id}', 'App\Http\Controllers\General\CitaController@manifiestos');
-    Route::get('EntregaQr/{id}', 'App\Http\Controllers\General\CitaController@EntregaQr');
-    
-
-    Route::get('firma/{id}', 'App\Http\Controllers\CitasController@FirmaTransporte');
-    Route::post('firma/{id}', 'App\Http\Controllers\CitasController@Entregar');
-*/
-
+  
 
     /**
      * Ruta Recolectores
@@ -598,7 +515,4 @@ Route::get('ConfirmacionChofer/{id}','App\Http\Controllers\Android\RecitrackTran
 
  Route::get('Limite/{id}','App\Http\Controllers\Desarrollo\TareasController@Limite');
  
- Route::get('tipoobra',function(){
-      return $tipoobra=TipoObra::select('tipoobra',DB::raw("group_concat(subtipoobra) as subtipoobra"))->groupby('tipoobra')->get();
-      
- });
+

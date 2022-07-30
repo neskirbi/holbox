@@ -29,65 +29,25 @@ class PagoController extends Controller
         ->groupby('created_at')
         ->get();
 
-        /**
-         * Aqui se calcula mas iva por que no tiene iva contemplado
-         */
-        $citas=DB::table('citas')
-        ->join('obras','obras.id','=','citas.id_obra')
-        ->select(DB::raw('sum((citas.cantidad*citas.precio)+(citas.cantidad*citas.precio*(citas.iva/100))) as consumo'))
-        ->where('obras.id_planta','=',GetIdPlanta())
-        ->where('citas.confirmacion',1)        
-        ->where('obras.esalcaldia','=',0)
-        ->first();
-
+       
         /**
          * Aqui solo se calcula la suma de la columna total, porque ya viene el iva
          */
-        $pedidos = DB::table('pedidos')  
-        ->where('id_planta',GetIdPlanta())
-        ->where('confirmacion','=',2)
-        ->select( DB::raw('SUM((total)) as monto'))
-        ->first();
+        $pedidos = 0;
 
-        $consumo=$citas->consumo+$pedidos->monto;
+        $consumo=0;
+        $clientegastos=array();
         
-
-        $clientegastos=DB::table('clientes')
-        ->join('generadores','generadores.id_cliente','clientes.id')
-        ->join('obras','obras.id_generador','generadores.id')
-        ->leftjoin('citas',function($join){
-            $join->on('citas.id_obra','=','obras.id');
-            $join->on('citas.confirmacion','=',DB::raw('1'));
-        })
-        ->select('obras.id',
-        DB::raw("(select obra from obras as ob where ob.id=obras.id) as nombre"),
-        DB::raw('sum((citas.cantidad*citas.precio)+(citas.cantidad*citas.precio*(citas.iva/100))) as reciclaje'),
-        DB::raw("(select sum(total) from pedidos where id_obra = obras.id and confirmacion=2) as pedidos"),
-        DB::raw("(SELECT sum(monto) from pagos where status=2 and id_obra=obras.id  ) as pagos"))
-        ->groupby('obras.id')
-        ->orderby('nombre', 'asc')
-        ->where('obras.id_planta','=',GetIdPlanta())        
-        ->where('obras.esalcaldia','=',0)
+        $pagos=DB::table('pagos')
+        ->join('negocios','negocios.id','=','pagos.id_negocio')
+        ->select('negocios.negocio','pagos.id','pagos.monto','pagos.descripcion','pagos.detalle','pagos.created_at',DB::raw('time(pagos.created_at) as hora'),'pagos.status','pagos.referencia')
+        ->orderby('created_at','desc')
+        ->where('pagos.id_planta','=',GetIdPlanta())
         ->get();
-
        
-/*
-        $pagos=DB::table('pagos')
-        ->join('clientes','clientes.id','=','pagos.id_cliente')
-        ->select('clientes.nombres','clientes.apellidos','pagos.id','pagos.monto','pagos.descripcion','pagos.detalle','pagos.created_at',DB::raw('time(pagos.created_at) as hora'),'pagos.status','pagos.referencia')
-        ->orderby('created_at','desc')
-        ->where('pagos.id_planta','=',GetIdPlanta())
-        ->get();
-*/
-
-        $pagos=DB::table('pagos')
-        ->join('obras','obras.id','=','pagos.id_obra')
-        ->select('obras.obra','pagos.id','pagos.monto','pagos.descripcion','pagos.detalle','pagos.created_at',DB::raw('time(pagos.created_at) as hora'),'pagos.status','pagos.referencia')
-        ->orderby('created_at','desc')
-        ->where('pagos.id_planta','=',GetIdPlanta())
-        ->get();
 
         $negocios=Negocio::where('id_planta','=',GetIdPlanta())->get();
+        
         return view('administracion.pagos.pagos',['negocios'=>$negocios,'pago'=>$pago,'pagos'=>$pagos,'consumo'=>$consumo,'pagos_fecha'=>$pagos_fecha,'clientegastos'=>$clientegastos]);
     }
 
