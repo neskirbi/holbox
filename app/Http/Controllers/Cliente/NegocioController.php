@@ -68,53 +68,6 @@ class NegocioController extends Controller
      */
     public function store(Request $request)
     {
-
-        $negocio = new Negocio();
-
-        $negocio->id=GetUuid();        
-        $negocio->id_generador=$request->generador;
-        $negocio->id_planta=$request->planta;
-
-        $negocio->negocio=$request->negocio;
-        
-        $tiponegocio=TipoNegocio::where('id','=',$request->tiponegocio)->first();
-        if(!$tiponegocio){
-            return Redirect::back()->with('error', 'El tipo de negocio no se encuentra');
-        }
-        $negocio->tiponegocio=$tiponegocio->tiponegocio;
-
-
-        $negocio->calle=$request->calle;
-        $negocio->numeroext=$request->numeroext;
-        $negocio->numeroint=$request->numeroint;
-        $negocio->colonia=$request->colonia;
-        $negocio->municipio=$request->municipio;
-        $negocio->entidad=$request->entidad;
-        $negocio->cp=$request->cp;
-        $negocio->latitud=$request->latitud;
-        $negocio->longitud=$request->longitud;
-        $negocio->fechainicio=$request->fechainicio;
-        $negocio->fechafin=$request->fechafin;
-        
-        //Subir plan de manejo
-        $nombre = $negocio->id.'.pdf';
-        if(!GuardarArchivos($request->plan,'/documentos/clientes/negocios/plan',$nombre)){
-            return Redirect::back()->with('error', 'Error al guardar RFC del generador.');
-        }
-
-        $negocio->telefono=$request->telefono;
-        $negocio->celular=$request->celular;
-        $negocio->correo=$request->correo;
-
-        $confi=Configuracion::select('iva')->where('id_planta',$request->planta)->first();
-        $negocio->iva=$confi->iva;
-        
-
-        if($negocio->save()){
-            return redirect('negocios')->with('success', 'Datos guardados.');
-        }else{
-            return redirect('negocios')->with('error', 'Error al guardar los datos.');
-        }
         
        
 
@@ -210,10 +163,5 @@ class NegocioController extends Controller
     }
 
 
-    function Cedula($id){
-        $negocio=Negocio::find($id);
-        $url=GeneraQR('images/qr/cedula/',str_replace('/','-',$negocio->negocio).'/'.$id);
-        return view('formatos.cedulas.cedula',['negocio'=>$negocio,'url'=>$url]);
-    }
 
 }

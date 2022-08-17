@@ -49,7 +49,7 @@
                                     <i class="fa fa-bars" aria-hidden="true"></i>
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="menu">
-                                        <a class="dropdown-item borrar" href="{{url('BorrarAdmin').'/'.$recolector->id}}" data-texto="¿Deseas quitar a {{$recolector->recolector}} de la planta?"><i class="fa fa-trash" aria-hidden="true"></i> Quitar</a>
+                                        <a class="dropdown-item borrar" href="{{url('BorrarRecolector').'/'.$recolector->id}}" data-texto="¿Deseas quitar a {{$recolector->recolector}} de la planta?"><i class="fa fa-trash" aria-hidden="true"></i> Quitar</a>
                                     </div>
                                 </div>
                             </div>

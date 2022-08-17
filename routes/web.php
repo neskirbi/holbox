@@ -203,7 +203,6 @@ Route::get('/prueba', function () {
 
 
 Route::resource('negocios','App\Http\Controllers\Cliente\NegocioController');
-Route::get('negocio/cedula/{id}','App\Http\Controllers\Cliente\NegocioController@Cedula');
 
 /***Ruta Manifiesto alcaldia */
 Route::get('manifiestoalcaldia/{id}',[FormatosController::class,'manifiestoalcaldia']);
@@ -285,6 +284,8 @@ Route::post('Horarios/{id}', 'App\Http\Controllers\Administracion\ConfiguracionC
 Route::resource('administradores', 'App\Http\Controllers\Administracion\AdministradorController');
 Route::resource('establecimientos', 'App\Http\Controllers\Administracion\NegocioController');
 
+Route::get('establecimientos/cedula/{id}','App\Http\Controllers\Administracion\NegocioController@Cedula');
+
 Route::get('imagenes',function(){
     return view('administracion.citas.imagenes');
 });
@@ -310,7 +311,7 @@ Route::resource('entregas','App\Http\Controllers\Administracion\EntregaControlle
 Route::resource('plantars','App\Http\Controllers\Administracion\PlantaReciduosController');
 
 Route::resource('recolectores','App\Http\Controllers\Administracion\RecolectorController');
-
+Route::get('BorrarRecolector/{id}','App\Http\Controllers\Administracion\RecolectorController@BorrarRecolector');
 /**
  * Rutas para vendedores (Protocolo rueditas de bici)
  */

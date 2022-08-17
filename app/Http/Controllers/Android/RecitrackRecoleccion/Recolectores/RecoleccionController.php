@@ -25,7 +25,8 @@ class RecoleccionController extends Controller
                 $recol->id=GetUuid();
                 $recol->id_recolector=$recoleccion['id_recolector'];
                 $recol->id_negocio=$recoleccion['id'];
-                $recol->negocio=$recoleccion['negocio'];
+                $recol->negocio=$recoleccion['negocio'];                
+                $recol->cantidad=$recoleccion['cantidad'];
                 $recol->fechavisita=$recoleccion['created_at'];
                 if($recol->save()){
                     $correctos[]=$recoleccion['id'];

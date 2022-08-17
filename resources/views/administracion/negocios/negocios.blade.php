@@ -29,6 +29,10 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+
+        <div class="p-2">
+          <a href="{{url('establecimientos/create')}}" class="btn btn-primary"><span><i class="fa fa-plus" aria-hidden="true"></i></span> Establecimiento</a>
+        </div>
         <div class="row">
           <div class="col-12">
             <div class="card">
@@ -80,10 +84,15 @@
                             @if(file_exists('documentos/clientes/contratos/'.$negocio->id.'.pdf'))
                               <a href="documentos/clientes/contratos/{{$negocio->id}}.pdf" target="_blank" class="btn btn-info btn-sm d-inline p-2" >Contrato <i class="fa fa-download" aria-hidden="true"></i></a>
                             @endif
+                            
                           </td>
                           
                           <td>
-                          <a href="establecimientos/{{$negocio->id}}" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Ver</a>
+                            <a href="establecimientos/{{$negocio->id}}" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i> Ver</a>
+
+                            @if($negocio->verificado==1)
+                            <a href="establecimientos/cedula/{{$negocio->id}}" class="btn btn-success" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Cédula QR</a>
+                            @endif
                           </td>
                         </tr>
                         @endforeach

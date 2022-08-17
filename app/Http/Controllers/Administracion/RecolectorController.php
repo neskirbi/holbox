@@ -124,7 +124,7 @@ class RecolectorController extends Controller
         
         $recolector->recolector=$request->nombre;
         $recolector->mail=isset($request->mail) ? $request->mail : $recolector->mail;                       
-        $recolector->telefono=$request->telefono;       
+        //$recolector->telefono=$request->telefono;       
         $recolector->pass=$request->pass;
 
         if($request->telefono!=null){
@@ -151,5 +151,13 @@ class RecolectorController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    function BorrarRecolector($id){
+        $recolector=Recolector::find($id);
+        if($recolector->delete()){            
+            return redirect('recolectores')->with('error','Registro borrado.');
+        }
+
     }
 }
