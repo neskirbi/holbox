@@ -189,7 +189,7 @@ class NegocioController extends Controller
             }
         }
        
-
+        $negocio->contacto=$request->contacto;
         $negocio->telefono=$request->telefono;
         $negocio->celular=$request->celular;
         $negocio->correo=$request->correo;

@@ -232,6 +232,15 @@
                                 <h3 class="card-title">Datos del contacto</h3>
                             </div>
                             <div class="card-body">
+                            <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="contacto">Contacto</label>
+                                            <input required type="text" name="contacto" class="form-control" id="contacto" value="{{$negocio->contacto}}" placeholder="Contacto"  minlength="1" maxlength="100" aria-invalid="false" >
+                                        </div>
+                                    </div>
+                                    
+                                </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
