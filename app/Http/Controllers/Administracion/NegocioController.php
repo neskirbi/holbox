@@ -24,7 +24,7 @@ class NegocioController extends Controller
     public function index()
     {
         $negocios = DB::table('negocios')
-        ->join('generadores', 'generadores.id', '=', 'negocios.id_generador')
+        ->leftjoin('generadores', 'generadores.id', '=', 'negocios.id_generador')
         ->where('negocios.id_planta',GetIdPlanta())
         ->select('negocios.id','negocios.negocio','negocios.tiponegocio','generadores.razonsocial','negocios.verificado')
         ->orderby('negocios.created_at','desc')
@@ -115,7 +115,6 @@ class NegocioController extends Controller
     public function show($id)
     {
         $negocio=Negocio::find($id);
-
         $tiponegocios=TipoNegocio::all();
 
         $entidades=Entidad::all();
@@ -130,7 +129,7 @@ class NegocioController extends Controller
         ->first();
 
         $entidad=DB::table('entidades')
-        ->where('id',$negocio->entidad)
+        ->where('entidad',$negocio->entidad)
         ->first();
 
 

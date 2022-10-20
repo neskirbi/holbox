@@ -48,7 +48,7 @@
                                     <div class="col-md-6"> 
                                         <div class="form-group">
                                             <label for="generador">Generador</label>
-                                            <input readonly="" type="text" class="form-control" id="generador" value="{{$generador->razonsocial}}" aria-invalid="false">
+                                            <input readonly="" type="text" class="form-control" id="generador" value="{{isset($generador->razonsocial) ? $generador->razonsocial : ''}}" aria-invalid="false">
                                         </div>
                                     </div>
                                     
