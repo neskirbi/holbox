@@ -284,7 +284,7 @@ Route::post('Horarios/{id}', 'App\Http\Controllers\Administracion\ConfiguracionC
 Route::resource('administradores', 'App\Http\Controllers\Administracion\AdministradorController');
 Route::resource('establecimientos', 'App\Http\Controllers\Administracion\NegocioController');
 
-Route::get('establecimientos/cedula/{id}','App\Http\Controllers\Administracion\NegocioController@Cedula');
+Route::get('cedula/{id}','App\Http\Controllers\Administracion\NegocioController@Cedula');
 
 Route::get('imagenes',function(){
     return view('administracion.citas.imagenes');

@@ -62,7 +62,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body" style="overflow-x: scroll;">
-              <a class="btn btn-primary" href="{{url('generador/create')}}">+ Generador</a>
+              <a class="btn btn-primary" href="{{url('generador/create')}}"><i class="fa fa-plus" aria-hidden="true"></i> Generador</a>
                 
                 @if(count($generadores))
                 <table class="table table-hover text-nowrap">

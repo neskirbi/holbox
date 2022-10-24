@@ -177,20 +177,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="fechainicio">Inicio de Contrato</label>                                           
-                                            <input required type="date" name="fechainicio" class="form-control" id="fechainicio" value="{{$negocio->fechainicio}}" aria-invalid="false">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="fechafin">Fin de Contrato</label>                                           
-                                            <input required type="date" name="fechafin" class="form-control" id="fechafin" value="{{$negocio->fechafin}}" aria-invalid="false">
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                        
