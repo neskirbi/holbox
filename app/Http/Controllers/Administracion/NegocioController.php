@@ -195,7 +195,7 @@ class NegocioController extends Controller
         $negocio->correo=$request->correo;
 
         $confi=Configuracion::select('iva')->where('id_planta',$request->planta)->first();
-        $negocio->iva=16;
+        $negocio->iva=$confi->iva;
         
 
         if($negocio->save()){
