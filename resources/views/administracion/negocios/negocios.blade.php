@@ -91,7 +91,7 @@
                             <a href="establecimientos/{{$negocio->id}}" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i> Ver</a>
 
                             @if($negocio->verificado==1)
-                            <a href="establecimientos/cedula/{{$negocio->id}}" class="btn btn-success" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Cédula QR</a>
+                            <a href="cedula/{{$negocio->id}}" class="btn btn-success" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Cédula QR</a>
                             @endif
                           </td>
                         </tr>

@@ -70,22 +70,18 @@
         
        
 		<center>
-			<h2>Cedula de identificación <br>para Recolección de <br>Residuos Sólidos Urbanos</h2>
+			<h4>Cedula de identificación <br>para Recolección de <br>Residuos Sólidos Urbanos</h4>
+			<h2>{{$negocio->negocio}}</h2>
 			<img src="{{asset($url)}}" alt="QR" width="50%">
 		</center>
 		
        
-		
-        <br>
         <br>
 		<p>
 			<center>Fecha de Registro:{{FechaFormateada($negocio->created_at)}}<center>
 		</p>
 		<p>
 			<center>Folio de Registro:{{($negocio->id)}}<center>
-		</p>
-		<p>
-			<center>Número de Autorización:0000<center>
 		</p>
 		
 		

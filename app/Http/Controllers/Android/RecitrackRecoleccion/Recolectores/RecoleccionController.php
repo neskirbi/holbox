@@ -18,31 +18,20 @@ class RecoleccionController extends Controller
        //return $recolecciones[0]['created_at'];
        foreach($recolecciones as $recoleccion){
            //return Recoleccion::where('fechavisita',date('Y-m-d',strtotime($recoleccion['created_at'])))->first();
-            if(Recoleccion::where('id_negocio',$recoleccion['id'])->whereraw("date(fechavisita) = '".date('Y-m-d',strtotime($recoleccion['created_at']))."'")->first()){
+            if(Recoleccion::where('id_negocio',$recoleccion['id'])->whereraw("date(created_at) = '".date('Y-m-d',strtotime($recoleccion['created_at']))."'")->first()){
                 $correctos[]=$recoleccion['id'];
             }else{
                 $recol=new Recoleccion();
-                $recol->id=GetUuid();
+                //$recol->id=GetUuid();
+                $recol->id=$recoleccion['id'];
                 $recol->id_recolector=$recoleccion['id_recolector'];
-                $recol->id_negocio=$recoleccion['id'];
-                $recol->negocio=$recoleccion['negocio'];                
+                $recol->id_negocio=$recoleccion['id_negocio'];
+                $recol->negocio=$recoleccion['negocio'] == null ? '' : $recoleccion['negocio'];
+                $recol->contenedor=$recoleccion['contenedor'];
+                $recol->residuo=$recoleccion['residuo'];
                 $recol->cantidad=$recoleccion['cantidad'];
-                $recol->fechavisita=$recoleccion['created_at'];
-                if($recol->save()){
-                    $correctos[]=$recoleccion['id'];
-                    //return Multa::where('id_negocio',$recoleccion['id'])->whereraw("year(created_at)='".date('Y',strtotime($recoleccion['created_at']))."'")->whereraw("month(created_at)='".date('m',strtotime($recoleccion['created_at']))."'")->first();
-                    if(!Pago::where('id_negocio',$recoleccion['id'])->whereraw("year(created_at)='".date('Y',strtotime($recoleccion['created_at']))."'")->whereraw("month(created_at)='".date('m',strtotime($recoleccion['created_at']))."'")->where('status',2)->first()
-                    && !Multa::where('id_negocio',$recoleccion['id'])->whereraw("year(created_at)='".date('Y',strtotime($recoleccion['created_at']))."'")->whereraw("month(created_at)='".date('m',strtotime($recoleccion['created_at']))."'")->first()){
-                        $negocio=Negocio::find($recoleccion['id']);
-                        $planta=Planta::find($negocio->id_planta);                        
-                        $multa=new Multa();
-                        $multa->id=GetUuid();
-                        $multa->id_planta=$planta->id;
-                        $multa->id_negocio=$recoleccion['id'];
-                        $multa->save();
-                    }
-                   
-                }
+                $recol->save();
+                $correctos[]=$recoleccion['id'];
             }
            
        }
