@@ -7,8 +7,6 @@ use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Exports\ReporteCitasAdministracion;
-use App\Exports\ReporteCitasAdministracionFotos;
 use App\Exports\ReportePagosAdministracion;
 use App\Exports\ReporteStatusObraAdministracion;
 
