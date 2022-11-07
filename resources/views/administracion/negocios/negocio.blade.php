@@ -127,13 +127,14 @@
                                     </div>
                                 </div>
 
+
                                 <div class='row'>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="entidad">Entidad Federativa</label>
                                             <!--<input  type="text" name="entidad" class="form-control" id="entidad" placeholder="Entidad federativa" aria-invalid="false" >-->
                                             <select  name="entidad" class="form-control" id="entidad" aria-invalid="false" >
-                                                <option value="{{$negocio->entidad}}">{{$entidad->entidad}}</option>
+                                                <option value="{{isset($negocio->entidad) ? $negocio->entidad : '' }}">{{isset($negocio->entidad) ? $negocio->entidad : ''}}</option>
                                                 <optgroup></optgroup>
                                                 @foreach($entidades as $entidad)
                                                 <option value="{{$entidad->id}}">{{$entidad->entidad}}</option>
