@@ -15,3 +15,18 @@ php artisan migrate:refresh --path=/database/migrations/tabla.php
 */
 
 php artisan make:migrtion create_table
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+

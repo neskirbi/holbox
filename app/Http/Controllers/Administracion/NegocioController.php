@@ -132,7 +132,6 @@ class NegocioController extends Controller
         ->where('entidad',$negocio->entidad)
         ->first();
 
-
         
         return view('administracion.negocios.negocio',['negocio'=>$negocio,'generador'=>$generador,'planta'=>$planta,'plantas'=>$plantas,'entidades'=>$entidades,'entidad'=>$entidad,'tiponegocios'=>$tiponegocios]);
 

@@ -65,8 +65,7 @@ class GeneradorController extends Controller
         $cliente->pass=password_hash('',PASSWORD_DEFAULT);
         $cliente->accept= 1;
         $cliente->confirmacion= 1;
-        if(!$cliente->save()){
-            
+        if(!$cliente->save()){            
             return Redirect::back()->with('error', 'Error al crear el registro.');
         }
 
@@ -172,15 +171,15 @@ class GeneradorController extends Controller
         
         }
 
-        $generdor->verificado=1;
+        $generador->verificado=1;
         if($generador->save()){
             $token=new Token();        
             $token->id=$id;
             $token->token=password_hash($id,PASSWORD_DEFAULT);
             $token->mail=$request->correo;
             $token->save();
-            Notificar('Generar Contraseña','Generar contraseña.','','Por favor, para generar la contraseña en la plataforma Reci-Track de la cuenta '.$request->correo.' de click en el siguiente enlace.',[$request->correo],'<a href="https://reci-track.mx/AdminPass/'.$id.'" class="btn btn-default  btn-outline-secondary">Generar Contraseña</a>');
-            Notificar('Nuevo Generador','Nuevo Generador Registrado.','Verificar datos del generador','Se ha registrado la información del generador '.$request->razonsocial.' para la validación de los datos.',['emiliano@csmx.mx'],'<a href="https://reci-track.mx/acceso" class="btn btn-default  btn-outline-secondary">Ir a Recitrack</a>');
+            //Notificar('Generar Contraseña','Generar contraseña.','','Por favor, para generar la contraseña en la plataforma Reci-Track de la cuenta '.$request->correo.' de click en el siguiente enlace.',[$request->correo],'<a href="https://reci-track.mx/AdminPass/'.$id.'" class="btn btn-default  btn-outline-secondary">Generar Contraseña</a>');
+            //Notificar('Nuevo Generador','Nuevo Generador Registrado.','Verificar datos del generador','Se ha registrado la información del generador '.$request->razonsocial.' para la validación de los datos.',['emiliano@csmx.mx'],'<a href="https://reci-track.mx/acceso" class="btn btn-default  btn-outline-secondary">Ir a Recitrack</a>');
             return redirect('generadores')->with('success', 'Registro correcto.');
             
         }else{

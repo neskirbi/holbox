@@ -26,7 +26,13 @@ class ReporteCitasAdministracionFotos implements FromView,WithDrawings{
         ->where('fechacita','<=',$fin)
         ->where('obras.id_planta','=',$id_planta)
         ->where('confirmacion','=',1)
-        ->select('citas.id','citas.folio','citas.fechacita','citas.regsct','citas.razonsocial','citas.calleynumerofis','citas.coloniafis','citas.municipiofis','citas.cpfis','citas.calleynumeroobr','citas.coloniaobr','citas.municipioobr','citas.cpobr','citas.unidades','citas.cantidad','citas.precio','citas.precio','citas.cantidad','citas.vehiculo','citas.marcaymodelo','citas.matricula','citas.ramir','citas.condicionesmaterial','citas.condicionesmaterial','citas.nombrecompleto','citas.recibio','citas.cargo','citas.observacion')
+        ->select('citas.id','citas.folio','citas.fechacita','citas.regsct',
+        'citas.razonsocial','citas.calleynumerofis','citas.coloniafis',
+        'citas.municipiofis','citas.cpfis','citas.calleynumeroobr','citas.coloniaobr',
+        'citas.municipioobr','citas.cpobr','citas.unidades','citas.cantidad','citas.precio',
+        'citas.precio','citas.cantidad','citas.vehiculo','citas.marcaymodelo','citas.matricula',
+        'citas.ramir','citas.condicionesmaterial','citas.condicionesmaterial','citas.nombrecompleto',
+        'citas.recibio','citas.cargo','citas.observacion')
         ->orderby('folio','asc')
         ->get();
 
