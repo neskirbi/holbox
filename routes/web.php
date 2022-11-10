@@ -128,23 +128,6 @@ Route::post('logintransport', 'App\Http\Controllers\LoginController@authenticate
 Route::get('logout', 'App\Http\Controllers\LoginController@logout');
 
 
-//Rutas transportistas
-
-
-Route::resource('vehiculo', 'App\Http\Controllers\Transportista\VehiculoController');
-Route::resource('chofer', 'App\Http\Controllers\Transportista\ChoferController');
-
-Route::resource('empresas', 'App\Http\Controllers\Transportista\EmpresaController');
-
-Route::resource('transportista','App\Http\Controllers\Transportista\TransportistaController');
-
-Route::resource('ubicacion','App\Http\Controllers\Transportista\UbicacionController');
-Route::resource('viajes','App\Http\Controllers\Transportista\ViajeController');
-
-
-
-Route::get('mapa','App\Http\Controllers\Transportista\UbicacionController@Mapa');
-Route::get('ruta','App\Http\Controllers\Transportista\UbicacionController@Ruta');
 
 
 //Ruta centros de acopio
@@ -166,29 +149,7 @@ Route::resource('generadores', 'App\Http\Controllers\Cliente\GeneradoresControll
 
 Route::get('registrogenerador','App\Http\Controllers\RegistroGeneradoresController@index');
 
-
-
-
-
-
-
-
-
 Route::resource('vehiculos', 'App\Http\Controllers\VehiculosController');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 Route::get('terminos/{direccion}/{fechaini}/{fechafin}/{generador}/{total}', 'App\Http\Controllers\TerminosyCondicionesController@terminosycondiciones');
@@ -229,19 +190,6 @@ Route::resource('sedemas', 'App\Http\Controllers\Asociacion\SedemaController');
 Route::get('quitarsedema/{id}','App\Http\Controllers\Asociacion\SedemaController@QuitarSedema');
 
 
-/**Rutas para Directores */
-
-Route::resource('graficas', 'App\Http\Controllers\Director\DashboardController');
-
-
-Route::get('pagosdirector','App\Http\Controllers\Director\DashboardController@Pagos');
-
-Route::get('GraficaPagosDiretor','App\Http\Controllers\Director\DashboardController@GraficaPagosDiretor');
-Route::get('GraficasCitasDirector','App\Http\Controllers\Director\DashboardController@GraficasCitasDirector');
-Route::get('GraficasMaterialMesDirector','App\Http\Controllers\Director\DashboardController@GraficasMaterialMesDirector');
-
-Route::get('citasdirector','App\Http\Controllers\Director\DashboardController@Citas');
-Route::get('saldosdirector','App\Http\Controllers\Director\DashboardController@Saldos');
 
 
 
@@ -281,6 +229,8 @@ Route::post('configuracionboleta', 'App\Http\Controllers\Administracion\Configur
 Route::post('CambioPass/{id}', 'App\Http\Controllers\Administracion\ConfiguracionController@CambioPass');
 Route::post('Horarios/{id}', 'App\Http\Controllers\Administracion\ConfiguracionController@Horarios');
 
+Route::post('Residuo', 'App\Http\Controllers\Administracion\ConfiguracionController@Residuo');
+
 Route::resource('administradores', 'App\Http\Controllers\Administracion\AdministradorController');
 Route::resource('establecimientos', 'App\Http\Controllers\Administracion\NegocioController');
 
@@ -312,80 +262,10 @@ Route::resource('plantars','App\Http\Controllers\Administracion\PlantaReciduosCo
 
 Route::resource('recolectores','App\Http\Controllers\Administracion\RecolectorController');
 Route::get('BorrarRecolector/{id}','App\Http\Controllers\Administracion\RecolectorController@BorrarRecolector');
-/**
- * Rutas para vendedores (Protocolo rueditas de bici)
- */
-
- 
-Route::resource('dashboardv','App\Http\Controllers\Vendedor\DashboardController');
-Route::get('GraficasMaterialMesVendedor','App\Http\Controllers\Vendedor\DashboardController@GraficasMaterialMesVendedor');
-Route::get('ReporteMensualvendedor/{month}/{year}','App\Http\Controllers\Vendedor\DashboardController@ReporteMensualvendedor');
 
 
 
 
-
-Route::resource('pagosv', 'App\Http\Controllers\Vendedor\PagoController');
-
-Route::resource('ventas','App\Http\Controllers\Vendedor\VentaController');
-
-Route::post('CancelarPagov/{id}', 'App\Http\Controllers\Vendedor\PagoController@CancelarPago');
-Route::post('VerificarPagov/{id}', 'App\Http\Controllers\Vendedor\PagoController@VerificarPago');
-
-
-Route::resource('productos','App\Http\Controllers\Vendedor\ProductoController');
-Route::get('agregar','App\Http\Controllers\Vendedor\ProductoController@Agregar');
-Route::get('productofotos/{id}','App\Http\Controllers\Vendedor\ProductoController@FotosProductos');
-
-
-
-
-
-
-Route::post('RechazarPedido/{id}','App\Http\Controllers\Vendedor\VentaController@RechazarPedido');
-
-Route::post('AceptarPedido/{id}','App\Http\Controllers\Vendedor\VentaController@AceptarPedido');
-
-Route::post('GuardarPedido/{id}','App\Http\Controllers\Vendedor\VentaController@GuardarPedido');
-
-
-Route::resource('reporteven', 'App\Http\Controllers\Vendedor\ReporteController');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Route::get('PassResetAdmin',function(){
-    return view('administracion.extras.passreset');
-});
-
-
- 
-
-
-
-
-/**
- * Rutas para finanzas (Geppetto)
- */
-
-Route::resource('pagosfi', 'App\Http\Controllers\Finanzas\PagoController');
-
-
-Route::resource('generadoresfi', 'App\Http\Controllers\Finanzas\GeneradorController');
-Route::resource('kpifi', 'App\Http\Controllers\Finanzas\KpiController');
-
-Route::resource('reportesfi', 'App\Http\Controllers\Finanzas\ReporteController');
 
 
 

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Configuracion;
 use App\Models\Administrador;
 use App\Models\Planta;
+use App\Models\Residuo;
 use Redirect;
 class ConfiguracionController extends Controller
 {
@@ -22,62 +23,8 @@ class ConfiguracionController extends Controller
         $configuraciones=DB::table('configuraciones')->where('id_planta','=',GetIdPlanta())->first();
         $planta=Planta::find(GetIdPlanta());
         $administrador=Administrador::find(GetId());
-        return view('administracion.configuraciones.configuraciones',['configuraciones'=>$configuraciones,'administrador'=>$administrador,'planta'=>$planta]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $residuos=Residuo::where('id_planta',GetIdPlanta())->get();
+        return view('administracion.configuraciones.configuraciones',['configuraciones'=>$configuraciones,'administrador'=>$administrador,'planta'=>$planta,'residuos'=>$residuos]);
     }
 
     /**
@@ -213,6 +160,24 @@ class ConfiguracionController extends Controller
             return redirect('configuracion')->with('success', 'Datos guardados.');
         }else{
             return redirect('configuracion')->with('error', 'Error al guardar.');
+        }
+    }
+
+
+    function Residuo(Request $request){
+        //return $request;
+        
+
+        $residuo=new Residuo();
+        $residuo->id=GetUuid();
+        $residuo->id_planta=GetIdPlanta();
+        $residuo->residuo=$request->residuo;
+        $residuo->precio=$request->precio;
+        $residuo->unidades=$request->unidades;
+        if($residuo->save()){
+            return Redirect::back()->with('success', 'Datos guardados.');
+        }else{
+            return Redirect::back()->with('error', 'Error al guardar.');
         }
     }
 }

@@ -29,6 +29,16 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+
+      <div class="row">
+          <div class="col-md-12">
+            <div class="callout callout-info">
+              <h5>Configuración de la Planta</h5>
+            </div>
+
+          </div>
+         
+        </div>
         <div class="row">
           <div class="col-md-3">
             <div class="card card-danger card-outline">
@@ -42,32 +52,32 @@
                   <ul class="nav nav-pills flex-column">                 
 
                   <li class="nav-item active">
-                        <a class="nav-link" onclick="VentanasTitulos(this);" data-text="Cuenta"  data-toggle="pill" href="#cuenta" role="tab">
+                        <a class="nav-link" onclick="VentanasTitulos(this,'titulo');" data-text="Cuenta"  data-toggle="pill" href="#cuenta" role="tab">
                             <i class="fa fa-user" aria-hidden="true"></i> Cuenta
                             <!--<span class="badge bg-primary float-right">12</span>-->
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" onclick="VentanasTitulos(this);" data-text="Contraseña"  data-toggle="pill" href="#contrasenia" role="tab">
+                        <a class="nav-link" onclick="VentanasTitulos(this,'titulo');" data-text="Contraseña"  data-toggle="pill" href="#contrasenia" role="tab">
                             <i class="fa fa-lock" aria-hidden="true"></i> Contraseña
                             <!--<span class="badge bg-primary float-right">12</span>-->
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" onclick="VentanasTitulos(this);" data-text="Banco"  data-toggle="pill" href="#banco" role="tab">
+                        <a class="nav-link" onclick="VentanasTitulos(this,'titulo');" data-text="Banco"  data-toggle="pill" href="#banco" role="tab">
                             <i class="fa fa-dollar" aria-hidden="true"></i> Banco
                             <!--<span class="badge bg-primary float-right">12</span>-->
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" onclick="VentanasTitulos(this);" data-text="Boletas"  data-toggle="pill" href="#boleta" role="tab">
+                        <a class="nav-link" onclick="VentanasTitulos(this,'titulo');" data-text="Boletas"  data-toggle="pill" href="#boleta" role="tab">
                           <i class="fa fa-file-text" aria-hidden="true"></i> Boletas
                             <!--<span class="badge bg-primary float-right">12</span>-->
                         </a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" onclick="VentanasTitulos(this);" data-text="Horarios"  data-toggle="pill" href="#horarios" role="tab">
+                        <a class="nav-link" onclick="VentanasTitulos(this,'titulo');" data-text="Horarios"  data-toggle="pill" href="#horarios" role="tab">
                           <i class="fa fa-calendar" aria-hidden="true"></i> Horarios
                             <!--<span class="badge bg-primary float-right">12</span>-->
                         </a>
@@ -402,6 +412,93 @@
         </div>
         <!-- /.row -->       
 
+        <div class="row">
+          <div class="col-md-12">
+            <div class="callout callout-info">
+              <h5>Configuración de la App</h5>
+            </div>
+
+          </div>
+         
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="card card-danger card-outline">
+              <div class="card-header">
+                <h3 class="card-title">App</h3>
+              </div>
+              <div class="card-body p-0">
+                <ul class="nav nav-pills flex-column">
+                  <li class="nav-item active">
+                    <a class="nav-link" onclick="VentanasTitulos(this,'titulo2');" data-text="Residuos"  data-toggle="pill" href="#residuos" role="tab">
+                      <i class="fa fa-user" aria-hidden="true"></i> Cuenta
+                      <!--<span class="badge bg-primary float-right">12</span>-->
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>
+
+
+          <div class="col-md-9">
+            <div class="card card-danger">
+              <div class="card-header">
+                <h3 class="card-title" id="titulo">Residuos</h3>
+              </div>
+              <div class="card-body">
+                <div class="col-md-12">                   
+                  <div class="row">
+                    <div class="tab-content" id="custom-tabs-four-tabContent" style="width:100%;">                            
+                      <div class="tab-pane fade active show" id="residuos" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                        <div class="p-2">
+                          <a class="btn btn-info" data-toggle="modal" data-target="#mresiduo">
+                          <i class="fa fa-plus" aria-hidden="true"></i> Residuo                    
+                        </a> 
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                          <table class="table table-hover text-nowrap">
+                                <thead>
+                                    <tr>
+                                    <th>Residuo</th>
+                                    <th>Precio</th>
+                                    <th>Unidades</th>    
+                                    </tr>
+                                </thead>
+                            <tbody>
+                            @foreach($residuos as $residuo)
+                            <tr>
+                              <td>{{$residuo->residuo}}</td>
+                              <td>{{$residuo->precio}}</td>
+                              <td>{{$residuo->unidades}}</td>
+                            </tr>
+                              
+                            @endforeach                   
+                                
+                            </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>                    
+                  </div>
+                </div>
+              </div>              
+            </div>            
+          </div>
+
+
+
+
+
+
+
+        </div>
+        
+
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
@@ -437,7 +534,7 @@
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App, funcion de sidebar -->
 <script src="dist/js/adminlte.js"></script>
-
+@include('administracion.configuraciones.modals.modalresiduo')
 @include('administracion.footer')
 
 <script>
@@ -602,5 +699,7 @@
 })();
 
 </script>
+
+
 </body>
 </html>

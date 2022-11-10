@@ -7,7 +7,7 @@ use App\Models\Planta;
 use Kreait\Firebase\Factory;
 
 function Version(){
-    return 174;
+    return 1;
 }
 
 function GetId(){

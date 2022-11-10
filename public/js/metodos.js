@@ -1915,8 +1915,8 @@ function FormatNumber(_this)
 
 }
 
-function VentanasTitulos(_this){
-    $('#titulo').html($(_this).data('text'));
+function VentanasTitulos(_this,contenedor){
+    $('#'+contenedor).html($(_this).data('text'));
 }
 
 function ReportePagos(){
