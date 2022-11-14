@@ -230,6 +230,7 @@ Route::post('CambioPass/{id}', 'App\Http\Controllers\Administracion\Configuracio
 Route::post('Horarios/{id}', 'App\Http\Controllers\Administracion\ConfiguracionController@Horarios');
 
 Route::post('Residuo', 'App\Http\Controllers\Administracion\ConfiguracionController@Residuo');
+Route::post('BorrarResiduo/{id}', 'App\Http\Controllers\Administracion\ConfiguracionController@BorrarResiduo');
 
 Route::resource('administradores', 'App\Http\Controllers\Administracion\AdministradorController');
 Route::resource('establecimientos', 'App\Http\Controllers\Administracion\NegocioController');

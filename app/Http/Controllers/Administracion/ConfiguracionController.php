@@ -180,4 +180,11 @@ class ConfiguracionController extends Controller
             return Redirect::back()->with('error', 'Error al guardar.');
         }
     }
+
+    function BorrarResiduo($id){
+        $residuo=Residuo::find($id);
+        $residuo->delete();
+        return Redirect::back()->with('error', 'Se borró del catálogo.');
+
+    }
 }

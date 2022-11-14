@@ -331,17 +331,22 @@ $(function () {
 <script>
     var markers = [];
     function initMap() {
-        const myLatlng = { lat:  20.248882446801847, lng: -101.45472227050904 };
+        const myLatlng = { lat:  $('#latitud').val()*1, lng: $('#longitud').val()*1 };
         const map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 4,
+          zoom: 19,
           center: myLatlng,
+        });
+        const marker = new google.maps.Marker({
+            position: myLatlng,
+            map,
+            title:$('#negocio').val()
         });
         // Create the initial InfoWindow.
         let infoWindow = new google.maps.InfoWindow({
           content: "Seleccione ubicación",
           position: myLatlng,
         });
-        infoWindow.open(map);
+        infoWindow.open(map,marker);
         // Configure the click listener.
          
         map.addListener("click", (mapsMouseEvent) => {

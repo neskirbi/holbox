@@ -432,7 +432,7 @@
                 <ul class="nav nav-pills flex-column">
                   <li class="nav-item active">
                     <a class="nav-link" onclick="VentanasTitulos(this,'titulo2');" data-text="Residuos"  data-toggle="pill" href="#residuos" role="tab">
-                      <i class="fa fa-user" aria-hidden="true"></i> Cuenta
+                      <i class="fa fa-user" aria-hidden="true"></i> Residuos
                       <!--<span class="badge bg-primary float-right">12</span>-->
                     </a>
                   </li>
@@ -465,15 +465,20 @@
                                     <tr>
                                     <th>Residuo</th>
                                     <th>Precio</th>
-                                    <th>Unidades</th>    
+                                    <th>Unidades</th> 
+                                    <th></th>   
                                     </tr>
                                 </thead>
                             <tbody>
                             @foreach($residuos as $residuo)
                             <tr>
                               <td>{{$residuo->residuo}}</td>
-                              <td>{{$residuo->precio}}</td>
+                              <td>${{$residuo->precio}}</td>
                               <td>{{$residuo->unidades}}</td>
+                              <td><form action="{{url('BorrarResiduo')}}/{{$residuo->id}}" method="post">
+                                @csrf
+                                <button class="btn btn-danger btn-sm confirmarclick" data-texto="Eliminar el residuo del catálogo?"><i class="fa fa-times" aria-hidden="true"></i></button>
+                              </form></td>
                             </tr>
                               
                             @endforeach                   
