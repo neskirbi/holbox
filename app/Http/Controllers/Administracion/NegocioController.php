@@ -60,7 +60,7 @@ class NegocioController extends Controller
         $negocio = new Negocio();
 
         $negocio->id=GetUuid();        
-        $negocio->id_generador=$request->generador;
+        $negocio->id_generador=isset($request->generador) ? $request->generador : '' ;
         $negocio->id_planta=$request->planta;
 
         $negocio->negocio=$request->negocio;
@@ -154,7 +154,7 @@ class NegocioController extends Controller
 
         //negocio->id=GetUuid(); 
         $negocio=Negocio::find($id);      
-        $negocio->id_generador=$request->generador;
+        $negocio->id_generador=isset($request->generador) ? $request->generador : '' ;
         $negocio->id_planta=$request->planta;
 
         $negocio->negocio=$request->negocio;
@@ -198,9 +198,9 @@ class NegocioController extends Controller
         
 
         if($negocio->save()){
-            return redirect('establecimientos')->with('success', 'Datos guardados.');
+            return Redirect::back()->with('success', 'Datos guardados.');
         }else{
-            return redirect('establecimientos')->with('error', 'Error al guardar los datos.');
+            return Redirect::back()->with('error', 'Error al guardar los datos.');
         }
         
        

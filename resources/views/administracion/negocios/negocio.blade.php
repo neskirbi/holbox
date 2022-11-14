@@ -49,7 +49,7 @@
                                         <div class="form-group">
                                             <label for="generador">Generador</label>
                                             <select class="form-control" name="generador" id="generador" aria-invalid="false" >
-                                                <option value="{{isset($generador->id_generador) ? $generador->id_generador : ''}}">{{isset($generador->razonsocial) ? $generador->razonsocial : ''}}</option>
+                                                <option value="{{isset($generador->id) ? $generador->id : ''}}">{{isset($generador->razonsocial) ? $generador->razonsocial : ''}}</option>
                                                 <optgroup></optgroup>
                                                 @foreach($generadores as $generador)
                                                 <option value="{{$generador->id}}">{{$generador->razonsocial}}</option>
