@@ -44,15 +44,23 @@
                                 <h3 class="card-title">Datos del Establecimiento</h3>
                             </div>
                             <div class="card-body">
-                                <div class="row">
+                            <div class="row">
                                     <div class="col-md-6"> 
                                         <div class="form-group">
                                             <label for="generador">Generador</label>
-                                            <input readonly="" type="text" class="form-control" id="generador" value="{{isset($generador->razonsocial) ? $generador->razonsocial : ''}}" aria-invalid="false">
+                                            <select class="form-control" name="generador" id="generador" aria-invalid="false" >
+                                                <option value="{{isset($generador->id_generador) ? $generador->id_generador : ''}}">{{isset($generador->razonsocial) ? $generador->razonsocial : ''}}</option>
+                                                <optgroup></optgroup>
+                                                @foreach($generadores as $generador)
+                                                <option value="{{$generador->id}}">{{$generador->razonsocial}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
+                                  
                                     
                                 </div>
+                               
 
                                 <div class="row">
                                     <div class="col-md-6">

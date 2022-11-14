@@ -132,8 +132,9 @@ class NegocioController extends Controller
         ->where('entidad',$negocio->entidad)
         ->first();
 
+        $generadores=Generador::all();
         
-        return view('administracion.negocios.negocio',['negocio'=>$negocio,'generador'=>$generador,'planta'=>$planta,'plantas'=>$plantas,'entidades'=>$entidades,'entidad'=>$entidad,'tiponegocios'=>$tiponegocios]);
+        return view('administracion.negocios.negocio',['generadores'=>$generadores,'negocio'=>$negocio,'generador'=>$generador,'planta'=>$planta,'plantas'=>$plantas,'entidades'=>$entidades,'entidad'=>$entidad,'tiponegocios'=>$tiponegocios]);
 
     }
 
@@ -153,6 +154,7 @@ class NegocioController extends Controller
 
         //negocio->id=GetUuid(); 
         $negocio=Negocio::find($id);      
+        $negocio->id_generador=$request->generador;
         $negocio->id_planta=$request->planta;
 
         $negocio->negocio=$request->negocio;
