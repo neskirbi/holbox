@@ -10,6 +10,7 @@ use App\Models\Configuracion;
 use App\Models\Administrador;
 use App\Models\Planta;
 use App\Models\Residuo;
+use App\Models\Contenedor;
 use Redirect;
 class ConfiguracionController extends Controller
 {
@@ -24,7 +25,9 @@ class ConfiguracionController extends Controller
         $planta=Planta::find(GetIdPlanta());
         $administrador=Administrador::find(GetId());
         $residuos=Residuo::where('id_planta',GetIdPlanta())->get();
-        return view('administracion.configuraciones.configuraciones',['configuraciones'=>$configuraciones,'administrador'=>$administrador,'planta'=>$planta,'residuos'=>$residuos]);
+        
+        $contenedores=Contenedor::where('id_planta',GetIdPlanta())->get();
+        return view('administracion.configuraciones.configuraciones',['configuraciones'=>$configuraciones,'administrador'=>$administrador,'planta'=>$planta,'residuos'=>$residuos,'contenedores'=>$contenedores]);
     }
 
     /**
@@ -184,6 +187,33 @@ class ConfiguracionController extends Controller
     function BorrarResiduo($id){
         $residuo=Residuo::find($id);
         $residuo->delete();
+        return Redirect::back()->with('error', 'Se borró del catálogo.');
+
+    }
+
+
+    
+    function Contenedor(Request $request){
+        //return $request;
+        
+
+        $contenedor=new Contenedor();
+        $contenedor->id=GetUuid();
+        $contenedor->id_planta=GetIdPlanta();
+        $contenedor->contenedor=$request->contenedor;
+        $contenedor->cantidad=$request->cantidad;
+        
+        if($contenedor->save()){
+            return Redirect::back()->with('success', 'Datos guardados.');
+        }else{
+            return Redirect::back()->with('error', 'Error al guardar.');
+        }
+    }
+
+
+    function BorrarContenedor($id){
+        $contenedor=Contenedor::find($id);
+        $contenedor->delete();
         return Redirect::back()->with('error', 'Se borró del catálogo.');
 
     }

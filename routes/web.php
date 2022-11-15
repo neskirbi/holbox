@@ -232,6 +232,9 @@ Route::post('Horarios/{id}', 'App\Http\Controllers\Administracion\ConfiguracionC
 Route::post('Residuo', 'App\Http\Controllers\Administracion\ConfiguracionController@Residuo');
 Route::post('BorrarResiduo/{id}', 'App\Http\Controllers\Administracion\ConfiguracionController@BorrarResiduo');
 
+Route::post('Contenedor', 'App\Http\Controllers\Administracion\ConfiguracionController@Contenedor');
+Route::post('BorrarContenedor/{id}', 'App\Http\Controllers\Administracion\ConfiguracionController@BorrarContenedor');
+
 Route::resource('administradores', 'App\Http\Controllers\Administracion\AdministradorController');
 Route::resource('establecimientos', 'App\Http\Controllers\Administracion\NegocioController');
 

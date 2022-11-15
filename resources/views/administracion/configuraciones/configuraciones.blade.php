@@ -51,8 +51,8 @@
                   <input type="hidden" name="id_planta" id="id_planta" value="{{Auth::guard('administradores')->user()->id_planta}}">
                   <ul class="nav nav-pills flex-column">                 
 
-                  <li class="nav-item active">
-                        <a class="nav-link" onclick="VentanasTitulos(this,'titulo');" data-text="Cuenta"  data-toggle="pill" href="#cuenta" role="tab">
+                  <li class="nav-item ">
+                        <a class="nav-link active" onclick="VentanasTitulos(this,'titulo');" data-text="Cuenta"  data-toggle="pill" href="#cuenta" role="tab">
                             <i class="fa fa-user" aria-hidden="true"></i> Cuenta
                             <!--<span class="badge bg-primary float-right">12</span>-->
                         </a>
@@ -430,9 +430,16 @@
               </div>
               <div class="card-body p-0">
                 <ul class="nav nav-pills flex-column">
-                  <li class="nav-item active">
-                    <a class="nav-link" onclick="VentanasTitulos(this,'titulo2');" data-text="Residuos"  data-toggle="pill" href="#residuos" role="tab">
+                  <li class="nav-item ">
+                    <a class="nav-link active" onclick="VentanasTitulos(this,'titulo2');" data-text="Residuos"  data-toggle="pill" href="#residuos" role="tab">
                       <i class="fa fa-user" aria-hidden="true"></i> Residuos
+                      <!--<span class="badge bg-primary float-right">12</span>-->
+                    </a>
+                  </li>
+                  
+                  <li class="nav-item">
+                    <a class="nav-link" onclick="VentanasTitulos(this,'titulo2');" data-text="Contenedores"  data-toggle="pill" href="#contenedores" role="tab">
+                      <i class="fa fa-user" aria-hidden="true"></i> Contenedores
                       <!--<span class="badge bg-primary float-right">12</span>-->
                     </a>
                   </li>
@@ -488,7 +495,47 @@
                           </div>
                         </div>
                       </div>
-                    </div>                    
+
+                      <div class="tab-pane fade" id="contenedores" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                        <div class="p-2">
+                          <a class="btn btn-info" data-toggle="modal" data-target="#mcontenedor">
+                          <i class="fa fa-plus" aria-hidden="true"></i> Contenedores                    
+                        </a> 
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                          <table class="table table-hover text-nowrap">
+                                <thead>
+                                    <tr>
+                                    <th>Contenedor</th>
+                                    <th>Cantidad</th>
+                                    <th></th>   
+                                    </tr>
+                                </thead>
+                            <tbody>
+                            @foreach($contenedores as $contenedor)
+                            <tr>
+                              <td>{{$contenedor->contenedor}}</td>
+                              <td>{{$contenedor->cantidad}}</td>
+                              <td><form action="{{url('BorrarContenedor')}}/{{$contenedor->id}}" method="post">
+                                @csrf
+                                <button class="btn btn-danger btn-sm confirmarclick" data-texto="Eliminar el residuo del catálogo?"><i class="fa fa-times" aria-hidden="true"></i></button>
+                              </form></td>
+                            </tr>
+                              
+                            @endforeach                   
+                                
+                            </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div> 
+                    
+                    <div class="tab-content" id="custom-tabs-four-tabContent" style="width:100%;">                            
+                      
+                    </div>
                   </div>
                 </div>
               </div>              
@@ -540,6 +587,7 @@
 <!-- AdminLTE App, funcion de sidebar -->
 <script src="dist/js/adminlte.js"></script>
 @include('administracion.configuraciones.modals.modalresiduo')
+@include('administracion.configuraciones.modals.modalcontenedor')
 @include('administracion.footer')
 
 <script>
