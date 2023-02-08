@@ -133,7 +133,7 @@ Route::post('CargarRecoleccion','App\Http\Controllers\Android\RecitrackRecolecci
 //Route::post('DatosNegocio','App\Http\Controllers\Android\Recolector\RecoleccionController@DatosNegocio');
 
 
-
+ 
 
 /**
  * Interface Sap
