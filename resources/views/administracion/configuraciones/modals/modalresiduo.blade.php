@@ -27,7 +27,12 @@
                     <div class="form-group">
                         <label for="nombrec">Unidades</label>
                         <input required type="text" class="form-control" id="unidades" name="unidades" >                        
-                    </div>                
+                    </div> 
+                    
+                    <div class="form-group">
+                        <label for="nombrec">Opción</label>
+                        <input required type="text" class="form-control" id="opcion" name="opcion" >                        
+                    </div> 
                  
               </div>
               <div class="card-footer">

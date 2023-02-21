@@ -177,6 +177,7 @@ class ConfiguracionController extends Controller
         $residuo->residuo=$request->residuo;
         $residuo->precio=$request->precio;
         $residuo->unidades=$request->unidades;
+        $residuo->opcion=$request->opcion;
         if($residuo->save()){
             return Redirect::back()->with('success', 'Datos guardados.');
         }else{
@@ -202,6 +203,7 @@ class ConfiguracionController extends Controller
         $contenedor->id_planta=GetIdPlanta();
         $contenedor->contenedor=$request->contenedor;
         $contenedor->cantidad=$request->cantidad;
+        $residuo->opcion=$request->opcion;
         
         if($contenedor->save()){
             return Redirect::back()->with('success', 'Datos guardados.');

@@ -18,7 +18,7 @@ class RecoleccionController extends Controller
        //return $recolecciones[0]['created_at'];
        foreach($recolecciones as $recoleccion){
            //return Recoleccion::where('fechavisita',date('Y-m-d',strtotime($recoleccion['created_at'])))->first();
-            if(Recoleccion::where('id_negocio',$recoleccion['id'])->whereraw("date(created_at) = '".date('Y-m-d',strtotime($recoleccion['created_at']))."'")->first()){
+            if(Recoleccion::find($recoleccion['id'])){
                 $correctos[]=$recoleccion['id'];
             }else{
                 $recol=new Recoleccion();

@@ -125,7 +125,7 @@ Route::post('Entregado','App\Http\Controllers\Android\RecitrackTransporte\Scaner
 Route::post('HistorialViajes','App\Http\Controllers\Android\RecitrackTransporte\Choferes\ViajesController@HistorialViajes');
 
 /**
- * Recitrac Recoleccion
+ * Recitrack Recoleccion
  */
 
 Route::post('RecolectorLogin','App\Http\Controllers\Android\RecitrackRecoleccion\Recolectores\LoginController@RecolectorLogin');

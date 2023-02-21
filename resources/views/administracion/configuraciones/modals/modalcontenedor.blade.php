@@ -23,6 +23,11 @@
                         <label for="cantidad">Cantidad</label>
                         <input required type="number" min="0.0" step="0.1" class="form-control" id="cantidad" name="cantidad" >                        
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="nombrec">Opción</label>
+                        <input required type="text" class="form-control" id="opcion" name="opcion" >                        
+                    </div> 
 
                         
                  

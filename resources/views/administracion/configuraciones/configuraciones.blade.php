@@ -473,6 +473,7 @@
                                     <th>Residuo</th>
                                     <th>Precio</th>
                                     <th>Unidades</th> 
+                                    <th>Opción</th> 
                                     <th></th>   
                                     </tr>
                                 </thead>
@@ -482,6 +483,7 @@
                               <td>{{$residuo->residuo}}</td>
                               <td>${{$residuo->precio}}</td>
                               <td>{{$residuo->unidades}}</td>
+                              <td>{{$residuo->opcion}}</td>
                               <td><form action="{{url('BorrarResiduo')}}/{{$residuo->id}}" method="post">
                                 @csrf
                                 <button class="btn btn-danger btn-sm confirmarclick" data-texto="Eliminar el residuo del catálogo?"><i class="fa fa-times" aria-hidden="true"></i></button>
@@ -508,7 +510,8 @@
                                 <thead>
                                     <tr>
                                     <th>Contenedor</th>
-                                    <th>Cantidad</th>
+                                    <th>Cantidad</th> 
+                                    <th>Opción</th> 
                                     <th></th>   
                                     </tr>
                                 </thead>
@@ -517,6 +520,7 @@
                             <tr>
                               <td>{{$contenedor->contenedor}}</td>
                               <td>{{$contenedor->cantidad}}</td>
+                              <td>{{$contenedor->opcion}}</td>
                               <td><form action="{{url('BorrarContenedor')}}/{{$contenedor->id}}" method="post">
                                 @csrf
                                 <button class="btn btn-danger btn-sm confirmarclick" data-texto="Eliminar el residuo del catálogo?"><i class="fa fa-times" aria-hidden="true"></i></button>
