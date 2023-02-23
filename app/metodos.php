@@ -32,22 +32,12 @@ function GetId(){
 
 function GetIdPlanta(){
     
-    if(Auth::guard('directores')->check()){
-        return Auth::guard('directores')->user()->id_planta;
-    }  
+    //return'algo';
     
     if(Auth::guard('administradores')->check()){
         return Auth::guard('administradores')->user()->id_planta;
     }  
     
-    if(Auth::guard('finanzas')->check()){
-        return Auth::guard('finanzas')->user()->id_planta;
-    }  
-
-    
-    if(Auth::guard('vendedores')->check()){
-        return Auth::guard('vendedores')->user()->id_planta;
-    }  
 }
 
 function GetNombre(){

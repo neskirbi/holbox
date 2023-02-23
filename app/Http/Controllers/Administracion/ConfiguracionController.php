@@ -24,9 +24,9 @@ class ConfiguracionController extends Controller
         $configuraciones=DB::table('configuraciones')->where('id_planta','=',GetIdPlanta())->first();
         $planta=Planta::find(GetIdPlanta());
         $administrador=Administrador::find(GetId());
-        $residuos=Residuo::where('id_planta',GetIdPlanta())->get();
+        $residuos=Residuo::where('id_planta',GetIdPlanta())->orderby('opcion','asc')->get();
         
-        $contenedores=Contenedor::where('id_planta',GetIdPlanta())->get();
+        $contenedores=Contenedor::where('id_planta',GetIdPlanta())->orderby('opcion','asc')->get();
         return view('administracion.configuraciones.configuraciones',['configuraciones'=>$configuraciones,'administrador'=>$administrador,'planta'=>$planta,'residuos'=>$residuos,'contenedores'=>$contenedores]);
     }
 
@@ -203,7 +203,7 @@ class ConfiguracionController extends Controller
         $contenedor->id_planta=GetIdPlanta();
         $contenedor->contenedor=$request->contenedor;
         $contenedor->cantidad=$request->cantidad;
-        $residuo->opcion=$request->opcion;
+        $contenedor->opcion=$request->opcion;
         
         if($contenedor->save()){
             return Redirect::back()->with('success', 'Datos guardados.');

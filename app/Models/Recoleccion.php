@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Recoleccion extends Model
 {
     use HasFactory;  
-    protected $table = 'recoleccion';
+    protected $table = 'recolecciones';
     protected $primaryKey = 'id';
     public $incrementing = false;
 }
