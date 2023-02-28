@@ -68,9 +68,9 @@ class RecolectorController extends Controller
 
         if($request->telefono!=null){
             //$response=EnviarMensaje("+52".$request->telefono,'Su numero se ha registrado en reci-track.mx, para confirmar el registro de su número vaya al siguiente link reci-track.mx/ConfirmacionRecolector/'.$recolector->id.' .');
-            if(intval($response)>=400){
+            /*if(intval($response)>=400){
                 return Redirect::back()->with('error','Error, el numero es invalido.');
-            }
+            }*?
         }
 
 
