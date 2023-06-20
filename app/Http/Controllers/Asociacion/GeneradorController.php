@@ -20,7 +20,6 @@ class GeneradorController extends Controller
     public function index(Request $request)
     {
         $generadores = DB::table('generadores')
-        ->where('borrado','1')
         ->where('generadores.razonsocial','like','%'.$request->generador.'%')
         ->orderby('created_at','desc')
         ->paginate(15);
