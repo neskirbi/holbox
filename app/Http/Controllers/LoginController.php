@@ -275,10 +275,7 @@ class LoginController extends Controller
 
 
     public function logout(){
-        if( Auth::guard('asociados')->check()){
-            Auth::guard('asociados')->logout();
-            return redirect('acceso');
-        }
+        
         if( Auth::guard('directores')->check()){
             Auth::guard('directores')->logout();
         }
@@ -312,6 +309,11 @@ class LoginController extends Controller
         if( Auth::guard('transportistas')->check()){
             Auth::guard('transportistas')->logout();
         }       
+
+        if( Auth::guard('asociados')->check()){
+            Auth::guard('asociados')->logout();
+            return redirect('acceso');
+        }
         
         return redirect('home');
     }
