@@ -39,17 +39,32 @@
               <div class="card-header">
                 <h3 class="card-title"><i class="fa fa-industry" aria-hidden="true"></i> Establecimientos </h3>
 
-                <!--<div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                <div class="card-tools">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Filtros <i class="fa fa-sliders" aria-hidden="true"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" style="width:300px;">
+                      <form class="px-4 py-3" action="{{url('establecimientos')}}" method="GET">
+                        
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="far fa-building"></i></span>
+                          </div>
+                          <input type="text" class="form-control" name="negocio" id="negocio" placeholder="Establecimiento" @if(isset($filtros->negocio)) value="{{$filtros->negocio}}" @endif >
+                        </div>
 
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default">
-                        <i class="fas fa-search"></i>
-                      </button>
+
+
+                        <div class="dropdown-divider"></div>
+                        <a href="{{url('establecimientos')}}" class="btn btn-default btn-sm">Limpiar</a>
+                        <button type="submit" class="btn btn-info btn-sm float-right">Aplicar</button>
+                        
+                      </form>
+                      
                     </div>
-                  </div>
-                </div>-->
+                  </div>                 
+                </div>
                 
               </div>
               <!-- /.card-header -->

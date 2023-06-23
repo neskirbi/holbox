@@ -21,16 +21,17 @@ class NegocioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $filtros)
     {
         $negocios = DB::table('negocios')
         ->leftjoin('generadores', 'generadores.id', '=', 'negocios.id_generador')
-        ->where('negocios.id_planta',GetIdPlanta())
+        ->where('negocios.id_planta',GetIdPlanta())   
+        ->where('negocios.negocio','like','%'.$filtros->negocio.'%')
         ->select('negocios.id','negocios.negocio','negocios.tiponegocio','generadores.razonsocial','negocios.verificado')
         ->orderby('negocios.created_at','desc')
         ->get();
 
-        return view('administracion.negocios.negocios',['negocios'=>$negocios]);
+        return view('administracion.negocios.negocios',['negocios'=>$negocios,'filtros'=>$filtros]);
     }
 
     /**
