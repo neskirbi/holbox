@@ -82,8 +82,6 @@ class NegocioController extends Controller
         $negocio->cp=$request->cp;
         $negocio->latitud=$request->latitud;
         $negocio->longitud=$request->longitud;
-        $negocio->fechainicio=$request->fechainicio;
-        $negocio->fechafin=$request->fechafin;
         $negocio->verificado=1;
         
         //Subir plan de manejo
