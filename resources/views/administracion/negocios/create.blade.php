@@ -48,7 +48,7 @@
                                     <div class="col-md-6"> 
                                         <div class="form-group">
                                             <label for="generador">Generador</label>
-                                            <select class="form-control" name="generador" id="generador" aria-invalid="false" >
+                                            <select data-invalido="true" class="form-control" name="generador" id="generador" aria-invalid="false" >
                                                 <option value="">--Generador--</option>
                                                 @foreach($generadores as $generador)
                                                 <option value="{{$generador->id}}">{{$generador->razonsocial}}</option>
