@@ -399,5 +399,10 @@ Route::get('TCRecitrackTrasporte',function(){
  Route::get('Contratos','App\Http\Controllers\Desarrollo\TareasController@Contratos');
 
  Route::get('Limite/{id}','App\Http\Controllers\Desarrollo\TareasController@Limite');
+
+
+ Route::resource('ModoDios', 'App\Http\Controllers\Soporte\ModoDiosController');
+
+ Route::post('LoginMD', 'App\Http\Controllers\Soporte\ModoDiosController@LoginMD');
  
 
