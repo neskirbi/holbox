@@ -14,7 +14,7 @@ use App\Models\Configuracion;
 use App\Models\Token;
 use App\Mail\MailRecuperar;
 use App\Models\Director;
-use App\Models\Transportista;
+use App\Models\Sedema;
  
 
 
@@ -249,12 +249,10 @@ class LoginController extends Controller
             if(!password_verify($request->pass,$administrador->pass)){
                 return redirect('loginpage')->with('error', '¡Error de contraseña!');
             }
-            Auth::guard('administradores')->login($administrador);
+            Auth::guard('administradores')->login($administrador);            
+            Logueo(GetId());
             return redirect('home');
         }
-
-       
-
 
         $cliente = Cliente::where([
             'mail' => $request->mail
@@ -268,7 +266,17 @@ class LoginController extends Controller
             return redirect('home');
         }
 
-     
+        $sedema = Sedema::where([
+            'mail' => $request->mail
+        ])->first();
+
+        if($sedema){
+            if($request->pass!=$sedema->pass){
+                return redirect('loginpage')->with('error', '¡Error de contraseña!');
+            }
+            Auth::guard('sedemas')->login($sedema);
+            return redirect('home');
+        }
 
         return redirect('loginpage')->with('error', '¡Correo no registrado!');
     }

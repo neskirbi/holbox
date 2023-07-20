@@ -17,17 +17,7 @@
         </div>
       </div>
 
-      <!-- SidebarSearch Form 
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div><div class="sidebar-search-results"><div class="list-group"><a href="#" class="list-group-item"><div class="search-title"><strong class="text-light"></strong>N<strong class="text-light"></strong>o<strong class="text-light"></strong> <strong class="text-light"></strong>e<strong class="text-light"></strong>l<strong class="text-light"></strong>e<strong class="text-light"></strong>m<strong class="text-light"></strong>e<strong class="text-light"></strong>n<strong class="text-light"></strong>t<strong class="text-light"></strong> <strong class="text-light"></strong>f<strong class="text-light"></strong>o<strong class="text-light"></strong>u<strong class="text-light"></strong>n<strong class="text-light"></strong>d<strong class="text-light"></strong>!<strong class="text-light"></strong></div><div class="search-path"></div></a></div></div>
-      </div>-->
+     
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -38,14 +28,14 @@
           
           <li class="nav-header">Personal</li>
           
-          <li class="nav-item">
+          <!--<li class="nav-item">
             <a href="{{ url('dashboard') }}" class="nav-link">
             <i class="fa fa-bar-chart" aria-hidden="true"></i>
               <p>
                 Dashboard
               </p>
             </a>
-          </li>
+          </li>-->
           
           <li class="nav-item">
             <a href="{{ url('generadores') }}" class="nav-link">
@@ -64,40 +54,24 @@
           
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-industry"></i>
+            <a href="{{ url('negocios') }}" class="nav-link">
+            <i class="fa fa-building" aria-hidden="true"></i>
               <p>
                 Establecimientos
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview" style="display: none;">
-              @if(TieneNegocios())
-              <li class="nav-item">
-                <a href="{{ url('negocios') }}" class="nav-link">
-                <i class="fa fa-industry" aria-hidden="true"></i>
-                  <p>
-                    Mis Establecimientos
-                  </p>
-                </a>
-              </li>
-              @else
-              <li class="nav-item">
-                <a href="{{ url('negocios/create') }}" class="nav-link">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                  <p>
-                    Registrar
-                  </p>
-                </a>
-              </li>
-              @endif
-              
-             
-              
-            </ul>
           </li>
+
+
           
-       
+          <li class="nav-item">
+            <a href="{{ url('recolecciones') }}" class="nav-link">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+              <p>
+                Recolecciones
+              </p>
+            </a>
+          </li>
           
           
           

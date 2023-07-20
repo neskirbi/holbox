@@ -38,41 +38,6 @@ class ModoDiosController extends Controller
                 return redirect('home');
                 
             }
-
-            if($ventas=Vendedor::where('mail',$request->correo)->first()){
-                Auth::guard('ventas')->login($ventas);
-                return redirect('home');
-                
-            }
-
-            if($do=Dosificador::where('mail',$request->correo)->first()){
-                Auth::guard('doificadores')->login($do);
-                return redirect('home');
-
-                
-            }
-
-            if($finanza=Finanza::where('mail',$request->correo)->first()){
-                Auth::guard('finanzas')->login($finanza);
-                return redirect('home');
-
-                
-            }
-
-            if($recepcion=Recepcion::where('mail',$request->correo)->first()){
-                Auth::guard('recepciones')->login($recepcion);
-                return redirect('home');
-
-                
-            }
-
-
-            if($re=Residente::where('mail',$request->correo)->first()){
-                Auth::guard('residentes')->login($re);
-                return redirect('home');
-
-                
-            }
             return "no encontro ninguno";
             
         }else{

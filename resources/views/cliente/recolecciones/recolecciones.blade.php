@@ -33,7 +33,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title"><i class="fa fa-industry" aria-hidden="true"></i> Establecimientos </h3>
+                <h3 class="card-title"><i class="fa fa-bars" aria-hidden="true"></i> Recolecciones </h3>
 
                 <!--<div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
@@ -50,60 +50,39 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <div class="p-2">
-                  <a href="{{url('negocios/create')}}" class="btn btn-primary"><span><i class="fa fa-plus" aria-hidden="true"></i></span> Establecimiento</a>
-                </div>
+                
+              
                 <div class="row">
                   <div class="col-md-12" style="overflow-x:scroll;">
-                    @if(count($negocios))
+                    @if(count($recolecciones))
                     <table class="table table-hover text-nowrap">
                       <thead>
                         <tr>
                           <th>Establecimientos</th>
-                          <th>Tipo de Establecimientos</th>                    
-                          <th>Estatus</th>
-                          <th colspan="3">Opciones</th>
+                          <th>Tipo</th>                    
+                          <th>Residuo</th>                  
+                          <th>Cantidad</th>
+                          <th>Día</th>
+                          <th>Opciones</th>
                           
                         </tr>
                       </thead>
                       <tbody>
                       
-                        @foreach($negocios as $negocio)
+                        @foreach($recolecciones as $recoleccion)
                         <tr>
-                          <td>{{$negocio->negocio}}</td>
-                          <td>{{$negocio->tiponegocio}}</td>
-                          <td>@if($negocio->verificado==0)
-                            <small class="badge badge-warning"><i class="fa fa-exclamation" aria-hidden="true"></i> Pendiente</small>
-                            @else
-                            <small class="badge badge-success"><i class="fa fa-check" aria-hidden="true"></i>  Verificado</small>
-                            @endif
-                          </td>
+                          <td>{{$recoleccion->negocio}}</td>
+                          <td>{{$recoleccion->tiponegocio}}</td>
+                          <td>{{$recoleccion->residuo}}</td>
+                          <td>{{$recoleccion->contenedor.' '.$recoleccion->cantidad}}</td>
+                          <td>{{FechaFormateada($recoleccion->created_at)}}</td>
                           
                           
                           <td>
-                            <a href="negocios/{{$negocio->id}}" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Ver</a>
+                            <a href="Manifiesto/{{$recoleccion->id}}" target="_blank" class="btn btn-info btn-sm"><i class="fa fa-download" aria-hidden="true"></i> Manifiesto</a>
                           </td>
 
-                          <td>
-                            @if(file_exists('documentos/clientes/contratos/'.$negocio->id.'.pdf'))
-                              <a href="documentos/clientes/contratos/{{$negocio->id}}.pdf" target="_blank" class="btn btn-info btn-sm d-inline p-2" >Contrato <i class="fa fa-download" aria-hidden="true"></i></a>
-                            @endif
-                          </td>
-                          
-                          <td>
-                            @if($negocio->verificado==0)
-                            <form action="negocios/{{$negocio->id}}" method="POST"  class="d-inline p-2">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button  id="borrar" class="borrar btn btn-danger btn-sm" data-texto="¿Eliminar Registro?"><i class="fa fa-times" aria-hidden="true"></i></button>
-                                
-                            </form>
-                            @endif
 
-                            @if($negocio->verificado==1)
-                            <a href="cedula/{{$negocio->id}}" class="btn btn-success" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Cédula QR</a>
-                            @endif
-                          </td>
                         </tr>
                         @endforeach
                         

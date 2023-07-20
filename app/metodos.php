@@ -20,14 +20,10 @@ function GetId(){
         return Auth::guard('administradores')->user()->id;
     }  
     
-    if(Auth::guard('finanzas')->check()){
-        return Auth::guard('finanzas')->user()->id;
+    if(Auth::guard('clientes')->check()){
+        return Auth::guard('clientes')->user()->id;
     }  
 
-    
-    if(Auth::guard('vendedores')->check()){
-        return Auth::guard('vendedores')->user()->id;
-    }  
 }
 
 function GetIdPlanta(){

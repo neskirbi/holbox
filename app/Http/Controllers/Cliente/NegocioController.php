@@ -46,11 +46,7 @@ class NegocioController extends Controller
     
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
         $plantas=Planta::where('tipo',2)->get();

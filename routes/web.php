@@ -52,7 +52,7 @@ Route::get('home', function () {
     
 
     if(Auth::guard('clientes')->check()){
-        return redirect('dashboard');
+        return redirect('generadores');
     }  
 
     if(Auth::guard('residentes')->check()){
@@ -71,6 +71,14 @@ Route::get('home', function () {
 });
 
 
+
+
+
+
+/**
+ * Rutas generales
+ */
+Route::get('Manifiesto/{id}', 'App\Http\Controllers\General\GeneralController@Manifiesto');
 
 /**
  * registro de clientes
@@ -105,7 +113,6 @@ Route::post('GuardarPass/{id}','App\Http\Controllers\LoginController@GuardarPass
 Route::post('loginasociado', 'App\Http\Controllers\LoginController@authenticateasociado');
 Route::post('loginadmin', 'App\Http\Controllers\LoginController@authenticateadmin');
 
-Route::post('loginsedema', 'App\Http\Controllers\LoginController@AuthenticateSedema');
 
 Route::get('loginpage',function(){
     return view('loginpage');
@@ -141,7 +148,7 @@ Route::resource('campamentos', 'App\Http\Controllers\CampamentoController');
  */
 
 
-Route::resource('dashboard', 'App\Http\Controllers\Cliente\DashboardController');
+//Route::resource('dashboard', 'App\Http\Controllers\Cliente\DashboardController');
 
 Route::get('GraficasPagosCliente','App\Http\Controllers\Cliente\DashboardController@GraficasPagosCliente');
 
@@ -149,24 +156,12 @@ Route::resource('generadores', 'App\Http\Controllers\Cliente\GeneradoresControll
 
 Route::get('registrogenerador','App\Http\Controllers\RegistroGeneradoresController@index');
 
-Route::resource('vehiculos', 'App\Http\Controllers\VehiculosController');
-
-
-Route::get('terminos/{direccion}/{fechaini}/{fechafin}/{generador}/{total}', 'App\Http\Controllers\TerminosyCondicionesController@terminosycondiciones');
-
-Route::get('terminosycondiciones',function(){
-    return view('formatos.terminosycondiciones');
-});
-
-Route::get('/prueba', function () {
-    return 'Administradores:'.Auth::guard('administradores')->check().'<br>Clientes: '. Auth::guard('clientes')->check();;
-});
-
-
 Route::resource('negocios','App\Http\Controllers\Cliente\NegocioController');
 
-/***Ruta Manifiesto alcaldia */
-Route::get('manifiestoalcaldia/{id}',[FormatosController::class,'manifiestoalcaldia']);
+
+Route::resource('recolecciones','App\Http\Controllers\Cliente\RecoleccionController');
+
+
 
 
 /**
@@ -192,6 +187,7 @@ Route::get('quitarsedema/{id}','App\Http\Controllers\Asociacion\SedemaController
 
 
 
+Route::resource('sedeman', 'App\Http\Controllers\Sedema\NegocioController');
 
 
 /**

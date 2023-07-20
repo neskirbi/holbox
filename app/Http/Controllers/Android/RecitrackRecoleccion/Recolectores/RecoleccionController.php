@@ -25,6 +25,7 @@ class RecoleccionController extends Controller
                 $correctos[]=$recoleccion['id'];
             }else{
 
+                $negocio=Negocio::find($recoleccion['id_negocio']);
                 $subtotal=0;
                 $iva=0;
                 $total=0;
@@ -33,7 +34,7 @@ class RecoleccionController extends Controller
                     $contenedor=Contenedor::where('opcion',$recoleccion['contenedor'])->first();
                     if($contenedor){
                         $subtotal=$recoleccion['cantidad']*$contenedor->cantidad*$residuo->precio;
-                        $negocio=Negocio::find($recoleccion['id_negocio']);
+                       
                         
                         $configuracion=Configuracion::where('id_planta',$negocio->id_planta)->first();
                         if($configuracion){
@@ -52,6 +53,7 @@ class RecoleccionController extends Controller
                 $recol=new Recoleccion();
 
                 $recol->id=$recoleccion['id'];
+                $recol->id_planta=$negocio->id_planta;
                 $recol->id_recolector=$recoleccion['id_recolector'];
                 $recol->id_negocio=$recoleccion['id_negocio'];
                 $recol->negocio=$recoleccion['negocio'] == null ? '' : $recoleccion['negocio'];
