@@ -250,6 +250,7 @@
     var markers = HtmltoJson('{{$marcadores}}');
     function initMap() {
       //console.log(markers);
+      
       var myLatlng = { lat:  parseFloat(markers[0].latitud), lng: parseFloat(markers[0].longitud) };
       var map = new google.maps.Map(document.getElementById("map"), {
         zoom: 6,
@@ -258,7 +259,8 @@
       console.log(markers.length);
       for(var i=0;i< markers.length ; i++){
         const  id=markers[i].id,con=markers[i].con;
-        var  myLatlng = { lat:  parseFloat(markers[i].latitud), lng: parseFloat(markers[i].longitud) };
+        
+        var  myLatlng = { lat:  parseFloat(markers[i].latitud*1), lng: parseFloat(markers[i].longitud*1) };
         var image = {
           url: '{{asset("images/iconos")}}/'+markers[i].pointer,
           // Este marcador tiene 20 pixeless de ancho por 32 pixeles de alto.
