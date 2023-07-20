@@ -79,7 +79,7 @@
                           
                           
                           <td>
-                            <a href="Manifiesto/{{$recoleccion->id}}" target="_blank" class="btn btn-info btn-sm"><i class="fa fa-download" aria-hidden="true"></i> Manifiesto</a>
+                            
                           </td>
 
 
