@@ -32,14 +32,24 @@
         <section class="col-lg-12 connectedSortable ui-sortable">
             <div class="row">
                 <div class="col-12">
-                    <div class="card-info">
+                    <form action="{{url('planta').'/'.$planta->id}}" id="{{$planta->id}}" method="post">
+                    @csrf
+                    @method('PUT')
+                    <div class="card card-info">
                         <div class="card-header">
                             <h3 class="card-title">Datos de la Planta</h3>                            
                         </div>
-                        <form action="{{url('planta').'/'.$planta->id}}" id="{{$planta->id}}" method="post">
-                        @csrf
-                        <input required="" id="_method" name="_method" type="hidden" value="PUT">
+                       
                         <div class="card-body">
+                        <div class="row">
+                                <div class="col-sm-7">
+                                    <div class='form-group'>
+                                        <label for="razonsocial">Razón Social</label>
+                                        <input type="text" class="form-control" id="razonsocial" name="razonsocial" value="{{$configuracion->razonsocial}}">
+                                    </div>
+                                </div>
+                               
+                            </div>
                             <div class="row">
                                 <div class="col-sm-7">
                                     <div class='form-group'>
@@ -72,74 +82,19 @@
                                 </div> 
                             </div>
                                                          
-                        </div>
-                        </form>                         
+                        </div>                        
                         @if(Auth::guard('administradores')->user()->principal==1) 
                         <div class="card-footer">
-                            <button type="submit" class='btn btn-info float-right'  onclick="Submite('{{$planta->id}}',this);" data-texto="¿Todos los datos son correctos?">Guardar</button>
+                            <button type="submit" class='btn btn-info float-right' data-texto="¿Todos los datos son correctos?">Guardar</button>
                         </div>
                         @endif                           
                     </div>
+                    
+                    </form> 
 
                 </div>
             </div>
-            <div class="callout callout-success">
-                <h5>Directores</h5>
-            </div>
-            @foreach($directores as $director)
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Director</h3>
-                            @if(Auth::guard('administradores')->user()->principal==1)
-                            <div class="card-tools">
-                                <div class="btn-group dropleft">
-                                    <button class="btn btn-default " type="button" id="menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-bars" aria-hidden="true"></i>
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="menu">
-                                        <a class="dropdown-item borrar" href="{{url('BorrarAdmin').'/'.$director->id}}" data-texto="¿Deseas quitar a {{$director->director}} de la planta?"><i class="fa fa-trash" aria-hidden="true"></i> Quitar</a>
-                                    </div>
-                                </div>
-                            </div>
-                            @endif
-                        </div>                        
-                        <form action="{{url('EditarAdmin').'/'.$director->id}}" id="{{$director->id}}" method="post">
-                        @csrf
-                        
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-7">
-                                    <div class='form-group'>
-                                        <label for="director">Director</label>
-                                        <input type="text" class="form-control" id="director" name="director" value="{{$director->director}}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">                            
-                                
-                                <div class="col-sm-4">
-                                    <div class='form-group'>
-                                        <label for="mail">Correo</label>
-                                        <input type="text" class="form-control" id="mail" onkeyup="Cambio(this)" data-mail="{{$director->mail}}" value="{{$director->mail}}">
-                                    </div>
-                                </div>
-                               
-                              
-                            </div>
-                        </div>                        
-                        </form>
-                        @if(Auth::guard('administradores')->user()->principal==1)
-                        <div class="card-footer">
-                            <button type="submit" class='btn btn-info float-right'  onclick="Submite('{{$director->id}}',this);" data-texto="¿Actualizar información para {{$director->director}}?">Guardar</button>
-                        </div>  
-                        @endif      
-                    </div>
-                    
-                </div>
-            </div>
-            @endforeach
+            
 
             <div class="callout callout-success">
                 <h5>Administradores</h5>
@@ -204,191 +159,7 @@
             </div>
             @endforeach
 
-            <div class="callout callout-success">
-                <h5>Vendedores</h5>
-            </div>
-            @foreach($vendedores as $vendedor)
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Vendedor</h3>
-                            @if(Auth::guard('administradores')->user()->principal==1)
-                            <div class="card-tools">
-                                <div class="btn-group dropleft">
-                                    <button class="btn btn-default " type="button" id="menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-bars" aria-hidden="true"></i>
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="menu">
-                                        <a class="dropdown-item borrar" href="{{url('BorrarAdmin').'/'.$vendedor->id}}" data-texto="¿Deseas quitar a {{$vendedor->vendedor}} de la planta?"><i class="fa fa-trash" aria-hidden="true"></i> Quitar</a>
-                                    </div>
-                                </div>
-                            </div>
-                            @endif
-                        </div>                        
-                        <form action="{{url('EditarAdmin').'/'.$vendedor->id}}" id="{{$vendedor->id}}" method="post">
-                        @csrf
-                        
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-7">
-                                    <div class='form-group'>
-                                        <label for="vendedor">Vendedor</label>
-                                        <input type="text" class="form-control" id="vendedor" name="vendedor" value="{{$vendedor->vendedor}}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">  
-                                <div class="col-sm-3">
-                                    <div class='form-group'>
-                                        <label for="mail">Correo</label>
-                                        <input type="text" class="form-control" id="mail" onkeyup="Cambio(this)" data-mail="{{$vendedor->mail}}" value="{{$vendedor->mail}}">
-                                    </div>
-                                </div>
-                               
-                              
-                            </div>
-                        </div>                        
-                        </form>
-                        @if(Auth::guard('administradores')->user()->principal==1)
-                        <div class="card-footer">
-                            <button type="submit" class='btn btn-info float-right'  onclick="Submite('{{$vendedor->id}}',this);" data-texto="¿Actualizar información para {{$vendedor->vendedor}}?">Guardar</button>
-                        </div>  
-                        @endif      
-                    </div>
-                    
-                </div>
-            </div>
-            @endforeach
-
-            <div class="callout callout-success">
-                <h5>Recepcionistas</h5>
-            </div>
-            @foreach($recepciones as $recepcion)
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">{{$recepcion->cargo}}</h3>
-                            @if(Auth::guard('administradores')->user()->principal==1)
-                            <div class="card-tools">
-                                <div class="btn-group dropleft">
-                                    <button class="btn btn-default " type="button" id="menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-bars" aria-hidden="true"></i>
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="menu">
-                                        <a class="dropdown-item borrar" href="{{url('BorrarAdmin').'/'.$recepcion->id}}" data-texto="¿Deseas quitar a {{$recepcion->nombre}} de la planta?"><i class="fa fa-trash" aria-hidden="true"></i> Quitar</a>
-                                    </div>
-                                </div>
-                            </div>
-                            @endif
-                        </div>                        
-                        <form action="{{url('EditarAdmin').'/'.$recepcion->id}}" id="{{$recepcion->id}}" method="post">
-                        @csrf
-                        
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-7">
-                                    <div class='form-group'>
-                                        <label for="vendedor">{{$recepcion->nombre}}</label>
-                                        <input type="text" class="form-control" id="nombre" name="nombre" value="{{$recepcion->nombre}}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">  
-                                <div class="col-sm-4">
-                                    <div class='form-group'>
-                                        <label for="cargo">Cargo</label>
-                                        <input type="text" class="form-control" id="cargo" name="cargo" value="{{$recepcion->cargo}}">
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class='form-group'>
-                                        <label for="mail">Correo</label>
-                                        <input type="text" class="form-control" id="mail" onkeyup="Cambio(this)" data-mail="{{$recepcion->mail}}" value="{{$recepcion->mail}}">
-                                    </div>
-                                </div>
-                               
-                              
-                            </div>
-                        </div>                        
-                        </form>
-                        @if(Auth::guard('administradores')->user()->principal==1)
-                        <div class="card-footer">
-                            <button type="submit" class='btn btn-info float-right'  onclick="Submite('{{$recepcion->id}}',this);" data-texto="¿Actualizar información para {{$recepcion->nombre}}?">Guardar</button>
-                        </div>  
-                        @endif      
-                    </div>
-                    
-                </div>
-            </div>
-            @endforeach
-
-
-            <div class="callout callout-success">
-                <h5>Finanzas</h5>
-            </div>
-            @foreach($finanzas as $finanza)
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">{{$finanza->cargo}}</h3>
-                            @if(Auth::guard('administradores')->user()->principal==1)
-                            <div class="card-tools">
-                                <div class="btn-group dropleft">
-                                    <button class="btn btn-default " type="button" id="menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-bars" aria-hidden="true"></i>
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="menu">
-                                        <a class="dropdown-item borrar" href="{{url('BorrarAdmin').'/'.$finanza->id}}" data-texto="¿Deseas quitar a {{$finanza->nombre}} de la planta?"><i class="fa fa-trash" aria-hidden="true"></i> Quitar</a>
-                                    </div>
-                                </div>
-                            </div>
-                            @endif
-                        </div>                        
-                        <form action="{{url('EditarAdmin').'/'.$finanza->id}}" id="{{$finanza->id}}" method="post">
-                        @csrf
-                        
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-7">
-                                    <div class='form-group'>
-                                        <label for="vendedor">Recepcionista</label>
-                                        <input type="text" class="form-control" id="nombre" name="nombre" value="{{$finanza->nombre}}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">  
-                                <div class="col-sm-4">
-                                    <div class='form-group'>
-                                        <label for="cargo">Cargo</label>
-                                        <input type="text" class="form-control" id="cargo" name="cargo" value="{{$finanza->cargo}}">
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class='form-group'>
-                                        <label for="mail">Correo</label>
-                                        <input type="text" class="form-control" id="mail" onkeyup="Cambio(this)" data-mail="{{$finanza->mail}}" value="{{$finanza->mail}}">
-                                    </div>
-                                </div>
-                               
-                              
-                            </div>
-                        </div>                        
-                        </form>
-                        @if(Auth::guard('administradores')->user()->principal==1)
-                        <div class="card-footer">
-                            <button type="submit" class='btn btn-info float-right'  onclick="Submite('{{$finanza->id}}',this);" data-texto="¿Actualizar información para {{$finanza->nombre}}?">Guardar</button>
-                        </div>  
-                        @endif      
-                    </div>
-                    
-                </div>
-            </div>
-            @endforeach
-
-
+            
             
             @if(Auth::guard('administradores')->user()->principal==1)
             <div class="row">
@@ -423,14 +194,10 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label for="tadmin">Rol de Usuario</label>
+                                        <label for="tadmin">Tipo de Administrador</label>
                                         <select required class="form-control" name="tadmin" id="tadmin">
                                             <option value="">--Seleccione Opción--</option>
-                                            <option value="1">DIRECTOR</option>
-                                            <option value="2">ADMINISTRADOR</option>
-                                            <option value="3">VENTAS</option>
-                                            <option value="4">RECEPCION</option>
-                                            <option value="5">FINANZAS</option>
+                                            <option value="1">Administrador</option>
                                         </select>
                                     </div> 
                                 </div>
@@ -438,7 +205,7 @@
                         </form>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class='btn btn-info float-right' onclick="Submite('Nadmin',this);" data-texto="¿Todos los datos son correctos?">Guardar</button>
+                        <button type="submit" class='btn btn-info float-right' onclick="Submite('Nadmin',this);" data-texto="¿Todos los datos son correctos?">Guardar</button>
                         </div>        
                     </div>                    
                 </div>
@@ -508,7 +275,6 @@
         }
     }
 </script>
-@include('administracion.plantas.modals.modalplanta')
 @include('footer')
 </body>
 </html>

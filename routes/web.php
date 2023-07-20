@@ -64,7 +64,7 @@ Route::get('home', function () {
     }  
 
     if(Auth::guard('sedemas')->check()){
-        return redirect('sedemao');
+        return redirect('sedeman');
     }  
     
     return view('home');
@@ -193,7 +193,9 @@ Route::resource('sedeman', 'App\Http\Controllers\Sedema\NegocioController');
 /**
  * Rutas para administradores
  */
-Route::resource('planta','App\Http\Controllers\Administracion\PlantaController');
+
+ Route::resource('planta','App\Http\Controllers\Administracion\PlantaController');
+
 Route::post('AltaAdmin','App\Http\Controllers\Administracion\PlantaController@AltaAdmin');
 Route::post('EditarAdmin/{id}','App\Http\Controllers\Administracion\PlantaController@EditarAdmin');
 Route::get('BorrarAdmin/{id}','App\Http\Controllers\Administracion\PlantaController@BorrarAdmin');
@@ -213,6 +215,14 @@ Route::resource('generador', 'App\Http\Controllers\Administracion\GeneradorContr
 
 
 
+Route::resource('recolectores','App\Http\Controllers\Administracion\RecolectorController');
+Route::get('BorrarRecolector/{id}','App\Http\Controllers\Administracion\RecolectorController@BorrarRecolector');
+
+
+Route::resource('vehiculos','App\Http\Controllers\Administracion\VehiculoController');
+Route::get('BorrarRecolector/{id}','App\Http\Controllers\Administracion\RecolectorController@BorrarRecolector');
+
+Route::resource('recoleccion','App\Http\Controllers\Administracion\RecoleccionController');
 
 
 Route::resource('citasfecha', 'App\Http\Controllers\Administracion\CitasFechaController');
@@ -258,10 +268,7 @@ Route::resource('entregas','App\Http\Controllers\Administracion\EntregaControlle
 
 
 
-Route::resource('plantars','App\Http\Controllers\Administracion\PlantaReciduosController');
 
-Route::resource('recolectores','App\Http\Controllers\Administracion\RecolectorController');
-Route::get('BorrarRecolector/{id}','App\Http\Controllers\Administracion\RecolectorController@BorrarRecolector');
 
 
 

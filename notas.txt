@@ -1,5 +1,7 @@
 
-correccion de las graficas de sedema, filtrar por año
-que se pueda ver los viajes por vehiculo en sedema
-descarga masiva de manifiestos
-avisos de manifisto valido
+agregar campos 
+
+recolecciones  id_planta, folio
+cliente  firma
+
+vehiculos id_transportista -> id_planta

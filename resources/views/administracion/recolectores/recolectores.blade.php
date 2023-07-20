@@ -225,7 +225,6 @@
         }
     }
 </script>
-@include('administracion.plantas.modals.modalplanta')
 @include('footer')
 </body>
 </html>

@@ -38,93 +38,19 @@
           
           <li class="nav-header">Administración</li>
          
-          @if(GetId()=='2072197791c84ada8403a23c5cec0567')
-          <li class="nav-item">
-            <a href="{{url('friday')}}" class="nav-link">
-            <i class="nav-icon fa fa-question" aria-hidden="true"></i>
-              <p>
-                Friday
-              </p>
-            </a>
-          </li>
-          @endif
+       
 
                     
           <li class="nav-item">
-            <a href="{{ url('planta') }}" class="nav-link">
-              <i class="nav-icon fa fa-recycle" aria-hidden="true"></i>
+            <a href="{{ url('sedeman') }}" class="nav-link">
+              <i class="nav-icon fa fa-building" aria-hidden="true"></i>
               <p>
-                Planta
+                Negocios
               </p>
             </a>
           </li>
           
-          <li class="nav-item">
-            <a href="{{ url('pagos') }}" class="nav-link">
-              <i class="nav-icon fa fa-dollar" aria-hidden="true"></i>
-              <p>
-                Pagos
-              </p>
-            </a>
-          </li>
-          
-
-          <li class="nav-item">
-            <a href="{{ url('generador') }}" class="nav-link">
-              <i class="nav-icon fa fa-group" aria-hidden="true"></i>
-              <p>
-                Generadores
-              </p>
-            </a>
-          </li>
-
-          
-          <li class="nav-item">
-            <a href="{{ url('establecimientos') }}" class="nav-link">
-              <i class="nav-icon fa fa-industry" aria-hidden="true"></i>
-              <p>
-                Establecimientos
-              </p>
-            </a>
-          </li>
-
-             
-          <li class="nav-item">
-            <a href="{{ url('recolectores') }}" class="nav-link">
-              <i class="nav-icon fa fa-user" aria-hidden="true"></i>
-              <p>
-                Recolectores
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="{{ url('vehiculos') }}" class="nav-link">
-              <i class="nav-icon fa fa-truck" aria-hidden="true"></i>
-              <p>
-                Vehículos
-              </p>
-            </a>
-          </li>
-          
-
-          <li class="nav-item">
-            <a href="{{ url('recoleccion') }}" class="nav-link">
-              <i class="nav-icon fa fa-bars" aria-hidden="true"></i>
-              <p>
-                Recolecciones
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="{{url('configuracion')}}" class="nav-link">
-            <i class="nav-icon fa fa-cogs" aria-hidden="true"></i>
-              <p>
-                Configuración
-              </p>
-            </a>
-          </li>
+ 
 
          
           <li class="nav-item">

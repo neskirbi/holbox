@@ -12,7 +12,7 @@ class GeneralController extends Controller
 {
     function Manifiesto($id){
 
-        $recoleccion=Cliente::select('generadores.razonsocial','generadores.fisicaomoral','generadores.telefono','generadores.calle',
+        $recoleccion=Cliente::select('clientes.firma','generadores.razonsocial','generadores.fisicaomoral','generadores.telefono','generadores.calle','generadores.entidad',
         'generadores.numeroext','generadores.numeroint','generadores.colonia','generadores.municipio','generadores.cp',
         'recolecciones.id','recolecciones.folio','negocios.nautorizacion',
         'negocios.telefono as negotelefono','negocios.calle as negocalle','negocios.numeroext as negonumeroext',

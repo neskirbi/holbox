@@ -26,58 +26,39 @@
             <td class="bordes"><center><img style="width:15px; padding:10px;" src="{{public_path('images/formatos/manifiesto/generador.png')}}" alt="Generador"></center></td>
             <td class="bordes">
                 <p><b>Folio: {{$recoleccion->folio}}</b></p>
-                1.-NÚM. DE REGISTRO (Resolutivo de Impacto Ambiental, Plan de Manejo): <b>{{$recoleccion->nautorizacion}}</b>
-               <br>
-                2.-RAZÓN SOCIAL DE LA PERSONA:  <b>{{$recoleccion->razonsocial}}</b>
-                <br>
-                3.-DOMICILIO FISCAL
+                NÚM. DE REGISTRO (Resolutivo de Impacto Ambiental, Plan de Manejo): <b>{{$recoleccion->nautorizacion}}</b>
+               <br><br>
+                RAZÓN SOCIAL DE LA PERSONA:  <b>{{$recoleccion->razonsocial}}</b>
+                <br><br>                
                 <table class="probable100">
                     
                     <tr>
-                        <td>CALLE:</td>
-                        <td>&nbsp;&nbsp;<b>{{$recoleccion->calle}}</b></td>
+                        <td>DOMICILIO:</td>
+                        <td>&nbsp;&nbsp;<b>{{$recoleccion->calle}} Col. {{$recoleccion->colonia}}</b></td>
                         <td>COLONIA:</td>
                         <td>&nbsp;&nbsp;<b>{{$recoleccion->colonia}}</b></td>
                     </tr>
 
                     <tr>
-                        <td>ALCALDÍA:</td>
-                        <td>&nbsp;&nbsp;<b>{{$recoleccion->municipio}}</b></td>
                         <td>C.P:</td>
                         <td>&nbsp;&nbsp;<b>{{$recoleccion->cp}}</b></td>
+                        <td>ENTIDAD:</td>
+                        <td>&nbsp;&nbsp;<b>{{$recoleccion->entidad}}</b></td>
+                    </tr>
+                    <tr>
+                        <td>TELÉFONO:</td>
+                        <td>&nbsp;&nbsp;<b>{{$recoleccion->telefono}}</b></td>
+                        <td></td>
+                        <td></td>
                     </tr>
 
                     
                 </table>
-                4.-DOMICILIO DEL PREDIO DONDE SE REALIZA LA OBRA
-                <table class="probable100">
-                    <tr>
-                        <td colspan="4">Negocio: <b>{{$recoleccion->negocio}}</b></td>
-                    </tr>
-                    <tr>
-                        <td>CALLE:</td>
-                        <td>&nbsp;&nbsp;<b>{{$recoleccion->negocalle}}</b></td>
-                        <td>COLONIA:</td>
-                        <td>&nbsp;&nbsp;<b>{{$recoleccion->negocolonia}}</b></td>
-                    </tr>
-
-                    <tr>
-                        <td>ALCALDÍA:</td>
-                        <td>&nbsp;&nbsp;<b>{{$recoleccion->negomunicipio}}</b></td>
-                        <td>C.P:</td>
-                        <td>&nbsp;&nbsp;<b>{{$recoleccion->negocp}}</b></td>
-                    </tr>
-
-                    <tr>
-                        <td>TEL: <b>{{$recoleccion->negotelefono}}</b></td>
-                    </tr>
-
-                    
-                </table>
-                <br>
+                
+                
              
                
-                <br> 5.-DESCRIPCIÓN RESIDUO
+                <br> 5.DESCRIPCIÓN RESIDUO
                 <table border="1" style="border-collapse: collapse;" class="probable100">                   
 
                     <tr>
@@ -99,32 +80,20 @@
                     
                 </table>
 
-                <table>
-                    <tr>
-                        <td>
-                            INDIQUE EL NOMBRE DEL PRESTADOR DE SERVICIO DE TRANSPORTE AL QUE ENTREGO SUS RESIDUOS: 
-                            <br>
-                            <b>{{$recoleccion->razonvehiculo}}</b>
-                            <br>
-                            
-                        </td>
-                        
-                    </tr>
-                </table>
-                <hr>
-                6.-DECLARACIÓN DEL GENERADOR:<br>
-                DECLARO QUE EL CONTENIDO DE ESTE MANIFIESTO ESTA TOTAL Y CORRECTAMENTE DESCRITO MEDIANTE EL NOMBRE DEL RESIDUO, 
-                BIEN CLASIFICADO, Y MARCADO, Y QUE SE HAN PREVISTO LAS CONDICIONES DE SEGURIDAD PARA SU TRANSPORTE POR VIA TERRESTRE DE ACUERDO A LA LEGISLACIÓN VIGENTE.<br>
-                
-                <table width="100%" style="pull:;">
-                <tr><td>NOMBRE Y FIRMA DEL RESPONSABLE:</td></tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td><img src="{{$recoleccion->firmares}}" width="70px" alt=""><br>{{$recoleccion->nombreres}}</td>
-                    </tr>
-                </table>
                
+                
+                INSTRUCCIONES ESPECIOALES E INFORMACION ADICIONAL PARA EL MANEJO SEGURO:<br><br>
+                
+              <hr>
+
+                DECLARACIÓN DEL GENERADOR:<br>
+                DECLARO QUE EL CONTENIDO DE ESTE LOTE ESTA TOTAL Y CORRECTAMENTE DESCRITO MEDIANTE EL NOMBRE DEL RESIDUO, 
+                BIEN EMPACADO, MARCADO Y ROTULADO, Y QUE SE HAN PREVISTO LAS CONDICIONES DE SEGURIDAD PARA SU TRANSPORTE 
+                POR VIA TERRESTRE DE ACUERDO A LA LEGISLACIÓN VIGENTE.<br><br><br>
+
+                NOMBRE Y FIRMA DEL RESPONSABLE: <b>{{GetNombre()}} {{GetApellidos()}}</b> <img src="{{$recoleccion->firma}}" width="70px" alt="">
+                <br> 
+                
                 
                
                 <br>
@@ -133,7 +102,7 @@
         <tr>
             <td class="bordes"><center><img style="width:15px; padding:10px;" src="{{public_path('images/formatos/manifiesto/transporte.png')}}" alt="Transporte"></center></td>
             <td class="bordes">
-                7.-RAZÓNSOCIAL DE LA PERSONA FÍSICA O MORAL TRANSPORTISTA:
+                7.-NOMBRE DE LA EMPRESA TRANSPORTISTA:
                 <br><b>{{$recoleccion->razonvehiculo}}</b>
                 <table style="border-collapse: collapse;" class="probable100">
                     <tr>

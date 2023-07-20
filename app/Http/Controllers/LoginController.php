@@ -15,220 +15,16 @@ use App\Models\Token;
 use App\Mail\MailRecuperar;
 use App\Models\Director;
 use App\Models\Sedema;
+use App\Models\Transportista;
  
 
 
 
 class LoginController extends Controller
 {
-    use AuthenticatesUsers;
-    /**
-     * Handle an authentication attempt.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-
-    public function authenticateasociado(Request $request){
-        if(strlen($request->mail)==0 || strlen($request->pass)==0){
-            return redirect('acceso')->with('error', '¡Campos vacios!');
-        }
-        
-        $asociado = Asociado::where([
-            'mail' => $request->mail, 
-            'pass' => $request->pass
-        ])->first();
-        
-        
-        if($asociado)
-        {
-            Auth::guard('asociados')->login($asociado);
-
-            return redirect('generadorasoc');
-        }
-        return redirect('acceso')->with('error', '¡Error en los los datos!');
-    }
-
-
-    public function authenticateadmin(Request $request)
-    {
-        if(strlen($request->mail)==0 || strlen($request->pass)==0){
-            return redirect('home')->with('error', '¡Campos vacios!');
-        }
-
-        
-        $director = Director::where([
-            'mail' => $request->mail
-        ])->first();
-
-
-        if($director){
-            if(!password_verify($request->pass,$director->pass)){
-                return redirect('home')->with('error', '¡Error de contraseña!');
-            }
-                
-            Auth::guard('directores')->login($director);
-          
-            return redirect('graficas');
-            
-            
-        }
-        
-        
-        $administrador = Administrador::where([
-            'mail' => $request->mail
-        ])->first();        
-        
-        if($administrador){
-            if(!password_verify($request->pass,$administrador->pass)){
-                return redirect('home')->with('error', '¡Error de contraseña!');
-            }
-            Auth::guard('administradores')->login($administrador);
-            
-            if($administrador->principal==2)
-                return redirect('ventas');
-
-            if($administrador->principal==1)
-                if(TieneObrasAdmin()){
-                    return redirect('citas');
-                }
-                if(TieneNegociosAdmin()){
-                    return redirect('establecimientos');
-                }
-
-            if($administrador->principal==0)
-                if(TieneObrasAdmin()){
-                    return redirect('citas');
-                }
-                if(TieneNegociosAdmin()){
-                    return redirect('establecimientos');
-                }
-            
-        }
-
-
-        $vendedor = Vendedor::where([
-            'mail' => $request->mail
-        ])->first();
-        
-        
-        if($vendedor)
-        {
-            if(!password_verify($request->pass,$vendedor->pass)){
-                return redirect('home')->with('error', '¡Error de contraseña!');
-            }
-            Auth::guard('vendedores')->login($vendedor);           
-            
-            return redirect('ventas');
-        }
-
-        /**
-         * Si no encuatra registro en ninguna de las dos tablas regresa mensaje de error 
-         */
-        return redirect('home')->with('error', '¡Correo no registrado.!');
-    }
-        
-        
-
-    public function authenticate(Request $request)
-    {
-        if(strlen($request->mail)==0 || strlen($request->pass)==0){
-            return redirect('home')->with('error', '¡Campos vacios!');
-        }
-        
-        $cliente = Cliente::where([
-            'mail' => $request->mail
-        ])->first();       
-        
-        
-        if($cliente)
-        {
-           
-
-            if($cliente->confirmacion){
-                if(!password_verify($request->pass,$cliente->pass)){
-                    return redirect('home')->with('error', '¡Error de contraseña!');
-                }
-                Auth::guard('clientes')->login($cliente);
-                //return $cliente;
-                return redirect('dashboard');
-            }else{
-                return view('mails.enviodecorreo',['cliente'=>$cliente]);
-            }
-            
-        }
-
-        
-
-        /**
-         * Si no encuentra registro en la tabla de clientes la buscara en la tabla de residentes para iniciar secion con ese tipo de usuario
-         */
-        $residente = Residente::where([
-            'mail' => $request->mail
-        ])->first();
-        
-        
-        if($residente)
-        {
-            if(!password_verify($request->pass,$residente->pass)){
-                return redirect('home')->with('error', '¡Error de contraseña!');
-            }
-            Auth::guard('residentes')->login($residente);
-            //return $cliente;
-            return redirect('citas');
-        }
-
-        /**
-         * Si no encuatra registro en ninguna de las dos tablas regresa mensaje de error 
-         */
-        return redirect('home')->with('error', '¡Correo no registrado!');
-    }
-
-
-    public function authenticateresidentes(Request $request){
-        if(strlen($request->mail)==0 || strlen($request->pass)==0){
-            return redirect('home')->with('error', '¡Campos vacios!');
-        }
-
-        
-        $residente = Residente::where([
-            'mail' => $request->mail, 
-            'pass' => $request->pass
-        ])->first();
-        
-        
-        if($residente)
-        {
-            Auth::guard('residentes')->login($residente);
-            //return $cliente;
-            return redirect('citas');
-        }
-        return redirect('home')->with('error', '¡Correo no registrado!');
-    }
-
-    public function AuthenticateSedema(Request $request){
-        if(strlen($request->mail)==0 || strlen($request->pass)==0){
-            return redirect('home')->with('error', '¡Campos vacios!');
-        }
-
-        
-        $sedema = Sedema::where([
-            'mail' => $request->mail, 
-            'pass' => $request->pass
-        ])->first();
-        
-        
-        if($sedema)
-        {
-            Auth::guard('sedemas')->login($sedema);
-            //return $cliente;
-            return redirect('sedemao');
-        }
-        return redirect('home')->with('error', '¡Correo no registrado!');
-    }
-
 
     function Login(Request $request){
+        
         $director = Director::where([
             'mail' => $request->mail
         ])->first();
@@ -249,8 +45,7 @@ class LoginController extends Controller
             if(!password_verify($request->pass,$administrador->pass)){
                 return redirect('loginpage')->with('error', '¡Error de contraseña!');
             }
-            Auth::guard('administradores')->login($administrador);            
-            Logueo(GetId());
+            Auth::guard('administradores')->login($administrador);    
             return redirect('home');
         }
 
@@ -263,6 +58,18 @@ class LoginController extends Controller
                 return redirect('loginpage')->with('error', '¡Error de contraseña!');
             }
             Auth::guard('clientes')->login($cliente);
+            return redirect('home');
+        }
+
+        $transportista = Transportista::where([
+            'mail' => $request->mail
+        ])->first();
+
+        if($transportista){
+            if(!password_verify($request->pass,$transportista->pass)){
+                return redirect('loginpage')->with('error', '¡Error de contraseña!');
+            }
+            Auth::guard('transportistas')->login($transportista);
             return redirect('home');
         }
 

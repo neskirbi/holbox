@@ -10,6 +10,14 @@ function Version(){
     return 1;
 }
 
+function GetSiglas($opcion){
+    switch($opcion){
+        case 2:
+            return 'Reci-Track';
+            break;
+    }
+}
+
 function GetId(){
     
     if(Auth::guard('directores')->check()){
@@ -54,8 +62,37 @@ function GetNombre(){
     if(Auth::guard('vendedores')->check()){
         return Auth::guard('vendedores')->user()->nombre;
     }  
+
+    if(Auth::guard('clientes')->check()){
+        return Auth::guard('clientes')->user()->nombres;
+    }  
 }
 
+
+
+function GetApellidos(){
+    
+    if(Auth::guard('directores')->check()){
+        return Auth::guard('directores')->user()->director;
+    }  
+    
+    if(Auth::guard('administradores')->check()){
+        return Auth::guard('administradores')->user()->administrador;
+    }  
+    
+    if(Auth::guard('finanzas')->check()){
+        return Auth::guard('finanzas')->user()->nombre;
+    }  
+
+    
+    if(Auth::guard('vendedores')->check()){
+        return Auth::guard('vendedores')->user()->nombre;
+    }  
+
+    if(Auth::guard('clientes')->check()){
+        return Auth::guard('clientes')->user()->apellidos;
+    }  
+}
 
 function GetCargo(){
     
