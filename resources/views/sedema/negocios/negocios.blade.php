@@ -170,7 +170,9 @@
                           
                         
                           <td>
+                            @if(GetId()=='ff0fbae0093d4928a8dac955dde189ea')
                             <a href="sedeman/{{$negocio->id}}" class="btn btn-info btn-sm d-inline p-2" ><i class="fa fa-eye" aria-hidden="true"></i> Revisar</a>
+                            @endif
                           </td>
                           
                         

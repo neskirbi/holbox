@@ -31,6 +31,10 @@ function GetId(){
     if(Auth::guard('clientes')->check()){
         return Auth::guard('clientes')->user()->id;
     }  
+    
+    if(Auth::guard('sedemas')->check()){
+        return Auth::guard('sedemas')->user()->id;
+    }  
 
 }
 
