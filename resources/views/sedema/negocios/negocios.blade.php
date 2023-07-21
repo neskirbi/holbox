@@ -274,8 +274,7 @@
         };
         var marker = new google.maps.Marker({
             position: myLatlng,
-            title: markers[i].negocio,
-            icon: image
+            title: markers[i].negocio
         });
 
          // Create the initial InfoWindow.
