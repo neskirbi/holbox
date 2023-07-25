@@ -3,5 +3,9 @@ agregar campos
 
 recolecciones  id_planta, folio
 cliente  firma
+configuraciones telefono
+configuraciones ruta
 
+
+cambiar columna
 vehiculos id_transportista -> id_planta

@@ -190,6 +190,8 @@ Route::get('quitarsedema/{id}','App\Http\Controllers\Asociacion\SedemaController
 Route::resource('sedeman', 'App\Http\Controllers\Sedema\NegocioController');
 
 
+
+
 /**
  * Rutas para administradores
  */
@@ -232,6 +234,7 @@ Route::resource('configuracion', 'App\Http\Controllers\Administracion\Configurac
 Route::post('configuracioncuenta', 'App\Http\Controllers\Administracion\ConfiguracionController@ConfiguracionCuenta');
 Route::post('configuracionbanco', 'App\Http\Controllers\Administracion\ConfiguracionController@ConfiguracionBanco');
 Route::post('configuracionboleta', 'App\Http\Controllers\Administracion\ConfiguracionController@ConfiguracionBoleta');
+Route::put('GuardarDatosPlanta/{id}', 'App\Http\Controllers\Administracion\ConfiguracionController@GuardarDatosPlanta');
 Route::post('CambioPass/{id}', 'App\Http\Controllers\Administracion\ConfiguracionController@CambioPass');
 Route::post('Horarios/{id}', 'App\Http\Controllers\Administracion\ConfiguracionController@Horarios');
 

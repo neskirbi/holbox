@@ -43,7 +43,6 @@ class ConfiguracionController extends Controller
 
     public function ConfiguracionBanco(Request $request){
         $configuracion=Configuracion::where('id_planta','=',GetIdPlanta())->first();
-        $configuracion->razonsocial=$request->razonsocial;
         $configuracion->referencia=$request->referencia;
         $configuracion->banco=$request->banco;
         $configuracion->cuenta=$request->cuenta;
@@ -218,5 +217,25 @@ class ConfiguracionController extends Controller
         $contenedor->delete();
         return Redirect::back()->with('error', 'Se borró del catálogo.');
 
+    }
+
+    function GuardarDatosPlanta(Request $request,$id){
+        $configuracion=Configuracion::where('id_planta','=',GetIdPlanta())->first();
+        $planta = Planta::find(GetIdPlanta());
+
+        $planta->planta = $request->planta;
+        $planta->plantaauto = $request->plantaauto;
+        $planta->codigo = $request->codigo;
+        $planta->direccion = $request->direccion;
+        $planta->save();
+
+        $configuracion->telefono = $request->telefono;
+        $configuracion->razonsocial = $request->razonsocial;
+        $configuracion->ruta = $request->ruta;
+        $configuracion->sct = $request->sct;
+
+        $configuracion->save();
+        return redirect('configuracion')->with('success','¡Se guardaron los datos!');
+        
     }
 }

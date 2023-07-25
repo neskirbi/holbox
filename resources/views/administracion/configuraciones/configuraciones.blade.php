@@ -51,8 +51,15 @@
                   <input type="hidden" name="id_planta" id="id_planta" value="{{Auth::guard('administradores')->user()->id_planta}}">
                   <ul class="nav nav-pills flex-column">                 
 
-                  <li class="nav-item ">
-                        <a class="nav-link active" onclick="VentanasTitulos(this,'titulo');" data-text="Cuenta"  data-toggle="pill" href="#cuenta" role="tab">
+                    <li class="nav-item ">
+                        <a class="nav-link active" onclick="VentanasTitulos(this,'titulo');" data-text="Planta"  data-toggle="pill" href="#planta" role="tab">
+                            <i class="fa fa-recycle" aria-hidden="true"></i> Planta
+                            <!--<span class="badge bg-primary float-right">12</span>-->
+                        </a>
+                    </li>
+
+                    <li class="nav-item ">
+                        <a class="nav-link" onclick="VentanasTitulos(this,'titulo');" data-text="Cuenta"  data-toggle="pill" href="#cuenta" role="tab">
                             <i class="fa fa-user" aria-hidden="true"></i> Cuenta
                             <!--<span class="badge bg-primary float-right">12</span>-->
                         </a>
@@ -90,54 +97,155 @@
           <div class="col-md-9">
             <div class="card card-danger">
               <div class="card-header">
-                <h3 class="card-title" id="titulo">Cuenta</h3>
+                <h3 class="card-title" id="titulo">Planta</h3>
               </div>
               <div class="card-body">
                 <div class="col-md-12">                   
                     <div class="row">
-                        <div class="tab-content" id="custom-tabs-four-tabContent" style="width:100%;">                            
-                          <div class="tab-pane fade active show" id="cuenta" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                        <div class="tab-content" id="custom-tabs-four-tabContent" style="width:100%;"> 
+                        
+
+                        <div class="tab-pane fade active show" id="planta" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                          <div class="row">
+                            <div class="col-12">
+                                <form action="{{url('GuardarDatosPlanta').'/'.$planta->id}}" id="{{$planta->id}}" method="post">
+                                @csrf
+                                @method('PUT')                              
+
+                                  
+                                  <div class="row">
+                                      <div class="col-sm-12">
+                                          <div class='form-group'>
+                                              <label for="planta">Planta</label>
+                                              <input required type="text" class="form-control" id="planta" name="planta" value="{{$planta->planta}}">
+                                          </div>
+                                      </div>
+                                      
+                                    </div>
+
+                                    <div class="row">
+                                      
+                                    
+                                      <div class="col-sm-4">
+                                        <div class='form-group'>
+                                          <label for="telefono">Teléfono</label>
+                                          <input required type="text" class="form-control" id="telefono" name="telefono" value="{{$configuraciones->telefono}}">
+                                        </div>
+                                      </div>
+
+                                      
+                                    
+                                      <div class="col-sm-8">
+                                        <div class='form-group'>
+                                          <label for="ruta">Ruta</label>
+                                          <input required type="text" class="form-control" id="ruta" name="ruta" value="{{$configuraciones->ruta}}">
+                                        </div>
+                                      </div>
+
+                                    </div>
+
+
+                                    <div class="row"> 
+                                      <div class="col-sm-6">
+                                          <div class='form-group'>
+                                              <label for="cst"># Registro S.C.T</label>
+                                              <input required type="text" class="form-control" id="sct" name="sct" value="{{$configuraciones->sct}}" >
+                                          </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="row"> 
+                                      
+                                      <div class="col-sm-6">
+                                          <div class='form-group'>
+                                              <label for="plantaauto">Autorización</label>
+                                              <input required type="text" class="form-control" id="plantaauto" name="plantaauto" value="{{$planta->plantaauto}}">
+                                          </div>
+                                      </div>
+                                        
+                                      <div class="col-sm-6">
+                                        <div class='form-group'>
+                                          <label for="codigo">C&oacute;digo</label>
+                                          <input required type="text" class="form-control" id="codigo" name="codigo" value="{{$planta->codigo}}">
+                                        </div>
+                                      </div> 
+                                  </div>
+
+                                  <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class='form-group'>
+                                            <label for="razonsocial">Razón Social</label>
+                                            <input required type="text" class="form-control" id="razonsocial" name="razonsocial" value="{{$configuraciones->razonsocial}}">
+                                        </div>
+                                    </div>
+                                  
+                                </div>
+                                <div class="row">                            
+                                    <div class="col-sm-12">
+                                        <div class='form-group'>
+                                            <label for="direccion">Dirección</label>
+                                            <input required type="text" class="form-control" id="direccion" name="direccion" value="{{$planta->direccion}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                @if(Auth::guard('administradores')->user()->principal==1) 
+                                <div class="card-footer">
+                                    <button type="submit" class='btn btn-info float-right' data-texto="¿Todos los datos son correctos?">Guardar</button>
+                                </div>
+                                @endif    
+                                
+                                </form> 
+
+                            </div>
+                        </div>
+                            
+                          </div>
+                        
+
+                          <div class="tab-pane fade " id="cuenta" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
                               <form action="configuracioncuenta" method="post" id="cuentaform">
                                 @csrf
                                 <div class="row">
-                                  <div class="col-md-7">
-                                      <div class="row">
-                                          <div class="col-sm-12">
-                                              <div class='form-group'>
-                                                  <label for="administrador">Administrador</label>
-                                                  <input type="text" class="form-control" id="administrador" name="administrador" value="{{$administrador->administrador}}">
-                                              </div>
-                                          </div>                               
-                                      </div>
-                                      <div class="row">                            
-                                          <div class="col-sm-6">
-                                              <div class='form-group'>
-                                                  <label for="cargo">Cargo</label>
-                                                  <input type="text" class="form-control" id="cargo" name="cargo" value="{{$administrador->cargo}}">
-                                              </div>
-                                          </div>
-                                          <div class="col-sm-5">
-                                              <div class='form-group'>
-                                                  <label for="mail">Correo</label>
-                                                  <input type="text" class="form-control" id="mail" name="mail" value="{{$administrador->mail}}">
-                                              </div>
-                                          </div>
-                                      </div>
+                                  <div class="col-md-12">
+                                     
+                                    <div class='form-group'>
+                                        <label for="administrador">Administrador</label>
+                                        <input type="text" class="form-control" id="administrador" name="administrador" value="{{$administrador->administrador}}">
+                                    </div>
+
                                   </div>
-                                  <div class="col-md-5">
-                                      <div class="form-group">   
-                                          <label for="firma">Firma</label> 
-                                          <br> 
-                                          @if($administrador->firma!='')   
-                                          <img src="{{$administrador->firma}}" alt="" width="340px" height="200px" id="imgfirma"> 
-                                          <canvas  id="draw-canvas" width="340px" height="200px" style="display:none;"></canvas>          
-                                          @else
-                                          <canvas  id="draw-canvas" width="340px" height="200px"></canvas>                     
-                                          @endif
-                                          <textarea data-invalido="true" id="draw-dataUrl" class="form-control" rows="5" name="firma" style="display:none;">{{$administrador->firma}}</textarea>
-                                          <br>
-                                          <button type="button" class="btn btn-default" id="draw-clearBtn">Limpiar</button> 
-                                      </div>
+                                </div>
+
+                                <div class="row">                            
+                                  <div class="col-sm-7">
+                                    <div class='form-group'>
+                                      <label for="cargo">Cargo</label>
+                                      <input type="text" class="form-control" id="cargo" name="cargo" value="{{$administrador->cargo}}">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-5">
+                                    <div class='form-group'>
+                                      <label for="mail">Correo</label>
+                                      <input type="text" class="form-control" id="mail" name="mail" value="{{$administrador->mail}}">
+                                    </div>
+                                  </div>                                        
+                                </div>
+
+                                <div class="row">                            
+                                  <div class="col-sm-7">
+                                    <div class="form-group">   
+                                      <label for="firma">Firma</label> 
+                                      <br> 
+                                      @if($administrador->firma!='')   
+                                      <img src="{{$administrador->firma}}" alt="" width="340px" height="200px" id="imgfirma"> 
+                                      <canvas  id="draw-canvas" width="340px" height="200px" style="display:none;"></canvas>          
+                                      @else
+                                      <canvas  id="draw-canvas" width="340px" height="200px"></canvas>                     
+                                      @endif
+                                      <textarea data-invalido="true" id="draw-dataUrl" class="form-control" rows="5" name="firma" style="display:none;">{{$administrador->firma}}</textarea>
+                                      <br>
+                                      <button type="button" class="btn btn-default" id="draw-clearBtn">Limpiar</button> 
+                                    </div>
                                   </div>
                                 </div>                                                                      
                               </form>
@@ -188,13 +296,13 @@
                               <form action="configuracionbanco" method="post" id="bancoform">
                                 @csrf
                                   <div class="row">
-                                    <div class="col-md-7">
-                                        <div class="form-group">
-                                            <label for="razonsocial">Razón Social</label>
-                                            <input require type="text" class="form-control" id="razonsocial" name="razonsocial" value="{{$configuraciones->razonsocial}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-8">
+                                          <div class="form-group">
+                                              <label for="banco">Banco</label>
+                                              <input maxlength="50" require type="text" class="form-control" id="banco" name="banco" value="{{$configuraciones->banco}}">
+                                          </div>
+                                      </div> 
+                                    <div class="col-md-1">
                                         
                                     </div>
                                     <div class="col-md-3">
@@ -205,12 +313,7 @@
                                     </div>
                                   </div>
                                   <div class="row"> 
-                                      <div class="col-md-3">
-                                          <div class="form-group">
-                                              <label for="banco">Banco</label>
-                                              <input maxlength="50" require type="text" class="form-control" id="banco" name="banco" value="{{$configuraciones->banco}}">
-                                          </div>
-                                      </div> 
+                                    
                                       <div class="col-md-3">
                                           <div class="form-group">
                                               <label for="cuenta">CLABE</label>
@@ -432,14 +535,14 @@
                 <ul class="nav nav-pills flex-column">
                   <li class="nav-item ">
                     <a class="nav-link active" onclick="VentanasTitulos(this,'titulo2');" data-text="Residuos"  data-toggle="pill" href="#residuos" role="tab">
-                      <i class="fa fa-user" aria-hidden="true"></i> Residuos
+                      <i class="fa fa-th" aria-hidden="true"></i> Residuos
                       <!--<span class="badge bg-primary float-right">12</span>-->
                     </a>
                   </li>
                   
                   <li class="nav-item">
                     <a class="nav-link" onclick="VentanasTitulos(this,'titulo2');" data-text="Contenedores"  data-toggle="pill" href="#contenedores" role="tab">
-                      <i class="fa fa-user" aria-hidden="true"></i> Contenedores
+                      <i class="fa fa-trash" aria-hidden="true"></i> Contenedores
                       <!--<span class="badge bg-primary float-right">12</span>-->
                     </a>
                   </li>

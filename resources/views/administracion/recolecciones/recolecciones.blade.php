@@ -79,8 +79,15 @@
                           
                           
                           <td>
-                            <a href="Manifiesto/{{$recoleccion->id}}" target="_blank" class="btn btn-info btn-sm"><i class="fa fa-download" aria-hidden="true"></i> Manifiesto</a>
+                            @if($recoleccion->matricula=='')
+                            {{$recoleccion->matricula}}
+                            <a href="{{url('recoleccion')}}/{{$recoleccion->id}}" target="_blank" class="btn btn-info "><i class="fa fa-file-text" aria-hidden="true"></i> Completar</a>
+                            @else
+                              <a href="{{url('Manifiesto')}}/{{$recoleccion->id}}" target="_blank" class="btn btn-info "><i class="fa fa-download" aria-hidden="true"></i> Manifiesto</a>
+                            @endif
+                            <a href="{{url('Manifiesto')}}/{{$recoleccion->id}}" target="_blank" class="btn btn-info "><i class="fa fa-download" aria-hidden="true"></i> Manifiesto</a>
                           </td>
+                          
 
 
                         </tr>

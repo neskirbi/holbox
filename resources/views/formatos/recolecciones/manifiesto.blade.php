@@ -102,17 +102,14 @@
         <tr>
             <td class="bordes"><center><img style="width:15px; padding:10px;" src="{{public_path('images/formatos/manifiesto/transporte.png')}}" alt="Transporte"></center></td>
             <td class="bordes">
-                7.-NOMBRE DE LA EMPRESA TRANSPORTISTA:
-                <br><b>{{$recoleccion->razonvehiculo}}</b>
+                7.-NOMBRE DE LA EMPRESA TRANSPORTISTA: <b>{{$configuracion->razonsocial}}</b>
                 <table style="border-collapse: collapse;" class="probable100">
                     <tr>
                         <td>
-                            DOMICILIO FISCAL:
-                            <br><b>{{$recoleccion->direccionvehiculo}}</b>
+                            DOMICILIO FISCAL: <b>{{$planta->direccion}}</b>
                         </td>
                         <td>
-                            TELÉFONO:
-                            <br><b>{{$recoleccion->telefonovehiculo}}</b>
+                            TELÉFONO: <b>{{$configuracion->telefono}}</b>
                         </td>
                     </tr>
                    
@@ -120,8 +117,7 @@
                 <table style="border-collapse: collapse;" class="probable100">
                     <tr>
                         <td>
-                            AUTORIZACIÓN RAMIR: <b>{{$recoleccion->ramir}}</b>
-                            <br>Folio Fiscal de la factura asociada al transporte de RCM
+                            AUTORIZACIÓN RAMIR: <b>{{$planta->plantaauto}}</b>
                         </td>
                         <td>
                             NO. DE REGISTRO S.C.T. <b>{{$recoleccion->regsct}}</b>

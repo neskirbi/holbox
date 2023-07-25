@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Cliente;
+use App\Models\Administrador;
+use App\Models\Planta;
+use App\Models\Configuracion;
 
 
 class GeneralController extends Controller
@@ -29,8 +32,12 @@ class GeneralController extends Controller
         ->first();
         
 
-        return view('formatos.recolecciones.manifiesto',['recoleccion'=>$recoleccion]);
-        $pdf = \PDF::loadView('formatos.recolecciones.manifiesto',['recoleccion'=>$recoleccion]);
+        $planta=Planta::where('id',GetIdPlanta())->first();
+        $configuracion=Configuracion::where('id_planta',GetIdPlanta())->first();
+
+        $administrador=Administrador::where('id_planta',GetIdPlanta())->where('principal',1)->orderby('created_at','asc')->first();
+        return view('formatos.recolecciones.manifiesto',['recoleccion'=>$recoleccion,'configuracion'=>$configuracion,'planta'=>$planta,'administrador'=>$administrador]);
+        $pdf = \PDF::loadView('formatos.recolecciones.manifiesto',['recoleccion'=>$recoleccion,'configuracion'=>$configuracion,'planta'=>$planta,'administrador'=>$administrador]);
         
         return $pdf ->setPaper('A4', 'portrait')->download('manifiesto'.'.pdf');
     }

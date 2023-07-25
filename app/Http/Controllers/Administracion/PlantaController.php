@@ -54,6 +54,7 @@ class PlantaController extends Controller
         $planta=Planta::find($id);
         $planta->planta=$request->planta;
         $planta->direccion=$request->direccion;
+        $planta->telefono=$request->telefono;
         $planta->codigo=$request->codigo;
         $planta->plantaauto=$request->plantaauto;
         $planta->save();

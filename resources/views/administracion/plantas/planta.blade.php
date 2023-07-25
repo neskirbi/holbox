@@ -30,70 +30,7 @@
     <section class="content">
       <div class="container-fluid">
         <section class="col-lg-12 connectedSortable ui-sortable">
-            <div class="row">
-                <div class="col-12">
-                    <form action="{{url('planta').'/'.$planta->id}}" id="{{$planta->id}}" method="post">
-                    @csrf
-                    @method('PUT')
-                    <div class="card card-info">
-                        <div class="card-header">
-                            <h3 class="card-title">Datos de la Planta</h3>                            
-                        </div>
-                       
-                        <div class="card-body">
-                        <div class="row">
-                                <div class="col-sm-7">
-                                    <div class='form-group'>
-                                        <label for="razonsocial">Razón Social</label>
-                                        <input type="text" class="form-control" id="razonsocial" name="razonsocial" value="{{$configuracion->razonsocial}}">
-                                    </div>
-                                </div>
-                               
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-7">
-                                    <div class='form-group'>
-                                        <label for="planta">Planta</label>
-                                        <input type="text" class="form-control" id="planta" name="planta" value="{{$planta->planta}}">
-                                    </div>
-                                </div>
-                                <div class="col-sm-1">
-                                    
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class='form-group'>
-                                        <label for="plantaauto">Autorización</label>
-                                        <input type="text" class="form-control" id="plantaauto" name="plantaauto" value="{{$planta->plantaauto}}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">                            
-                                <div class="col-sm-8">
-                                    <div class='form-group'>
-                                        <label for="direccion">Dirección</label>
-                                        <input type="text" class="form-control" id="direccion" name="direccion" value="{{$planta->direccion}}">
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class='form-group'>
-                                        <label for="codigo">C&oacute;digo</label>
-                                        <input type="text" class="form-control" id="codigo" name="codigo" value="{{$planta->codigo}}">
-                                    </div>
-                                </div> 
-                            </div>
-                                                         
-                        </div>                        
-                        @if(Auth::guard('administradores')->user()->principal==1) 
-                        <div class="card-footer">
-                            <button type="submit" class='btn btn-info float-right' data-texto="¿Todos los datos son correctos?">Guardar</button>
-                        </div>
-                        @endif                           
-                    </div>
-                    
-                    </form> 
-
-                </div>
-            </div>
+            
             
 
             <div class="callout callout-success">
