@@ -359,7 +359,7 @@
                                     </div>
                                   </div>                                                                      
                               </form>
-                              <button class="btn btn-info float-right" onclick="Submite('boletaform',this);" data-texto="¿Guardar los datos del banco?">Guardar</button>
+                              <button class="btn btn-info float-right" onclick="Submite('boletaform',this);" data-texto="¿Guardar los datos?">Guardar</button>
                           </div>
 
                           <div class="tab-pane fade" id="horarios" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">

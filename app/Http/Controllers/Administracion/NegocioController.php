@@ -63,8 +63,10 @@ class NegocioController extends Controller
         $negocio->id=GetUuid();        
         $negocio->id_generador=isset($request->generador) ? $request->generador : '' ;
         $negocio->id_planta=$request->planta;
-
+        
         $negocio->negocio=$request->negocio;
+
+        $negocio->nautorizacion=$request->nautorizacion;
         
         $tiponegocio=TipoNegocio::where('id','=',$request->tiponegocio)->first();
         if(!$tiponegocio){
@@ -157,6 +159,8 @@ class NegocioController extends Controller
         $negocio->id_planta=$request->planta;
 
         $negocio->negocio=$request->negocio;
+        
+        $negocio->nautorizacion=$request->nautorizacion;
         
         if(strlen($request->tiponegocio)==32){
             $tiponegocio=TipoNegocio::where('id','=',$request->tiponegocio)->first();

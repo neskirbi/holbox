@@ -63,10 +63,19 @@
                                
 
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <div class="form-group">
                                             <label for="negocio">Nombre del Establecimiento</label>
                                             <input required type="text" name="negocio" class="form-control" id="negocio" value="{{$negocio->negocio}}" placeholder="Nombre del Establecimiento" minlength="1" maxlength="500" aria-invalid="false" >
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="nautorizacion"># Autorización</label>
+                                            <input required type="text" name="nautorizacion" class="form-control" id="nautorizacion" value="{{$negocio->nautorizacion}}" placeholder="# Autorización" minlength="1" maxlength="100" aria-invalid="false" >
                                         </div>
                                     </div>
                                 </div>

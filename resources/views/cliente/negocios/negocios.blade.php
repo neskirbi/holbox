@@ -50,9 +50,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <div class="p-2">
-                  <a href="{{url('negocios/create')}}" class="btn btn-primary"><span><i class="fa fa-plus" aria-hidden="true"></i></span> Establecimiento</a>
-                </div>
+                
                 <div class="row">
                   <div class="col-md-12" style="overflow-x:scroll;">
                     @if(count($negocios))
