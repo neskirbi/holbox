@@ -65,6 +65,8 @@ class RecoleccionController extends Controller
                 $recol->contenedor=$recoleccion['contenedor'];
                 $recol->residuo=$recoleccion['residuo'];
                 $recol->cantidad=$recoleccion['cantidad'];
+                $recol->created_at=$recoleccion['created_at'];
+                $recol->updated_at=$recoleccion['updated_at'];
                 $recol->subtotal=$subtotal;
                 $recol->iva=$iva;
                 $recol->total=$total;

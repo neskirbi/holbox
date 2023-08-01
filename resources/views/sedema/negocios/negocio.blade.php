@@ -28,254 +28,204 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
+
+
+        <div class="row">
+          <div class="col-md-6">
+            @foreach($obras as $obra)
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Obra</h3>
+                <div class="card-tools">
+                  <a href="{{url('reporte').'/'.$obra->id}}" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Impimir</a>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4><i class="far fa-user"></i> {{$obra->razonsocial}} </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5><i class="far fa-building"></i> {{$obra->obra}}</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h6><i class="fa fa-recycle"></i> {{$obra->planta}}</h6>
+                    </div>
+                </div>
+                <div class="row">                    
+                    <div class="col-md-12">
+                        <b>{{$obra->nautorizacion}}</b>
+                    </div> 
+                </div>
+                <div class="row">                    
+                    <div class="col-md-12">
+                        {{$obra->superficie}} {{$obra->superunidades}}
+                    </div> 
+                </div>
+                <b>Dirección</b>
+                <div class="row">                    
+                    <div class="col-md-12">
+                        {{$obra->calle}} {{$obra->numeroext}} {{$obra->numeroint}}
+                    </div> 
+                </div>
+
+                <div class="row">                    
+                    <div class="col-md-12">
+                        {{$obra->colonia}}
+                    </div> 
+                </div>
+
+                <div class="row">                    
+                    <div class="col-md-12">
+                        {{$obra->municipio}}, {{$obra->entidad}}
+                    </div> 
+                </div>
+                <div class="row">                    
+                    <div class="col-md-12">
+                        Inicio: {{FechaFormateada($obra->fechainicio)}}
+                    </div> 
+                </div>
+                <div class="row">                    
+                    <div class="col-md-12">
+                        Fin: {{FechaFormateada($obra->fechafin)}}
+                    </div> 
+                </div>
+                <script>
+                  /**
+                   * Aqui por que agarro el id de la obra en el foreach
+                   */
+                    $(document).ready(function(){
+                        AvanceEntregasSedema('{{$obra->id}}');
+                    });
+                    
+                </script>
+                    
+               
+              </div>
+            </div> 
+            @endforeach
+
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Contrato</h3>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      @if(file_exists(('documentos/clientes/contratos').'/'.$obra->id.'.pdf'))
+                      <iframe id="inlineFrameExample"
+                          title="identificación"
+                          width="100%"
+                          height="200"
+                          src="{{asset('documentos/clientes/contratos').'/'.$obra->id.'.pdf'}}">
+                      </iframe>
+                      <a target="_blank" class="btn btn-default" href="{{asset('documentos/clientes/contratos').'/'.$obra->id.'.pdf'}}">Ver</a>
+                      @endif
+                      @if(!file_exists(('documentos/clientes/contratos').'/'.$obra->id.'.pdf'))
+                      <h3 title="{{asset('documentos/clientes/contratos').'/'.$obra->id.'.pdf'}}">Sin contrato</h3>
+                      
+                      @endif
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Informes Unidad de Inspección</h3>
+                <div class="card-tools">
+                  
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <a href="{{url('informe')}}/{{$obra->id}}" class="btn btn-info"> <i class="fas fa-plus"></i> Informe</a>
+                  </div>
+                </div>
+                
+                
+              </div>
+            </div>
+
+
+
+
+
+          </div>
+          <div class="col-md-6">
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Volumen Declarado</h3>
+              </div>
+              <div class="card-body">
+                <div class="avancematerial" style="height:350px;">
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         
-            <div class="card card-default">
+        
+            <div class="row">
+            <div class="col-12">
+                <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title"><i class="fa fa-building" aria-hidden="true"></i> Negocio</h3>            
+                    <h3 class="card-title">Desglose</h3>                
                 </div>
                 <!-- /.card-header -->
-                    <form method="POST" action="{{url('sedeman')}}/{{$negocio->id}}" id="formnegocio" enctype="multipart/form-data">
-                    @csrf                    
-                    <input required name="_method" type="hidden" value="PUT"> 
-                    <div class="card-body">  
-
-                        <div class="card card-info">
-                            <div class="card-header">
-                                <h3 class="card-title">Datos del Establecimiento</h3>
-                            </div>
-                            <div class="card-body">
-                            <div class="row">
-                                    <div class="col-md-6"> 
-                                        <div class="form-group">
-                                            <label for="generador">Generador</label>
-                                            <select class="form-control" name="generador" id="generador" aria-invalid="false" >
-                                                <option value="{{isset($generador->id) ? $generador->id : ''}}">{{isset($generador->razonsocial) ? $generador->razonsocial : ''}}</option>
-                                                <optgroup></optgroup>
-                                                @foreach($generadores as $generador)
-                                                <option value="{{$generador->id}}">{{$generador->razonsocial}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                  
-                                    
-                                </div>
-                               
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="negocio">Nombre del Establecimiento</label>
-                                            <input required type="text" name="negocio" class="form-control" id="negocio" value="{{$negocio->negocio}}" placeholder="Nombre del Establecimiento" minlength="1" maxlength="500" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6"> 
-                                        <div class="form-group">
-                                            <label for="tiponegocio">Tipo de Establecimiento</label>
-                                            <select class="form-control" name="tiponegocio" id="tiponegocio" aria-invalid="false">
-                                                <option value="{{$negocio->tiponegocio}}">{{$negocio->tiponegocio}}</option>
-                                                <optgroup></optgroup>
-                                                @foreach($tiponegocios as $tiponegocio)
-                                                <option value="{{$tiponegocio->id}}">{{$tiponegocio->tiponegocio}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>  
-                                    </div>
-                                </div>
-
-                               
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="calle">Calle</label>
-                                            <input required type="text" name="calle" class="form-control" id="calle" value="{{$negocio->calle}}" placeholder="Calle" minlength="4" maxlength="150" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="numeroext">Número Ext.</label>
-                                            <input required type="text" name="numeroext" class="form-control" id="numeroext" value="{{$negocio->numeroext}}" placeholder="Número Ext." minlength="1" maxlength="10" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="numeroint">Número Int.</label>
-                                            <input required type="text" name="numeroint" class="form-control" id="numeroint" value="{{$negocio->numeroint}}"  placeholder="Número Int." minlength="1" maxlength="10" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="colonia">Colonia</label>
-                                            <input required type="text" name="colonia" class="form-control" id="colonia" value="{{$negocio->colonia}}" placeholder="Colonia"  minlength="1" maxlength="150" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="municipio">Alcaldía/Municipio</label>
-                                            <input required type="text" name="municipio" class="form-control" id="municipio" value="{{$negocio->municipio}}" placeholder="Alcaldía/Municipio"  minlength="1" maxlength="150" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="cp">C.P.</label>
-                                            <input required type="text" name="cp" class="form-control" id="cp" value="{{$negocio->cp}}" placeholder="C.P."  minlength="1" maxlength="10" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class='row'>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="entidad">Entidad Federativa</label>
-                                            <!--<input  type="text" name="entidad" class="form-control" id="entidad" placeholder="Entidad federativa" aria-invalid="false" >-->
-                                            <select  name="entidad" class="form-control" id="entidad" aria-invalid="false" >
-                                                <option value="{{isset($negocio->entidad) ? $negocio->entidad : '' }}">{{isset($negocio->entidad) ? $negocio->entidad : ''}}</option>
-                                                <optgroup></optgroup>
-                                                @foreach($entidades as $entidad)
-                                                <option value="{{$entidad->id}}">{{$entidad->entidad}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="planta">Prestador de Servicio</label>
-                                            <select name="planta" id="planta" name="planta" class="form-control">
-                                                <option value="{{$negocio->id_planta}}">{{$planta->planta}}</option>                                                
-                                                <optgroup></optgroup>
-                                                @foreach($plantas as $planta)
-                                                <option value="{{$planta->id}}">{{$planta->planta}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div calss="row">
-                                    <div class="col-md-8">
-                                        <label for="map">Ubicación del Establecimiento</label>
-                                        <div id="map" style=" height: 350px; width:100%;"></div>
-                                    </div>
-                                </div>
-
-                                <div class="row">                                    
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <label for="latitud">Latitud</label>
-                                            <input required type="text" name="latitud" class="form-control" id="latitud" value="{{$negocio->latitud}}" placeholder="Latitud" aria-invalid="false" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <label for="longitud">Longitud</label>                                           
-                                            <input required type="text" name="longitud" class="form-control" id="longitud" value="{{$negocio->longitud}}" placeholder="Longitud" aria-invalid="false" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                
-                            </div>
-                        </div>
-                       
-
-                       
-                        <div class="card card-info">
-                            <div class="card-header">
-                                <h3 class="card-title">Documentación</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="plan">Plan de manejo(pdf)</label>                                            
-                                            <div class="input-group">
-                                                <div class="custom-file">                                    
-                                                    <input type="file" class="custom-file-input" id="plan" value="{{$negocio->id}}.pdf" name="plan">
-                                                    <label class="custom-file-label" for="plan">Plan de manejo(pdf)</label>                                    
-                                                </div>
-                                            </div>
-                                            <font color="red">No cambia hasta guardar.</font>
-                                            <iframe id="inlineFrameExample"
-                                                title="identificación"
-                                                width="100%"
-                                                height="200"
-                                                src="{{asset('documentos/clientes/negocios/plan').'/'.$negocio->id.'.pdf'.'?ver='.rand(0,10000)}}">
-                                            </iframe>                      
-                                            <a target="_blank" class="btn btn-default" href="{{asset('documentos/clientes/negocios/plan').'/'.$negocio->id.'.pdf'}}">Ver</a>
-                                        </div>
-                                    </div>        
-                                </div>
-                            </div>
-                        </div>                
-                        
-
-
-                        <div class="card card-info">
-                            <div class="card-header">
-                                <h3 class="card-title">Datos del contacto</h3>
-                            </div>
-                            <div class="card-body">
-                            <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="contacto">Contacto</label>
-                                            <input required type="text" name="contacto" class="form-control" id="contacto" value="{{$negocio->contacto}}" placeholder="Contacto"  minlength="1" maxlength="100" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="correo">Correo Contacto</label>
-                                            <input required type="text" name="correo" class="form-control" id="correo" value="{{$negocio->correo}}" placeholder="Correo"  minlength="1" maxlength="100" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="telefono">Teléfono</label>
-                                            <input required type="text" name="telefono" class="form-control" id="telefono" value="{{$negocio->telefono}}" placeholder="Teléfono"  minlength="1" maxlength="50" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="celular">Celular</label>
-                                            <input required type="text" name="celular" class="form-control" id="celular" value="{{$negocio->celular}}" placeholder="Celular"  minlength="1" maxlength="50" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                </div>
-
-                               
-                               
-                            </div>
-                        </div>                
-                        
-                        
-                        
-                    </div><!--End body-->
+                <div class="card-body" style="overflow-x:scroll;">
                     
-                    <div class="card-footer" >
-                        <button required type="submit" id="guardar" class="btn  btn-info float-right">{{$negocio->verificado==1 ? 'Guardar' : 'Confirmar' }}</button>
-                    </div>
-                </form>
+                    @if(count($obras))
+                    <table class="table table-hover text-nowrap" id="obras">
+                    <thead>
+                        <tr>
+                        <th>Material</th>
+                        <th>Entregado a sitio de reciclaje</th>
+                        <th>Fecha entrega</th>
+                        <th>Manifiesto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    
+                        @foreach($materialesobra as $materialobra)
+                        <tr>
+                        <td>
+                            {{$materialobra->material}}
+                        </td>  
+                        <td>
+                            {{$materialobra->cantidad}} {{$materialobra->unidades}}
+                        </td>
+                                
+                        <td>
+                            {{FechaFormateada($materialobra->fechacita)}}
+                        </td>
+                        <td>
+                            <a href="{{url('boleta').'/'.$materialobra->id_cita}}" target="_blank" class="btn btn-info btn-sm d-inline p-2" title="Descargar Boleta"><i class="fa fa-download" aria-hidden="true"></i> Boleta</a>
+                            <a href="{{url('manifiesto').'/'.$materialobra->id_cita}}" target="_blank" class="btn btn-info btn-sm d-inline p-2" title="Descargar manifiesto"><i class="fa fa-download" aria-hidden="true"></i> Manifiesto</a>
+                        </td>
+                        
+                        
+                        </tr>
+                        @endforeach
+                        
+                    </tbody>
+                    </table>
+                    @endif
+                </div>
+                <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
             </div>
-            <br>          
+            </div>      
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->

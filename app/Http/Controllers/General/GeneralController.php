@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Cliente;
 use App\Models\Administrador;
 use App\Models\Planta;
+use App\Models\Recoleccion;
 use App\Models\Configuracion;
 
 
@@ -15,7 +16,8 @@ class GeneralController extends Controller
 {
     function Manifiesto($id){
 
-        $recoleccion=Cliente::select('clientes.nombres','clientes.apellidos','clientes.firma as firmacliente','generadores.razonsocial','generadores.fisicaomoral','generadores.telefono','generadores.calle','generadores.entidad',
+        return $recoleccion=Recoleccion::select('clientes.nombres','clientes.apellidos','clientes.firma as firmacliente',
+        'generadores.razonsocial','generadores.fisicaomoral','generadores.telefono','generadores.calle','generadores.entidad',
         'generadores.numeroext','generadores.numeroint','generadores.colonia','generadores.municipio','generadores.cp',
         'recolecciones.id','recolecciones.folio','negocios.nautorizacion',
         'negocios.telefono as negotelefono','negocios.calle as negocalle','negocios.numeroext as negonumeroext',
@@ -24,9 +26,9 @@ class GeneralController extends Controller
         DB::RAW("(select contenedor from contenedores where opcion=recolecciones.contenedor) as contenedor"),
         DB::RAW("(select (cantidad*recolecciones.cantidad) from contenedores where opcion=recolecciones.contenedor) as total"),
         DB::RAW("(select residuo from residuos where opcion=recolecciones.residuo) as residuo"))
-        ->join('generadores','generadores.id_cliente','=','clientes.id')
-        ->join('negocios','negocios.id_generador','=','generadores.id')
-        ->join('recolecciones','recolecciones.id_negocio','=','negocios.id')
+        ->join('negocios','negocios.id','=','recolecciones.id_negocio')
+        ->join('generadores','generadores.id','=','negocios.id_generador')
+        ->join('clientes','clientes.id','=','generadores.id_cliente')
         ->where('recolecciones.id',$id)
         ->orderby('created_at','desc')
         ->first();
