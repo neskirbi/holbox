@@ -309,7 +309,14 @@
                                 </div>                                                                      
                               </form>
                               <button class="btn btn-info float-right" id="draw-submitBtnr" data-texto="¿Guardar los datos de representante?">Guardar</button>
-                              
+                              <div class="row">
+                                <div class="col-md-12">  
+                                  <div class='form-group'>
+                                    <label style="color:#999;">Nota:Estos datos se verán reflejados en el manifiesto.</label>
+                                  </div>                 
+                                
+                                </div>
+                              </div>
                           </div>
 
                           <div class="tab-pane fade" id="contrasenia" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
