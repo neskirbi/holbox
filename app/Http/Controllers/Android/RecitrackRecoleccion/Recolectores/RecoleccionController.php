@@ -26,8 +26,9 @@ class RecoleccionController extends Controller
             }else{
 
                 $negocio=Negocio::find($recoleccion['id_negocio']);
-                
+                $planta=Planta::find($negocio->id_planta);
                 $configuracion=Configuracion::where('id_planta',$negocio->id_planta)->first();
+
                 $folio=$configuracion->folio;
                 $configuracion->folio = $configuracion->folio+1;
                 $configuracion->save();
@@ -71,6 +72,25 @@ class RecoleccionController extends Controller
                 $recol->iva=$iva;
                 $recol->total=$total;
                 $recol->folio=$folio;
+
+                $recol->transportista=$planta->planta;
+                $recol->domiciliot=$planta->direccion;
+                $recol->ramir=$planta->plantaauto;
+                $recol->telefonot=$configuracion->telefono;
+                $recol->sctt=$configuracion->sct;
+
+                //$recol->nombret=$configuracion->nombre_repre;
+                //$recol->firmat=$configuracion->firma_repre;
+                //$recol->ruta=$configuracion->ruta;
+
+                $recol->empresar=$planta->planta;
+                $recol->ramirr=$planta->plantaauto;
+                $recol->domicilior=$planta->direccion;
+                $recol->telefonor=$configuracion->telefono;
+                //$recol->nombrer=$configuracion->nombre_repre;
+                //$recol->firmar=$configuracion->firma_repre;
+                //$recol->cargor=$configuracion->cargo_repre;
+                $recol->fehcallegada=date('Y-m-d H:i:s');
 
                 
                 $recol->save();

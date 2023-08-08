@@ -64,6 +64,13 @@
                             <!--<span class="badge bg-primary float-right">12</span>-->
                         </a>
                     </li>
+
+                    <li class="nav-item ">
+                        <a class="nav-link" onclick="VentanasTitulos(this,'titulo');" data-text="Representante"  data-toggle="pill" href="#representante" role="tab">
+                            <i class="fa fa-user" aria-hidden="true"></i> Representante
+                            <!--<span class="badge bg-primary float-right">12</span>-->
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" onclick="VentanasTitulos(this,'titulo');" data-text="Contraseña"  data-toggle="pill" href="#contrasenia" role="tab">
                             <i class="fa fa-lock" aria-hidden="true"></i> Contraseña
@@ -250,6 +257,58 @@
                                 </div>                                                                      
                               </form>
                               <button class="btn btn-info float-right" id="draw-submitBtn" data-texto="¿Guardar los datos de administrador?">Guardar</button>
+                              
+                          </div>
+
+
+                          <div class="tab-pane fade " id="representante" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                              <form action="configuracionrepresentante" method="post" id="repreform">
+                                @csrf
+                                <div class="row">
+                                  <div class="col-md-12">
+                                     
+                                    <div class='form-group'>
+                                        <label for="representante">Representante Legal</label>
+                                        <input type="text" class="form-control" id="representante" name="representante" value="{{$configuraciones->representante}}">
+                                    </div>
+
+                                  </div>
+                                </div>
+
+                                <div class="row">                            
+                                  <div class="col-sm-7">
+                                    <div class='form-group'>
+                                      <label for="cargo">Cargo</label>
+                                      <input type="text" class="form-control" id="cargo" name="cargo" value="{{$configuraciones->cargo}}">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-5">
+                                    <div class='form-group'>
+                                      <label for="mail">Correo</label>
+                                      <input type="text" class="form-control" id="mail" name="mail" value="{{$configuraciones->mail}}">
+                                    </div>
+                                  </div>                                        
+                                </div>
+
+                                <div class="row">                            
+                                  <div class="col-sm-7">
+                                    <div class="form-group">   
+                                      <label for="firma">Firma</label> 
+                                      <br> 
+                                      @if($configuraciones->firma!='')   
+                                      <img src="{{$configuraciones->firma}}" alt="" width="340px" height="200px" id="imgfirmar"> 
+                                      <canvas class="draw-canvas" id="draw-canvasr" width="340px" height="200px" style="display:none;"></canvas>          
+                                      @else
+                                      <canvas class="draw-canvas" id="draw-canvasr" width="340px" height="200px"></canvas>                     
+                                      @endif
+                                      <textarea data-invalido="true" id="draw-dataUrlr" class="form-control" rows="5" name="firma" style="display:none;">{{$configuraciones->firma}}</textarea>
+                                      <br>
+                                      <button type="button" class="btn btn-default" id="draw-clearBtnr">Limpiar</button> 
+                                    </div>
+                                  </div>
+                                </div>                                                                      
+                              </form>
+                              <button class="btn btn-info float-right" id="draw-submitBtnr" data-texto="¿Guardar los datos de representante?">Guardar</button>
                               
                           </div>
 
@@ -699,10 +758,10 @@
 
 <script>
   var si=0;
-(function() { // Comenzamos una funcion auto-ejecutable
+function IniciarFirmar(variante,form) { // Comenzamos una funcion auto-ejecutable
 
     // Obtenenemos un intervalo regular(Tiempo) en la pamtalla
-  window.requestAnimFrame = (function (callback) {
+    window.requestAnimFrame = (function (callback) {
     return window.requestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
     window.mozRequestAnimationFrame ||
@@ -715,14 +774,14 @@
   })();
 
   // Traemos el canvas mediante el id del elemento html
-  var canvas = document.getElementById("draw-canvas");
+  var canvas = document.getElementById("draw-canvas"+variante);
   var ctx = canvas.getContext("2d");
 
 
   // Mandamos llamar a los Elemetos interactivos de la Interfaz HTML
-  var drawText = document.getElementById("draw-dataUrl");
-  var clearBtn = document.getElementById("draw-clearBtn");
-  var submitBtn = document.getElementById("draw-submitBtn");
+  var drawText = document.getElementById("draw-dataUrl"+variante);
+  var clearBtn = document.getElementById("draw-clearBtn"+variante);
+  var submitBtn = document.getElementById("draw-submitBtn"+variante);
   
   clearBtn.addEventListener("click", function (e) {
     // Definimos que pasa cuando el boton draw-clearBtn es pulsado
@@ -734,7 +793,7 @@
     var dataUrl = canvas.toDataURL();
     if(si)
       drawText.innerHTML = dataUrl;
-    Submite('cuentaform',this);
+    Submite(form,this);
   }, false);
 
   // Activamos MouseEvent para nuestra pagina
@@ -844,8 +903,8 @@
 
   function clearCanvas() {
     si=0;
-    $('#draw-canvas').show();
-    $('#imgfirma').hide();
+    $('#draw-canvas'+variante).show();
+    $('#imgfirma'+variante).hide();
     drawText.innerHTML = '';
     canvas.width = canvas.width;
   }
@@ -856,8 +915,10 @@
     renderCanvas();
   })();
 
-})();
+}
 
+IniciarFirmar('','cuentaform');
+IniciarFirmar('r','repreform');
 </script>
 
 

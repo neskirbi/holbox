@@ -10056,3 +10056,9 @@ padding: 10px;
   border-radius: 5px;
   cursor: crosshair;
 }
+
+.draw-canvas {
+  border: 2px solid #CCCCCC;
+  border-radius: 5px;
+  cursor: crosshair;
+}
