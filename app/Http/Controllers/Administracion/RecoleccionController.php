@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Recoleccion;
+use App\Models\Vehiculo;
+use App\Models\Planta;
+use App\Models\Configuracion;
+use App\Models\Recolector;
 use Redirect;
 
 
@@ -18,7 +22,8 @@ class RecoleccionController extends Controller
     }
 
     function index(){
-       $recolecciones=Recoleccion::select('recolecciones.id','negocios.negocio','recolecciones.cantidad','negocios.tiponegocio','recolecciones.created_at',
+       $recolecciones=Recoleccion::select('recolecciones.id','negocios.negocio','recolecciones.cantidad','negocios.tiponegocio',
+       'recolecciones.created_at','recolecciones.matriculat',
         DB::RAW("(select contenedor from contenedores where opcion=recolecciones.contenedor) as contenedor"),
         DB::RAW("(select residuo from residuos where opcion=recolecciones.residuo) as residuo"),
         DB::RAW("(select plantaauto from plantas where id=recolecciones.id_planta) as plantaauto"))
@@ -31,8 +36,59 @@ class RecoleccionController extends Controller
 
 
     function show($id){
+        
+        $recoleccion = Recoleccion::select('id',
+            DB::RAW("(select recolector from recolectores where id=recolecciones.id_recolector) as responsable")
+        )
+        ->where('id',$id)
+        ->first();
+        $vehiculos=Vehiculo::where('id_planta',GetIdPlanta())->get();
+        return view('administracion.recolecciones.show',['recoleccion'=>$recoleccion,'vehiculos'=>$vehiculos]);
+
+    }
+
+    function update(Request $request,$id){
+        $vehiculo=Vehiculo::find($request->vehiculo);
         $recoleccion = Recoleccion::find($id);
-        return view('administracion.recolecciones.show',['recoleccion'=>$recoleccion]);
+       
+        
+        
+        $planta=Planta::find(GetIdPlanta());
+        $configuracion=Configuracion::where('id_planta',GetIdPlanta())->first();
+        $recolector=Recolector::find($recoleccion->id_recolector);
+
+        if($configuracion->firma_repre==''){
+            return redirect('recoleccion/'.$id)->with('error','Primero debe configurar los datos del representante legal.');
+        }
+
+
+        $recoleccion->vehiculo = $vehiculo->vehiculo;
+        $recoleccion->matriculat = $vehiculo->matricula;
+
+
+        $recoleccion->transportista=$planta->planta;
+        $recoleccion->domiciliot=$planta->direccion;
+        $recoleccion->ramir=$planta->plantaauto;
+        $recoleccion->telefonot=$configuracion->telefono;
+        $recoleccion->sctt=$configuracion->sct;
+
+        $recoleccion->recolector=$recolector->recolector;
+        $recoleccion->firmat=isset($recolector->firma) ? $recolector->firma : '' ;
+        $recoleccion->ruta=$configuracion->ruta;
+
+        $recoleccion->empresar=$planta->planta;
+        $recoleccion->ramirr=$planta->plantaauto;
+        $recoleccion->domicilior=$planta->direccion;
+        $recoleccion->telefonor=$configuracion->telefono;
+        $recoleccion->nombrer=$configuracion->representante;
+        $recoleccion->firmar=$configuracion->firma_repre;
+        $recoleccion->cargor=$configuracion->cargo;
+
+
+
+        $recoleccion->save();
+
+        return redirect('recoleccion')->with('success','Se guardó la información.');
 
     }
 }

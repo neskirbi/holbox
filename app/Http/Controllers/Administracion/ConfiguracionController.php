@@ -82,6 +82,26 @@ class ConfiguracionController extends Controller
         }
     }
 
+
+    function ConfiguracionRepresentante(Request $request){
+        $configuracion=Configuracion::where('id_planta',GetIdPlanta())->first();
+
+       
+
+        //$representante=Configuracion::find(GetId());
+        $configuracion->representante=$request->representante;
+        $configuracion->mail=$request->mail;
+        $configuracion->cargo=$request->cargo;
+        $configuracion->firma_repre=$request->firma==null ? '' : $request->firma;
+        if($configuracion->save()){            
+            return redirect('configuracion')->with('succes', 'Datos guardados.');
+        }else{
+            return redirect('configuracion')->with('error', 'Error al guardar.');
+        }
+    }
+
+    
+
     function CambioPass(Request $request,$id){
         if($request->pass!=$request->pass){            
             return redirect('configuracion')->with('error', 'Error, las contraseñas no coinciden.');

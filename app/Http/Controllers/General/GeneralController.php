@@ -19,7 +19,8 @@ class GeneralController extends Controller
         $recoleccion=Recoleccion::select('clientes.nombres','clientes.apellidos','clientes.firma as firmacliente',
         'generadores.razonsocial','generadores.fisicaomoral','generadores.telefono','generadores.calle','generadores.entidad',
         'generadores.numeroext','generadores.numeroint','generadores.colonia','generadores.municipio','generadores.cp',
-        'recolecciones.id','recolecciones.folio','negocios.nautorizacion',
+        'recolecciones.id','recolecciones.folio','recolecciones.recolector','recolecciones.firmar','recolecciones.matriculat','recolecciones.vehiculo',
+        'negocios.nautorizacion',
         'negocios.telefono as negotelefono','negocios.calle as negocalle','negocios.numeroext as negonumeroext',
         'negocios.nautorizacion','negocios.numeroint as negonumeroint','negocios.colonia as negocolonia','negocios.municipio as negomunicipio',
         'negocios.cp as negocp','negocios.negocio','recolecciones.cantidad','negocios.tiponegocio','recolecciones.created_at',
@@ -38,7 +39,7 @@ class GeneralController extends Controller
         $configuracion=Configuracion::where('id_planta',GetIdPlanta())->first();
 
         $administrador=Administrador::where('id_planta',GetIdPlanta())->where('principal',1)->orderby('created_at','asc')->first();
-        //return view('formatos.recolecciones.manifiesto',['recoleccion'=>$recoleccion,'configuracion'=>$configuracion,'planta'=>$planta,'administrador'=>$administrador]);
+        return view('formatos.recolecciones.manifiesto',['recoleccion'=>$recoleccion,'configuracion'=>$configuracion,'planta'=>$planta,'administrador'=>$administrador]);
         $pdf = \PDF::loadView('formatos.recolecciones.manifiesto',['recoleccion'=>$recoleccion,'configuracion'=>$configuracion,'planta'=>$planta,'administrador'=>$administrador]);
         
         return $pdf ->setPaper('A4', 'portrait')->download('manifiesto'.'.pdf');

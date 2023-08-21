@@ -40,9 +40,10 @@ class CreateRecolecciones extends Migration
             $table->string('ramir',250)->default('');
             $table->string('telefonot',20)->default('');
             $table->string('sctt',30)->default('');
-            $table->string('nombret',150)->default('');
+            $table->string('recolector',150)->default('');
             $table->longtext('firmat')->default('');
             $table->string('ruta',50)->default('');
+            $table->string('vehiculo',50)->default('');
             $table->string('matriculat',20)->default('');
 
             

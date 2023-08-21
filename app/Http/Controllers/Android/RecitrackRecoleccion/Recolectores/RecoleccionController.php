@@ -73,23 +73,7 @@ class RecoleccionController extends Controller
                 $recol->total=$total;
                 $recol->folio=$folio;
 
-                $recol->transportista=$planta->planta;
-                $recol->domiciliot=$planta->direccion;
-                $recol->ramir=$planta->plantaauto;
-                $recol->telefonot=$configuracion->telefono;
-                $recol->sctt=$configuracion->sct;
-
-                //$recol->nombret=$configuracion->nombre_repre;
-                //$recol->firmat=$configuracion->firma_repre;
-                //$recol->ruta=$configuracion->ruta;
-
-                $recol->empresar=$planta->planta;
-                $recol->ramirr=$planta->plantaauto;
-                $recol->domicilior=$planta->direccion;
-                $recol->telefonor=$configuracion->telefono;
-                //$recol->nombrer=$configuracion->nombre_repre;
-                //$recol->firmar=$configuracion->firma_repre;
-                //$recol->cargor=$configuracion->cargo_repre;
+                
                 $recol->fehcallegada=date('Y-m-d H:i:s');
 
                 

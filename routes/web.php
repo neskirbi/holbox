@@ -232,6 +232,7 @@ Route::resource('citasfecha', 'App\Http\Controllers\Administracion\CitasFechaCon
 Route::resource('configuracion', 'App\Http\Controllers\Administracion\ConfiguracionController');
 
 Route::post('configuracioncuenta', 'App\Http\Controllers\Administracion\ConfiguracionController@ConfiguracionCuenta');
+Route::post('ConfiguracionRepresentante', 'App\Http\Controllers\Administracion\ConfiguracionController@ConfiguracionRepresentante');
 Route::post('configuracionbanco', 'App\Http\Controllers\Administracion\ConfiguracionController@ConfiguracionBanco');
 Route::post('configuracionboleta', 'App\Http\Controllers\Administracion\ConfiguracionController@ConfiguracionBoleta');
 Route::put('GuardarDatosPlanta/{id}', 'App\Http\Controllers\Administracion\ConfiguracionController@GuardarDatosPlanta');

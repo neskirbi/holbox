@@ -223,40 +223,7 @@ class CitasFechaController extends Controller
 
 
 
-    public function manifiesto($id)
-    {
-        $cita = DB::table('clientes')
-        ->join('generadores','generadores.id_cliente','=','clientes.id')
-        ->join('obras','obras.id_generador','=','generadores.id')
-        ->join('citas','citas.id_obra','=','obras.id')
-        ->where('citas.id', $id)
-        ->select('citas.folio','generadores.razonsocial','generadores.fisicaomoral','generadores.telefono','generadores.calle','generadores.numeroext','generadores.numeroint','generadores.colonia','generadores.municipio','generadores.cp',
-        'obras.telefono as obrtelefono','obras.calle as obrcalle','obras.numeroext as obrnumeroext','obras.nautorizacion','obras.numeroint as obrnumeroint','obras.colonia as obrcolonia','obras.municipio as obrmunicipio','obras.cp as obrcp','obras.tipoobra','obras.superficie',
-        'citas.id_materialobra','citas.nombrecompleto','citas.observacion','citas.fechacita','citas.unidades',
-        'citas.cantidad','citas.razonvehiculo','citas.direccionvehiculo','citas.telefonovehiculo','citas.ramir','citas.regsct','citas.vehiculo','citas.marcaymodelo','citas.matricula','citas.condicionesmaterial','citas.planta','citas.plantaauto','citas.direccionplanta','citas.nombreres','citas.firmares','citas.nombrecompleto','citas.firmachof','citas.recibio','citas.cargo','citas.firmarecibio','citas.confirmacion')
-        ->first();
-        
-        //return print_r($cita);
 
-        $materialobra=MaterialObra::find($cita->id_materialobra);
-        
-        $cita->fechacita=str_replace("-","/",date('Y-m-d',strtotime($cita->fechacita)));
-        $cita->qr=$id.'.png';
-        
-        
-        $qrimage= ('images/qr/manifiesto/'. $cita->qr);
-        \QRCode::text('reci-track.mx/manifiesto/'.$id)->setOutfile($qrimage)->png(); 
-        
-        //return view('formatos.manifiesto', ['cita'=>$cita,'materialobra'=>$materialobra]);
-        $pdf = \PDF::loadView('formatos.manifiesto', ['cita'=>$cita,'materialobra'=>$materialobra]);
-    
-        return $pdf ->setPaper('legal', 'portrait')->download('Manifiesto '.($cita->folio==0 ? '' : $cita->folio).'.pdf');
-    }
-
-    function Manifiestoalcal($id){
-        $cita=DB::table('clientes');
-        
-        return view('formatos.manifiestoalcaldias.manifiestoalcaldia',['cita'=>$cita]);
-    }
+   
     
 }

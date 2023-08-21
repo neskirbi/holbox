@@ -262,7 +262,7 @@
 
 
                           <div class="tab-pane fade " id="representante" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
-                              <form action="configuracionrepresentante" method="post" id="repreform">
+                              <form action="ConfiguracionRepresentante" method="post" id="repreform">
                                 @csrf
                                 <div class="row">
                                   <div class="col-md-12">
@@ -295,13 +295,13 @@
                                     <div class="form-group">   
                                       <label for="firma">Firma</label> 
                                       <br> 
-                                      @if($configuraciones->firma!='')   
-                                      <img src="{{$configuraciones->firma}}" alt="" width="340px" height="200px" id="imgfirmar"> 
+                                      @if($configuraciones->firma_repre!='')   
+                                      <img src="{{$configuraciones->firma_repre}}" alt="" width="340px" height="200px" id="imgfirmar"> 
                                       <canvas class="draw-canvas" id="draw-canvasr" width="340px" height="200px" style="display:none;"></canvas>          
                                       @else
                                       <canvas class="draw-canvas" id="draw-canvasr" width="340px" height="200px"></canvas>                     
                                       @endif
-                                      <textarea data-invalido="true" id="draw-dataUrlr" class="form-control" rows="5" name="firma" style="display:none;">{{$configuraciones->firma}}</textarea>
+                                      <textarea data-invalido="true" id="draw-dataUrlr" class="form-control" rows="5" name="firma" style="display:none;">{{$configuraciones->firma_repre}}</textarea>
                                       <br>
                                       <button type="button" class="btn btn-default" id="draw-clearBtnr">Limpiar</button> 
                                     </div>

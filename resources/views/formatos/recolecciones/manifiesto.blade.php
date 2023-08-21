@@ -146,13 +146,13 @@
                 <table style="border-collapse: collapse;" class="probable100">
                     <tr>
                         <td>NOMBRE:</td>
-                        <td><b>{{$administrador->administrador}}</b></td>
+                        <td><b>{{$recoleccion->recolector}}</b></td>
                         <td>FIRMA: </td>
-                        <td><img src="{{$administrador->firma}}" width="70px" alt=""></td>
+                        <td><img src="{{$recoleccion->firmat}}" width="70px" alt=""></td>
                     </tr>
                     <tr>
                         <td>CARGO:</td>
-                        <td>{{$administrador->cargo}}</td>
+                        <td><b>Recolector</b></td>
                         <td>FECHA DE EMBARQUE:</td>
                         <td><b>{{FechaFormateada($recoleccion->fechacita)}}</b></td>
                     </tr>
@@ -166,7 +166,7 @@
                         <td>TIPO DE VEHÍCULO: </td>
                         <td><b>{{$recoleccion->vehiculo}}</b></td>
                         <td>No. DE MATRÍCULA:</td>
-                        <td><b>{{$recoleccion->matricula}}</b></td>
+                        <td><b>{{$recoleccion->matriculat}}</b></td>
                     </tr>
                    
                 </table>

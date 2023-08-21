@@ -31,115 +31,41 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
+            <form action="{{url('recoleccion')}}/{{$recoleccion->id}}" method="post">
+              @csrf
+              @method('PUT')
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title"><i class="fa fa-file-text" aria-hidden="true"></i> Recolección </h3>
+                <h3 class="card-title"><i class="fa fa-file-text" aria-hidden="true"></i> Vehículo que transporta los residuos </h3>
 
                
                 
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                
               
                 <div class="row">
-                  <div class="col-md-12">
-                    
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="tienda">Nombre de la Tienda</label>
-                                <input required type="text" class="form-control" id="tienda" name="tienda" placeholder="Tienda"  maxlength="150">
-                            </div>
-
-                        </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="vehiculo">Matrícula</label>
+                      <select required class="form-control" id="vehiculo" name="vehiculo">
+                        <option value="">---Vehículo---</option>
+                        @foreach($vehiculos as $vehiculo)
+                        <option value="{{$vehiculo->id}}">{{$vehiculo->matricula}}</option>
+                        @endforeach
+                      </select>
                     </div>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="contacto">Contacto</label>
-                                <input required type="text" class="form-control" id="contacto" name="contacto" placeholder="Contacto"  maxlength="150">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="telefono">Teléfono (WhatsApp)</label>
-                                <input required type="text" class="form-control" id="telefono" name="telefono" placeholder="Teléfono" maxlength="10">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="correo">Correo</label>
-                                <input required type="mail" class="form-control" id="correo" name="correo" placeholder="Correo"  maxlength="150">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label for="calle">Calle</label>
-                                <input required type="text" class="form-control" id="calle" name="calle" placeholder="Calle"  maxlenght="150">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="next"># Exterior</label>
-                                <input required type="text" class="form-control" id="next" name="next" placeholder="# Exterior" maxlenght="15">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="nint"># Interior</label>
-                                <input required type="text" class="form-control" id="nint" name="nint" placeholder="# Interior"  maxlenght="15">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-10">
-                            <div class="form-group">
-                                <label for="calle">Colonia</label>
-                                <input required type="text" class="form-control" id="colonia" name="colonia" placeholder="Colonia" maxlenght="150">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="next">CP</label>
-                                <input required type="text" class="form-control" id="cp" name="cp" placeholder="CP" maxlenght="15">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="entidad">Entidad federativa</label>
-                                <!--<input  type="text" name="entidad" class="form-control" id="entidad" placeholder="Entidad federativa" aria-invalid="false" >-->
-                                <select required  name="entidad" class="form-control" id="entidad" aria-invalid="false" onchange="MunicipiosApi(this,1);">
-                                    <option value="">---Entidad---</option>
-                                  
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="municipio">Alcaldía/Municipio</label>
-                                <select required name="municipio" class="form-control" id="municipio" aria-invalid="false" data-mun="municipio" >
-                                                                                  
-                                </select>
-                            </div>
-                        </div>                                   
-                    </div>
-                    
-                  
                   </div>
+                    
                 </div>
                 
               </div>
+              <div class="card-footer">
+                <button class="float-right btn btn-info">Guardar</button>
+              </div>
               <!-- /.card-body -->
             </div>
+            </form>
             <!-- /.card -->
           </div>
         </div>
