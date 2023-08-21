@@ -7,7 +7,7 @@ use App\Models\Planta;
 use Kreait\Firebase\Factory;
 
 function Version(){
-    return 1;
+    return 2;
 }
 
 function GetSiglas($opcion){
