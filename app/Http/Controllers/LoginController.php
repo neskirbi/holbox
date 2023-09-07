@@ -23,6 +23,27 @@ use App\Models\Transportista;
 class LoginController extends Controller
 {
 
+    function authenticateasociado(Request $request){
+        if(strlen($request->mail)==0 || strlen($request->pass)==0){
+            return redirect('acceso')->with('error', '¡Campos vacios!');
+        }
+
+        
+        $asociado = Asociado::where([
+            'mail' => $request->mail, 
+            'pass' => $request->pass
+        ])->first();
+        
+        
+        if($asociado)
+        {
+            Auth::guard('asociados')->login($asociado);
+
+            return redirect('generadorasoc');
+        }
+        return redirect('acceso')->with('error', '¡Error en los los datos!');
+    }
+
     function Login(Request $request){
         
         $director = Director::where([

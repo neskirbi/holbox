@@ -121,15 +121,10 @@
                                 <div class="col-sm-3">
                                     <div class='form-group'>
                                         <label for="mail">Correo</label>
-                                        <input type="text" class="form-control" id="mail" name="mail" value="{{$administrador->mail}}">
+                                        <input disabled type="text" class="form-control" id="mail" name="mail" value="{{$administrador->mail}}">
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
-                                    <div class='form-group'>
-                                        <label for="pass">Contraseña</label>
-                                        <input type="text" class="form-control" id="pass" name="pass" value="{{$administrador->pass}}">
-                                    </div>
-                                </div>
+                                
                               
                             </div>
                         </div>                        

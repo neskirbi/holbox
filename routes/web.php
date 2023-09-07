@@ -175,6 +175,7 @@ Route::resource('catalogosasoc', 'App\Http\Controllers\Asociacion\CatalogosContr
 
 
 Route::resource('plantasasoc','App\Http\Controllers\Asociacion\PlantaController');
+Route::put('administradoresasoc/{id}','App\Http\Controllers\Asociacion\PlantaController@administradoresasoc');
 
 
 

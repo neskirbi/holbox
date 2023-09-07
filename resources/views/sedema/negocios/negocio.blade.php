@@ -31,67 +31,66 @@
 
 
         <div class="row">
-          <div class="col-md-6">
-            @foreach($obras as $obra)
+          <div class="col-md-12" >
             <div class="card card-info">
               <div class="card-header">
                 <h3 class="card-title">Obra</h3>
                 <div class="card-tools">
-                  <a href="{{url('reporte').'/'.$obra->id}}" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Impimir</a>
+                  
                 </div>
               </div>
               <div class="card-body">
-                <div class="row">
+                <div class="row" >
                     <div class="col-md-12">
-                        <h4><i class="far fa-user"></i> {{$obra->razonsocial}} </h4>
+                        <h4><i class="far fa-user"></i> {{$negocio->razonsocial}} </h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <h5><i class="far fa-building"></i> {{$obra->obra}}</h5>
+                        <h5><i class="far fa-building"></i> {{$negocio->negocio}}</h5>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <h6><i class="fa fa-recycle"></i> {{$obra->planta}}</h6>
+                        <h6><i class="fa fa-recycle"></i> {{$planta->planta}}</h6>
                     </div>
                 </div>
                 <div class="row">                    
                     <div class="col-md-12">
-                        <b>{{$obra->nautorizacion}}</b>
+                        <b>{{$negocio->nautorizacion}}</b>
                     </div> 
                 </div>
                 <div class="row">                    
                     <div class="col-md-12">
-                        {{$obra->superficie}} {{$obra->superunidades}}
+                        {{$negocio->superficie}} {{$negocio->superunidades}}
                     </div> 
                 </div>
                 <b>Dirección</b>
                 <div class="row">                    
                     <div class="col-md-12">
-                        {{$obra->calle}} {{$obra->numeroext}} {{$obra->numeroint}}
+                        {{$negocio->calle}} {{$negocio->numeroext}} {{$negocio->numeroint}}
                     </div> 
                 </div>
 
                 <div class="row">                    
                     <div class="col-md-12">
-                        {{$obra->colonia}}
+                        {{$negocio->colonia}}
                     </div> 
                 </div>
 
                 <div class="row">                    
                     <div class="col-md-12">
-                        {{$obra->municipio}}, {{$obra->entidad}}
+                        {{$negocio->municipio}}, {{$negocio->entidad}}
                     </div> 
                 </div>
                 <div class="row">                    
                     <div class="col-md-12">
-                        Inicio: {{FechaFormateada($obra->fechainicio)}}
+                        Inicio: {{FechaFormateada($negocio->fechainicio)}}
                     </div> 
                 </div>
                 <div class="row">                    
                     <div class="col-md-12">
-                        Fin: {{FechaFormateada($obra->fechafin)}}
+                        Fin: {{FechaFormateada($negocio->fechafin)}}
                     </div> 
                 </div>
                 <script>
@@ -99,7 +98,7 @@
                    * Aqui por que agarro el id de la obra en el foreach
                    */
                     $(document).ready(function(){
-                        AvanceEntregasSedema('{{$obra->id}}');
+                        AvanceEntregasSedema('{{$negocio->id}}');
                     });
                     
                 </script>
@@ -107,70 +106,16 @@
                
               </div>
             </div> 
-            @endforeach
 
-            <div class="card card-info">
-              <div class="card-header">
-                <h3 class="card-title">Contrato</h3>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      @if(file_exists(('documentos/clientes/contratos').'/'.$obra->id.'.pdf'))
-                      <iframe id="inlineFrameExample"
-                          title="identificación"
-                          width="100%"
-                          height="200"
-                          src="{{asset('documentos/clientes/contratos').'/'.$obra->id.'.pdf'}}">
-                      </iframe>
-                      <a target="_blank" class="btn btn-default" href="{{asset('documentos/clientes/contratos').'/'.$obra->id.'.pdf'}}">Ver</a>
-                      @endif
-                      @if(!file_exists(('documentos/clientes/contratos').'/'.$obra->id.'.pdf'))
-                      <h3 title="{{asset('documentos/clientes/contratos').'/'.$obra->id.'.pdf'}}">Sin contrato</h3>
-                      
-                      @endif
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
 
-            <div class="card card-info">
-              <div class="card-header">
-                <h3 class="card-title">Informes Unidad de Inspección</h3>
-                <div class="card-tools">
-                  
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-12">
-                    <a href="{{url('informe')}}/{{$obra->id}}" class="btn btn-info"> <i class="fas fa-plus"></i> Informe</a>
-                  </div>
-                </div>
-                
-                
-              </div>
-            </div>
 
 
 
 
 
           </div>
-          <div class="col-md-6">
-            <div class="card card-info">
-              <div class="card-header">
-                <h3 class="card-title">Volumen Declarado</h3>
-              </div>
-              <div class="card-body">
-                <div class="avancematerial" style="height:350px;">
-                  
-                </div>
-              </div>
-            </div>
-          </div>
+          
         </div>
 
         
@@ -184,33 +129,33 @@
                 <!-- /.card-header -->
                 <div class="card-body" style="overflow-x:scroll;">
                     
-                    @if(count($obras))
+                    
                     <table class="table table-hover text-nowrap" id="obras">
                     <thead>
                         <tr>
-                        <th>Material</th>
-                        <th>Entregado a sitio de reciclaje</th>
+                        <th>Residuo</th>
+                        <th>Cantidad</th>
                         <th>Fecha entrega</th>
                         <th>Manifiesto</th>
                         </tr>
                     </thead>
                     <tbody>
                     
-                        @foreach($materialesobra as $materialobra)
+                        @foreach($recolecciones as $recoleccion)
                         <tr>
-                        <td>
-                            {{$materialobra->material}}
+                        <td title="{{$recoleccion->re}}">
+                            {{$recoleccion->residuo}}
                         </td>  
                         <td>
-                            {{$materialobra->cantidad}} {{$materialobra->unidades}}
+                            {{$recoleccion->cantidad}} {{$recoleccion->unidades}}
                         </td>
                                 
                         <td>
-                            {{FechaFormateada($materialobra->fechacita)}}
+                            {{FechaFormateada($recoleccion->created_at)}}
                         </td>
                         <td>
-                            <a href="{{url('boleta').'/'.$materialobra->id_cita}}" target="_blank" class="btn btn-info btn-sm d-inline p-2" title="Descargar Boleta"><i class="fa fa-download" aria-hidden="true"></i> Boleta</a>
-                            <a href="{{url('manifiesto').'/'.$materialobra->id_cita}}" target="_blank" class="btn btn-info btn-sm d-inline p-2" title="Descargar manifiesto"><i class="fa fa-download" aria-hidden="true"></i> Manifiesto</a>
+                            <a href="{{url('boleta').'/'.$recoleccion->id}}" target="_blank" class="btn btn-info btn-sm d-inline p-2" title="Descargar Boleta"><i class="fa fa-download" aria-hidden="true"></i> Boleta</a>
+                            <a href="{{url('manifiesto').'/'.$recoleccion->id}}" target="_blank" class="btn btn-info btn-sm d-inline p-2" title="Descargar manifiesto"><i class="fa fa-download" aria-hidden="true"></i> Manifiesto</a>
                         </td>
                         
                         
@@ -219,7 +164,6 @@
                         
                     </tbody>
                     </table>
-                    @endif
                 </div>
                 <!-- /.card-body -->
                 </div>

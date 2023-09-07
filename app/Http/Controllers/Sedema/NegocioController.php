@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Generador;
 use App\Models\Negocio;
+use App\Models\Recoleccion;
 use App\Models\TipoNegocio;
 use App\Models\Entidad;
 use App\Models\Planta;
@@ -144,6 +145,10 @@ class NegocioController extends Controller
     public function show($id)
     {
         $negocio=Negocio::find($id);
+        
+        $recolecciones= Recoleccion::select('id',db::raw(" (select residuo from residuos where opcion=recolecciones.residuo) as residuo")
+        ,db::raw(" (select unidades from residuos where opcion=recolecciones.residuo) as unidades")
+        ,'residuo as re','cantidad','created_at')->where('id_negocio',$negocio->id)->get();
         $tiponegocios=TipoNegocio::all();
 
         $entidades=Entidad::all();
@@ -163,7 +168,8 @@ class NegocioController extends Controller
 
         $generadores=Generador::all();
         
-        return view('sedema.negocios.negocio',['generadores'=>$generadores,'negocio'=>$negocio,'generador'=>$generador,'planta'=>$planta,'plantas'=>$plantas,'entidades'=>$entidades,'entidad'=>$entidad,'tiponegocios'=>$tiponegocios]);
+        return view('sedema.negocios.negocio',['recolecciones'=>$recolecciones,'generadores'=>$generadores,'negocio'=>$negocio,'generador'=>$generador,
+        'planta'=>$planta,'plantas'=>$plantas,'entidades'=>$entidades,'entidad'=>$entidad,'tiponegocios'=>$tiponegocios]);
 
     }
 

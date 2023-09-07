@@ -94,4 +94,13 @@ class PlantaController extends Controller
         
         return redirect('plantasasoc')->with('success', 'La planta se registr&oacute; correctamente.');
     }
+
+    function administradoresasoc(Request $request,$id){
+        $admin = Administrador::find($id);
+        $admin->administrador=$request->administrador;
+        $admin->cargo=$request->cargo;
+        $admin->save();
+        return Redirect::back()->with('success', 'Se guardaron los datos.');
+
+    }
 }
