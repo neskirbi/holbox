@@ -399,7 +399,6 @@ class ApisController extends Controller
         
     }
 
-
     function CorreoExisteAdmin(Request $request){
         if(Director::where('mail',$request->mail)->first()){
             return 1;
@@ -427,30 +426,13 @@ class ApisController extends Controller
         if(Administrador::where('mail',$request->mail)->first()){
             return 1;
         }
-
-        if(Vendedor::where('mail',$request->mail)->first()){
-            return 1;
-        }
-
-        if(Recepcion::where('mail',$request->mail)->first()){
-            return 1;
-        }
-
-        if(Finanza::where('mail',$request->mail)->first()){
-            return 1;
-        }
+        
         
         if(Cliente::where('mail',$request->mail)->first()){
             return 1;
         }
 
-        if(Residente::where('mail',$request->mail)->first()){
-            return 1;
-        }
-
-        if(Transportista::where('mail',$request->mail)->first()){
-            return 1;
-        }
+        
         return 0;
     }
 
