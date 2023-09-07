@@ -10,7 +10,7 @@
         <img src="{{asset('images/logo.png')}}" alt="" width="200px">
         <h2>Nuevo Generador Registrado.</h2>
         <h5>Se ha registrado la información del generador {{$generador->razonsocial}} para la validación de los datos.</h5>
-        <a href="http://reci-track.mx/acceso" class="btn btn-default  btn-outline-secondary">Ir a Reci-track</a>
+        <a href="https://reci-track.mx/acceso" class="btn btn-default  btn-outline-secondary">Ir a Reci-track</a>
     </center>
     
 </body>
