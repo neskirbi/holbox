@@ -4,6 +4,7 @@ use App\Models\Token;
 use App\Models\Historial;
 use App\Models\Cita;
 use App\Models\Planta;
+use App\Models\Vehiculo;
 use Kreait\Firebase\Factory;
 
 function Version(){
@@ -12,9 +13,14 @@ function Version(){
 
 function GetSiglas($opcion){
     switch($opcion){
-        case 2:
-            return 'Reci-Track';
+        
+        case 0:
+            return 'Soporte';
             break;
+
+        case 2:
+            return 'Reci-Trash';
+        break;
     }
 }
 
@@ -97,6 +103,25 @@ function GetApellidos(){
         return Auth::guard('clientes')->user()->apellidos;
     }  
 }
+
+function RevisaDatosVehiculos($request,$id){
+
+    $vehiculos=Vehiculo::join('empresastransporte','empresastransporte.id','=','vehiculos.id_empresa')
+    ->where('empresastransporte.id','=',$id)
+    ->get();
+    foreach($vehiculos as $vehiculo){
+        Cita::where('matricula', $vehiculo->matricula)
+        ->update([
+            'razonvehiculo' => $request->razonsocial,
+            'ramir' => $request->ramir,
+            'direccionvehiculo' => $request->domicilio
+        ]);
+    }
+    
+
+
+}
+
 
 function GetCargo(){
     
