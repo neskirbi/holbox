@@ -414,3 +414,22 @@ Route::get('TCRecitrackTrasporte',function(){
  Route::post('LoginMD', 'App\Http\Controllers\Soporte\ModoDiosController@LoginMD');
  
 
+
+
+ /**
+  * Rutas soporte 
+  */
+
+  Route::get('soporte',function(){
+
+    if(Auth::guard('soporte')->check()){
+        return redirect('vehiculossoporte');
+    }  
+
+    return view('soporte.login.login');
+});
+
+Route::resource('empresassoporte', 'App\Http\Controllers\Soporte\EmpresaController');
+
+Route::post('loginsoporte','App\Http\Controllers\Soporte\LoginController@LoginSoporte');
+Route::resource('vehiculossoporte','App\Http\Controllers\Soporte\VehiculoController');

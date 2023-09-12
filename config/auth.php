@@ -90,6 +90,11 @@ return [
             'driver' => 'session',
             'provider' => 'transportistas',
         ],
+        
+        'soporte' => [
+            'driver' => 'session',
+            'provider' => 'soporte',
+        ],
 
         'api' => [
             'driver' => 'token',
@@ -159,6 +164,11 @@ return [
         'transportistas' => [
             'driver' => 'eloquent',
             'model' => App\Models\Transportista::class,
+        ],
+
+        'soporte' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Soporte::class,
         ],
 
         'sedemas' => [

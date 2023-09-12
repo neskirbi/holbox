@@ -166,39 +166,14 @@ class LoginController extends Controller
             $this->MailRecuperar($request->mail);
             return redirect('home')->with('success','Se envió un correo con las instrucciones para recuperar su contraseña.');
         }
-
-        if(Vendedor::where('mail',$request->mail)->first()){
-            $this->MailRecuperar($request->mail);
-            return redirect('home')->with('success','Se envió un correo con las instrucciones para recuperar su contraseña.');
-        }
-
-        if(Recepcion::where('mail',$request->mail)->first()){
-            $this->MailRecuperar($request->mail);
-            return redirect('home')->with('success','Se envió un correo con las instrucciones para recuperar su contraseña.');
-        }
-
-        if(Finanza::where('mail',$request->mail)->first()){
-            $this->MailRecuperar($request->mail);
-            return redirect('home')->with('success','Se envió un correo con las instrucciones para recuperar su contraseña.');
-        }
         
         if(Cliente::where('mail',$request->mail)->first()){
             $this->MailRecuperar($request->mail);
             return redirect('home')->with('success','Se envió un correo con las instrucciones para recuperar su contraseña.');
         }
-
-        if(Residente::where('mail',$request->mail)->first()){
-            $this->MailRecuperar($request->mail);
-            return redirect('home')->with('success','Se envió un correo con las instrucciones para recuperar su contraseña.');
-        }
-
-        if(Transportista::where('mail',$request->mail)->first()){
-            $this->MailRecuperar($request->mail);
-            return redirect('home')->with('success','Se envió un correo con las instrucciones para recuperar su contraseña.');
-        }
     }
 
-    public function MailRecuperar($mail){
+    function MailRecuperar($mail){
         $id=GetUuid();
         $token=Token::where('mail',$mail)->first();
         
