@@ -175,12 +175,27 @@ Route::resource('catalogosasoc', 'App\Http\Controllers\Asociacion\CatalogosContr
 
 
 Route::resource('plantasasoc','App\Http\Controllers\Asociacion\PlantaController');
-Route::put('administradoresasoc/{id}','App\Http\Controllers\Asociacion\PlantaController@administradoresasoc');
+Route::get('administradoresasoc/{id}','App\Http\Controllers\Asociacion\AdministradorController@Administradores');
+
+Route::post('CreateAdmin','App\Http\Controllers\Asociacion\AdministradorController@CreateAdmin');
+
+Route::put('UpdateDirector/{id}','App\Http\Controllers\Asociacion\AdministradorController@UpdateDirector');
+Route::post('DeleteDirector/{id}','App\Http\Controllers\Asociacion\AdministradorController@DeleteDirector');
+
+Route::put('UpdateAdmin/{id}','App\Http\Controllers\Asociacion\AdministradorController@UpdateAdmin');
+Route::post('DeleteAdmin/{id}','App\Http\Controllers\Asociacion\AdministradorController@DeleteAdmin');
+
+
+Route::put('UpdateFinanza/{id}','App\Http\Controllers\Asociacion\AdministradorController@UpdateFinanza');
+Route::post('DeleteFinanza/{id}','App\Http\Controllers\Asociacion\AdministradorController@DeleteFinanza');
 
 
 
 Route::post('plantareg','App\Http\Controllers\Asociacion\PlantaController@PlantaReg');
 
+Route::put('ActivarPlanta/{id}','App\Http\Controllers\Asociacion\PlantaController@ActivarPlanta');
+
+Route::put('InactivarPlanta/{id}','App\Http\Controllers\Asociacion\PlantaController@InactivarPlanta');
 
 Route::resource('sedemas', 'App\Http\Controllers\Asociacion\SedemaController');
 Route::get('quitarsedema/{id}','App\Http\Controllers\Asociacion\SedemaController@QuitarSedema');
@@ -191,6 +206,8 @@ Route::get('quitarsedema/{id}','App\Http\Controllers\Asociacion\SedemaController
 Route::resource('sedeman', 'App\Http\Controllers\Sedema\NegocioController');
 
 
+Route::resource('configuracionasoc','App\Http\Controllers\Asociacion\ConfiguracionController');
+
 
 
 /**
@@ -199,7 +216,6 @@ Route::resource('sedeman', 'App\Http\Controllers\Sedema\NegocioController');
 
  Route::resource('planta','App\Http\Controllers\Administracion\PlantaController');
 
-Route::post('AltaAdmin','App\Http\Controllers\Administracion\PlantaController@AltaAdmin');
 Route::post('EditarAdmin/{id}','App\Http\Controllers\Administracion\PlantaController@EditarAdmin');
 Route::get('BorrarAdmin/{id}','App\Http\Controllers\Administracion\PlantaController@BorrarAdmin');
 
@@ -269,13 +285,6 @@ Route::get('ReporteStatusObraAdministracion/{id_planta}', 'App\Http\Controllers\
 Route::resource('crm','App\Http\Controllers\Administracion\CrmController');
 
 Route::resource('entregas','App\Http\Controllers\Administracion\EntregaController');
-
-
-
-
-
-
-
 
 
 

@@ -12,11 +12,10 @@ use Redirect;
 
 class GeneradorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct(){
+        $this->middleware('asociadoislogged');
+    }
+    
     public function index(Request $request)
     {
         $generadores = DB::table('generadores')

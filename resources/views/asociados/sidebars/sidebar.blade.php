@@ -67,6 +67,7 @@
               </p>
             </a>
           </li>
+          
 
           <li class="nav-item">
             <a href="{{ url('generadorasoc') }}" class="nav-link">
@@ -77,24 +78,7 @@
             </a>
           </li>
 
-          <li class="nav-item">
-            <a href="{{ url('obrasasoc') }}" class="nav-link">
-            <i class="nav-icon fa fa-building" aria-hidden="true"></i>
-              <p>
-                Obras
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="{{ url('citasasoc') }}" class="nav-link">
-            <i class="nav-icon fa fa-calendar" aria-hidden="true"></i>
-              <p>
-                Citas
-              </p>
-            </a>
-          </li>
-
+          
           
           <!--<li class="nav-item">
             <a href="{{url('configuracion')}}" class="nav-link">

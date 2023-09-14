@@ -8,6 +8,11 @@ use App\Models\Sedema;
 
 class SedemaController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('asociadoislogged');
+    }
+    
     function index(){
         $sedemas=Sedema::orderby('nombre','asc')->get();
         return view('asociados.sedemas.sedemas',['sedemas'=>$sedemas]);

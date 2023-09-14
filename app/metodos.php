@@ -24,6 +24,36 @@ function GetSiglas($opcion){
     }
 }
 
+function BuscarCorreo($mail){
+    $res='';
+
+    if(DB::table('directores')->where('mail',$mail)->first()){
+        $res='Directores';
+    }
+
+    if(DB::table('administradores')->where('mail',$mail)->first()){
+        $res='Administradores';
+    }
+
+
+    if(DB::table('recepciones')->where('mail',$mail)->first()){
+        $res='Recepcion';
+    }
+
+
+    if(DB::table('finanzas')->where('mail',$mail)->first()){
+        $res='Finanzas';
+    }
+
+
+    if(DB::table('clientes')->where('mail',$mail)->first()){
+        $res='Clientes';
+    }
+
+    return $res;
+
+}
+
 function GetId(){
     
     if(Auth::guard('directores')->check()){

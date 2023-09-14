@@ -14,10 +14,6 @@ class PlantaController extends Controller
 {
     function index(){
         $plantas = DB::table('plantas')
-        ->join('administradores','administradores.id_planta','=','plantas.id')
-        ->select('plantas.id','plantas.planta','plantas.direccion','plantas.plantaauto',DB::raw("GROUP_CONCAT(administradores.administrador SEPARATOR  '<br>') as administradores"))
-        ->groupby('plantas.id','plantas.planta','plantas.direccion','plantas.plantaauto')
-        ->orderby('planta','asc')
         ->paginate(10);
         return view('asociados.plantas.plantas',['plantas'=>$plantas]);
     }
@@ -95,12 +91,24 @@ class PlantaController extends Controller
         return redirect('plantasasoc')->with('success', 'La planta se registr&oacute; correctamente.');
     }
 
-    function administradoresasoc(Request $request,$id){
-        $admin = Administrador::find($id);
-        $admin->administrador=$request->administrador;
-        $admin->cargo=$request->cargo;
-        $admin->save();
-        return Redirect::back()->with('success', 'Se guardaron los datos.');
+    
 
+    function InactivarPlanta($id){
+        
+        $planta = Planta::find($id);
+        $planta->activa = 0;
+        $planta->save();
+        
+        return Redirect::back()->with('error','Planta inactiva.');
+    }
+
+
+    function ActivarPlanta($id){
+        
+        $planta = Planta::find($id);
+        $planta->activa = 1;
+        $planta->save();
+        
+        return Redirect::back()->with('error','Planta inactiva.');
     }
 }

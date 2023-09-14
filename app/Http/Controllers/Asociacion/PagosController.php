@@ -11,11 +11,11 @@ use Redirect;
 
 class PagosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct(){
+        $this->middleware('asociadoislogged');
+    }
+
+    
     public function index()
     {
         $pago=DB::table('pagos')

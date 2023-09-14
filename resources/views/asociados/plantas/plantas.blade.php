@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  @include('cliente.header')
-  <title>CSMX | Plantas</title>
+  @include('asociados.header')
+  <title>AMRCD | Plantas</title>
 
   
 </head>
@@ -11,7 +11,7 @@
 <div class="wrapper">
 
   <!-- Navbar -->
- 
+  
   @include('asociados.navigations.navigation')
   <!-- /.navbar -->
 
@@ -29,66 +29,117 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        
+
         <div class="row">
           <div class="col-12">
-            <div class="card">
+            <div class="card card-primary card-outline card-outline-tabs">
               <div class="card-header">
-                <h3 class="card-title">Plantas</h3>
+              <h3 class="card-title"> <i class="nav-icon fa fa-recycle" aria-hidden="true"></i> Plantas</h3>
+                <div class="card-tools">
+                  <div class="btn-group">
+                    <button type="button" class="btn  btn-default btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Filtros <i class="fa fa-sliders" aria-hidden="true"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" style="width:300px;">
+                      <form class="px-4 py-3" action="{{url('pagosv')}}" method="GET">
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="far fa-building"></i></span>
+                          </div>
+                          <input type="text" class="form-control" name="obra" id="obra" placeholder="Obra" @if(isset($filtros->obra)) value="{{$filtros->obra}}" @endif >
+                        </div>
+                        
 
-                <!--<div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default">
-                        <i class="fas fa-search"></i>
-                      </button>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{url('pagosv')}}" class="btn btn-block btn-default btn-sm">Limpiar</a>
+                        <button type="submit" class="btn btn-block btn-info btn-sm float-right">Aplicar</button>
+                        
+                      </form>
+                      
                     </div>
-                  </div>
-                </div>-->
+                  </div>                 
+                </div>              
+
                 
               </div>
-              <!-- /.card-header -->
-              <div class="card-body" style="overflow-x:scroll;">
-                <div class="p-2">
-                <button data-toggle="modal" data-target="#modalplanta"  class="btn btn-primary"><span><i class="fa fa-plus" aria-hidden="true"></i></span> Planta</button>
-                </div>
-                @if(count($plantas))
-                <table class="table table-hover text-nowrap" >
-                  <thead>
-                    <tr>
-                    <th  style="width:30%;">Planta</th>
-                    <th  style="width:30%;">Dirección</th>
-                    <th  style="width:20%;">Autorización</th>
-                    <th>Administradores</th>
-                    <th colspan="2"  style="width:10%;">Opciones</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  
-                    @foreach($plantas as $planta)
-                    <tr>
-                      <td>{{$planta->planta}}</td>
-                      <td>{{$planta->direccion}}</td>
-                      <td>{{$planta->plantaauto}}</td>
-                      <td>{!!$planta->administradores!!}</td>
-                      <td>
-                        <a href="plantasasoc/{{$planta->id}}" class="btn btn-info btn-sm d-inline p-2" ><i class="fa fa-eye" aria-hidden="true"></i> Revisar</a>
-                      </td>
+              <div class="card-body">
+              @if(count($plantas))
+                @foreach($plantas as $planta)
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <h5 class="card-title"><b>{{strlen($planta->planta)<81 ? $planta->planta : mb_substr($planta->planta,0,80,"UTF-8").'...'}}</b></h5>
+                              @if($planta->activa==0)
+                                <small class="badge badge-danger float-right"><i class="fa fa-times" aria-hidden="true"></i> Inactiva</small>
+                              @elseif($planta->activa==1)
+                                <small class="badge badge-success float-right"><i class="fa fa-check" aria-hidden="true"></i> Activa</small>
+                              @endif
+                             
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-4">
+                              Autorización: <b>{{$planta->plantaauto}}</b>
+                            </div>
+                          </div>
+                          <br><br>
+                          <div class="row">
+                                                    
+                            <div class="col-md-3" >
+                              @if($planta->activa==0)
+                                <form action="{{url('ActivarPlanta')}}/{{$planta->id}}" method="POST">
+                                  @csrf
+                                  @method('PUT')
+                                  <button style="width:100%;" class="btn btn-block btn-success"><i class="fa fa-check" aria-hidden="true"></i> Activar</button>
+                                </form>
+                              @elseif($planta->activa==1)
+                                <form action="{{url('InactivarPlanta')}}/{{$planta->id}}" method="POST">
+                                  @csrf
+                                  @method('PUT')
+                                  <button style="width:100%;" class="btn btn-block btn-danger" ><i class="fa fa-times" aria-hidden="true"></i> Inactivar</button>   
+                                </form>
+                                
+                              @endif
+                              
+                            </div>
+                            <div class="col-md-3" > 
+                              
+                            </div> 
+                            <div class="col-md-3" > 
+                              <a href="{{url('administradoresasoc')}}/{{$planta->id}}" target="_blank" class="btn btn-block btn-info"><i class="fa fa-group" aria-hidden="true"></i> Administradores</a>
+                            </div>   
+                            <div class="col-md-3" >
+                              <a href="{{url('configuracionasoc')}}/{{$planta->id}}" class="btn btn-block btn-info"><i class="fa fa-cogs" aria-hidden="true"></i> Configuración</a>
+                            </div>   
+                          </div>
+                        </div>
+                    </div>
                       
-                    </tr>
-                    @endforeach
-                    
-                  </tbody>
-                </table>
+                  </div>
+                </div>
+
+
+
+                
+                
+                @endforeach
                 @endif
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer">
-              {{ $plantas->links('pagination::bootstrap-4') }}
+
+
+                
               </div>
 
+              <div class="card-footer">
+              {{ $plantas->appends($_GET)->links('pagination::bootstrap-4') }}
+              </div>
             </div>
+            
             <!-- /.card -->
           </div>
         </div>
@@ -146,7 +197,8 @@
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App, funcion de sidebar -->
 <script src="dist/js/adminlte.js"></script>
-@include('asociados.plantas.modals.modalplanta')
-@include('footer')
+<script>
+</script>
+
 </body>
 </html>
