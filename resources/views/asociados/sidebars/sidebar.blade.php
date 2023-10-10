@@ -40,7 +40,7 @@
          
           <!--<li class="nav-header">Panel de Control</li>-->
           <li class="nav-item">
-            <a href="sedemas" class="nav-link">
+            <a href="{{url('sedemas')}}" class="nav-link">
             <i class="nav-icon fa fa-bar-chart" aria-hidden="true"></i>
               <p>
                 SEDEMA

@@ -20,7 +20,7 @@ class ConfiguracionController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function __construct(){
+    public function __construct(){
         $this->middleware('asociadoislogged');
     }
 
@@ -45,7 +45,8 @@ class ConfiguracionController extends Controller
         //
     }
 
-    public function ConfiguracionBanco(Request $request){
+    public function GuardarDatosBancoAsoc(Request $request,$id){
+        //return $request;
         $configuracion=Configuracion::where('id_planta','=',$id)->first();
         $configuracion->referencia=$request->referencia;
         $configuracion->banco=$request->banco;
@@ -53,9 +54,9 @@ class ConfiguracionController extends Controller
         $configuracion->clabe=$request->clabe;
         $configuracion->iva=$request->iva;
         if($configuracion->save()){
-            return redirect('configuracion')->with('success','¡Se guardaron los datos!');
+            return Redirect::back()->with('success', 'Datos guardados.');
         }else{
-            return redirect('configuracion')->with('error','¡Error al guardar!');
+            return Redirect::back()->with('error','¡Error al guardar!');
         }
     }
     public function ConfiguracionBoleta(Request $request){
@@ -259,7 +260,7 @@ class ConfiguracionController extends Controller
         $configuracion->sct = $request->sct;
 
         $configuracion->save();
-        return redirect('configuracion')->with('success','¡Se guardaron los datos!');
+        return Redirect::back()->with('success','¡Se guardaron los datos!');
         
     }
 }

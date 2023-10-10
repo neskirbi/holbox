@@ -331,6 +331,9 @@ Route::post('guardarcondicion', 'App\Http\Controllers\Asociacion\CatalogosContro
 Route::get('borrarcondicion/{id}', 'App\Http\Controllers\Asociacion\CatalogosController@BorrarCondicion');
 
 
+Route::put('GuardarDatosPlantaAsoc/{id}', 'App\Http\Controllers\Asociacion\ConfiguracionController@GuardarDatosPlanta');
+
+Route::post('GuardarDatosBancoAsoc/{id}', 'App\Http\Controllers\Asociacion\ConfiguracionController@GuardarDatosBancoAsoc');
 
 /**
  * Confirmaciones de generadores, obras y no se que mas vaya a haber

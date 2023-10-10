@@ -48,18 +48,12 @@
               
               </div>
               <div class="card-body p-0">
-                  <input type="hidden" name="id_planta" id="id_planta" value="{{$configuraciones->id_planta}}">
+                  <input type="hidden" name="id_planta" id="id_planta" value="{{$configuracion->id_planta}}">
                   <ul class="nav nav-pills flex-column">                 
 
                     <li class="nav-item ">
                         <a class="nav-link active" onclick="VentanasTitulos(this,'titulo');" data-text="Planta"  data-toggle="pill" href="#planta" role="tab">
                             <i class="fa fa-recycle" aria-hidden="true"></i> Planta
-                            <!--<span class="badge bg-primary float-right">12</span>-->
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" onclick="VentanasTitulos(this,'titulo');" data-text="Representante"  data-toggle="pill" href="#representante" role="tab">
-                            <i class="fa fa-user" aria-hidden="true"></i> Representante
                             <!--<span class="badge bg-primary float-right">12</span>-->
                         </a>
                     </li>
@@ -101,7 +95,7 @@
                         <div class="tab-pane fade active show" id="planta" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
                           <div class="row">
                             <div class="col-12">
-                                <form action="{{url('GuardarDatosPlanta').'/'.$planta->id}}" id="{{$planta->id}}" method="post">
+                                <form action="{{url('GuardarDatosPlantaAsoc').'/'.$planta->id}}" id="{{$planta->id}}" method="post">
                                 @csrf
                                 @method('PUT')                              
 
@@ -122,7 +116,7 @@
                                       <div class="col-sm-4">
                                         <div class='form-group'>
                                           <label for="telefono">Teléfono</label>
-                                          <input required type="text" class="form-control" id="telefono" name="telefono" value="{{$configuraciones->telefono}}">
+                                          <input required type="text" class="form-control" id="telefono" name="telefono" value="{{$configuracion->telefono}}">
                                         </div>
                                       </div>
 
@@ -131,7 +125,7 @@
                                       <div class="col-sm-8">
                                         <div class='form-group'>
                                           <label for="ruta">Ruta</label>
-                                          <input required type="text" class="form-control" id="ruta" name="ruta" value="{{$configuraciones->ruta}}">
+                                          <input required type="text" class="form-control" id="ruta" name="ruta" value="{{$configuracion->ruta}}">
                                         </div>
                                       </div>
 
@@ -142,7 +136,7 @@
                                       <div class="col-sm-6">
                                           <div class='form-group'>
                                               <label for="cst"># Registro S.C.T</label>
-                                              <input required type="text" class="form-control" id="sct" name="sct" value="{{$configuraciones->sct}}" >
+                                              <input required type="text" class="form-control" id="sct" name="sct" value="{{$configuracion->sct}}" >
                                           </div>
                                       </div>
                                     </div>
@@ -168,7 +162,7 @@
                                     <div class="col-sm-12">
                                         <div class='form-group'>
                                             <label for="razonsocial">Razón Social</label>
-                                            <input required type="text" class="form-control" id="razonsocial" name="razonsocial" value="{{$configuraciones->razonsocial}}">
+                                            <input required type="text" class="form-control" id="razonsocial" name="razonsocial" value="{{$configuracion->razonsocial}}">
                                         </div>
                                     </div>
                                   
@@ -199,73 +193,17 @@
                           
 
 
-                        <div class="tab-pane fade " id="representante" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
-                          <form action="ConfiguracionRepresentante" method="post" id="repreform">
-                            @csrf
-                            <div class="row">
-                              <div class="col-md-12">
-                                  
-                                <div class='form-group'>
-                                    <label for="representante">Representante Legal</label>
-                                    <input type="text" class="form-control" id="representante" name="representante" value="{{$configuraciones->representante}}">
-                                </div>
-
-                              </div>
-                            </div>
-
-                            <div class="row">                            
-                              <div class="col-sm-7">
-                                <div class='form-group'>
-                                  <label for="cargo">Cargo</label>
-                                  <input type="text" class="form-control" id="cargo" name="cargo" value="{{$configuraciones->cargo}}">
-                                </div>
-                              </div>
-                              <div class="col-sm-5">
-                                <div class='form-group'>
-                                  <label for="mail">Correo</label>
-                                  <input type="text" class="form-control" id="mail" name="mail" value="{{$configuraciones->mail}}">
-                                </div>
-                              </div>                                        
-                            </div>
-
-                            <div class="row">                            
-                              <div class="col-sm-7">
-                                <div class="form-group">   
-                                  <label for="firma">Firma</label> 
-                                  <br> 
-                                  @if($configuraciones->firma_repre!='')   
-                                  <img src="{{$configuraciones->firma_repre}}" alt="" width="340px" height="200px" id="imgfirmar"> 
-                                  <canvas class="draw-canvas" id="draw-canvasr" width="340px" height="200px" style="display:none;"></canvas>          
-                                  @else
-                                  <canvas class="draw-canvas" id="draw-canvasr" width="340px" height="200px"></canvas>                     
-                                  @endif
-                                  <textarea data-invalido="true" id="draw-dataUrlr" class="form-control" rows="5" name="firma" style="display:none;">{{$configuraciones->firma_repre}}</textarea>
-                                  <br>
-                                  <button type="button" class="btn btn-default" id="draw-clearBtnr">Limpiar</button> 
-                                </div>
-                              </div>
-                            </div>                                                                      
-                          </form>
-                          <button class="btn btn-info float-right" id="draw-submitBtnr" data-texto="¿Guardar los datos de representante?">Guardar</button>
-                          <div class="row">
-                            <div class="col-md-12">  
-                              <div class='form-group'>
-                                <label style="color:#999;">Nota:Estos datos se verán reflejados en el manifiesto.</label>
-                              </div>                 
-                            
-                            </div>
-                          </div>
-                        </div>
+                        
 
                         
                         <div class="tab-pane fade" id="banco" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
-                            <form action="configuracionbanco" method="post" id="bancoform">
+                            <form action="{{url('GuardarDatosBancoAsoc')}}/{{$configuracion->id_planta}}" method="post" id="bancoform">
                               @csrf
                                 <div class="row">
                                   <div class="col-md-8">
                                         <div class="form-group">
                                             <label for="banco">Banco</label>
-                                            <input maxlength="50" require type="text" class="form-control" id="banco" name="banco" value="{{$configuraciones->banco}}">
+                                            <input maxlength="50" require type="text" class="form-control" id="banco" name="banco" value="{{$configuracion->banco}}">
                                         </div>
                                     </div> 
                                   <div class="col-md-1">
@@ -274,7 +212,7 @@
                                   <div class="col-md-3">
                                       <div class="form-group">
                                           <label for="referencia">Inicio de Referencia</label>
-                                          <input require type="text" class="form-control" id="referencia" name="referencia" value="{{$configuraciones->referencia}}">
+                                          <input require type="text" class="form-control" id="referencia" name="referencia" value="{{$configuracion->referencia}}">
                                       </div>
                                   </div>
                                 </div>
@@ -283,26 +221,26 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="cuenta">CLABE</label>
-                                            <input maxlength="20" require type="text" class="form-control" id="clabe" name="clabe" value="{{$configuraciones->clabe}}">
+                                            <input maxlength="20" require type="text" class="form-control" id="clabe" name="clabe" value="{{$configuracion->clabe}}">
                                         </div>
                                     </div> 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="cuenta">Cuenta</label>
-                                            <input maxlength="20" require type="text" class="form-control" id="cuenta" name="cuenta" value="{{$configuraciones->cuenta}}">
+                                            <input maxlength="20" require type="text" class="form-control" id="cuenta" name="cuenta" value="{{$configuracion->cuenta}}">
                                         </div>
                                     </div>
                                     <div class="col-md-1">
                                         
                                     </div>
-                                    <div class="col-md-2">                                         
+                                    <div class="col-md-3">                                         
                                       <div class="form-group">
                                         <label for="cuenta">Iva</label>
                                         <div class="input-group">
                                           <div class="input-group-prepend">
                                               <span class="input-group-text">%</span>
                                           </div>
-                                          <input type="number" min="0" step="0.01" name="iva" id="iva" class="form-control" aria-invalid="false" value="{{$configuraciones->iva}}">
+                                          <input type="number" min="0" step="0.01" name="iva" id="iva" class="form-control" aria-invalid="false" value="{{$configuracion->iva}}">
                                         </div>
                                       </div>
                                     </div>
@@ -320,7 +258,7 @@
                                   <div class="col-md-2">
                                       <div class="form-group">
                                           <label for="folio">Folio</label>
-                                          <input require type="text" class="form-control" id="folio" name="folio" value="{{$configuraciones->folio}}">
+                                          <input require type="text" class="form-control" id="folio" name="folio" value="{{$configuracion->folio}}">
                                       </div>
                                   </div>
                                 </div>                                                                      

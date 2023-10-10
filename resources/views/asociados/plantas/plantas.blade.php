@@ -43,18 +43,18 @@
                       Filtros <i class="fa fa-sliders" aria-hidden="true"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" style="width:300px;">
-                      <form class="px-4 py-3" action="{{url('pagosv')}}" method="GET">
+                      <form class="px-4 py-3" action="{{url('plantasasoc')}}" method="GET">
                         <div class="input-group mb-3">
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-building"></i></span>
                           </div>
-                          <input type="text" class="form-control" name="obra" id="obra" placeholder="Obra" @if(isset($filtros->obra)) value="{{$filtros->obra}}" @endif >
+                          <input type="text" class="form-control" name="planta" id="planta" placeholder="Planta" @if(isset($filtros->planta)) value="{{$filtros->planta}}" @endif >
                         </div>
                         
 
                         <div class="dropdown-divider"></div>
-                        <a href="{{url('pagosv')}}" class="btn btn-block btn-default btn-sm">Limpiar</a>
-                        <button type="submit" class="btn btn-block btn-info btn-sm float-right">Aplicar</button>
+                        <button type="submit" class="btn btn-block btn-info">Aplicar</button>
+                        <a href="{{url('plantasasoc')}}" class="btn btn-block btn-default">Limpiar</a>
                         
                       </form>
                       

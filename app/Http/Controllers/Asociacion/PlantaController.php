@@ -12,8 +12,9 @@ use Redirect;
 
 class PlantaController extends Controller
 {
-    function index(){
+    function index(Request $request){
         $plantas = DB::table('plantas')
+        ->whereraw("planta like '%".$request->planta."%' ")
         ->paginate(10);
         return view('asociados.plantas.plantas',['plantas'=>$plantas]);
     }

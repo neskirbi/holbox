@@ -135,8 +135,7 @@
                         <tr>
                         <th>Residuo</th>
                         <th>Cantidad</th>
-                        <th>Fecha entrega</th>
-                        <th>Manifiesto</th>
+                        <th>Fecha de Recolección</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -153,10 +152,7 @@
                         <td>
                             {{FechaFormateada($recoleccion->created_at)}}
                         </td>
-                        <td>
-                            <a href="{{url('boleta').'/'.$recoleccion->id}}" target="_blank" class="btn btn-info btn-sm d-inline p-2" title="Descargar Boleta"><i class="fa fa-download" aria-hidden="true"></i> Boleta</a>
-                            <a href="{{url('manifiesto').'/'.$recoleccion->id}}" target="_blank" class="btn btn-info btn-sm d-inline p-2" title="Descargar manifiesto"><i class="fa fa-download" aria-hidden="true"></i> Manifiesto</a>
-                        </td>
+                       
                         
                         
                         </tr>
