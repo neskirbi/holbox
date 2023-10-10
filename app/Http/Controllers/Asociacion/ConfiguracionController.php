@@ -26,7 +26,7 @@ class ConfiguracionController extends Controller
 
     public function show($id)
     {
-        return$configuracion=DB::table('configuraciones')->where('id_planta','=',$id)->first();
+        $configuracion=DB::table('configuraciones')->where('id_planta','=',$id)->first();
         $planta=Planta::find($id);
         $residuos=Residuo::where('id_planta',$id)->orderby('opcion','asc')->get();
         
