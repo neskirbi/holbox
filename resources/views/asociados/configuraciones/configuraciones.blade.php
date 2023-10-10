@@ -48,7 +48,7 @@
               
               </div>
               <div class="card-body p-0">
-                  <input type="hidden" name="id_planta" id="id_planta" value="{{$configuracion->id_planta}}">
+                  <input type="" name="id_planta" id="id_planta" value="{{$configuracion->id_planta}}">
                   <ul class="nav nav-pills flex-column">                 
 
                     <li class="nav-item ">
