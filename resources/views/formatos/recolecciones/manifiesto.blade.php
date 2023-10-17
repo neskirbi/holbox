@@ -114,7 +114,7 @@
                 <table style="border-collapse: collapse;" class="probable100" cellpadding="3px">
                     <tr>
                         <td>
-                        NOMBRE DE LA EMPRESA TRANSPORTISTA: <b>{{$configuracion->razonsocial}}</b>
+                        NOMBRE DE LA EMPRESA TRANSPORTISTA: <b>{{$recoleccion->transportista}}</b>
                         </td>
                         <td>
                             
@@ -123,10 +123,10 @@
 
                     <tr>
                         <td>
-                            DOMICILIO FISCAL: <b>{{$planta->direccion}}</b>
+                            DOMICILIO FISCAL: <b>{{$recoleccion->domiciliot}}</b>
                         </td>
                         <td>
-                            TELÉFONO: <b>{{$configuracion->telefono}}</b>
+                            TELÉFONO: <b>{{$recoleccion->telefonot}}</b>
                         </td>
                     </tr>
               
@@ -154,7 +154,7 @@
                         <td>CARGO:</td>
                         <td><b>Recolector</b></td>
                         <td>FECHA DE EMBARQUE:</td>
-                        <td><b>{{FechaFormateada($recoleccion->fechacita)}}</b></td>
+                        <td><b>{{FechaFormateada($recoleccion->created_at)}}</b></td>
                     </tr>
                 </table>
                 <hr>
@@ -219,7 +219,7 @@
                         <td>CARGO:</td>
                         <td>{{$administrador->cargo}}</td>
                         <td>FECHA DE EMBARQUE:</td>
-                        <td><b>{{FechaFormateada($recoleccion->fechacita)}}</b></td>
+                        <td><b>{{FechaFormateada($recoleccion->created_at)}}</b></td>
                     </tr>
                 </table>
                 

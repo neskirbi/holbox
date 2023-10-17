@@ -147,8 +147,12 @@ class NegocioController extends Controller
         $negocio=Negocio::find($id);
         
         $recolecciones= Recoleccion::select('id',db::raw(" (select residuo from residuos where opcion=recolecciones.residuo) as residuo")
-        ,db::raw(" (select unidades from residuos where opcion=recolecciones.residuo) as unidades")
-        ,'residuo as re','cantidad','created_at')->where('id_negocio',$negocio->id)->get();
+        ,db::raw(" (select unidades from residuos where opcion=recolecciones.residuo) as unidades"),'recolecciones.matriculat'
+        ,'residuo as re','cantidad','created_at')
+        ->where('id_negocio',$negocio->id)
+        ->orderby('created_at','desc')
+        ->get();
+        
         $tiponegocios=TipoNegocio::all();
 
         $entidades=Entidad::all();

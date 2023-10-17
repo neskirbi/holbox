@@ -913,7 +913,7 @@ function AbrirDropMenu(menu){
      
 }
 
-
+var datosVehiculo='';
 function BuscarPlaca(este){
     
     CerrarDropMenu('menu');
@@ -923,23 +923,27 @@ function BuscarPlaca(este){
         
         headers: { "APP-KEY": AppKey() },
         method:'post',
-        url: "api/Matricula",
+        url: Url()+"api/Matricula",
         data:{matricula:matricula},
         context: document.body
     }).done(function(vehiculo) {
+        datosVehiculo=vehiculo;
         AbrirDropMenu('menu');
         for(var i in vehiculo){
-            html+='<a class="dropdown-item" onclick="CerrarDropMenu(\'menu\');PasarId(this);" href="#" data-id="'+vehiculo[i].id+'" data-ramir="'+vehiculo[i].ramir+'">'+vehiculo[i].matricula+'</a>';                
+            html+='<a class="dropdown-item" onclick="CerrarDropMenu(\'menu\');PasarId(this,'+i+');" href="#" data-id="'+vehiculo[i].id+'" data-ramir="'+vehiculo[i].ramir+'">'+vehiculo[i].matricula+'</a>';                
         }
 
-        html+='<a onclick="AbrirModal(\'modalvehiculo\');" class="dropdown-item" href="#"><i class="fa fa-truck" aria-hidden="true"></i>&nbsp;&nbsp;Agregar Vehículo</a>';
- 
         $('#menu').html(html);
     });
 }
-function PasarId(este){
-    $('#vehiculo').val($(este).data('id'));
-    $('#ramir').html('RAMIR: '+$(este).data('ramir'));
+function PasarId(este,index){
+    
+    console.log(datosVehiculo[index]);
+    $('#id_vehiculo').val(datosVehiculo[index].id);
+    $('#vehiculo').val(datosVehiculo[index].vehiculo);
+    $('#ramir').val(datosVehiculo[index].ramir);
+    $('#marca').val(datosVehiculo[index].marca);
+    $('#modelo').val(datosVehiculo[index].modelo);
     $('#bmatricula').val($(este).html());
 }
 function BuscarRazon(este){   

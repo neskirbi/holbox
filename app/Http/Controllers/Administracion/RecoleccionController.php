@@ -10,6 +10,7 @@ use App\Models\Vehiculo;
 use App\Models\Planta;
 use App\Models\Configuracion;
 use App\Models\Recolector;
+use App\Models\EmpresaTransporte;
 use Redirect;
 
 
@@ -40,15 +41,15 @@ class RecoleccionController extends Controller
         $recoleccion = Recoleccion::select('id',
             DB::RAW("(select recolector from recolectores where id=recolecciones.id_recolector) as responsable")
         )
-        ->where('id',$id)
-        ->first();
-        $vehiculos=Vehiculo::where('id_planta',GetIdPlanta())->get();
-        return view('administracion.recolecciones.show',['recoleccion'=>$recoleccion,'vehiculos'=>$vehiculos]);
+        ->where('id',$id)->first();
+        //$vehiculos=Vehiculo::where('id_planta',GetIdPlanta())->get();
+        return view('administracion.recolecciones.show',['recoleccion'=>$recoleccion]);
 
     }
 
     function update(Request $request,$id){
-        $vehiculo=Vehiculo::find($request->vehiculo);
+        $vehiculo=Vehiculo::find($request->id_vehiculo);
+        $empresa=EmpresaTransporte::find($vehiculo->id_empresa);
         $recoleccion = Recoleccion::find($id);
        
         
@@ -66,11 +67,11 @@ class RecoleccionController extends Controller
         $recoleccion->matriculat = $vehiculo->matricula;
 
 
-        $recoleccion->transportista=$planta->planta;
-        $recoleccion->domiciliot=$planta->direccion;
-        $recoleccion->ramir=$planta->plantaauto;
-        $recoleccion->telefonot=$configuracion->telefono;
-        $recoleccion->sctt=$configuracion->sct;
+        $recoleccion->transportista=$empresa->razonsocial;
+        $recoleccion->domiciliot=$empresa->domicilio;
+        $recoleccion->ramir=$empresa->ramir;
+        $recoleccion->telefonot=$empresa->telefono;
+        $recoleccion->sctt=$empresa->regsct;
 
         $recoleccion->recolector=$recolector->recolector;
         $recoleccion->firmat=isset($recolector->firma) ? $recolector->firma : '' ;

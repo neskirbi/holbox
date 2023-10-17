@@ -45,15 +45,56 @@
               <div class="card-body">
               
                 <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="bmatricula">Buscar Vehículo (Placa)</label>
+                        <input required autocomplete="off" onkeyup="BuscarPlaca(this);" type="text" class="form-control" id="bmatricula" placeholder="Buscar Matrícula" aria-invalid="false" >
+                        
+                        
+                        <div class="dropdown">
+                            <div class="dropdown-menu" id="menu" aria-labelledby="dropdownMenuButton">                                
+                            </div>
+                        </div>
+                        <input type="text" style="display:none;" name="id_vehiculo" class="form-control" id="id_vehiculo" aria-invalid="false" >
+                    </div>
+                  </div>
+                    
+                </div>
+                
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="ramir">Ramir</label>
+                        <input disabled required type="text" class="form-control" id="ramir" placeholder="Ramir" aria-invalid="false" >
+                        
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="vehiculo">Matrícula</label>
-                      <select required class="form-control" id="vehiculo" name="vehiculo">
-                        <option value="">---Vehículo---</option>
-                        @foreach($vehiculos as $vehiculo)
-                        <option value="{{$vehiculo->id}}">{{$vehiculo->matricula}}</option>
-                        @endforeach
-                      </select>
+                        <label for="marca">Marca</label>
+                        <input disabled required type="text" class="form-control" id="marca" placeholder="Marca" aria-invalid="false" >
+                        
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="vehiculo">Vehículo</label>
+                        <input disabled required type="text" class="form-control" id="vehiculo" placeholder="Vehículo" aria-invalid="false" >
+                        
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="modelo">Modelo</label>
+                        <input disabled type="text" class="form-control" id="modelo" placeholder="Modelo" aria-invalid="false" >
+                        
                     </div>
                   </div>
                     
@@ -92,9 +133,9 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
+<script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button);
@@ -102,26 +143,26 @@
  
 </script>
 <!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- ChartJS -->
-<script src="plugins/chart.js/Chart.min.js"></script>
+<script src="{{asset('plugins/chart.js/Chart.min.js')}}"></script>
 <!-- Sparkline -->
-<script src="plugins/sparklines/sparkline.js"></script>
+<script src="{{asset('plugins/sparklines/sparkline.js')}}"></script>
 <!-- JQVMap -->
-<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<script src="{{asset('plugins/jqvmap/jquery.vmap.min.js')}}"></script>
+<script src="{{asset('plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
 <!-- jQuery Knob Chart -->
-<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+<script src="{{asset('plugins/jquery-knob/jquery.knob.min.js')}}"></script>
 <!-- daterangepicker -->
-<script src="plugins/moment/moment.min.js"></script>
-<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<script src="{{asset('plugins/moment/moment.min.js')}}"></script>
+<script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"></script>
 <!-- Tempusdominus Bootstrap 4 -->
-<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="{{asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
 <!-- Summernote -->
-<script src="plugins/summernote/summernote-bs4.min.js"></script>
+<script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
 <!-- overlayScrollbars -->
-<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App, funcion de sidebar -->
-<script src="dist/js/adminlte.js"></script>
+<script src="{{asset('dist/js/adminlte.js')}}"></script>
 </body>
 </html>

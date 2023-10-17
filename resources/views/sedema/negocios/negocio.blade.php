@@ -136,6 +136,7 @@
                         <th>Residuo</th>
                         <th>Cantidad</th>
                         <th>Fecha de Recolección</th>
+                        <th>Manifiesto</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -151,6 +152,11 @@
                                 
                         <td>
                             {{FechaFormateada($recoleccion->created_at)}}
+                        </td>
+                        <td>
+                            @if($recoleccion->matriculat!='')
+                                <a href="{{url('Manifiesto')}}/{{$recoleccion->id}}" target="_blank" class="btn btn-info "><i class="fa fa-download" aria-hidden="true"></i> Manifiesto</a>
+                            @endif
                         </td>
                        
                         

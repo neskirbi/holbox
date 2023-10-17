@@ -148,9 +148,10 @@ class ApisController extends Controller
 
 
     function Matricula(Request $request){
+        //return $request;
 
-        return DB::table('empresastransporte')->join('vehiculos','vehiculos.id_empresatransporte','=','empresastransporte.id')
-        ->select('empresastransporte.ramir','vehiculos.id','vehiculos.matricula')
+        return DB::table('empresastransporte')->join('vehiculos','vehiculos.id_empresa','=','empresastransporte.id')
+        ->select('empresastransporte.ramir','vehiculos.id','vehiculos.matricula','vehiculos.vehiculo','vehiculos.marca','vehiculos.modelo')
         ->where('matricula', 'like', '%'.$request->matricula.'%')
         ->get();
     }

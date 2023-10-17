@@ -19,10 +19,10 @@ class GeneralController extends Controller
         $recoleccion=Recoleccion::select('clientes.nombres','clientes.apellidos','clientes.firma as firmacliente',
         'generadores.razonsocial','generadores.fisicaomoral','generadores.telefono','generadores.calle','generadores.entidad',
         'generadores.numeroext','generadores.numeroint','generadores.colonia','generadores.municipio','generadores.cp',
-        'recolecciones.id','recolecciones.folio','recolecciones.recolector','recolecciones.firmar','recolecciones.matriculat','recolecciones.vehiculo',
-        'negocios.nautorizacion',
+        'recolecciones.id','recolecciones.id_planta','recolecciones.transportista','recolecciones.domiciliot','recolecciones.telefonot','recolecciones.folio',
+        'recolecciones.recolector','recolecciones.firmar','recolecciones.matriculat','recolecciones.vehiculo',
         'negocios.telefono as negotelefono','negocios.calle as negocalle','negocios.numeroext as negonumeroext',
-        'negocios.nautorizacion','negocios.numeroint as negonumeroint','negocios.colonia as negocolonia','negocios.municipio as negomunicipio',
+        'negocios.numeroint as negonumeroint','negocios.colonia as negocolonia','negocios.municipio as negomunicipio',
         'negocios.cp as negocp','negocios.negocio','recolecciones.cantidad','negocios.tiponegocio','recolecciones.created_at',
         DB::RAW("(select contenedor from contenedores where opcion=recolecciones.contenedor) as contenedor"),
         DB::RAW("(select (cantidad*recolecciones.cantidad) from contenedores where opcion=recolecciones.contenedor) as total"),
@@ -35,10 +35,10 @@ class GeneralController extends Controller
         ->first();
         
 
-        $planta=Planta::where('id',GetIdPlanta())->first();
-        $configuracion=Configuracion::where('id_planta',GetIdPlanta())->first();
+        $planta=Planta::where('id',$recoleccion->id_planta)->first();
+        $configuracion=Configuracion::where('id_planta',$recoleccion->id_planta)->first();
 
-        $administrador=Administrador::where('id_planta',GetIdPlanta())->where('principal',1)->orderby('created_at','asc')->first();
+        $administrador=Administrador::where('id_planta',$recoleccion->id_planta)->where('principal',1)->orderby('created_at','asc')->first();
         //return view('formatos.recolecciones.manifiesto',['recoleccion'=>$recoleccion,'configuracion'=>$configuracion,'planta'=>$planta,'administrador'=>$administrador]);
         $pdf = \PDF::loadView('formatos.recolecciones.manifiesto',['recoleccion'=>$recoleccion,'configuracion'=>$configuracion,'planta'=>$planta,'administrador'=>$administrador]);
         
