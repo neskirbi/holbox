@@ -113,7 +113,7 @@
 
           <li class="nav-item">
             <a href="{{ url('vehiculos') }}" class="nav-link">
-              <i class="nav-icon fa fa-user" aria-hidden="true"></i>
+              <i class="nav-icon fa fa-truck" aria-hidden="true"></i>
               <p>
                 Vehiculos
               </p>
