@@ -607,10 +607,10 @@
                     
                                                       
                               <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-12">
                                   <div class="form-group">
                                     <label for="domicilio">Domicilio</label>
-                                    <textarea required name="domicilio" rows="3" cols="90">{{$empresa->domicilio}}</textarea>
+                                    <textarea required class="form-control" name="domicilio" rows="3" cols="90">{{$empresa->domicilio}}</textarea>
                                   </div>
                                 </div>  
                               </div>
