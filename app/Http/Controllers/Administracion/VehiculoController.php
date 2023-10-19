@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Redirect;
 use App\Models\Vehiculo;
 use App\Models\Transportista;
+use App\Models\EmpresaTransporte;
 
 class VehiculoController extends Controller
 {
@@ -42,9 +43,15 @@ class VehiculoController extends Controller
             Redirect::back()->with('error', 'Esta matricula ya fue dada de alta.');
         }
         
+        $empresa=EmpresaTransporte::where('id_transportista',GetIdPlanta())->first();
+        if(!$empresa){
+            Redirect::back()->with('error', 'Primero registra los datos de la empresa.');
+        }
+        
 
         $vehiculo=new Vehiculo();
         $vehiculo->id = GetUuid();
+        $vehiculo->id_empresa = $empresa->id;
         $vehiculo->id_planta = GetIdPlanta();
         $vehiculo->vehiculo = $request->vehiculo;
         $vehiculo->marca = $request->marca;

@@ -255,6 +255,8 @@ Route::post('configuracionboleta', 'App\Http\Controllers\Administracion\Configur
 Route::put('GuardarDatosPlanta/{id}', 'App\Http\Controllers\Administracion\ConfiguracionController@GuardarDatosPlanta');
 Route::post('CambioPass/{id}', 'App\Http\Controllers\Administracion\ConfiguracionController@CambioPass');
 Route::post('Horarios/{id}', 'App\Http\Controllers\Administracion\ConfiguracionController@Horarios');
+Route::post('GuardarEmpresaTransporte', 'App\Http\Controllers\Administracion\ConfiguracionController@GuardarEmpresaTransporte');
+
 
 Route::post('Residuo', 'App\Http\Controllers\Administracion\ConfiguracionController@Residuo');
 Route::post('BorrarResiduo/{id}', 'App\Http\Controllers\Administracion\ConfiguracionController@BorrarResiduo');

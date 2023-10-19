@@ -96,6 +96,13 @@
                             <!--<span class="badge bg-primary float-right">12</span>-->
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="VentanasTitulos(this,'titulo');" data-text="Transporte"  data-toggle="pill" href="#transporte" role="tab">
+                          <i class="fa fa-truck" aria-hidden="true"></i> Transporte
+                            <!--<span class="badge bg-primary float-right">12</span>-->
+                        </a>
+                    </li>
                   </ul>
               </div>
               <!-- /.card-body -->
@@ -429,7 +436,7 @@
                           </div>
 
                           <div class="tab-pane fade" id="horarios" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
-                          <form action="{{url('Horarios')}}/{{$planta->id}}" method="POST">
+                            <form action="{{url('Horarios')}}/{{$planta->id}}" method="POST">
                               @csrf   
                               <div class="row">
                                 <div class="col-md-3">
@@ -564,6 +571,72 @@
                               </div>                                                          
                             </form>
                           </div>
+
+                          <div class="tab-pane fade" id="transporte" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                            <form action="{{url('GuardarEmpresaTransporte')}}" method="post" >
+                            @csrf
+                              <div class="form-group">
+                                <label for="razonsocial">Razón social</label>
+                                <input required type="text" name="razonsocial" class="form-control" id="razonsocial" placeholder="Razón Social" maxlength="250" aria-invalid="false" value="{{$empresa->razonsocial}}">
+                              </div>
+
+
+                              <div class = "row">
+                                <div class="col-md-4"> 
+                                  <div class="form-group">
+                                    <label for="razonsocial">Ramir</label>
+                                    <input required type="text" name="ramir" class="form-control" id="ramir" placeholder="Ramir" maxlength="100" aria-invalid="false" value="{{$empresa->ramir}}">
+                                  </div>                      
+                                </div>
+
+
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label for="giro">Giro</label>
+                                    <input required type="text" name="giro" class="form-control" id="giro" placeholder="Giro" maxlength="250" aria-invalid="false" value="{{$empresa->giro}}">
+                                  </div>
+                                </div>  
+                                  
+                                <div class="col-md-4">  
+                                  <div class="form-group">
+                                    <label for="regsct">Registro SCT</label>
+                                    <input required type="text" name="regsct" class="form-control" id="regsct" placeholder="Registro SCT" maxlength="100" aria-invalid="false" value="{{$empresa->regsct}}">
+                                  </div>
+                                </div>
+                              </div>
+                    
+                                                      
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label for="domicilio">Domicilio</label>
+                                    <textarea required name="domicilio" rows="3" cols="90">{{$empresa->domicilio}}</textarea>
+                                  </div>
+                                </div>  
+                              </div>
+                            
+                                                      
+                                    
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label for="telefono">Teléfono</label>
+                                    <input required type="text" name="telefono" class="form-control" id="telefono" placeholder="Teléfono" aria-invalid="false" maxlength="50" value="{{$empresa->telefono}}">
+                                  </div>
+                                </div>  
+                              
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label for="mail">Correo</label>
+                                    <input required type="text" name="mail" class="form-control" id="mail" placeholder="Correo" aria-invalid="false" maxlength="50" value= "{{$empresa->correo}}">
+                                  </div>
+                                </div>
+                              </div>
+                              <button required="" type="submit" id="guardar" class="btn  btn-info float-right">Guardar</button>
+                            </form>
+
+                          </div>
+                          
                         </div>
                       </div>           
                         
@@ -703,6 +776,8 @@
                           </div>
                         </div>
                       </div>
+
+                      
 
                     </div> 
                     

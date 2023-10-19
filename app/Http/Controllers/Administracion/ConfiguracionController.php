@@ -11,6 +11,9 @@ use App\Models\Administrador;
 use App\Models\Planta;
 use App\Models\Residuo;
 use App\Models\Contenedor;
+use App\Models\EmpresaTransporte;
+
+
 use Redirect;
 class ConfiguracionController extends Controller
 {
@@ -25,9 +28,17 @@ class ConfiguracionController extends Controller
         $planta=Planta::find(GetIdPlanta());
         $administrador=Administrador::find(GetId());
         $residuos=Residuo::where('id_planta',GetIdPlanta())->orderby('opcion','asc')->get();
+        $empresa=EmpresaTransporte::where('id_transportista',GetIdPlanta())->first();
+        if(!$empresa){
+            $empresa=new EmpresaTransporte();
+        }
         
         $contenedores=Contenedor::where('id_planta',GetIdPlanta())->orderby('opcion','asc')->get();
-        return view('administracion.configuraciones.configuraciones',['configuraciones'=>$configuraciones,'administrador'=>$administrador,'planta'=>$planta,'residuos'=>$residuos,'contenedores'=>$contenedores]);
+        return view('administracion.configuraciones.configuraciones',
+        ['configuraciones'=>$configuraciones,'administrador'=>$administrador,
+        'planta'=>$planta,'residuos'=>$residuos,'contenedores'=>$contenedores,
+        'empresa'=>$empresa
+    ]);
     }
 
     /**
@@ -257,5 +268,33 @@ class ConfiguracionController extends Controller
         $configuracion->save();
         return redirect('configuracion')->with('success','¡Se guardaron los datos!');
         
+    }
+
+    function GuardarEmpresaTransporte(Request $request){
+        
+
+        $empresa=EmpresaTransporte::where('id_transportista',GetIdPlanta())->first();
+        if(!$empresa){
+            $empresa=new EmpresaTransporte();
+            $id = $empresa->id = GetUuid();
+        }
+
+       
+        $empresa->id_transportista=GetIdPlanta();
+        $empresa->razonsocial=$request->razonsocial;
+        $empresa->ramir=$request->ramir;
+        $empresa->regsct=$request->regsct;
+        $empresa->giro=$request->giro;
+        $empresa->ramir=$request->ramir;
+        $empresa->domicilio=$request->domicilio;
+        $empresa->correo=$request->mail;
+        $empresa->telefono=$request->telefono;
+        $empresa->giro=$request->giro;
+
+        if($empresa->save()){
+            return  Redirect::back();
+        }else{
+            return Redirect::back();
+        }
     }
 }
