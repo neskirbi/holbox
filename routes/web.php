@@ -80,6 +80,11 @@ Route::get('home', function () {
  */
 Route::get('Manifiesto/{id}', 'App\Http\Controllers\General\GeneralController@Manifiesto');
 
+Route::get('terminosycondiciones',function(){
+    return view('formatos.terminosycondiciones');
+});
+
+
 /**
  * registro de clientes
  */
@@ -306,6 +311,7 @@ Route::get('AdminPass/{id}',function($id){
         return redirect('home')->with('error','No se encontró la petición o ya se ultilizó el link anteriormente.');
     }
 });
+
 
 
 Route::post('GuardarPassAdmin/{id}','App\Http\Controllers\LoginController@GuardarPassAdmin');
