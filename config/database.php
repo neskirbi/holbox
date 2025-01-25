@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'recitrack'),
+    'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -35,8 +35,8 @@ return [
 
     'connections' => [
 
-        'recitrack' => [
-            'name' => 'recitrack',
+        'mysql' => [
+            'name' => 'mysql',
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),

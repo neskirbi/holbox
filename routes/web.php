@@ -45,11 +45,7 @@ Route::get('home', function () {
 
     if(Auth::guard('finanzas')->check()){
         return redirect('pagosfi');
-    } 
-
-    
-
-    
+    }     
 
     if(Auth::guard('clientes')->check()){
         return redirect('generadores');
