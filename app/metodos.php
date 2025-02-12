@@ -8,7 +8,7 @@ use App\Models\Vehiculo;
 use Kreait\Firebase\Factory;
 
 function Version(){
-    return 2;
+    return 3;
 }
 
 function GetSiglas($opcion){
