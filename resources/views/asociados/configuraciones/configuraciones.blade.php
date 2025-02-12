@@ -70,12 +70,7 @@
                         </a>
                     </li>
                     
-                    <li class="nav-item">
-                        <a class="nav-link" onclick="VentanasTitulos(this,'titulo');" data-text="Horarios"  data-toggle="pill" href="#horarios" role="tab">
-                          <i class="fa fa-calendar" aria-hidden="true"></i> Horarios
-                            <!--<span class="badge bg-primary float-right">12</span>-->
-                        </a>
-                    </li>
+                   
                   </ul>
               </div>
               <!-- /.card-body -->
@@ -266,142 +261,7 @@
                             <button class="btn btn-info float-right" onclick="Submite('boletaform',this);" data-texto="¿Guardar los datos?">Guardar</button>
                         </div>
 
-                        <div class="tab-pane fade" id="horarios" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
-                        <form action="{{url('Horarios')}}/{{$planta->id}}" method="POST">
-                            @csrf   
-                            <div class="row">
-                              <div class="col-md-3">
-                                <div class="form-group">
-                                  <label for="folio">Intervalo</label>
-                                  <div class="input-group">
-                                    <input type="number" step="1" min="1" class="form-control" id="intervalo" name="intervalo" value="{{$planta->intervalo}}">
-                                    <div class="input-group-append">
-                                      <span class="input-group-text">min</span>
-                                    </div>
-                                  </div>
-                                </div>
-                                
-                              </div>
-                            </div>  
-                            <table>
-                              <tr>
-                                <td>
-                              
-                                  <div class="form-group">
-                                      <label for="domingoi">Domingo</label>
-                                      <input require type="text" class="form-control" id="domingoi" name="domingoi" value="{{$planta->domingoi}}">
-                                  </div>
-                                </td>
-                                <td>
-                              
-                                  <div class="form-group">
-                                      <label for="lunesi">Lunes</label>
-                                      <input require type="text" class="form-control" id="lunesi" name="lunesi" value="{{$planta->lunesi}}">
-                                  </div>
-                                </td>
-                                <td>
-                              
-                                  <div class="form-group">
-                                      <label for="martesi">Martes</label>
-                                      <input require type="text" class="form-control" id="martesi" name="martesi" value="{{$planta->martesi}}">
-                                  </div>
-                                </td>
-                                <td>
-                              
-                                  <div class="form-group">
-                                      <label for="miercolesi">Miércoles</label>
-                                      <input require type="text" class="form-control" id="miercolesi" name="miercolesi" value="{{$planta->miercolesi}}">
-                                  </div>
-                                </td>
-                                <td>
-                              
-                                  <div class="form-group">
-                                      <label for="juevesi">Jueves</label>
-                                      <input require type="text" class="form-control" id="juevesi" name="juevesi" value="{{$planta->juevesi}}">
-                                  </div>
-                                </td>
-                                <td>
-                              
-                                  <div class="form-group">
-                                      <label for="viernesi">Viernes</label>
-                                      <input require type="text" class="form-control" id="viernesi" name="viernesi" value="{{$planta->viernesi}}">
-                                  </div>
-                                </td>
-                                <td>
-                              
-                                  <div class="form-group">
-                                      <label for="sabadoi">Sabados</label>
-                                      <input require type="text" class="form-control" id="sabadoi" name="sabadoi" value="{{$planta->sabadoi}}">
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                              
-                                  <div class="form-group">
-                                      <label for="domingof">Domingo</label>
-                                      <input require type="text" class="form-control" id="domingof" name="domingof" value="{{$planta->domingof}}">
-                                  </div>
-                                </td>
-                                <td>
-                              
-                                  <div class="form-group">
-                                      <label for="lunesf">Lunes</label>
-                                      <input require type="text" class="form-control" id="lunesf" name="lunesf" value="{{$planta->lunesf}}">
-                                  </div>
-                                </td>
-                                <td>
-                              
-                                  <div class="form-group">
-                                      <label for="martesf">Martes</label>
-                                      <input require type="text" class="form-control" id="martesf" name="martesf" value="{{$planta->martesf}}">
-                                  </div>
-                                </td>
-                                <td>
-                              
-                                  <div class="form-group">
-                                      <label for="miercolesf">Miércoles</label>
-                                      <input require type="text" class="form-control" id="miercolesf" name="miercolesf" value="{{$planta->miercolesf}}">
-                                  </div>
-                                </td>
-                                <td>
-                              
-                                  <div class="form-group">
-                                      <label for="juevesf">Jueves</label>
-                                      <input require type="text" class="form-control" id="juevesf" name="juevesf" value="{{$planta->juevesf}}">
-                                  </div>
-                                </td>
-                                <td>
-                              
-                                  <div class="form-group">
-                                      <label for="viernesf">Viernes</label>
-                                      <input require type="text" class="form-control" id="viernesf" name="viernesf" value="{{$planta->viernesf}}">
-                                  </div>
-                                </td>
-                                <td>
-                              
-                                  <div class="form-group">
-                                      <label for="sabadof">Sabado</label>
-                                      <input require type="text" class="form-control" id="sabadof" name="sabadof" value="{{$planta->sabadof}}">
-                                  </div>
-                                </td>
-                              </tr>
-                            </table>  
-                            <div class="row">
-                              <div class="col-md-12">  
-                                <div class='form-group'>
-                                  <label style="color:#999;">Nota:El formato de fecha es de 24 horas, solo horas y minutos Ej. 15:30 .</label>
-                                </div>                 
-                              
-                              </div>
-                            </div>
-                            <div class='row'>
-                              <div class='col-md-12'>
-                                <button type="submit" class="btn btn-info float-right">Guardar</button>
-                              </div>
-                            </div>                                                          
-                          </form>
-                        </div>
+                        
                       </div>
                     </div>           
                       

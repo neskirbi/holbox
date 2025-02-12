@@ -49,19 +49,13 @@ Route::get('home', function () {
 
     if(Auth::guard('clientes')->check()){
         return redirect('generadores');
-    }  
-
-    if(Auth::guard('residentes')->check()){
-        return redirect('citas');
-    }  
+    }    
     
     if(Auth::guard('transportistas')->check()){
         return redirect('empresas');
     }  
 
-    if(Auth::guard('sedemas')->check()){
-        return redirect('sedeman');
-    }  
+    
     
     return view('home');
 });
@@ -255,7 +249,7 @@ Route::post('configuracionbanco', 'App\Http\Controllers\Administracion\Configura
 Route::post('configuracionboleta', 'App\Http\Controllers\Administracion\ConfiguracionController@ConfiguracionBoleta');
 Route::put('GuardarDatosPlanta/{id}', 'App\Http\Controllers\Administracion\ConfiguracionController@GuardarDatosPlanta');
 Route::post('CambioPass/{id}', 'App\Http\Controllers\Administracion\ConfiguracionController@CambioPass');
-Route::post('Horarios/{id}', 'App\Http\Controllers\Administracion\ConfiguracionController@Horarios');
+
 Route::post('GuardarEmpresaTransporte', 'App\Http\Controllers\Administracion\ConfiguracionController@GuardarEmpresaTransporte');
 
 

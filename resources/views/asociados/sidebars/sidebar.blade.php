@@ -39,23 +39,9 @@
           <li class="nav-header">Asociación</li>
          
           <!--<li class="nav-header">Panel de Control</li>-->
-          <li class="nav-item">
-            <a href="{{url('sedemas')}}" class="nav-link">
-            <i class="nav-icon fa fa-bar-chart" aria-hidden="true"></i>
-              <p>
-                SEDEMA
-              </p>
-            </a>
-          </li>
+         
 
-          <!--<li class="nav-item">
-            <a href="generador" class="nav-link">
-            <i class="nav-icon fa fa-cogs" aria-hidden="true"></i>
-              <p>
-                Generadores
-              </p>
-            </a>
-          </li>-->
+         
 
           
 
@@ -69,14 +55,7 @@
           </li>
           
 
-          <li class="nav-item">
-            <a href="{{ url('generadorasoc') }}" class="nav-link">
-            <i class="nav-icon fa fa-bars" aria-hidden="true"></i>
-              <p>
-                Generadores
-              </p>
-            </a>
-          </li>
+         
 
           
           

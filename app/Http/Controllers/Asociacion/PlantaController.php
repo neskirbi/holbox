@@ -12,11 +12,16 @@ use Redirect;
 
 class PlantaController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('asociadoislogged');
+    }
+    
     function index(Request $request){
         $plantas = DB::table('plantas')
         ->whereraw("planta like '%".$request->planta."%' ")
         ->paginate(10);
-        return view('asociados.plantas.plantas',['plantas'=>$plantas]);
+        return view('asociados.plantas.index',['plantas'=>$plantas]);
     }
 
     function show($id){

@@ -122,74 +122,7 @@ class ConfiguracionController extends Controller
     }
 
 
-    function Horarios(Request $request,$id){
-        if(''==strtotime($request->domingoi) || count(explode(':',$request->domingoi))!=2){
-            return Redirect::back()->with('error', 'Formato de fecha para domingo invalido.');
-        }
-        if(''==strtotime($request->lunesi) || count(explode(':',$request->lunesi))!=2){
-            return Redirect::back()->with('error', 'Formato de fecha para lunes invalido.');
-        }
-        if(''==strtotime($request->martesi) || count(explode(':',$request->martesi))!=2){
-            return Redirect::back()->with('error', 'Formato de fecha para martes invalido.');
-        }
-        if(''==strtotime($request->miercolesi) || count(explode(':',$request->miercolesi))!=2){
-            return Redirect::back()->with('error', 'Formato de fecha para miercoles invalido.');
-        }
-        if(''==strtotime($request->juevesi) || count(explode(':',$request->juevesi))!=2){
-            return Redirect::back()->with('error', 'Formato de fecha para jueves invalido.');
-        }
-        if(''==strtotime($request->viernesi) || count(explode(':',$request->viernesi))!=2){
-            return Redirect::back()->with('error', 'Formato de fecha para viernes invalido.');
-        }
-        if(''==strtotime($request->sabadoi) || count(explode(':',$request->sabadoi))!=2){
-            return Redirect::back()->with('error', 'Formato de fecha para sabado invalido.');
-        }
-        if(''==strtotime($request->domingof) || count(explode(':',$request->domingof))!=2){
-            return Redirect::back()->with('error', 'Formato de fecha para domingo invalido.');
-        }
-        if(''==strtotime($request->lunesf) || count(explode(':',$request->lunesf))!=2){
-            return Redirect::back()->with('error', 'Formato de fecha para lunes invalido.');
-        }
-        if(''==strtotime($request->martesf) || count(explode(':',$request->martesf))!=2){
-            return Redirect::back()->with('error', 'Formato de fecha para martes invalido.');
-        }
-        if(''==strtotime($request->miercolesf) || count(explode(':',$request->miercolesf))!=2){
-            return Redirect::back()->with('error', 'Formato de fecha para miercoles invalido.');
-        }
-        if(''==strtotime($request->juevesf) || count(explode(':',$request->juevesf))!=2){
-            return Redirect::back()->with('error', 'Formato de fecha para jueves invalido.');
-        }
-        if(''==strtotime($request->viernesf) || count(explode(':',$request->viernesf))!=2){
-            return Redirect::back()->with('error', 'Formato de fecha para viernes invalido.');
-        }
-        if(''==strtotime($request->sabadof) || count(explode(':',$request->sabadof))!=2){
-            return Redirect::back()->with('error', 'Formato de fecha para sabado invalido.');
-        }
-
-        $planta=Planta::find($id);
-        $planta->intervalo= $request->intervalo;
-        $planta->domingoi= $request->domingoi;
-        $planta->lunesi= $request->lunesi;
-        $planta->martesi= $request->martesi;
-        $planta->miercolesi= $request->miercolesi;
-        $planta->juevesi= $request->juevesi;
-        $planta->viernesi= $request->viernesi;
-        $planta->sabadoi= $request->sabadoi;
-        $planta->domingof= $request->domingof;
-        $planta->lunesf= $request->lunesf;
-        $planta->martesf= $request->martesf;
-        $planta->miercolesf= $request->miercolesf;
-        $planta->juevesf= $request->juevesf;
-        $planta->viernesf= $request->viernesf;
-        $planta->sabadof= $request->sabadof;
-
-        if($planta->save()){ 
-            return redirect('configuracion')->with('success', 'Datos guardados.');
-        }else{
-            return redirect('configuracion')->with('error', 'Error al guardar.');
-        }
-    }
-
+    
 
     function Residuo(Request $request){
         //return $request;

@@ -5,69 +5,161 @@
     <title>Hoplbox | RSU</title>
 </head>
 <style>
-    .portada {
-        position: fixed;
-        width: 100%;
-        margin: 0;
-        z-index: -100;
+    body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background:#78AF6C;
     }
-    .item-color{
-        color:#fff;
+    .full-width-container {
+        margin-top:50px;
+        width: 100%;
+        padding: 0px; /* Padding de 20px */
+        box-sizing: border-box; /* Incluye el padding en el ancho total */
+        background-color: #ECEADB; /* Color de fondo opcional */
+        text-align: center; /* Centra la imagen horizontalmente */
+        border-radius:30px 30px 0px 0px;
+    }
+    .full-width-container img {
+        width: 100%; /* La imagen no excede el ancho del contenedor */
+        height: auto; /* Mantiene la proporción de la imagen */
+        display: inline-block; /* Permite centrar la imagen con text-align */
     }
 </style>
 <body>
-    <img class="portada" src="{{asset('images/portada.jfif')}}" alt="">
-
-    @include('navbar')
-    @include('toast.toasts')
     
-    <br>
-    <br>
-    <center>
-        <div style="width:80%;">
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" src="https://www.cali.gov.co/bienesyservicios/info/principal/media/pubInt/thumbs/thpub_700x400_166390.jpg" alt="First slide">
+
+   
+    @include('toast.toasts')
+
+     <!-- Div que abarca el 100% del ancho -->
+     <div class="full-width-container">
+        
+
+        <div class="bg-light" style=" height:60px; margin-right:10px; margin-left:10px; ">
+            
+            <a class="navbar-brand float-left" href="#" >
+                <img src="{{asset('images/logoreci.png')}}" class="d-inline-block float-left" alt="">
+            </a>
+            <div class=" float-right">
+                <nav class="navbar navbar-expand-md navbar-light navbar-loght">
+                    <!--<a class="navbar-brand" href="home">Concretos</a>-->
+                
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto extra-nav">
+
+                    
+                        
+                        
+                            <!--<li class="nav-item">
+                                <a class="nav-link"  data-toggle="modal" data-target="#modalsedemalogin" href="#">Autoridad </a>
+                            </li>
+
+
+                            <li class="nav-item ">
+                                <a class="nav-link"  data-toggle="modal" data-target="#loginadmin" href="#">Administrador </a>
+                            </li>
+
+                            <li class="nav-item dropdown" style="">
+                                <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Clientes</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="position:absolute;">
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#login" href="#">Acceso</a>
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#registro" href="#">Registrar</a>
+                                    
+                                </div>
+                            
+                            </li>
+
+
+                            <li class="nav-item dropdown" style="">
+                                <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Transportistas</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="position:absolute;">
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#logintransport" href="#">Acceso</a>
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#registrotransportistas" href="#">Registro</a>
+
+                                </div>
+
+                            </li>-->
+
+                    
+                            <li class="nav-item">
+                                <a class="nav-link"  href="{{url('registropage')}}">Registrarse </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link"  href="{{url('loginpage')}}"> <i class="fa fa-user-o" aria-hidden="true"></i> Ingresar </a>
+                            </li>
+
+
+                        </ul>
+                        
                     </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="https://www.cali.gov.co/bienesyservicios/info/principal/media/pubInt/thumbs/thpub_700x400_166390.jpg" alt="Second slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="https://www.cali.gov.co/bienesyservicios/info/principal/media/pubInt/thumbs/thpub_700x400_166390.jpg" alt="Third slide">
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+                </nav>
             </div>
         </div>
 
-    </center>
-    <br>
-    <br><br><br><br><br>
 
-    <img src="{{asset('images/footer.jpg')}}" alt="" width="100%" >
+        <!-- Imagen centrada -->
+        <img src="{{asset('images/wallreci.png')}}" alt="">
+    </div>
+    <section class="services-area wf100">
+            <div class="container">
+               <ul>
+                  <!--box  start-->
+                  <li>
+                     <div class="sinfo">
+                        <img src="images/sericon1.png" alt="">
+                        <h6>Recycling</h6>
+                        <p>Waste Management</p>
+                     </div>
+                  </li>
+                  <!--box  end--> 
+                  <!--box  start-->
+                  <li>
+                     <div class="sinfo">
+                        <img src="images/sericon2.png" alt="">
+                        <h6>Wind Energy</h6>
+                        <p>Polar, Prevailing, Tropical</p>
+                     </div>
+                  </li>
+                  <!--box  end--> 
+                  <!--box  start-->
+                  <li>
+                     <div class="sinfo">
+                        <img src="images/sericon3.png" alt="">
+                        <h6>Pure Water</h6>
+                        <p>Save Water Resources</p>
+                     </div>
+                  </li>
+                  <!--box  end--> 
+                  <!--box  start-->
+                  <li class="active">
+                     <div class="sinfo">
+                        <img src="images/sericon4.png" alt="">
+                        <h6>Solar Panels</h6>
+                        <p>Save Natural Engery</p>
+                     </div>
+                  </li>
+                  <!--box  end--> 
+                  <!--box  start-->
+                  <li>
+                     <div class="sinfo">
+                        <img src="images/sericon5.png" alt="">
+                        <h6>Forest Planting</h6>
+                        <p>Make Plants Alive for Life</p>
+                     </div>
+                  </li>
+                  <!--box  end-->
+               </ul>
+            </div>
+         </section>
 
-    
 
-<!--<div style="height:100px; background-color:#1E1E1E; position:absolute; width:100%; bottom:0px;">
-    <p><font color="#fff">Contacto</font></p>
-</div>-->
+     
 </body>
         
-    @include('modals.modalregistro')
-    @include('modals.modalloginresidentes')
-    @include('modals.modallogin')
-    @include('modals.modalloginadmin')    
-    @include('modals.modalsedemalogin')
-    @include('modals.modallogintransportistas')
-    @include('modals.modalregistrotransportistas')
+  
     
 
 

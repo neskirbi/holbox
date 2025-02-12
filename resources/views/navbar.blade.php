@@ -1,15 +1,21 @@
-<div class="bg-light" style=" height:60px; width:100%;   ">
-    <!--<a class="navbar-brand" href="{{url('home')}}"><img src="{{asset('images/logot.png')}}" height="55px" style="margin-left:10px;"></a>-->
+
+
+<div class="bg-light" style=" height:60px; margin-right:10px; margin-left:10px; ">
+    
+    <a class="navbar-brand float-left" href="#" >
+        <img src="{{asset('images/logoreci.png')}}" class="d-inline-block float-left" alt="">
+    </a>
     <div class=" float-right">
         <nav class="navbar navbar-expand-md navbar-light navbar-loght">
             <!--<a class="navbar-brand" href="home">Concretos</a>-->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+           
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto extra-nav">
+
+               
                   
+                
                     <!--<li class="nav-item">
                         <a class="nav-link"  data-toggle="modal" data-target="#modalsedemalogin" href="#">Autoridad </a>
                     </li>
