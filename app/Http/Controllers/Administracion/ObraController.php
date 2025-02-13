@@ -421,7 +421,7 @@ class ObraController extends Controller
         if($obra->save()){
             $generador=Generador::find($obra->id_generador);
             $cliente=Cliente::find($generador->id_cliente);
-            Notificar('Obra Confirmada','Obra Confirmada.','','Su información ha sido validada exitosamente, ya puede realizar sus citas de reciclaje.',[$cliente->mail],'<a href="https://reci-track.mx/" class="btn btn-default  btn-outline-secondary">Ir a Recitrack</a>');
+            Notificar('Obra Confirmada','Obra Confirmada.','','Su información ha sido validada exitosamente, ya puede realizar sus citas de reciclaje.',[$cliente->mail],'<a href="https://reci-trash.mx/" class="btn btn-default  btn-outline-secondary">Ir a Recitrack</a>');
             return Redirect::back()->with('success', 'Datos guardados.');
         }else{
             return Redirect::back()->with('error', 'Error al guardar los datos.');

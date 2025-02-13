@@ -20,7 +20,6 @@ class CreateClientesTable extends Migration
             $table->string("mail",150)->unique();
             $table->boolean("accept")->default(false);
             $table->string("pass",150);
-            $table->boolean('puedepospago')->default(false);
             $table->boolean('confirmacion')->default(0);
             $table->rememberToken();            
             $table->timestamps();

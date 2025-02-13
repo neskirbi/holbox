@@ -101,7 +101,7 @@ class PedidoController extends Controller
                     return redirect('carrito')->with('error', 'Error al guardar.');
                 }
             }
-            Notificar('Nuevo Pedido','Nuevo Pedido.','','Se ha generado un nuevo pedido de '.$obra->obra.' para la confirmación.',['emiliano@csmx.mx','ventas@csmx.mx','miriam@csmx.mx'],'<a href="https://reci-track.mx" class="btn btn-default  btn-outline-secondary">Ir a Recitrack</a>');
+            Notificar('Nuevo Pedido','Nuevo Pedido.','','Se ha generado un nuevo pedido de '.$obra->obra.' para la confirmación.',['emiliano@csmx.mx','ventas@csmx.mx','miriam@csmx.mx'],'<a href="https://reci-trash.mx" class="btn btn-default  btn-outline-secondary">Ir a Recitrack</a>');
             return redirect('pedidos')->with('success', 'Registro guardado.');
         }else{
             return redirect('pedidos')->with('error', 'Error al guardar.');  

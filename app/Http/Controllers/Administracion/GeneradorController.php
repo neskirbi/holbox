@@ -15,6 +15,11 @@ use Redirect;
 
 class GeneradorController extends Controller
 {
+
+     
+    public function __construct(){
+        $this->middleware('administradorlogged');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -178,8 +183,8 @@ class GeneradorController extends Controller
             $token->token=password_hash($id,PASSWORD_DEFAULT);
             $token->mail=$request->correo;
             $token->save();
-            //Notificar('Generar Contraseña','Generar contraseña.','','Por favor, para generar la contraseña en la plataforma Reci-Track de la cuenta '.$request->correo.' de click en el siguiente enlace.',[$request->correo],'<a href="https://reci-track.mx/AdminPass/'.$id.'" class="btn btn-default  btn-outline-secondary">Generar Contraseña</a>');
-            //Notificar('Nuevo Generador','Nuevo Generador Registrado.','Verificar datos del generador','Se ha registrado la información del generador '.$request->razonsocial.' para la validación de los datos.',['emiliano@csmx.mx'],'<a href="https://reci-track.mx/acceso" class="btn btn-default  btn-outline-secondary">Ir a Recitrack</a>');
+            //Notificar('Generar Contraseña','Generar contraseña.','','Por favor, para generar la contraseña en la plataforma Reci-Trash de la cuenta '.$request->correo.' de click en el siguiente enlace.',[$request->correo],'<a href="https://reci-trash.mx/AdminPass/'.$id.'" class="btn btn-default  btn-outline-secondary">Generar Contraseña</a>');
+            //Notificar('Nuevo Generador','Nuevo Generador Registrado.','Verificar datos del generador','Se ha registrado la información del generador '.$request->razonsocial.' para la validación de los datos.',['emiliano@csmx.mx'],'<a href="https://reci-trash.mx/acceso" class="btn btn-default  btn-outline-secondary">Ir a Recitrack</a>');
             return redirect('generadores')->with('success', 'Registro correcto.');
             
         }else{

@@ -84,17 +84,8 @@
             <form method="post" action="{{ url('Registro') }}">
                 @csrf
                 <div class="card-body">
-                    <!-- Fila 1: Tipo de usuario -->
-                    <div class="form-row">
-                        <div class="form-group full-width">
-                            <label for="usuario">Tipo de usuario</label>
-                            <select required name="usuario" class="form-control" id="usuario">
-                                <option value="">Seleccionar</option>
-                                <option value="1">Generador</option>
-                                <option value="2">Transportista</option>
-                            </select>
-                        </div>
-                    </div>
+                 
+                    
 
                     <!-- Fila 2: Nombres y Apellidos -->
                     <div class="form-row">
@@ -125,11 +116,11 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="pass">Contraseña</label>
-                            <input required type="password" class="form-control" id="pass" name="pass" placeholder="Contraseña">
+                            <input required onkeyup="ValidarPassRegistro();" type="password" class="form-control" id="pass" name="pass" placeholder="Contraseña">
                         </div>
                         <div class="form-group">
                             <label for="pass2">Confirmar Contraseña</label>
-                            <input required type="password" class="form-control" id="pass2" name="pass2" placeholder="Confirmar Contraseña">
+                            <input required onkeyup="ValidarPassRegistro();" type="password" class="form-control" id="pass2" name="pass2" placeholder="Confirmar Contraseña">
                         </div>
                     </div>
 

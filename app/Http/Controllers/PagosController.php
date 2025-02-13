@@ -139,7 +139,7 @@ class PagosController extends Controller
 
         $pago->referencia= $configuracion->referencia.'-'.$number1.'-'.$number2;
         if($pago->save()){
-            Notificar('¡Se ha registrado un nuevo pago!','Nuevo Pago Registrado.','Por favor verificar el estatus del pago para la validación.','',['ventas@csmx.mx'],'<a href="https://reci-track.mx/" class="btn btn-default  btn-outline-secondary">Ir a Recitrack</a>');
+            Notificar('¡Se ha registrado un nuevo pago!','Nuevo Pago Registrado.','Por favor verificar el estatus del pago para la validación.','',['ventas@csmx.mx'],'<a href="https://reci-trash.mx/" class="btn btn-default  btn-outline-secondary">Ir a Recitrack</a>');
             return Redirect::back()->with('success', 'Se generó el pago.')->with('transferencia', $id);
         }else{
             return Redirect::back()->with('error', 'Error al generar el pago.');

@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-      <img src="{{asset('images/logo.png')}}" alt="Reci-Track" class="brand-image elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Reci-Track</span>
+      <img src="{{asset('images/logo.png')}}" alt="Reci-Trash" class="brand-image elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Reci-Trash</span>
     </a>
 
     <!-- Sidebar -->
@@ -57,16 +57,7 @@
                 Planta
               </p>
             </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="{{ url('pagos') }}" class="nav-link">
-              <i class="nav-icon fa fa-dollar" aria-hidden="true"></i>
-              <p>
-                Pagos
-              </p>
-            </a>
-          </li>
+          </li>        
           
 
           <li class="nav-item">
@@ -145,6 +136,6 @@
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
-    </div></div></div><div class="os-scrollbar os-scrollbar-horizontal os-scrollbar-unusable"><div class="os-scrollbar-track"><div class="os-scrollbar-handle" style="width: 100%; transform: translate(0px, 0px);"></div></div></div><div class="os-scrollbar os-scrollbar-vertical"><div class="os-scrollbar-track"><div class="os-scrollbar-handle" style="height: 26.087%; transform: translate(0px, 0px);"></div></div></div><div class="os-scrollbar-corner"></div></div>
+    </div></div></div><div class="os-scrollbar os-scrollbar-horizontal os-scrollbar-unusable"><div class="os-scrollbar-trash"><div class="os-scrollbar-handle" style="width: 100%; transform: translate(0px, 0px);"></div></div></div><div class="os-scrollbar os-scrollbar-vertical"><div class="os-scrollbar-trash"><div class="os-scrollbar-handle" style="height: 26.087%; transform: translate(0px, 0px);"></div></div></div><div class="os-scrollbar-corner"></div></div>
     <!-- /.sidebar -->
   </aside>

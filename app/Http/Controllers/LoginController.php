@@ -315,7 +315,7 @@ class LoginController extends Controller
         if(Director::where('mail',$request->mail)->first()){
             $token=TokenGen($request->mail);
             if($token){
-                Notificar('Recuperar Contraseña','Recuperar contraseña.','','Por favor, para recuperar la contraseña de '.$request->mail.' de click en el siguiente enlace.',[$request->mail],'<a href="https://reci-track.mx/AdminPass/'.$token.'" class="btn btn-default  btn-outline-secondary">Recuperar Contraseña</a>');
+                Notificar('Recuperar Contraseña','Recuperar contraseña.','','Por favor, para recuperar la contraseña de '.$request->mail.' de click en el siguiente enlace.',[$request->mail],'<a href="https://reci-trash.mx/AdminPass/'.$token.'" class="btn btn-default  btn-outline-secondary">Recuperar Contraseña</a>');
             }
             return redirect('home')->with('success','Se envió un correo con las instrucciones para recuperar su contraseña.');
         }
@@ -323,7 +323,7 @@ class LoginController extends Controller
         if(Administrador::where('mail',$request->mail)->first()){
             $token=TokenGen($request->mail);
             if($token){
-                Notificar('Recuperar Contraseña','Recuperar contraseña.','','Por favor, para recuperar la contraseña de '.$request->mail.' de click en el siguiente enlace.',[$request->mail],'<a href="https://reci-track.mx/AdminPass/'.$token.'" class="btn btn-default  btn-outline-secondary">Recuperar Contraseña</a>');
+                Notificar('Recuperar Contraseña','Recuperar contraseña.','','Por favor, para recuperar la contraseña de '.$request->mail.' de click en el siguiente enlace.',[$request->mail],'<a href="https://reci-trash.mx/AdminPass/'.$token.'" class="btn btn-default  btn-outline-secondary">Recuperar Contraseña</a>');
             }
             return redirect('home')->with('success','Se envió un correo con las instrucciones para recuperar su contraseña.');
         }
@@ -331,7 +331,7 @@ class LoginController extends Controller
         if(Vendedor::where('mail',$request->mail)->first()){
             $token=TokenGen($request->mail);
             if($token){
-                Notificar('Recuperar Contraseña','Recuperar contraseña.','','Por favor, para recuperar la contraseña de '.$request->mail.' de click en el siguiente enlace.',[$request->mail],'<a href="https://reci-track.mx/AdminPass/'.$token.'" class="btn btn-default  btn-outline-secondary">Recuperar Contraseña</a>');
+                Notificar('Recuperar Contraseña','Recuperar contraseña.','','Por favor, para recuperar la contraseña de '.$request->mail.' de click en el siguiente enlace.',[$request->mail],'<a href="https://reci-trash.mx/AdminPass/'.$token.'" class="btn btn-default  btn-outline-secondary">Recuperar Contraseña</a>');
             }
             return redirect('home')->with('success','Se envió un correo con las instrucciones para recuperar su contraseña.');
         }

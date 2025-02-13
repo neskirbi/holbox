@@ -44,7 +44,7 @@ class CitaController extends Controller
         $cita->qr=$id.'.png';
         
         $qrimage= ('images/qr/boleta/'.$cita->qr);
-        \QRCode::text('reci-track.mx/boleta/'.$id)->setOutfile($qrimage)->png(); 
+        \QRCode::text('reci-trash.mx/boleta/'.$id)->setOutfile($qrimage)->png(); 
 
         return view('android.citas.citarevA', ['cita'=>$cita,'materialobra'=>$materialobra,'materialesobra'=>$materialesobra,'admin'=>$admin]);
     

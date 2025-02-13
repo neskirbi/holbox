@@ -122,7 +122,7 @@ class CitasFechaController extends Controller
         $cita->qr=$id.'.png';
         
         $qrimage= ('images/qr/boleta/'.$cita->qr);
-        \QRCode::text('reci-track.mx/boleta/'.$id)->setOutfile($qrimage)->png(); 
+        \QRCode::text('reci-trash.mx/boleta/'.$id)->setOutfile($qrimage)->png(); 
 
         return view('administracion.citas.citarev', ['cita'=>$cita,'materialobra'=>$materialobra,'materialesobra'=>$materialesobra]);
     

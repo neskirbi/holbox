@@ -20,6 +20,11 @@ class CatalogoController extends Controller
 {
     
 
+     
+    public function __construct(){
+        $this->middleware('administradorlogged');
+    }
+
     public function index()
     {
         $categoriasmateriales=DB::table('categoriasmaterial')   

@@ -216,7 +216,7 @@ class GeneradorController extends Controller
         $generador->verificado=1;
         if($generador->save()){
             $cliente=Cliente::find($generador->id_cliente);
-            Notificar('Generador Confirmado','Generador Confirmado.','','Su información ha sido validada exitosamente, puede proceder a realizar el alta de su obra en el sistema.',[$cliente->mail],'<a href="https://reci-track.mx/" class="btn btn-default  btn-outline-secondary">Ir a Recitrack</a>');
+            Notificar('Generador Confirmado','Generador Confirmado.','','Su información ha sido validada exitosamente, puede proceder a realizar el alta de su obra en el sistema.',[$cliente->mail],'<a href="https://reci-trash.mx/" class="btn btn-default  btn-outline-secondary">Ir a Recitrack</a>');
             return Redirect::back()->with('success', 'Generador Confirmado.');
         }else{
             return Redirect::back()->with('error', 'Error al guardar.');

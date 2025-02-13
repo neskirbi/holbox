@@ -153,7 +153,7 @@ class GeneradoresController extends Controller
         }
 
         if($generador->save()){
-            Notificar('Nuevo Generador','Nuevo Generador Registrado.','Verificar datos del generador','Se ha registrado la información del generador '.$generador->razonsocial.' para la validación de los datos.',['emiliano@csmx.mx'],'<a href="https://reci-track.mx/acceso" class="btn btn-default  btn-outline-secondary">Ir a Recitrack</a>');
+            Notificar('Nuevo Generador','Nuevo Generador Registrado.','Verificar datos del generador','Se ha registrado la información del generador '.$generador->razonsocial.' para la validación de los datos.',['emiliano@csmx.mx'],'<a href="https://reci-trash.mx/acceso" class="btn btn-default  btn-outline-secondary">Ir a Recitrack</a>');
             return redirect('generadores')->with('success', 'Registro correcto.');
         }else{
             return redirect('generadores')->with('error', 'Error al crear el registro.');

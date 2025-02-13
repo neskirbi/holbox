@@ -162,7 +162,7 @@ class ObraController extends Controller
         }
 
         if($obra->save()){
-            Notificar('Nueva Obra','Obra registrada.','Verificar datos de la obra.','Se registró la obra '.$obra->obra.' de '.$generador->razonsocial.', favor de verificar la información.',$correos,'<a href="https://reci-track.mx" class="btn btn-default  btn-outline-secondary">Ir a Recitrack</a>');
+            Notificar('Nueva Obra','Obra registrada.','Verificar datos de la obra.','Se registró la obra '.$obra->obra.' de '.$generador->razonsocial.', favor de verificar la información.',$correos,'<a href="https://reci-trash.mx" class="btn btn-default  btn-outline-secondary">Ir a Recitrack</a>');
             return view('mails.obraregistrada');
         }else{
             return redirect('obras')->with('error', 'Error al guardar la obra.');

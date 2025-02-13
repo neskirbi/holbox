@@ -63,7 +63,7 @@ class ChoferController extends Controller
         }
         
         if($chofer->telefono!=null){
-            $response=EnviarMensaje("+52".$chofer->telefono,'Su numero se ha registrado en reci-track.mx, para confirmar el registro de su número vaya al siguiente link reci-track.mx/ConfirmacionChofer/'.$chofer->id.' .');
+            $response=EnviarMensaje("+52".$chofer->telefono,'Su numero se ha registrado en reci-trshk.mx, para confirmar el registro de su número vaya al siguiente link reci-trash.mx/ConfirmacionChofer/'.$chofer->id.' .');
             if(intval($response)>=400){
                 return view('avisos.aviso',['titulo'=>'Error','mensaje'=>'Error, el numero telefónico no es correcto.']);
             }
