@@ -33,7 +33,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title"><i class="fa fa-industry" aria-hidden="true"></i> Establecimientos </h3>
+                <h3 class="card-title"><i class="fa fa-industry" aria-hidden="true"></i> Negocio </h3>
 
                 <!--<div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
@@ -49,63 +49,64 @@
                 
               </div>
               <!-- /.card-header -->
-              <div class="card-body">                
+              <div class="card-body">  
+                <div class="col-md-3">
+                    <a href="{{url('negocios/create')}}">
+                      <div class="info-box">
+                        <span class="info-box-icon bg-info"><i class="fa fa-plus"></i></span>
+                        <div class="info-box-content">
+                          <span class="info-box-text" style="color:#000;">Negocio</span>
+                        </div>
+                      </div>
+                    </a>                    
+                  </div>
+
                 <div class="row">
                   <div class="col-md-12" style="overflow-x:scroll;">
                     @if(count($negocios))
-                    <table class="table table-hover text-nowrap">
-                      <thead>
-                        <tr>
-                          <th>Establecimientos</th>
-                          <th>Tipo de Establecimientos</th>                    
-                          <th>Estatus</th>
-                          <th colspan="3">Opciones</th>
-                          
-                        </tr>
-                      </thead>
-                      <tbody>
-                      
-                        @foreach($negocios as $negocio)
-                        <tr>
-                          <td>{{$negocio->negocio}}</td>
-                          <td>{{$negocio->tiponegocio}}</td>
-                          <td>@if($negocio->verificado==0)
-                            <small class="badge badge-warning"><i class="fa fa-exclamation" aria-hidden="true"></i> Pendiente</small>
-                            @else
-                            <small class="badge badge-success"><i class="fa fa-check" aria-hidden="true"></i>  Verificado</small>
-                            @endif
-                          </td>
-                          
-                          
-                          <td>
-                            <a href="negocios/{{$negocio->id}}" class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Ver</a>
-                          </td>
 
-                          <td>
-                            @if(file_exists('documentos/clientes/contratos/'.$negocio->id.'.pdf'))
-                              <a href="documentos/clientes/contratos/{{$negocio->id}}.pdf" target="_blank" class="btn btn-info btn-sm d-inline p-2" >Contrato <i class="fa fa-download" aria-hidden="true"></i></a>
-                            @endif
-                          </td>
-                          
-                          <td>
-                            @if($negocio->verificado==0)
-                            <form action="negocios/{{$negocio->id}}" method="POST"  class="d-inline p-2">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button  id="borrar" class="borrar btn btn-danger btn-sm" data-texto="¿Eliminar Registro?"><i class="fa fa-times" aria-hidden="true"></i></button>
-                                
-                            </form>
-                            @endif
-
-                            @if($negocio->verificado==1)
-                            <a href="cedula/{{$negocio->id}}" class="btn btn-success" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Cédula QR</a>
-                            @endif
-                          </td>
-                        </tr>
-                        @endforeach
-                        
-                      </tbody>
-                    </table>
+                    @foreach($negocios as $negocio)
+                          <div class="card mb-4">
+                            <!-- Badge de estatus en la esquina superior derecha -->
+                           
+                            <div class="card-body">
+                              @if($negocio->verificado == 0)
+                                <small class="badge badge-warning float-right">
+                                  <i class="fa fa-exclamation" aria-hidden="true"></i> Pendiente
+                                </small>
+                              @else
+                                <small class="badge badge-success float-right">
+                                  <i class="fa fa-check" aria-hidden="true"></i> Verificado
+                                </small>
+                              @endif
+                              <h5 class="card-title">{{$negocio->razonsocial}}</h5>
+                              <p class="card-text">
+                                <strong>{{$negocio->negocio}}</strong> <br>
+                              </p>
+                            </div>
+                            <div class="card-footer">
+                              <!-- Botones -->
+                              <div class="mt-2">
+                                <!-- Botón Ver -->
+                                <a href="negocios/{{$negocio->id}}" class="btn btn-info btn-sm btn-block">
+                                  <i class="fa fa-eye" aria-hidden="true"></i> Ver
+                                </a>
+                                <!-- Botón Quitar (solo si no está verificado) -->
+                                @if($negocio->verificado == 0)
+                                <hr>
+                                  <form action="negocios/{{$negocio->id}}" method="POST" class="d-inline">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button id="borrar" class="borrar btn btn-danger btn-sm btn-block btn-quitar" data-texto="¿Deseas quitar este generador?">
+                                      <i class="fa fa-times" aria-hidden="true"></i> Quitar
+                                    </button>
+                                  </form>
+                                @endif
+                              </div>
+                            </div>
+                          </div>
+                      @endforeach
+                    
                     @endif
                   </div>
                 </div>

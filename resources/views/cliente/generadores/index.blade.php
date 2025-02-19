@@ -4,19 +4,7 @@
   @include('cliente.header')
   <title>CSMX | Generadores</title>
   <style>
-    /* Estilos personalizados */
-    .card {
-      position: relative;
-    }
-    .badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      z-index: 1;
-    }
-    .btn-quitar {
-      margin-top: 10px; /* Espacio entre el botón Ver y Quitar */
-    }
+   
   </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -46,10 +34,15 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <div class="p-2">
-                    <a href="registrogenerador" class="btn btn-primary">
-                      <span><i class="fa fa-plus" aria-hidden="true"></i></span> Registrar Generador
-                    </a>
+                  <div class="col-md-3">
+                    <a href="{{url('generadores/create')}}">
+                      <div class="info-box">
+                        <span class="info-box-icon bg-info"><i class="fa fa-plus"></i></span>
+                        <div class="info-box-content">
+                          <span class="info-box-text" style="color:#000;">Generador</span>
+                        </div>
+                      </div>
+                    </a>                    
                   </div>
                   @if(count($generadores))
                     <div class="row">
@@ -57,16 +50,17 @@
                         <div class="col-md-6"> <!-- 2 tarjetas por fila -->
                           <div class="card mb-4">
                             <!-- Badge de estatus en la esquina superior derecha -->
-                            @if($generador->verificado == 0)
-                              <small class="badge badge-warning">
-                                <i class="fa fa-exclamation" aria-hidden="true"></i> Pendiente
-                              </small>
-                            @else
-                              <small class="badge badge-success">
-                                <i class="fa fa-check" aria-hidden="true"></i> Verificado
-                              </small>
-                            @endif
+                            
                             <div class="card-body">
+                              @if($generador->verificado == 0)
+                                <small class="badge badge-warning float-right">
+                                  <i class="fa fa-exclamation" aria-hidden="true"></i> Pendiente
+                                </small>
+                              @else
+                                <small class="badge badge-success float-right">
+                                  <i class="fa fa-check" aria-hidden="true"></i> Verificado
+                                </small>
+                              @endif
                               <h5 class="card-title">{{$generador->razonsocial}}</h5>
                               <p class="card-text">
                                 <strong>RFC:</strong> {{$generador->rfc}}<br>
@@ -82,6 +76,7 @@
                                 </a>
                                 <!-- Botón Quitar (solo si no está verificado) -->
                                 @if($generador->verificado == 0)
+                                <hr>
                                   <form action="generadores/{{$generador->id}}" method="POST" class="d-inline">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="_method" value="DELETE">

@@ -3,272 +3,213 @@
 <head>
   @include('cliente.header')
   <title>CSMX | Registro negocio</title>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>  
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-@include('toast.toasts')  
+@include('toast.toasts')
 <div class="wrapper">
 
   <!-- Navbar -->
- 
   @include('cliente.navigations.navigation')
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
   @include('cliente.sidebars.sidebar')
 
-  <!-- Content Wrapper. Contains page content -->
+  <!-- Content Wrapper -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-     
-    </div>
+    <!-- Content Header -->
+    <div class="content-header"></div>
     <!-- /.content-header -->
 
-    <!-- Main content -->
+    <!-- Main Content -->
     <section class="content">
-        <div class="container-fluid">
-        
-            <div class="card card-default">
+      <div class="container-fluid">
+      <form method="POST" action="{{url('negocios')}}" id="formnegocio" enctype="multipart/form-data">
+            @csrf
+              <!-- Datos del Establecimiento -->
+              <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title"><i class="fa fa-industry" aria-hidden="true"></i> Registro de Establecimiento</h3>            
+                  <h3 class="card-title"><i class="fas fa-building"></i> Datos del Establecimiento</h3>
                 </div>
-                <!-- /.card-header -->
-                    <form method="POST" action="{{url('negocios')}}" id="formnegocio" enctype="multipart/form-data">
-                    @csrf
-                    
-                    <div class="card-body">  
-
-                        <div class="card card-info">
-                            <div class="card-header">
-                                <h3 class="card-title">Datos del Establecimiento</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6"> 
-                                        <div class="form-group">
-                                            <label for="generador">Generador</label>
-                                            <select class="form-control" name="generador" id="generador" aria-invalid="false" >
-                                                <option value="">--Generador--</option>
-                                                @foreach($generadores as $generador)
-                                                <option value="{{$generador->id}}">{{$generador->razonsocial}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label for="negocio">Nombre del Establecimiento</label>
-                                            <input required type="text" name="negocio" class="form-control" id="negocio" placeholder="Nombre del Establecimiento" minlength="1" maxlength="500" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                </div>
-
-                                
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="nautorizacion"># Autorización</label>
-                                            <input required type="text" name="nautorizacion" class="form-control" id="nautorizacion" placeholder="# Autorización" minlength="1" maxlength="100" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6"> 
-                                        <div class="form-group">
-                                            <label for="tiponegocio">Tipo de Establecimiento</label>
-                                            <select class="form-control" name="tiponegocio" id="tiponegocio" aria-invalid="false">
-                                                <option value="">--Tipo Establecimiento--</option>
-                                                @foreach($tiponegocios as $tiponegocio)
-                                                <option value="{{$tiponegocio->id}}">{{$tiponegocio->tiponegocio}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>  
-                                    </div>
-
-                         
-                                </div>
-
-                               
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="calle">Calle</label>
-                                            <input required type="text" name="calle" class="form-control" id="calle" placeholder="Calle" minlength="4" maxlength="150" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="numeroext">Número Ext.</label>
-                                            <input required type="text" name="numeroext" class="form-control" id="numeroext" placeholder="Número Ext." minlength="1" maxlength="10" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="numeroint">Número Int.</label>
-                                            <input required type="text" name="numeroint" class="form-control" id="numeroint" placeholder="Número Int." minlength="1" maxlength="10" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="colonia">Colonia</label>
-                                            <input required type="text" name="colonia" class="form-control" id="colonia" placeholder="Colonia"  minlength="1" maxlength="150" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="municipio">Alcaldía/Municipio</label>
-                                            <input required type="text" name="municipio" class="form-control" id="municipio" placeholder="Alcaldía/Municipio"  minlength="1" maxlength="150" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="cp">C.P.</label>
-                                            <input required type="text" name="cp" class="form-control" id="cp" placeholder="C.P."  minlength="1" maxlength="10" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class='row'>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="entidad">Entidad Federativa</label>
-                                            <!--<input  type="text" name="entidad" class="form-control" id="entidad" placeholder="Entidad federativa" aria-invalid="false" >-->
-                                            <select  name="entidad" class="form-control" id="entidad" aria-invalid="false" >
-                                                <option value="">--Entidad Federativa--</option>
-                                                @foreach($entidades as $entidad)
-                                                <option value="{{$entidad->id}}">{{$entidad->entidad}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="planta">Prestador de Servicio</label>
-                                            <select name="planta" id="planta" class="form-control">
-                                                <option value="">---Prestador de Servicio---</option>
-                                                @foreach($plantas as $planta)
-                                                <option value="{{$planta->id}}">{{$planta->planta}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div calss="row">
-                                    <div class="col-md-8">
-                                        <label for="map">Ubicación del Establecimiento</label>
-                                        <div id="map" style=" height: 350px; width:100%;"></div>
-                                    </div>
-                                </div>
-
-                                <div class="row">                                    
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <label for="latitud">Latitud</label>
-                                            <input required type="text" name="latitud" class="form-control" id="latitud" placeholder="Latitud" aria-invalid="false" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <label for="longitud">Longitud</label>                                           
-                                            <input required type="text" name="longitud" class="form-control" id="longitud" placeholder="Longitud" aria-invalid="false" readonly>
-                                        </div>
-                                    </div>
-                                </div>                            
-                            </div>
-                        </div>
-                       
-
-                       
-                        <div class="card card-info">
-                            <div class="card-header">
-                                <h3 class="card-title">Documentación</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            
-                                            <label for="rfc">Plan de manejo(pdf)</label>
-                                            <div class="input-group">
-                                                <div class="custom-file">                                    
-                                                    <input  type="file" class="custom-file-input" id="plan" name="plan">
-                                                    <label class="custom-file-label" for="plan">Plan de manejo(pdf)</label>                                    
-                                                </div>                      
-                                            </div>
-                                        </div>
-                                    </div> 
-                                </div>
-                            </div>
-                        </div>                
-                        
-
-
-                        <div class="card card-info">
-                            <div class="card-header">
-                                <h3 class="card-title">Datos del contacto</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="correo">Correo Contacto</label>
-                                            <input required type="text" name="correo" class="form-control" id="correo" placeholder="Correo"  minlength="1" maxlength="100" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="telefono">Teléfono</label>
-                                            <input required type="text" name="telefono" class="form-control" id="telefono" placeholder="Teléfono"  minlength="1" maxlength="50" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="celular">Celular</label>
-                                            <input required type="text" name="celular" class="form-control" id="celular" placeholder="Celular"  minlength="1" maxlength="50" aria-invalid="false" >
-                                        </div>
-                                    </div>
-                                </div>
-
-                               
-                               
-                            </div>
-                        </div>                
-                        
-                        
-                        
-                    </div><!--End body-->
-                    </form>
-                    <div class="card-footer" >
-                        <button required type="submit" id="guardar" class="btn  btn-info float-right" onclick="GuardarNegocio();">Guardar</button>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="generador"><i class="fas fa-user-tie"></i> Generador</label>
+                        <select class="form-control" name="generador" id="generador" required>
+                          <option value="">--Generador--</option>
+                          @foreach($generadores as $generador)
+                            <option value="{{$generador->id}}">{{$generador->razonsocial}}</option>
+                          @endforeach
+                        </select>
+                      </div>
                     </div>
-                
-            </div>
-            <br>          
-        </div><!-- /.container-fluid -->
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="negocio"><i class="fas fa-signature"></i> Nombre del Establecimiento</label>
+                        <input type="text" name="negocio" class="form-control" id="negocio" placeholder="Nombre del Establecimiento" required>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="nautorizacion"><i class="fas fa-file-alt"></i> # Autorización</label>
+                        <input type="text" name="nautorizacion" class="form-control" id="nautorizacion" placeholder="# Autorización" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="tiponegocio"><i class="fas fa-store"></i> Giro del Establecimiento</label>
+                        <input type="text" name="tiponegocio" id="tiponegocio" class="form-control" placeholder="Giro del Establecimiento" required>
+                        
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="calle"><i class="fas fa-road"></i> Calle</label>
+                        <input type="text" name="calle" class="form-control" id="calle" placeholder="Calle" required>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="numeroext"><i class="fas fa-home"></i> Número Ext.</label>
+                        <input type="text" name="numeroext" class="form-control" id="numeroext" placeholder="Número Ext." required>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="numeroint"><i class="fas fa-home"></i> Número Int.</label>
+                        <input type="text" name="numeroint" class="form-control" id="numeroint" placeholder="Número Int.">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="colonia"><i class="fas fa-map-marker-alt"></i> Colonia</label>
+                        <input type="text" name="colonia" class="form-control" id="colonia" placeholder="Colonia" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="municipio"><i class="fas fa-city"></i> Alcaldía/Municipio</label>
+                        <input type="text" name="municipio" class="form-control" id="municipio" placeholder="Alcaldía/Municipio" required>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="cp"><i class="fas fa-map-pin"></i> C.P.</label>
+                        <input type="text" name="cp" class="form-control" id="cp" placeholder="C.P." required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="entidad"><i class="fas fa-flag"></i> Entidad Federativa</label>
+                        <select name="entidad" class="form-control" id="entidad" required>
+                          <option value="">--Entidad Federativa--</option>
+                          @foreach($entidades as $entidad)
+                            <option value="{{$entidad->id}}">{{$entidad->entidad}}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label for="map"><i class="fas fa-map-marked-alt"></i> Ubicación del Establecimiento</label>
+                      <div id="map" style="height: 350px; width: 100%;"></div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="latitud"><i class="fas fa-latitude"></i> Latitud</label>
+                        <input type="text" name="latitud" class="form-control" id="latitud" placeholder="Latitud" readonly>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="longitud"><i class="fas fa-longitude"></i> Longitud</label>
+                        <input type="text" name="longitud" class="form-control" id="longitud" placeholder="Longitud" readonly>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Documentación -->
+              <div class="card card-info">
+                <div class="card-header">
+                  <h3 class="card-title"><i class="fas fa-file-pdf"></i> Documentación</h3>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="plan"><i class="fas fa-file-upload"></i> Plan de manejo (pdf)</label>
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="plan" name="plan" required>
+                          <label class="custom-file-label" for="plan">Seleccionar archivo</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Datos del Contacto -->
+              <div class="card card-info">
+                <div class="card-header">
+                  <h3 class="card-title"><i class="fas fa-id-card"></i> Datos del Contacto</h3>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="correo"><i class="fas fa-envelope"></i> Correo Contacto</label>
+                        <input type="email" name="correo" class="form-control" id="correo" placeholder="Correo" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="telefono"><i class="fas fa-phone"></i> Teléfono</label>
+                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Teléfono" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="celular"><i class="fas fa-mobile-alt"></i> Celular</label>
+                        <input type="tel" name="celular" class="form-control" id="celular" placeholder="Celular" required>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" id="guardar" class="btn btn-info float-right"><i class="fas fa-save"></i> Guardar</button>
+                </div>
+              </div>
+              
+            </form>
+      </div>
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
+
+  <!-- Footer -->
   <footer class="main-footer">
     <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
     All rights reserved.
@@ -276,49 +217,9 @@
       <b>Version</b> 3.1.0
     </div>
   </footer>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->
 
-<!-- jQuery -->
-<script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button);
 
- 
-</script>
-<!-- Bootstrap 4 -->
-<script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<!-- ChartJS -->
-<script src="{{asset('plugins/chart.js/Chart.min.js')}}"></script>
-<!-- Sparkline -->
-<script src="{{asset('plugins/sparklines/sparkline.js')}}"></script>
-<!-- JQVMap -->
-<script src="{{asset('plugins/jqvmap/jquery.vmap.min.js')}}"></script>
-<script src="{{asset('plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
-<!-- jQuery Knob Chart -->
-<script src="{{asset('plugins/jquery-knob/jquery.knob.min.js')}}"></script>
-<!-- daterangepicker -->
-<script src="{{asset('plugins/moment/moment.min.js')}}"></script>
-<script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="{{asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
-<!-- Summernote -->
-<script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
-<!-- overlayScrollbars -->
-<script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
-<!-- AdminLTE App, funcion de sidebar -->
-<script src="{{asset('dist/js/adminlte.js')}}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{asset('dist/js/demo.js')}}"></script>
 <script>
 $(function () {
   bsCustomFileInput.init();
@@ -368,9 +269,8 @@ $(function () {
       
 </script>
 
+<!-- Scripts -->
 @include('MapsApi')
-
-
 @include('footer')
 </body>
 </html>

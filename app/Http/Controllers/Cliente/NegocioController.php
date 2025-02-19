@@ -42,15 +42,15 @@ class NegocioController extends Controller
 
         
 
-        return view('cliente.negocios.negocios',['negocios'=>$negocios]);
+        return view('cliente.negocios.index',['negocios'=>$negocios]);
     
     }
 
     
     public function create()
     {
-        $plantas=Planta::where('tipo',2)->get();
-        $tiponegocios=TipoNegocio::All();        
+        $plantas=Planta::all();        
+        $tiponegocios=TipoNegocio::All();
         $entidades=Entidad::All();
         $generadores=Generador::where('id_cliente','=',Auth::guard('clientes')->user()->id)->get();
         return view('cliente.negocios.create',['generadores'=>$generadores,'plantas'=>$plantas,'tiponegocios'=>$tiponegocios,'entidades'=>$entidades]);
@@ -62,10 +62,39 @@ class NegocioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         
-       
+       //return $request;
+       $id = GetUuid();
+
+       if(!GuardarArchivos($request->plan,'/documentos/negocios/plan/', $id)){
+            return Redirect::back()->with('error', 'Error al guardar el plan de menejo.');
+        }
+
+
+        $negocio = new Negocio();
+        
+        $negocio->id = $id;
+        $negocio->id_planta = '';
+        $negocio->id_generador = $request->generador;
+        $negocio->negocio = $request->negocio;
+        $negocio->tiponegocio = $request->tiponegocio;
+        $negocio->calle = $request->calle;
+        $negocio->numeroext = $request->numeroext;
+        $negocio->numeroint = $request->numeroint=='' ? '' : $request->numeroint ;
+        $negocio->colonia = $request->colonia;
+        $negocio->municipio = $request->municipio;
+        $negocio->cp = $request->cp;
+        $negocio->entidad = $request->entidad;
+        $negocio->latitud = $request->latitud;
+        $negocio->longitud = $request->longitud;
+        $negocio->correo = $request->correo;
+        $negocio->telefono = $request->telefono;
+        $negocio->celular = $request->celular;
+
+        $negocio->save();
+
+        return redirect('negocios')->with('success', 'Registro correcto.');
 
     }
 
@@ -94,7 +123,7 @@ class NegocioController extends Controller
 
 
         
-        return view('cliente.negocios.negocio',['negocio'=>$negocio,'generador'=>$generador,'planta'=>$planta,'entidad'=>$entidad]);
+        return view('cliente.negocios.show',['negocio'=>$negocio,'generador'=>$generador,'planta'=>$planta,'entidad'=>$entidad]);
 
 
     }

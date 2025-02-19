@@ -586,5 +586,34 @@ $(function () {
   bsCustomFileInput.init();
 });
 </script>
+
+<script>
+  // Función para validar si un archivo es PDF
+  function validarPDF(input) {
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      const fileType = file.type;
+
+      // Verificar si el archivo es un PDF
+      if (fileType !== "application/pdf") {
+        alert("Por favor, selecciona un archivo en formato PDF.");
+        input.value = ""; // Limpiar el input
+        return false;
+      }
+    }
+    return true;
+  }
+
+  // Asignar la validación a los inputs de tipo file
+  document.addEventListener("DOMContentLoaded", function () {
+    const inputsPDF = document.querySelectorAll('input[type="file"]');
+
+    inputsPDF.forEach((input) => {
+      input.addEventListener("change", function () {
+        validarPDF(this);
+      });
+    });
+  });
+</script>
 </body>
 </html>

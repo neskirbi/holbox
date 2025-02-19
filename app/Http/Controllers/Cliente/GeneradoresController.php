@@ -32,7 +32,7 @@ class GeneradoresController extends Controller
         ->get();
         //return $generadores;
         
-        return view('cliente.generadores.generadores',['generadores'=>$generadores]);
+        return view('cliente.generadores.index',['generadores'=>$generadores]);
     }
 
     /**
@@ -42,7 +42,7 @@ class GeneradoresController extends Controller
      */
     public function create()
     {
-        //
+        return view('cliente.generadores.create');
     }
 
     /**
@@ -202,8 +202,9 @@ class GeneradoresController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id){
-      
-        
+      $generador = Generador::find($id);
+      $generador->delete();
+      return redirect('generadores')->with('error','Generador Borrado.');
     }
 
     /**
