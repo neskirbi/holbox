@@ -48,7 +48,7 @@
               
               </div>
               <div class="card-body p-0">
-                  <input type="hidden" name="id_planta" id="id_planta" value="{{Auth::guard('administradores')->user()->id_planta}}">
+                  <input type="hidden" name="id_municipio" id="id_municipio" value="{{Auth::guard('administradores')->user()->id_municipio}}">
                   <ul class="nav nav-pills flex-column">                 
 
                     <li class="nav-item ">

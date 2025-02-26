@@ -26,8 +26,8 @@ class RecoleccionController extends Controller
             }else{
 
                 $negocio=Negocio::find($recoleccion['id_negocio']);
-                $planta=Planta::find($negocio->id_planta);
-                $configuracion=Configuracion::where('id_planta',$negocio->id_planta)->first();
+                $planta=Planta::find($negocio->id_municipio);
+                $configuracion=Configuracion::where('id_municipio',$negocio->id_municipio)->first();
 
                 $folio=$configuracion->folio;
                 $configuracion->folio = $configuracion->folio+1;
@@ -59,7 +59,7 @@ class RecoleccionController extends Controller
                 $recol=new Recoleccion();
 
                 $recol->id=$recoleccion['id'];
-                $recol->id_planta=$negocio->id_planta;
+                $recol->id_municipio=$negocio->id_municipio;
                 $recol->id_recolector=$recoleccion['id_recolector'];
                 $recol->id_negocio=$recoleccion['id_negocio'];
                 $recol->negocio=$recoleccion['negocio'] == null ? '' : $recoleccion['negocio'];

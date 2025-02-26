@@ -14,29 +14,29 @@ use Redirect;
 
 class AdministradorController extends Controller
 {
-    function Administradores($id_planta){
+    function Administradores($id_municipio){
         
-        $planta = Planta::find($id_planta);
+        $planta = Planta::find($id_municipio);
 
         $directores=DB::table('directores')
-        ->where('id_planta',$id_planta)
+        ->where('id_municipio',$id_municipio)
         ->orderby('director','asc')
         ->get();
 
         $administradores=DB::table('administradores')
-        ->where('id_planta',$id_planta)
+        ->where('id_municipio',$id_municipio)
         ->orderby('administrador','asc')
         ->get();
 
 
         $recepciones=DB::table('recepciones')
-        ->where('id_planta',$id_planta)
+        ->where('id_municipio',$id_municipio)
         ->orderby('nombre','asc')
         ->get();
 
 
         $finanzas=DB::table('finanzas')
-        ->where('id_planta',$id_planta)
+        ->where('id_municipio',$id_municipio)
         ->orderby('nombre','asc')
         ->get();
         
@@ -52,7 +52,7 @@ class AdministradorController extends Controller
         ->first();
 
         $administradores=DB::table('administradores')
-        ->where('id_planta',$planta->id)
+        ->where('id_municipio',$planta->id)
         ->where('principal',1)
         ->orderby('administrador','asc')
         ->get();
@@ -91,7 +91,7 @@ class AdministradorController extends Controller
         
         
         $admin->id=GetUuid();
-        $admin->id_planta=$request->id_planta;
+        $admin->id_municipio=$request->id_municipio;
         $admin->mail=$request->mail;
         $admin->pass=$request->pass;
         $admin->save();
@@ -191,7 +191,7 @@ class AdministradorController extends Controller
 
         $administrador=new Administrador();
         $administrador->id=GetUuid();
-        $administrador->id_planta=$planta->id;
+        $administrador->id_municipio=$planta->id;
         $administrador->administrador=$request->administrador;
         $administrador->cargo=$request->cargo;
         $administrador->mail=$request->mail;
@@ -204,7 +204,7 @@ class AdministradorController extends Controller
 
         $configuracion=new Configuracion();
         $configuracion->id=GetUuid();
-        $configuracion->id_planta=$planta->id;
+        $configuracion->id_municipio=$planta->id;
 
         if(!$configuracion->save()){
             return redirect('plantasasoc')->with('error', 'Error la configurar.');  

@@ -30,7 +30,7 @@ class PlantaController extends Controller
         ->first();
 
         $administradores=DB::table('administradores')
-        ->where('id_planta',$planta->id)
+        ->where('id_municipio',$planta->id)
         ->where('principal',1)
         ->orderby('administrador','asc')
         ->get();
@@ -75,7 +75,7 @@ class PlantaController extends Controller
 
         $administrador=new Administrador();
         $administrador->id=GetUuid();
-        $administrador->id_planta=$planta->id;
+        $administrador->id_municipio=$planta->id;
         $administrador->administrador=$request->administrador;
         $administrador->cargo=$request->cargo;
         $administrador->mail=$request->mail;
@@ -88,7 +88,7 @@ class PlantaController extends Controller
 
         $configuracion=new Configuracion();
         $configuracion->id=GetUuid();
-        $configuracion->id_planta=$planta->id;
+        $configuracion->id_municipio=$planta->id;
 
         if(!$configuracion->save()){
             return redirect('plantasasoc')->with('error', 'Error la configurar.');  

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   @include('administracion.header')
-  <title>CSMX | Generadores</title>
+  <title>CSMX | Establecimientos</title>
 
   
 </head>
@@ -29,11 +29,13 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+
+        
         <div class="row">
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Generadores</h3>
+                <h3 class="card-title"><i class="fa fa-industry" aria-hidden="true"></i> Establecimientos </h3>
 
                 <div class="card-tools">
                   <div class="btn-group">
@@ -41,16 +43,19 @@
                       Filtros <i class="fa fa-sliders" aria-hidden="true"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" style="width:300px;">
-                      <form class="px-4 py-3" action="{{url('generador')}}" method="GET">
+                      <form class="px-4 py-3" action="{{url('establecimientos')}}" method="GET">
+                        
                         <div class="input-group mb-3">
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="far fa-building"></i></span>
                           </div>
-                          <input type="text" class="form-control" name="generador" id="generador" placeholder="Generador" @if(isset($filtros->generador)) value="{{$filtros->generador}}" @endif >
+                          <input type="text" class="form-control" name="negocio" id="negocio" placeholder="Establecimiento" @if(isset($filtros->negocio)) value="{{$filtros->negocio}}" @endif >
                         </div>
 
+
+
                         <div class="dropdown-divider"></div>
-                        <a href="generador" class="btn btn-default btn-sm">Limpiar</a>
+                        <a href="{{url('establecimientos')}}" class="btn btn-default btn-sm">Limpiar</a>
                         <button type="submit" class="btn btn-info btn-sm float-right">Aplicar</button>
                         
                       </form>
@@ -61,45 +66,56 @@
                 
               </div>
               <!-- /.card-header -->
-              <div class="card-body" style="overflow-x: scroll;">
-              <a class="btn btn-primary" href="{{url('generador/create')}}"><i class="fa fa-plus" aria-hidden="true"></i> Generador</a>
+              <div class="card-body">
                 
-                @if(count($generadores))
-                <table class="table table-hover text-nowrap">
-                  <thead>
-                    <tr>
-                    <th>Razón social</th>
-                    <th>RFC</th>
-                    <th>Persona</th> 
-                    <th>Estatus</th> 
-                    <th></th> 
-                    </tr>
-                  </thead>
-                  <tbody>
-                  
-                    @foreach($generadores as $generador)
-                      <tr>
-                      <td>{{$generador->razonsocial}}</td>
-                      <td>{{$generador->rfc}}</td>
-                      <td>{{$generador->fisicaomoral}}</td>
-                      <td>@if($generador->verificado==0)
-                        <small class="badge badge-warning"><i class="fa fa-exclamation" aria-hidden="true"></i> Pendiente</small>
-                        @else
-                        <small class="badge badge-success"><i class="fa fa-check" aria-hidden="true"></i>  Verificado</small>
-                        @endif</td>
-                      <td>
-                      <a href="generador/{{$generador->id}}" class="btn btn-info btn-sm d-inline p-2" ><i class="fa fa-eye" aria-hidden="true"></i> Revisar</a>
-                     
-                    </td>
-                    </tr>
-                    @endforeach
-                    
-                  </tbody>
-                </table>
-                @endif
-              </div>
-              <div class="card-footer">
-              {{ $generadores->appends($_GET)->links('pagination::bootstrap-4') }}
+                <div class="row">
+                  <div class="col-md-12" style="overflow-x:scroll;">
+                    @if(count($negocios))
+                    <table class="table table-hover text-nowrap">
+                      <thead>
+                        <tr>
+                        <th>Establecimientos</th>
+                        <th>Tipo de Establecimiento</th>                    
+                        <th>Estatus</th>
+                        <th colspan="3">Opciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      
+                        @foreach($negocios as $negocio)
+                        <tr>
+                          <td>{{$negocio->negocio}}</td>
+                          <td>{{$negocio->tiponegocio}}</td>
+                          <td>@if($negocio->verificado==0)
+                            <small class="badge badge-warning"><i class="fa fa-exclamation" aria-hidden="true"></i> Pendiente</small>
+                            @else
+                            <small class="badge badge-success"><i class="fa fa-check" aria-hidden="true"></i>  Verificado</small>
+                            @endif
+                          </td>
+                          
+                          <td>
+                            @if(file_exists('documentos/clientes/contratos/'.$negocio->id.'.pdf'))
+                              <a href="documentos/clientes/contratos/{{$negocio->id}}.pdf" target="_blank" class="btn btn-info btn-sm d-inline p-2" >Contrato <i class="fa fa-download" aria-hidden="true"></i></a>
+                            @endif
+                            
+                          </td>
+                          
+                          <td>
+                            <a href="establecimientos/{{$negocio->id}}" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i> Ver</a>
+
+                            @if($negocio->verificado==1)
+                            <a href="cedula/{{$negocio->id}}" class="btn btn-success" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Cédula QR</a>
+                            @endif
+                          </td>
+                        </tr>
+                        @endforeach
+                        
+                      </tbody>
+                    </table>
+                    @endif
+                  </div>
+                </div>
+                
               </div>
               <!-- /.card-body -->
             </div>
@@ -160,7 +176,5 @@
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App, funcion de sidebar -->
 <script src="dist/js/adminlte.js"></script>
-@include('cliente.generadores.modals.modalgenerador')
-@include('administracion.footer')
 </body>
 </html>

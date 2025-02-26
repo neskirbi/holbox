@@ -274,10 +274,10 @@ Route::resource('friday','App\Http\Controllers\Administracion\FridayController')
 
 
 Route::resource('reportes', 'App\Http\Controllers\Administracion\ReporteController');
-Route::get('ReportePagosAdministracion/{id_planta}/{mes}/{anio}', 'App\Http\Controllers\Administracion\ReporteController@ReportePagosAdministracion');
-Route::get('ReporteCitasAdministracion/{id_obra}/{ini}/{fin}/{id_planta}/{fotos}', 'App\Http\Controllers\Administracion\ReporteController@ReporteCitasAdministracion');
-Route::get('ReporteTransporte/{id_obra}/{ini}/{fin}/{id_planta}', 'App\Http\Controllers\Administracion\ReporteController@ReporteTransporte');
-Route::get('ReporteStatusObraAdministracion/{id_planta}', 'App\Http\Controllers\Administracion\ReporteController@ReporteStatusObraAdministracion');
+Route::get('ReportePagosAdministracion/{id_municipio}/{mes}/{anio}', 'App\Http\Controllers\Administracion\ReporteController@ReportePagosAdministracion');
+Route::get('ReporteCitasAdministracion/{id_obra}/{ini}/{fin}/{id_municipio}/{fotos}', 'App\Http\Controllers\Administracion\ReporteController@ReporteCitasAdministracion');
+Route::get('ReporteTransporte/{id_obra}/{ini}/{fin}/{id_municipio}', 'App\Http\Controllers\Administracion\ReporteController@ReporteTransporte');
+Route::get('ReporteStatusObraAdministracion/{id_municipio}', 'App\Http\Controllers\Administracion\ReporteController@ReporteStatusObraAdministracion');
 
 Route::resource('crm','App\Http\Controllers\Administracion\CrmController');
 

@@ -10,7 +10,7 @@ use App\Models\Generador;
 use App\Models\Negocio;
 use App\Models\TipoNegocio;
 use App\Models\Entidad;
-use App\Models\Planta;
+use App\Models\Municipio;
 use App\Models\Configuracion;
 use Redirect;
 
@@ -25,13 +25,13 @@ class NegocioController extends Controller
     {
         $negocios = DB::table('negocios')
         ->leftjoin('generadores', 'generadores.id', '=', 'negocios.id_generador')
-        ->where('negocios.id_planta',GetIdPlanta())   
+        ->where('negocios.id_municipio',GetIdMunicipio())   
         ->where('negocios.negocio','like','%'.$filtros->negocio.'%')
         ->select('negocios.id','negocios.negocio','negocios.tiponegocio','generadores.razonsocial','negocios.verificado')
         ->orderby('negocios.created_at','desc')
         ->get();
 
-        return view('administracion.negocios.negocios',['negocios'=>$negocios,'filtros'=>$filtros]);
+        return view('administracion.negocios.index',['negocios'=>$negocios,'filtros'=>$filtros]);
     }
 
     /**
@@ -41,11 +41,7 @@ class NegocioController extends Controller
      */
     public function create()
     {
-        $plantas=Planta::where('tipo',2)->where('id',GetIdPlanta())->get();
-        $tiponegocios=TipoNegocio::All();        
-        $entidades=Entidad::All();
-        $generadores=Generador::all();
-        return view('administracion.negocios.create',['generadores'=>$generadores,'plantas'=>$plantas,'tiponegocios'=>$tiponegocios,'entidades'=>$entidades]);
+       
     }
 
     /**
@@ -56,55 +52,6 @@ class NegocioController extends Controller
      */
     public function store(Request $request)
     {
-        
-
-        $negocio = new Negocio();
-
-        $negocio->id=GetUuid();        
-        $negocio->id_generador=isset($request->generador) ? $request->generador : '' ;
-        $negocio->id_planta=$request->planta;
-        
-        $negocio->negocio=$request->negocio;
-
-        $negocio->nautorizacion=$request->nautorizacion;
-        
-        $tiponegocio=TipoNegocio::where('id','=',$request->tiponegocio)->first();
-        if(!$tiponegocio){
-            return Redirect::back()->with('error', 'El tipo de negocio no se encuentra');
-        }
-        $negocio->tiponegocio=$tiponegocio->tiponegocio;
-
-
-        $negocio->calle=$request->calle;
-        $negocio->numeroext=$request->numeroext;
-        $negocio->numeroint=$request->numeroint;
-        $negocio->colonia=$request->colonia;
-        $negocio->municipio=$request->municipio;
-        $negocio->entidad=$request->entidad;
-        $negocio->cp=$request->cp;
-        $negocio->latitud=$request->latitud;
-        $negocio->longitud=$request->longitud;
-        $negocio->verificado=1;
-        
-        //Subir plan de manejo
-        $nombre = $negocio->id.'.pdf';
-        if(!GuardarArchivos($request->plan,'/documentos/clientes/negocios/plan',$nombre)){
-            return Redirect::back()->with('error', 'Error al guardar RFC del generador.');
-        }
-
-        $negocio->telefono=$request->telefono;
-        $negocio->celular=$request->celular;
-        $negocio->correo=$request->correo;
-
-        $confi=Configuracion::select('iva')->where('id_planta',$request->planta)->first();
-        $negocio->iva=$confi->iva;
-        
-
-        if($negocio->save()){
-            return redirect('establecimientos')->with('success', 'Datos guardados.');
-        }else{
-            return redirect('establecimientos')->with('error', 'Error al guardar los datos.');
-        }
     }
 
     /**
@@ -119,23 +66,25 @@ class NegocioController extends Controller
         $tiponegocios=TipoNegocio::all();
 
         $entidades=Entidad::all();
-        $plantas=Planta::all();
+        
 
         $generador=DB::table('generadores')
         ->where('generadores.id',$negocio->id_generador)
-        ->first();
-
-        $planta=DB::table('plantas')
-        ->where('plantas.id',$negocio->id_planta)
         ->first();
 
         $entidad=DB::table('entidades')
         ->where('entidad',$negocio->entidad)
         ->first();
 
+        $municipio = Municipio::find($negocio->id_municipio);
+        $entidad=Entidad::find($municipio->id_entidad);
+
         $generadores=Generador::all();
         
-        return view('administracion.negocios.negocio',['generadores'=>$generadores,'negocio'=>$negocio,'generador'=>$generador,'planta'=>$planta,'plantas'=>$plantas,'entidades'=>$entidades,'entidad'=>$entidad,'tiponegocios'=>$tiponegocios]);
+        return view('administracion.negocios.show',['generadores'=>$generadores,
+        'negocio'=>$negocio,'generador'=>$generador,
+        'entidad'=>$entidad,
+        'entidades'=>$entidades,'municipio'=>$municipio,'entidad'=>$entidad,'tiponegocios'=>$tiponegocios]);
 
     }
 
@@ -156,48 +105,27 @@ class NegocioController extends Controller
         //negocio->id=GetUuid(); 
         $negocio=Negocio::find($id);      
         $negocio->id_generador=isset($request->generador) ? $request->generador : '' ;
-        $negocio->id_planta=$request->planta;
+        $negocio->id_municipio=$request->municipio;
 
         $negocio->negocio=$request->negocio;
-        
-        $negocio->nautorizacion=$request->nautorizacion;
-        
-        if(strlen($request->tiponegocio)==32){
-            $tiponegocio=TipoNegocio::where('id','=',$request->tiponegocio)->first();
-            if(!$tiponegocio){
-                return Redirect::back()->with('error', 'El tipo de negocio no se encuentra');
-            }
-            $negocio->tiponegocio=$tiponegocio->tiponegocio;
-
-        }
-        
-
+        $negocio->tiponegocio=$request->tiponegocio;
         $negocio->calle=$request->calle;
         $negocio->numeroext=$request->numeroext;
         $negocio->numeroint=$request->numeroint;
         $negocio->colonia=$request->colonia;
-        $negocio->municipio=$request->municipio;
-        $negocio->entidad=$request->entidad;
         $negocio->cp=$request->cp;
         $negocio->latitud=$request->latitud;
         $negocio->longitud=$request->longitud;
         $negocio->verificado=1;
         
-        //Subir plan de manejo
-        if($request->plan!=null){
-            $nombre = $negocio->id.'.pdf';
-            if(!GuardarArchivos($request->plan,'/documentos/clientes/negocios/plan',$nombre)){
-                return Redirect::back()->with('error', 'Error al guardar RFC del generador.');
-            }
-        }
+        
        
-        $negocio->contacto=$request->contacto;
         $negocio->telefono=$request->telefono;
         $negocio->celular=$request->celular;
         $negocio->correo=$request->correo;
 
-        $confi=Configuracion::select('iva')->where('id_planta',$request->planta)->first();
-        $negocio->iva=$confi->iva;
+        
+        $negocio->iva=16;
         
 
         if($negocio->save()){

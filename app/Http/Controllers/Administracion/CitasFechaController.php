@@ -38,34 +38,34 @@ class CitasFechaController extends Controller
 
         $citas_count = DB::table('citas')
         ->join('obras','obras.id','=','citas.id_obra')
-        ->where('obras.id_planta','=',GetIdPlanta())
+        ->where('obras.id_municipio','=',GetIdPlanta())
         ->where('citas.borrado',1)
         ->count();
 
         $citas_pendientes_count = DB::table('citas')
         ->join('obras','obras.id','=','citas.id_obra')
-        ->where('obras.id_planta','=',GetIdPlanta())
+        ->where('obras.id_municipio','=',GetIdPlanta())
             ->where('citas.borrado',1)
                 ->where('citas.confirmacion',0)
                     ->count();
 
         $citas_asistidas_count = DB::table('citas')
         ->join('obras','obras.id','=','citas.id_obra')
-        ->where('obras.id_planta','=',GetIdPlanta())
+        ->where('obras.id_municipio','=',GetIdPlanta())
             ->where('citas.borrado',1)
                 ->where('citas.confirmacion',1)
                     ->count();
 
         $citas_falta_count = DB::table('citas')
         ->join('obras','obras.id','=','citas.id_obra')
-        ->where('obras.id_planta','=',GetIdPlanta())
+        ->where('obras.id_municipio','=',GetIdPlanta())
             ->where('citas.borrado',1)
                 ->where('citas.confirmacion',2)
                     ->count();
 
         $citas = DB::table('citas')
         ->join('obras','obras.id','=','citas.id_obra')
-        ->where('obras.id_planta','=',GetIdPlanta())
+        ->where('obras.id_municipio','=',GetIdPlanta())
         ->where('obras.obra','like','%'.$filtros->obra.'%')
         ->orderBy('citas.folio', 'asc')
         ->select('citas.id','citas.obra',DB::raw("'Reciclaje' as tipo"),'citas.fechacita','citas.planta','citas.confirmacion','citas.folio','citas.matricula')
@@ -190,7 +190,7 @@ class CitasFechaController extends Controller
         $obra=Obra::find($cita->id_obra);
 
         if($cita->confirmacion==0 || $cita->folio==0){
-            $configuracion=Configuracion::where('id_planta','=',$obra->id_planta)->first();
+            $configuracion=Configuracion::where('id_municipio','=',$obra->id_municipio)->first();
             $configuracion->folio=$configuracion->folio+1;
             $cita->folio=$configuracion->folio;
             $configuracion->save();

@@ -15,7 +15,7 @@ class CreateRecepciones extends Migration
     {
         Schema::create('recepciones', function (Blueprint $table) {
             $table->string('id',32)->unique();
-            $table->string('id_planta',32);
+            $table->string('id_municipio',32);
             $table->string('nombre',150);
             $table->string('cargo',150);
             $table->longtext('firma')->default('');

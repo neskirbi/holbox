@@ -143,7 +143,7 @@ class ApiController extends Controller
     function ReportePagos(Request $request){
         /*$pagos= DB::table('pagos')
         ->join('clientes','clientes.id','=','pagos.id_cliente')
-        ->where('id_planta','=',$request->id_planta)
+        ->where('id_municipio','=',$request->id_municipio)
         ->whereraw('month(pagos.created_at)='.$request->month)
         ->whereraw('year(pagos.created_at)='.$request->year)
         ->where('pagos.status','=',2)
@@ -154,7 +154,7 @@ class ApiController extends Controller
 
         $pagos=DB::table('pagos')
         ->join('obras','obras.id','=','pagos.id_obra')
-        ->where('pagos.id_planta','=',$request->id_planta)
+        ->where('pagos.id_municipio','=',$request->id_municipio)
         ->whereraw('month(pagos.created_at)='.$request->month)
         ->whereraw('year(pagos.created_at)='.$request->year)
         ->where('pagos.status','=',2)
@@ -182,7 +182,7 @@ class ApiController extends Controller
         ->where('id_obra','like','%'.$request->obra == null ? '' : $request->obra.'%')
         ->where('fechacita','>=',$request->ini)
         ->where('fechacita','<=',$request->fin)
-        ->where('obras.id_planta','=',$request->id_planta)
+        ->where('obras.id_municipio','=',$request->id_municipio)
         ->where('confirmacion','=',1)
         ->orderby('folio','asc')
         ->get();
@@ -214,7 +214,7 @@ class ApiController extends Controller
         ->where('obras.id','like','%'.$request->obra == null ? '' : $request->obra.'%')
         ->where('pedidos.created_at','>=',$request->ini)
         ->where('pedidos.updated_at','<=',$request->fin)
-        ->where('obras.id_planta','=',$request->id_planta)
+        ->where('obras.id_municipio','=',$request->id_municipio)
         ->where('pedidos.confirmacion','=',2)
         ->orderby('pedidos.created_at','desc')
         ->get();
@@ -229,7 +229,7 @@ class ApiController extends Controller
     function ReporteStatusObrasPre(Request $request){
         $obras = DB::table('generadores')
         ->join('obras' ,'obras.id_generador','=','generadores.id')
-        ->where('obras.id_planta','=',$request->id_planta)
+        ->where('obras.id_municipio','=',$request->id_municipio)
         ->select('generadores.razonsocial','obras.obra','obras.fechainicio','obras.fechafin','obras.descuento','obras.superficie','obras.superunidades',
         DB::raw("(select sum(mat.cantidad*mat.precio)+(sum(mat.cantidad*mat.precio)*(obras.ivaobra/100)) from materialesobra as mat where mat.id_obra=obras.id) as monto"),
         DB::raw("(select sum(mat.cantidad*mat.precio)+(sum(mat.cantidad*mat.precio)*(obras.ivaobra/100)) from materialesobra as mat where mat.id_obra=obras.id)-((select sum(mat.cantidad*mat.precio)+(sum(mat.cantidad*mat.precio)*(obras.ivaobra/100)) from materialesobra as mat where mat.id_obra=obras.id)*(obras.descuento/100)) as montototal"),

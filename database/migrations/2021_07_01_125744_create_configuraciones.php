@@ -15,7 +15,7 @@ class CreateConfiguraciones extends Migration
     {
         Schema::create('configuraciones', function (Blueprint $table) {
             $table->string('id',32)->unique();
-            $table->string('id_planta',32);
+            $table->string('id_municipio',32);
             $table->string('razonsocial',250)->default('');
             $table->float('iva',5,2)->default(0);
             $table->string('banco',50)->default('');

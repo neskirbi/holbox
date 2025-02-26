@@ -22,12 +22,12 @@ class PlantaController extends Controller
         ->first();
 
         $configuracion = DB::table('configuraciones')
-        ->where('id_planta',GetIdPlanta())
+        ->where('id_municipio',GetIdPlanta())
         ->first();
 
 
         $administradores=DB::table('administradores')
-        ->where('id_planta',$planta->id)
+        ->where('id_municipio',$planta->id)
         ->orderby('created_at','asc')
         ->get();
 
@@ -43,7 +43,7 @@ class PlantaController extends Controller
         ->first();
 
         $recolectores=DB::table('recolectores')
-        ->where('id_planta',$planta->id)
+        ->where('id_municipio',$planta->id)
         ->orderby('administrador','asc')
         ->get();
 
@@ -60,7 +60,7 @@ class PlantaController extends Controller
         $planta->save();
 
         $configuracion = DB::table('configuraciones')
-        ->where('id_planta',$id)
+        ->where('id_municipio',$id)
         ->first();
 
         $configuracion=Configuracion::find($configuracion->id);

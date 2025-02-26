@@ -15,7 +15,7 @@ class CreateContenedores extends Migration
     {
         Schema::create('contenedores', function (Blueprint $table) {
             $table->string('id',32)->unique();
-            $table->string('id_planta',32);            
+            $table->string('id_municipio',32);            
             $table->string('contenedor',150);                  
             $table->float('cantidad',20,5);  
             

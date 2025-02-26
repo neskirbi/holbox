@@ -48,7 +48,7 @@
               
               </div>
               <div class="card-body p-0">
-                  <input type="hidden" name="id_planta" id="id_planta" value="{{$configuracion->id_planta}}">
+                  <input type="hidden" name="id_municipio" id="id_municipio" value="{{$configuracion->id_municipio}}">
                   <ul class="nav nav-pills flex-column">                 
 
                     <li class="nav-item ">
@@ -192,7 +192,7 @@
 
                         
                         <div class="tab-pane fade" id="banco" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
-                            <form action="{{url('GuardarDatosBancoAsoc')}}/{{$configuracion->id_planta}}" method="post" id="bancoform">
+                            <form action="{{url('GuardarDatosBancoAsoc')}}/{{$configuracion->id_municipio}}" method="post" id="bancoform">
                               @csrf
                                 <div class="row">
                                   <div class="col-md-8">

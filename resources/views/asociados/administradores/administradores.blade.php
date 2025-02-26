@@ -282,7 +282,7 @@
                             <div class="row">
                                 <div class="col-md-12"><font color="#ff0000">
                                     El usuario que guardes quedara registrado en: {{$planta->planta}}</font>
-                                    <input type="text" name="id_planta" style="display:none;" value="{{$planta->id}}">
+                                    <input type="text" name="id_municipio" style="display:none;" value="{{$planta->id}}">
                             </div>
                             </div>
                             <div class="row">

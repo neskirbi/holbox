@@ -28,12 +28,12 @@ class CatalogoController extends Controller
     public function index()
     {
         $categoriasmateriales=DB::table('categoriasmaterial')   
-        ->where('id_planta','=',GetIdPlanta())     
+        ->where('id_municipio','=',GetIdPlanta())     
         ->orderBy('categoriamaterial','asc')
         ->get();
         $materiales=DB::table('materiales')
         ->join('categoriasmaterial','categoriasmaterial.id','=','materiales.id_categoriamaterial')
-        ->where('id_planta','=',GetIdPlanta()) 
+        ->where('id_municipio','=',GetIdPlanta()) 
         ->orderBy('categoriasmaterial.categoriamaterial','asc')
         ->select('categoriasmaterial.categoriamaterial','materiales.id','materiales.id_categoriamaterial','materiales.material','materiales.precio')
         ->get();
@@ -132,7 +132,7 @@ class CatalogoController extends Controller
        
         $categoriamaterial=new CategoriaMaterial();
         $categoriamaterial->id=GetUuid();
-        $categoriamaterial->id_planta=GetIdPlanta();
+        $categoriamaterial->id_municipio=GetIdPlanta();
         $categoriamaterial->categoriamaterial=$request->categoriamaterial;
         if($categoriamaterial->save()){
             return Redirect::back()->with('success', 'Catalogo Actualizado.');

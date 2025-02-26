@@ -15,7 +15,7 @@ class CreateAdministradores extends Migration
     {
         Schema::create('administradores', function (Blueprint $table) {
             $table->string('id',32)->unique();
-            $table->string('id_planta',32);
+            $table->string('id_municipio',32);
             $table->string('administrador',150);
             $table->string('cargo',150);
             $table->longtext('firma')->default('');

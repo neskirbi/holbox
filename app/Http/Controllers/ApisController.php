@@ -39,7 +39,7 @@ class ApisController extends Controller
             $cita_horas = DB::table('citas')
             ->join('obras','obras.id','=','citas.id_obra')
             ->where('fechacita','like',date('Y-m-d',strtotime($request->fecha)).'%')
-            ->where('obras.id_planta',$obra->id_planta)
+            ->where('obras.id_municipio',$obra->id_municipio)
             ->select('fechacita')
             ->get();
             foreach($cita_horas as $cita_hora){
@@ -70,15 +70,15 @@ class ApisController extends Controller
         $diai=$diasinicio[date('w',strtotime($request->fecha))];
         $diaf=$diasfin[date('w',strtotime($request->fecha))];
 
-        $horainicio=Planta::where('id',$obra->id_planta)
+        $horainicio=Planta::where('id',$obra->id_municipio)
         ->select($diai)
         ->first();
 
-        $intervalo=Planta::where('id',$obra->id_planta)
+        $intervalo=Planta::where('id',$obra->id_municipio)
         ->select('intervalo')
         ->first();
 
-        $horafin=Planta::where('id',$obra->id_planta)
+        $horafin=Planta::where('id',$obra->id_municipio)
         ->select($diaf)
         ->first();
        $i=1;
@@ -113,8 +113,8 @@ class ApisController extends Controller
         return $materiales;
     }
 
-    function GetCategoriasMaterial($id_planta){
-        return DB::table('categoriasmaterial')->where('id_planta','=',$id_planta)->orderby('categoriamaterial','asc')->get();
+    function GetCategoriasMaterial($id_municipio){
+        return DB::table('categoriasmaterial')->where('id_municipio','=',$id_municipio)->orderby('categoriamaterial','asc')->get();
     }
 
 
@@ -250,7 +250,7 @@ class ApisController extends Controller
     function ReportePagos(Request $request){
         $pagos= DB::table('pagos')
         ->join('clientes','clientes.id','=','pagos.id_cliente')
-        ->where('id_planta','=',$request->id_planta)
+        ->where('id_municipio','=',$request->id_municipio)
         ->whereraw('month(pagos.created_at)='.$request->month)
         ->whereraw('year(pagos.created_at)='.$request->year)
         ->where('pagos.status','=',2)
@@ -336,7 +336,7 @@ class ApisController extends Controller
         if($request->id_producto!=null){
             $producto = DB::table('productosobras')
             ->join('obras','obras.id','=','productosobras.id_obra')
-            ->select('obras.id as id_obra','obras.id_planta','productosobras.categoria','productosobras.producto','productosobras.descripcion','precio','productosobras.unidades')
+            ->select('obras.id as id_obra','obras.id_municipio','productosobras.categoria','productosobras.producto','productosobras.descripcion','precio','productosobras.unidades')
             ->where('productosobras.id',$request->id_producto)
             ->first();
             $disponible=0;            
@@ -345,7 +345,7 @@ class ApisController extends Controller
         if($request->id_transporte!=null){
             $producto = DB::table('transporteobras')
             ->join('obras','obras.id','=','transporteobras.id_obra')
-            ->select('obras.id as id_obra','obras.id_planta',DB::raw('\'Transporte\' as categoria'),'transporteobras.transporte as producto','transporteobras.descripcion','precio')
+            ->select('obras.id as id_obra','obras.id_municipio',DB::raw('\'Transporte\' as categoria'),'transporteobras.transporte as producto','transporteobras.descripcion','precio')
             ->where('transporteobras.id',$request->id_transporte)
             ->first();
             $disponible=1;

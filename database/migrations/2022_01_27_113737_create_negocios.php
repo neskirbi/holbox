@@ -18,20 +18,17 @@ class CreateNegocios extends Migration
             
             $table->string('id',32)->unique();
             $table->string('id_generador',32);
-            $table->string('id_planta',32);
+            $table->string('id_municipio',32);
             $table->string('negocio',500);
             $table->string('tiponegocio',150);
             $table->string('calle',500);
             $table->string('numeroext',10);
             $table->string('numeroint',10);
             $table->string('colonia',500);
-            $table->string('municipio',150);
-            $table->string('entidad',150);
             $table->string('cp',10);
             $table->string('latitud',50);
             $table->string('longitud',50);
-            $table->string('fechainicio',30);
-            $table->string('fechafin',30);
+            
 
             $table->string('telefono',50);
             $table->string('celular',50);
@@ -39,7 +36,7 @@ class CreateNegocios extends Migration
            
             
             $table->float('iva',5,2)->default(0.0);
-            $table->boolean('puedepospago')->default(0);
+            
             
             
             $table->boolean("verificado")->default(false);

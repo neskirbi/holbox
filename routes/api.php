@@ -55,7 +55,7 @@ Route::post('GetHoras', 'App\Http\Controllers\ApisController@GetHoras');
 
 Route::post('GetMateriales', 'App\Http\Controllers\ApisController@GetMateriales');
 
-Route::get('GetCategoriasMaterial/{id_planta}', 'App\Http\Controllers\ApisController@GetCategoriasMaterial');
+Route::get('GetCategoriasMaterial/{id_municipio}', 'App\Http\Controllers\ApisController@GetCategoriasMaterial');
 
 Route::post('MaterialesObraTodos', 'App\Http\Controllers\ApisController@MaterialesObraTodos');
 Route::post('MaterialesObraDeclarados', 'App\Http\Controllers\ApisController@MaterialesObraDeclarados');

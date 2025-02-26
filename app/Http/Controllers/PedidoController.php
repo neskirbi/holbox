@@ -68,7 +68,7 @@ class PedidoController extends Controller
             return redirect('carrito')->with('error', 'Carrito vacio.');
         }
         $obra=Obra::find($id_obra);
-        $configuraciones=Configuracion::where('id_planta',$obra->id_planta)->first();
+        $configuraciones=Configuracion::where('id_municipio',$obra->id_municipio)->first();
         $total=$subtotal+($subtotal*($configuraciones->iva/100));
       
         if(!PuedeGastar($id_obra,$total)){
@@ -79,7 +79,7 @@ class PedidoController extends Controller
         $pedido=new Pedido();
         $id_pedido=GetUuid();
         $pedido->id=$id_pedido; 
-        $pedido->id_planta=$obra->id_planta;
+        $pedido->id_municipio=$obra->id_municipio;
         $pedido->id_obra=$id_obra;
         $pedido->id_usuario=$id_usuario;
         $pedido->obra=$obra->obra;
@@ -184,7 +184,7 @@ class PedidoController extends Controller
 
         $pedido = DB::table('detallepedidos')
         ->join('obras','obras.id','=','detallepedidos.id_obra')
-        ->select('obras.id_planta')
+        ->select('obras.id_municipio')
         ->where('carrito',1)
         ->where('id_usuario',$id_usuario)
         ->first();
@@ -194,7 +194,7 @@ class PedidoController extends Controller
          */
         $configuraciones=json_decode('{"iva":0}');
         if($pedido){
-            $configuraciones=Configuracion::where('id_planta',$pedido->id_planta)->first();
+            $configuraciones=Configuracion::where('id_municipio',$pedido->id_municipio)->first();
         }
         
         

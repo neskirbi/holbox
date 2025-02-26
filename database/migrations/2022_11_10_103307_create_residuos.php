@@ -15,7 +15,7 @@ class CreateResiduos extends Migration
     {
         Schema::create('residuos', function (Blueprint $table) {
             $table->string('id',32)->unique();
-            $table->string('id_planta',32);            
+            $table->string('id_municipio',32);            
             $table->string('residuo',150);                  
             $table->float('precio',20,5);      
             $table->string('unidades',150);

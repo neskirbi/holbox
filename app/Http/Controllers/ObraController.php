@@ -67,7 +67,7 @@ class ObraController extends Controller
 
         $obra->id=GetUuid();        
         $obra->id_generador=$generador->id;
-        $obra->id_planta=$request->planta;
+        $obra->id_municipio=$request->planta;
 
         $obra->obra=$request->obra;
         
@@ -107,14 +107,14 @@ class ObraController extends Controller
             $obra->transporte=false;
         }
 
-        $confi=Configuracion::select('iva')->where('id_planta',$request->planta)->first();
+        $confi=Configuracion::select('iva')->where('id_municipio',$request->planta)->first();
         $obra->ivaobra=$confi->iva;
         
 
         $materiales = DB::table('materiales')
         ->join('categoriasmaterial','categoriasmaterial.id','=','materiales.id_categoriamaterial')
         ->select('categoriasmaterial.categoriamaterial','materiales.id','materiales.material','materiales.precio')
-        ->where('categoriasmaterial.id_planta',$request->planta)
+        ->where('categoriasmaterial.id_municipio',$request->planta)
         ->get();
         
         
@@ -199,7 +199,7 @@ class ObraController extends Controller
         ->select('materialesobra.categoriamaterial','materialesobra.material','materialesobra.cantidad','materialesobra.unidades','materialesobra.precio','materialesobra.cantidad')
         ->get();
 
-        $planta=Planta::find($obra->id_planta);
+        $planta=Planta::find($obra->id_municipio);
 
 
         if(!$obra){

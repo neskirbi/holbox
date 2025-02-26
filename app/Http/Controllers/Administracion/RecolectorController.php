@@ -26,7 +26,7 @@ class RecolectorController extends Controller
     public function index()
     {
         $recolectores=DB::table('recolectores')
-        ->where('id_planta',Auth::guard('administradores')->user()->id_planta)
+        ->where('id_municipio',Auth::guard('administradores')->user()->id_municipio)
         ->orderby('created_at','asc')
         ->get();
 
@@ -60,7 +60,7 @@ class RecolectorController extends Controller
         $recolector=new Recolector();
 
         $recolector->id=GetUuid();
-        $recolector->id_planta=Auth::guard('administradores')->user()->id_planta;        
+        $recolector->id_municipio=GetIdMunicipio();        
         $recolector->recolector=$request->nombre;
         $recolector->mail=$request->mail;                        
         $recolector->telefono=$request->telefono;             

@@ -74,12 +74,12 @@ function GetId(){
 
 }
 
-function GetIdPlanta(){
+function GetIdMunicipio(){
     
     //return'algo';
     
     if(Auth::guard('administradores')->check()){
-        return Auth::guard('administradores')->user()->id_planta;
+        return Auth::guard('administradores')->user()->id_municipio;
     }  
     
 }
@@ -316,7 +316,7 @@ function PuedeGastar($id_obra,$monto){
     /**
      * Si puede pospago regresas true, para que revisas si le alcansa o no jejejejej
      */
-    //return GastoPedidos($cliente->id_cliente,$cliente->id_planta);
+    //return GastoPedidos($cliente->id_cliente,$cliente->id_municipio);
     if(PuedePospago($id_obra)){
         return true;
     }
@@ -375,11 +375,11 @@ function Pago($id_cliente){
 /**
  * Pago por cliente en cada planta 
  */
-function PagoPorPlanta($id_cliente,$id_planta){
+function PagoPorPlanta($id_cliente,$id_municipio){
     $pago = DB::table('clientes')
         ->join('pagos','pagos.id_cliente','=','clientes.id')
         ->where('clientes.id',$id_cliente) 
-        ->where('pagos.id_planta',$id_planta)       
+        ->where('pagos.id_municipio',$id_municipio)       
         ->where('pagos.status',2)
         ->select(DB::raw('SUM(pagos.monto) as monto'))
         ->first();
@@ -474,7 +474,7 @@ function VerificarConexion($conectionName){
 function TieneObrasAdmin(){
     $plantas=DB::table('plantas')
         ->select('plantas.id')
-        ->where('plantas.id',Auth::guard('administradores')->user()->id_planta)
+        ->where('plantas.id',Auth::guard('administradores')->user()->id_municipio)
         ->where('plantas.tipo',1)
         ->get();
     return count($plantas);
@@ -484,7 +484,7 @@ function TieneObrasAdmin(){
 function TieneNegociosAdmin(){
     $plantas=DB::table('plantas')
         ->select('plantas.id')
-        ->where('plantas.id',Auth::guard('administradores')->user()->id_planta)
+        ->where('plantas.id',Auth::guard('administradores')->user()->id_municipio)
         ->where('plantas.tipo',2)
         ->get();
     return count($plantas);
@@ -546,7 +546,7 @@ function PostmanAndroid($request){
 }
 
 function TipoPlanta(){
-    $planta=Planta::where('id',Auth::guard('administradores')->user()->id_planta)->first();
+    $planta=Planta::where('id',Auth::guard('administradores')->user()->id_municipio)->first();
     return $planta->tipo;
 }
 

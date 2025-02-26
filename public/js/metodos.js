@@ -759,12 +759,12 @@ function ReiniciaMateriales(){
 
 
 function CargarCategoriaMaterial(select){
-   var id_planta=$('#planta').val();
+   var id_municipio=$('#planta').val();
     $.ajax({
         
         headers: { "APP-KEY": AppKey() },
         method:'get',
-        url:  Url()+"api/GetCategoriasMaterial/"+id_planta,
+        url:  Url()+"api/GetCategoriasMaterial/"+id_municipio,
         context: document.body
     }).done(function(categoria) {
 
@@ -1926,7 +1926,7 @@ function VentanasTitulos(_this,contenedor){
 function ReportePagos(){
     var month=$('#mespago').val();
     var year=$('#aniopago').val();
-    var id_planta=$('#id_planta').val();
+    var id_municipio=$('#id_municipio').val();
     var html="";
 
     $.ajax({
@@ -1934,7 +1934,7 @@ function ReportePagos(){
         headers: { "APP-KEY": AppKey() },
         method:'post',
         url: Url()+"api/ReportePagos",
-        data:{month:month,year:year,id_planta:id_planta},
+        data:{month:month,year:year,id_municipio:id_municipio},
         context: document.body
     }).done(function(data) {
         html+='<table class="table table-hover text-nowrap">';
@@ -1977,11 +1977,11 @@ function ReportePagos(){
 }
 
 function ReportePagosAdministracion(){
-    var id_planta=$('#id_planta').val();
+    var id_municipio=$('#id_municipio').val();
     var mes=$('#mespago').val();
     var anio=$('#aniopago').val();
 
-    window.open('ReportePagosAdministracion/'+id_planta+'/'+mes+'/'+anio);
+    window.open('ReportePagosAdministracion/'+id_municipio+'/'+mes+'/'+anio);
 }
 
 function FormateaNumero(number){
@@ -1994,7 +1994,7 @@ function ReporteCitas(){
     var obra=$('#obracita').val();
     var ini=$('#ini').val();    
     var fin=$('#fin').val();    
-    var id_planta=$('#id_planta').val();
+    var id_municipio=$('#id_municipio').val();
     var html="";
 
     $.ajax({
@@ -2002,7 +2002,7 @@ function ReporteCitas(){
         headers: { "APP-KEY": AppKey() },
         method:'post',
         url: Url()+"api/ReporteCitas",
-        data:{obra:obra,ini:ini+' 00:00:00',fin:fin+' 23:59:59',id_planta:id_planta},
+        data:{obra:obra,ini:ini+' 00:00:00',fin:fin+' 23:59:59',id_municipio:id_municipio},
         context: document.body
     }).done(function(data) {
         
@@ -2072,14 +2072,14 @@ function ReporteCitasAdministracion(){
     var obra=$('#obracita').val();
     var ini=$('#ini').val();    
     var fin=$('#fin').val();
-    var id_planta=$('#id_planta').val();
+    var id_municipio=$('#id_municipio').val();
     var fotos = 0;
     if( $('#fotoscita').prop('checked')){
         fotos = 1;
     }
     
 
-    window.open('ReporteCitasAdministracion/'+(obra.length==0 ? 0 : obra)+'/'+ini+' 00:00:00'+'/'+fin+' 23:59:59'+'/'+id_planta+'/'+fotos);
+    window.open('ReporteCitasAdministracion/'+(obra.length==0 ? 0 : obra)+'/'+ini+' 00:00:00'+'/'+fin+' 23:59:59'+'/'+id_municipio+'/'+fotos);
 }
 
 
@@ -2087,7 +2087,7 @@ function ReporteTransportePre(){
     var obra=$('#tobra').val();
     var ini=$('#tini').val();    
     var fin=$('#tfin').val();    
-    var id_planta=$('#id_planta').val();
+    var id_municipio=$('#id_municipio').val();
     var html="";
 
     $.ajax({
@@ -2095,7 +2095,7 @@ function ReporteTransportePre(){
         headers: { "APP-KEY": AppKey() },
         method:'post',
         url: Url()+"api/ReporteTransportePre",
-        data:{obra:obra,ini:ini+' 00:00:00',fin:fin+' 23:59:59',id_planta:id_planta},
+        data:{obra:obra,ini:ini+' 00:00:00',fin:fin+' 23:59:59',id_municipio:id_municipio},
         context: document.body
     }).done(function(data) {
         console.log(data);
@@ -2149,23 +2149,23 @@ function ReporteTransporte(){
     var obra=$('#tobra').val();
     var ini=$('#tini').val();    
     var fin=$('#tfin').val();
-    var id_planta=$('#id_planta').val();
+    var id_municipio=$('#id_municipio').val();
     
 
-    window.open('ReporteTransporte/'+(obra.length==0 ? 0 : obra)+'/'+ini+' 00:00:00'+'/'+fin+' 23:59:59'+'/'+id_planta);
+    window.open('ReporteTransporte/'+(obra.length==0 ? 0 : obra)+'/'+ini+' 00:00:00'+'/'+fin+' 23:59:59'+'/'+id_municipio);
 }
 
 
 function ReporteStatusObrasPre(){
     
-    var id_planta=$('#id_planta').val();
-    console.log(id_planta);
+    var id_municipio=$('#id_municipio').val();
+    console.log(id_municipio);
     $.ajax({
         
         headers: { "APP-KEY": AppKey() },
         method:'post',
         url: Url()+"api/ReporteStatusObrasPre",
-        data:{id_planta:id_planta},
+        data:{id_municipio:id_municipio},
         context: document.body
     }).done(function(data) {
         html='<table class="table table-hover text-nowrap">';

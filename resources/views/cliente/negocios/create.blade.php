@@ -55,12 +55,7 @@
                   </div>
 
                   <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="nautorizacion"><i class="fas fa-file-alt"></i> # Autorización</label>
-                        <input type="text" name="nautorizacion" class="form-control" id="nautorizacion" placeholder="# Autorización" required>
-                      </div>
-                    </div>
+                    
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="tiponegocio"><i class="fas fa-store"></i> Giro del Establecimiento</label>
@@ -112,7 +107,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="entidad"><i class="fas fa-flag"></i> Entidad Federativa</label>
-                        <select name="entidad" class="form-control" id="entidad" onchange="MunicipiosApi(this,1);" required>
+                        <select name="entidad" class="form-control" id="entidad" onchange="MunicipiosApi(this,2);" required>
                           <option value="">--Entidad Federativa--</option>
                           @foreach($entidades as $entidad)
                             <option value="{{$entidad->id}}">{{$entidad->entidad}}</option>
@@ -154,24 +149,7 @@
               </div>
 
               <!-- Documentación -->
-              <div class="card card-info">
-                <div class="card-header">
-                  <h3 class="card-title"><i class="fas fa-file-pdf"></i> Documentación</h3>
-                </div>
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="plan"><i class="fas fa-file-upload"></i> Plan de manejo (pdf)</label>
-                        <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="plan" name="plan" required>
-                          <label class="custom-file-label" for="plan">Seleccionar archivo</label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              
 
               <!-- Datos del Contacto -->
               <div class="card card-info">

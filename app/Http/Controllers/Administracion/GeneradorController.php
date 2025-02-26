@@ -25,10 +25,11 @@ class GeneradorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $filtros)
     {
-        $generadores=Generador::paginate(15);
-        return view('administracion.generadores.generadores',['generadores'=>$generadores]);
+        $generadores=Generador::whereraw("razonsocial like '%".$filtros->generador."%'")
+        ->paginate(15);
+        return view('administracion.generadores.index',['generadores'=>$generadores,'filtros'=>$filtros]);
     }
 
     /**
@@ -202,7 +203,7 @@ class GeneradorController extends Controller
     public function show($id)
     {
         $generador = Generador::find($id);
-        return view('administracion.generadores.generador',['generador'=>$generador]);
+        return view('administracion.generadores.show',['generador'=>$generador]);
     }
 
     /**

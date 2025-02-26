@@ -24,16 +24,16 @@ class ConfiguracionController extends Controller
      */
     public function index()
     {
-        $configuraciones=DB::table('configuraciones')->where('id_planta','=',GetIdPlanta())->first();
+        $configuraciones=DB::table('configuraciones')->where('id_municipio','=',GetIdPlanta())->first();
         $planta=Planta::find(GetIdPlanta());
         $administrador=Administrador::find(GetId());
-        $residuos=Residuo::where('id_planta',GetIdPlanta())->orderby('opcion','asc')->get();
+        $residuos=Residuo::where('id_municipio',GetIdPlanta())->orderby('opcion','asc')->get();
         $empresa=EmpresaTransporte::where('id_transportista',GetIdPlanta())->first();
         if(!$empresa){
             $empresa=new EmpresaTransporte();
         }
         
-        $contenedores=Contenedor::where('id_planta',GetIdPlanta())->orderby('opcion','asc')->get();
+        $contenedores=Contenedor::where('id_municipio',GetIdPlanta())->orderby('opcion','asc')->get();
         return view('administracion.configuraciones.configuraciones',
         ['configuraciones'=>$configuraciones,'administrador'=>$administrador,
         'planta'=>$planta,'residuos'=>$residuos,'contenedores'=>$contenedores,
@@ -53,7 +53,7 @@ class ConfiguracionController extends Controller
     }
 
     public function ConfiguracionBanco(Request $request){
-        $configuracion=Configuracion::where('id_planta','=',GetIdPlanta())->first();
+        $configuracion=Configuracion::where('id_municipio','=',GetIdPlanta())->first();
         $configuracion->referencia=$request->referencia;
         $configuracion->banco=$request->banco;
         $configuracion->cuenta=$request->cuenta;
@@ -66,7 +66,7 @@ class ConfiguracionController extends Controller
         }
     }
     public function ConfiguracionBoleta(Request $request){
-        $configuracion=Configuracion::where('id_planta','=',GetIdPlanta())->first();
+        $configuracion=Configuracion::where('id_municipio','=',GetIdPlanta())->first();
         $configuracion->folio=$request->folio;
         if($configuracion->save()){
             return redirect('configuracion')->with('success','¡Se guardaron los datos!');
@@ -95,7 +95,7 @@ class ConfiguracionController extends Controller
 
 
     function ConfiguracionRepresentante(Request $request){
-        $configuracion=Configuracion::where('id_planta',GetIdPlanta())->first();
+        $configuracion=Configuracion::where('id_municipio',GetIdPlanta())->first();
 
        
 
@@ -203,7 +203,7 @@ class ConfiguracionController extends Controller
 
         $residuo=new Residuo();
         $residuo->id=GetUuid();
-        $residuo->id_planta=GetIdPlanta();
+        $residuo->id_municipio=GetIdPlanta();
         $residuo->residuo=$request->residuo;
         $residuo->precio=$request->precio;
         $residuo->unidades=$request->unidades;
@@ -230,7 +230,7 @@ class ConfiguracionController extends Controller
 
         $contenedor=new Contenedor();
         $contenedor->id=GetUuid();
-        $contenedor->id_planta=GetIdPlanta();
+        $contenedor->id_municipio=GetIdPlanta();
         $contenedor->contenedor=$request->contenedor;
         $contenedor->cantidad=$request->cantidad;
         $contenedor->opcion=$request->opcion;
@@ -251,7 +251,7 @@ class ConfiguracionController extends Controller
     }
 
     function GuardarDatosPlanta(Request $request,$id){
-        $configuracion=Configuracion::where('id_planta','=',GetIdPlanta())->first();
+        $configuracion=Configuracion::where('id_municipio','=',GetIdPlanta())->first();
         $planta = Planta::find(GetIdPlanta());
 
         $planta->planta = $request->planta;

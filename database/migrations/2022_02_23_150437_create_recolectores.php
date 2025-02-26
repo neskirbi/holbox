@@ -15,7 +15,7 @@ class CreateRecolectores extends Migration
     {
         Schema::create('recolectores', function (Blueprint $table) {
             $table->string('id',32)->unique();
-            $table->string('id_planta',32);
+            $table->string('id_municipio',32);
             $table->string('recolector',150);
             $table->string('mail',150);
             $table->string('telefono',150);            

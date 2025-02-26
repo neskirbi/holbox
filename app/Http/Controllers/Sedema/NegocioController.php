@@ -28,7 +28,7 @@ class NegocioController extends Controller
         ->leftjoin('generadores', 'generadores.id', '=', 'negocios.id_generador')
         ->where('negocios.negocio','like','%'.$filtros->negocio.'%')
         ->select('generadores.razonsocial','negocios.id','negocios.negocio','negocios.tiponegocio','negocios.verificado',
-        DB::RAW("(select planta from plantas where id=negocios.id_planta) as planta"),
+        DB::RAW("(select planta from plantas where id=negocios.id_municipio) as planta"),
         'negocios.latitud','negocios.longitud')
         ->orderby('negocios.created_at','desc')
         ->paginate(15);
@@ -37,7 +37,7 @@ class NegocioController extends Controller
         ->leftjoin('generadores', 'generadores.id', '=', 'negocios.id_generador')
         ->where('negocios.negocio','like','%'.$filtros->negocio.'%')
         ->select('generadores.razonsocial','negocios.id','negocios.negocio','negocios.tiponegocio','negocios.verificado',
-        DB::RAW("(select planta from plantas where id=negocios.id_planta) as planta"),
+        DB::RAW("(select planta from plantas where id=negocios.id_municipio) as planta"),
         'negocios.latitud','negocios.longitud')
         ->orderby('negocios.created_at','desc')
         ->get();
@@ -93,7 +93,7 @@ class NegocioController extends Controller
 
         $negocio->id=GetUuid();        
         $negocio->id_generador=isset($request->generador) ? $request->generador : '' ;
-        $negocio->id_planta=$request->planta;
+        $negocio->id_municipio=$request->planta;
 
         $negocio->negocio=$request->negocio;
         
@@ -125,7 +125,7 @@ class NegocioController extends Controller
         $negocio->celular=$request->celular;
         $negocio->correo=$request->correo;
 
-        $confi=Configuracion::select('iva')->where('id_planta',$request->planta)->first();
+        $confi=Configuracion::select('iva')->where('id_municipio',$request->planta)->first();
         $negocio->iva=$confi->iva;
         
 
@@ -163,7 +163,7 @@ class NegocioController extends Controller
         ->first();
 
         $planta=DB::table('plantas')
-        ->where('plantas.id',$negocio->id_planta)
+        ->where('plantas.id',$negocio->id_municipio)
         ->first();
 
         $entidad=DB::table('entidades')
@@ -194,7 +194,7 @@ class NegocioController extends Controller
         //negocio->id=GetUuid(); 
         $negocio=Negocio::find($id);      
         $negocio->id_generador=isset($request->generador) ? $request->generador : '' ;
-        $negocio->id_planta=$request->planta;
+        $negocio->id_municipio=$request->planta;
 
         $negocio->negocio=$request->negocio;
         
@@ -232,7 +232,7 @@ class NegocioController extends Controller
         $negocio->celular=$request->celular;
         $negocio->correo=$request->correo;
 
-        $confi=Configuracion::select('iva')->where('id_planta',$request->planta)->first();
+        $confi=Configuracion::select('iva')->where('id_municipio',$request->planta)->first();
         $negocio->iva=$confi->iva;
         
 

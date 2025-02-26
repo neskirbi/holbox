@@ -545,7 +545,7 @@
 
                     </div><!--End body-->
                     <div class="modal-footer" >
-                        <button type="submit" id="guardar" class="btn  btn-info float-right">Guardar</button>
+                        
                     </div>
                 </form>
                 <div>

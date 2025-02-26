@@ -37,7 +37,7 @@
                    
                     </div>
                     <div class="card-body p-0">
-                        <input type="hidden" name="id_planta" id="id_planta" value="{{GetIdPlanta()}}">
+                        <input type="hidden" name="id_municipio" id="id_municipio" value="{{GetIdPlanta()}}">
                         <ul class="nav nav-pills flex-column">
 
                             <li class="nav-item active">

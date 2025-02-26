@@ -18,7 +18,7 @@ class CreateCuotas extends Migration
             $table->string('id_administrador',32)->default('');
             $table->string('id_cliente',32);
             $table->string('id_negocio',32)->default('');
-            $table->string('id_planta',32);
+            $table->string('id_municipio',32);
             $table->float('monto',20,2);    
             $table->string('detalle',150)->default('');
             $table->integer('status')->default(1);

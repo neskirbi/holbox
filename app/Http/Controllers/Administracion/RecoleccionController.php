@@ -27,9 +27,9 @@ class RecoleccionController extends Controller
        'recolecciones.created_at','recolecciones.matriculat',
         DB::RAW("(select contenedor from contenedores where opcion=recolecciones.contenedor) as contenedor"),
         DB::RAW("(select residuo from residuos where opcion=recolecciones.residuo) as residuo"),
-        DB::RAW("(select plantaauto from plantas where id=recolecciones.id_planta) as plantaauto"))
+        DB::RAW("(select plantaauto from plantas where id=recolecciones.id_municipio) as plantaauto"))
         ->join('negocios','negocios.id','=','recolecciones.id_negocio')
-        ->where('recolecciones.id_planta',GetIdPlanta())
+        ->where('recolecciones.id_municipio',GetIdPlanta())
         ->orderby('created_at','desc')
         ->get();
         return view('administracion.recolecciones.recolecciones',['recolecciones'=>$recolecciones]);
@@ -42,7 +42,7 @@ class RecoleccionController extends Controller
             DB::RAW("(select recolector from recolectores where id=recolecciones.id_recolector) as responsable")
         )
         ->where('id',$id)->first();
-        //$vehiculos=Vehiculo::where('id_planta',GetIdPlanta())->get();
+        //$vehiculos=Vehiculo::where('id_municipio',GetIdPlanta())->get();
         return view('administracion.recolecciones.show',['recoleccion'=>$recoleccion]);
 
     }
@@ -55,7 +55,7 @@ class RecoleccionController extends Controller
         
         
         $planta=Planta::find(GetIdPlanta());
-        $configuracion=Configuracion::where('id_planta',GetIdPlanta())->first();
+        $configuracion=Configuracion::where('id_municipio',GetIdPlanta())->first();
         $recolector=Recolector::find($recoleccion->id_recolector);
 
         if($configuracion->firma_repre==''){

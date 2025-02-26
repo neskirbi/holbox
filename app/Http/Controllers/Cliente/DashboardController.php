@@ -49,12 +49,12 @@ class DashboardController extends Controller
 
         $saldo=$pago;
 
-        $id_plantas=array();
+        $id_municipios=array();
 
         $compenzado=0;
        
 
-        $plantas=Planta::wherein('id',$id_plantas)->orderby('planta','asc')->get();
+        $plantas=Planta::wherein('id',$id_municipios)->orderby('planta','asc')->get();
 
         return view('cliente.dashboard.dashboard',['generadores'=>$generadores,
         'saldo'=>$saldo,

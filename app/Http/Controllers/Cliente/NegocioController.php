@@ -76,15 +76,14 @@ class NegocioController extends Controller
         
         $negocio->id = $id;
         $negocio->id_generador = $request->generador;
+        $negocio->id_municipio = $request->municipio;
         $negocio->negocio = $request->negocio;
         $negocio->tiponegocio = $request->tiponegocio;
         $negocio->calle = $request->calle;
         $negocio->numeroext = $request->numeroext;
         $negocio->numeroint = $request->numeroint=='' ? '' : $request->numeroint ;
         $negocio->colonia = $request->colonia;
-        $negocio->municipio = $request->municipio;
         $negocio->cp = $request->cp;
-        $negocio->entidad = $request->entidad;
         $negocio->latitud = $request->latitud;
         $negocio->longitud = $request->longitud;
         $negocio->correo = $request->correo;
@@ -113,7 +112,7 @@ class NegocioController extends Controller
         ->first();
 
         $planta=DB::table('plantas')
-        ->where('plantas.id',$negocio->id_planta)
+        ->where('plantas.id',$negocio->id_municipio)
         ->first();
 
         $entidad=DB::table('entidades')

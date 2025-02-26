@@ -22,7 +22,7 @@ class CreateRecolecciones extends Migration
             $table->longtext('firma')->default('');
 
 
-            $table->string('id_planta',32);
+            $table->string('id_municipio',32);
             $table->string('id_recolector',32);
             $table->string('id_negocio',32);
             $table->string('negocio',500);

@@ -15,7 +15,7 @@ class CreateMultas extends Migration
     {
         Schema::create('multas', function (Blueprint $table) {
             $table->string('id',32)->unique();
-            $table->string('id_planta',32);
+            $table->string('id_municipio',32);
             $table->string('id_negocio',32);
             $table->float('monto',20,2)->default(0);    
             $table->string('detalle',150)->default('');
