@@ -38,27 +38,9 @@
           
           <li class="nav-header">Administración</li>
          
-          @if(GetId()=='2072197791c84ada8403a23c5cec0567')
-          <li class="nav-item">
-            <a href="{{url('friday')}}" class="nav-link">
-            <i class="nav-icon fa fa-question" aria-hidden="true"></i>
-              <p>
-                Friday
-              </p>
-            </a>
-          </li>
-          @endif
-
+       
                     
-          <li class="nav-item">
-            <a href="{{ url('planta') }}" class="nav-link">
-              <i class="nav-icon fa fa-recycle" aria-hidden="true"></i>
-              <p>
-                Planta
-              </p>
-            </a>
-          </li>        
-          
+        
 
           <li class="nav-item">
             <a href="{{ url('generador') }}" class="nav-link">

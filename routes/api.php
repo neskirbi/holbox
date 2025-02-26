@@ -134,18 +134,7 @@ Route::post('CargarRecoleccion','App\Http\Controllers\Android\RecitrackRecolecci
 
 
  
+//Apis Generales
 
-/**
- * Interface Sap
- */
 
-Route::get('ClientesSAP','App\Http\Controllers\Sap\ServiciosController@ClientesSAP');
-Route::get('GeneradoresSAP','App\Http\Controllers\Sap\ServiciosController@GeneradoresSAP');
-Route::get('PagosSAP','App\Http\Controllers\Sap\ServiciosController@PagosSAP');
-Route::get('ObrasSAP','App\Http\Controllers\Sap\ServiciosController@ObrasSAP');
-Route::get('CitasSAP','App\Http\Controllers\Sap\ServiciosController@CitasSAP');
-
-Route::get('url',function(){
-    return $_SERVER['SERVER_NAME'];
-});
-
+Route::post('MunicipiosApi','App\Http\Controllers\Api\ApiController@MunicipiosApi');

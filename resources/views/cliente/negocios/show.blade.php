@@ -97,23 +97,25 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="municipio"><i class="fas fa-city"></i> Alcaldía/Municipio</label>
-                      <input type="text" class="form-control" id="municipio" value="{{$negocio->municipio}}" readonly>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
                       <label for="cp"><i class="fas fa-map-pin"></i> C.P.</label>
                       <input type="text" class="form-control" id="cp" value="{{$negocio->cp}}" readonly>
                     </div>
                   </div>
+                  
+                </div>
+
+                <div class="row">
+                  
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="entidad"><i class="fas fa-flag"></i> Entidad Federativa</label>
                       <input type="text" class="form-control" id="entidad" value="{{$negocio->entidad}}" readonly>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="municipio"><i class="fas fa-city"></i> Alcaldía/Municipio</label>
+                      <input type="text" class="form-control" id="municipio" value="{{$negocio->municipio}}" readonly>
                     </div>
                   </div>
                 </div>

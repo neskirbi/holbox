@@ -2979,3 +2979,33 @@ function LlenarTipoObra(tipoobra){
         }
     });       
   }
+
+
+  function MunicipiosApi(_this,opcion){
+    var entidad=$(_this).val();
+    console.log(entidad);
+    $.ajax({
+            
+        headers: { "APP-KEY": AppKey() },
+        method:'post',
+        url: Url()+"api/MunicipiosApi",
+        data:{entidad:entidad},
+        context: document.body
+    }).done(function(data) {
+        //console.log(data);
+        var html='<option value="">--Municipio--</option><optgroup></optgroup>';
+        for(var i in data){
+            switch(opcion){
+                case 1:
+                     html+='<option value="'+data[i].municipio+'">'+data[i].municipio+'</option>';
+                break;
+                case 2:
+                     html+='<option value="'+data[i].id+'">'+data[i].municipio+'</option>';
+                break;
+            }
+           
+        }
+        //console.log($('#municipio'));
+        $('#municipio').html(html);
+    });
+}

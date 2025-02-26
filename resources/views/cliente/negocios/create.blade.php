@@ -100,27 +100,30 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="municipio"><i class="fas fa-city"></i> Alcaldía/Municipio</label>
-                        <input type="text" name="municipio" class="form-control" id="municipio" placeholder="Alcaldía/Municipio" required>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
                         <label for="cp"><i class="fas fa-map-pin"></i> C.P.</label>
                         <input type="text" name="cp" class="form-control" id="cp" placeholder="C.P." required>
                       </div>
                     </div>
+                    
+                  </div>
+
+                  <div class="row">
+                    
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="entidad"><i class="fas fa-flag"></i> Entidad Federativa</label>
-                        <select name="entidad" class="form-control" id="entidad" required>
+                        <select name="entidad" class="form-control" id="entidad" onchange="MunicipiosApi(this,1);" required>
                           <option value="">--Entidad Federativa--</option>
                           @foreach($entidades as $entidad)
                             <option value="{{$entidad->id}}">{{$entidad->entidad}}</option>
                           @endforeach
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="municipio"><i class="fas fa-city"></i> Alcaldía/Municipio</label>
+                        <select  name="municipio" class="form-control" id="municipio" aria-invalid="false" data-mun="municipio" >
                         </select>
                       </div>
                     </div>

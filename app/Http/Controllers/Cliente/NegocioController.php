@@ -75,7 +75,6 @@ class NegocioController extends Controller
         $negocio = new Negocio();
         
         $negocio->id = $id;
-        $negocio->id_planta = '';
         $negocio->id_generador = $request->generador;
         $negocio->negocio = $request->negocio;
         $negocio->tiponegocio = $request->tiponegocio;
