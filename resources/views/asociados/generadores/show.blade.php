@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  @include('administracion.header')
-  <title>CSMX | Generadores</title>
+  @include('cliente.header')
+  <title>{{GetSiglas(0)}} | Generadores</title>
 
   
 </head>
@@ -12,11 +12,11 @@
 
   <!-- Navbar -->
  
-  @include('administracion.navigations.navigation')
+  @include('asociados.navigations.navigation')
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  @include('administracion.sidebars.sidebar')
+  @include('asociados.sidebars.sidebar')
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -47,7 +47,7 @@
                     @endif            
                 </div>
                 <!-- /.card-header -->
-                <form method="POST" action="{{url('generador')}}/{{$generador->id}}" id="formgenerador" enctype="multipart/form-data">
+                <form method="POST" action="{{url('generadorasoc')}}/{{$generador->id}}" id="formgenerador" enctype="multipart/form-data">
                     @csrf
                     <input required name="_method" type="hidden" value="PUT">                    
                     <div class="card-body">                  
@@ -83,6 +83,29 @@
                                         <div class="form-group">
                                             <label for="rfc">RFC</label>
                                             <input required  type="text" value="{{$generador->rfc}}" name="rfc" class="form-control" id="rfc" placeholder="RFC" aria-invalid="false" >
+                                            
+                                        </div>
+                                    </div>                       
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="usocfdi">Uso de CFDI</label>
+                                            <!--<input  type="text" name="entidad" class="form-control" id="entidad" placeholder="Entidad federativa" aria-invalid="false" >-->
+                                            <select  name="usocfdi" class="form-control" id="usocfdi">
+                                                <option value="{{$generador->usocfdi}}">{{$generador->usocfdi}}</option>
+                                                <optgroup></optgroup>
+                                                <option value="G03 GASTOS EN GENERAL">G03 GASTOS EN GENERAL</option>
+                                                <option value="I01 CONSTRUCCIONES">I01 CONSTRUCCIONES</option>
+                                                <option value="S01 SIN EFECTOS FISCALES">S01 SIN EFECTOS FISCALES</option>
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
                                             <label for="rfc">Constancia de situación fiscal actualizada</label>
                                             <div class="input-group">
                                                 <div class="custom-file">                                    
@@ -99,7 +122,7 @@
                                             </iframe>                      
                                             <a target="_blank" class="btn btn-default" href="{{asset('documentos/generadores/rfc/empresa').'/'.$generador->rfcpdf}}">Ver</a>
                                         </div>
-                                    </div>                       
+                                    </div>  
                                 </div>
 
                             
@@ -545,7 +568,7 @@
 
                     </div><!--End body-->
                     <div class="modal-footer" >
-                        
+                        <button type="submit" id="guardar" class="btn  btn-info float-right">Guardar</button>
                     </div>
                 </form>
                 <div>
@@ -615,6 +638,6 @@ $(function () {
   bsCustomFileInput.init();
 });
 </script>
-@include('administracion.footer')
+@include('asociados.footer')
 </body>
 </html>

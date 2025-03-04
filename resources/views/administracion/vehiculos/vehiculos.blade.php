@@ -60,9 +60,18 @@
                 </div>
               </div>
               <div class="card-body">
-                <div class="p-2">
-                  <a href="{{url('vehiculos')}}/create" class="btn btn-primary"><span><i class="fa fa-plus" aria-hidden="true"></i></span> Vehículo</a>
+
+                <div class="col-md-3">
+                  <a href="{{url('vehiculos/create')}}">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-info"><i class="fa fa-plus"></i></span>
+                      <div class="info-box-content">
+                        <span class="info-box-text" style="color:#000;">Vehículo</span>
+                      </div>
+                    </div>
+                  </a>                    
                 </div>
+                
                 
                 <div class="row">
                 @foreach($vehiculos as $vehiculo) 

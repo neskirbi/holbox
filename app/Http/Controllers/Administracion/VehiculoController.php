@@ -20,7 +20,7 @@ class VehiculoController extends Controller
         }
         
         $vehiculos=DB::table('vehiculos')
-        ->where('id_municipio','=',GetIdPlanta())        
+        ->where('id_municipio','=',GetIdMunicipio())        
         ->where('vehiculos.matricula','like','%'.$filtros->matricula.'%')
         ->orderby('matricula','asc')
         ->orderby('vehiculos.created_at','desc')
@@ -43,16 +43,11 @@ class VehiculoController extends Controller
             Redirect::back()->with('error', 'Esta matricula ya fue dada de alta.');
         }
         
-        $empresa=EmpresaTransporte::where('id_transportista',GetIdPlanta())->first();
-        if(!$empresa){
-            Redirect::back()->with('error', 'Primero registra los datos de la empresa.');
-        }
         
 
         $vehiculo=new Vehiculo();
         $vehiculo->id = GetUuid();
-        $vehiculo->id_empresa = $empresa->id;
-        $vehiculo->id_municipio = GetIdPlanta();
+        $vehiculo->id_municipio = GetIdMunicipio();
         $vehiculo->vehiculo = $request->vehiculo;
         $vehiculo->marca = $request->marca;
         $vehiculo->modelo = $request->modelo;

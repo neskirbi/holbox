@@ -225,7 +225,7 @@ Route::resource('catalogos', 'App\Http\Controllers\Administracion\CatalogoContro
 
 
 
-Route::resource('generador', 'App\Http\Controllers\Administracion\GeneradorController');
+
 
 
 
@@ -339,7 +339,10 @@ Route::post('GuardarDatosBancoAsoc/{id}', 'App\Http\Controllers\Asociacion\Confi
 
 Route::get('confirmargenerador/{id}', 'App\Http\Controllers\Asociacion\GeneradorController@ConfirmarGenerador');
 
+Route::resource('generador', 'App\Http\Controllers\Asociacion\GeneradorController');
 
+
+Route::get('BorrarGenerador/{id}', 'App\Http\Controllers\Asociacion\GeneradorController@BorrarGenerador');
 
 
 

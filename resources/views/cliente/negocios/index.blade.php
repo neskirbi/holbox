@@ -51,15 +51,15 @@
               <!-- /.card-header -->
               <div class="card-body">  
                 <div class="col-md-3">
-                    <a href="{{url('negocios/create')}}">
-                      <div class="info-box">
-                        <span class="info-box-icon bg-info"><i class="fa fa-plus"></i></span>
-                        <div class="info-box-content">
-                          <span class="info-box-text" style="color:#000;">Negocio</span>
-                        </div>
+                  <a href="{{url('negocios/create')}}">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-info"><i class="fa fa-plus"></i></span>
+                      <div class="info-box-content">
+                        <span class="info-box-text" style="color:#000;">Negocio</span>
                       </div>
-                    </a>                    
-                  </div>
+                    </div>
+                  </a>                    
+                </div>
 
                 <div class="row">
                   <div class="col-md-12" style="overflow-x:scroll;">

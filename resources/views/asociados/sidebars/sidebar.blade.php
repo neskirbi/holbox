@@ -53,6 +53,19 @@
               </p>
             </a>
           </li>
+
+
+          
+
+
+          <li class="nav-item">
+            <a href="{{ url('generador') }}" class="nav-link">
+              <i class="nav-icon fa fa-group" aria-hidden="true"></i>
+              <p>
+                Generadores
+              </p>
+            </a>
+          </li>
           
 
          
@@ -67,6 +80,7 @@
               </p>
             </a>
           </li>-->
+
 
           <li class="nav-item">
             <a href="{{url('logout')}}" class="nav-link">
