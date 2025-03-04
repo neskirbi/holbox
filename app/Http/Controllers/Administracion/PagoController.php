@@ -17,13 +17,13 @@ class PagoController extends Controller
     public function index()
     {
         $pago=DB::table('pagos')
-        ->where('id_planta','=',GetIdPlanta())
+        ->where('id_municipio','=',GetIdPlanta())
         ->where('status','=',2)
         ->select(DB::raw('sum(monto) as montot'))
         ->first();
 
         $pagos_fecha=DB::table('pagos')
-        ->where('id_planta','=',GetIdPlanta())
+        ->where('id_municipio','=',GetIdPlanta())
         ->where('status','=',2)
         ->select(DB::raw('date(created_at) as created_at'),DB::raw('sum(monto) as montot'))
         ->groupby('created_at')
@@ -42,11 +42,11 @@ class PagoController extends Controller
         ->join('negocios','negocios.id','=','pagos.id_negocio')
         ->select('negocios.negocio','pagos.id','pagos.monto','pagos.descripcion','pagos.detalle','pagos.created_at',DB::raw('time(pagos.created_at) as hora'),'pagos.status','pagos.referencia')
         ->orderby('created_at','desc')
-        ->where('pagos.id_planta','=',GetIdPlanta())
+        ->where('pagos.id_municipio','=',GetIdPlanta())
         ->get();
        
 
-        $negocios=Negocio::where('id_planta','=',GetIdPlanta())->get();
+        $negocios=Negocio::where('id_municipio','=',GetIdPlanta())->get();
         
         return view('administracion.pagos.pagos',['negocios'=>$negocios,'pago'=>$pago,'pagos'=>$pagos,'consumo'=>$consumo,'pagos_fecha'=>$pagos_fecha,'clientegastos'=>$clientegastos]);
     }
@@ -121,10 +121,10 @@ class PagoController extends Controller
         
         $negocio=Negocio::where('id',$request->negocio)->first();
 
-        $planta=Planta::where('id','=',$negocio->id_planta)->first();
+        $planta=Planta::where('id','=',$negocio->id_municipio)->first();
         
         $configuracion=DB::table('configuraciones')
-        ->where('id_planta','=',$planta->id)
+        ->where('id_municipio','=',$planta->id)
         ->first();
 
         $cliente=DB::table('clientes')
@@ -139,7 +139,7 @@ class PagoController extends Controller
         $pago->id_cliente = $cliente->id;        
         $pago->id_obra = '';      
         $pago->id_negocio = $request->negocio;
-        $pago->id_planta = $negocio->id_planta;
+        $pago->id_municipio = $negocio->id_municipio;
         $pago->monto = $request->monto;
         $pago->nombre = $request->nombre;
         $pago->direccion = $request->direccion;

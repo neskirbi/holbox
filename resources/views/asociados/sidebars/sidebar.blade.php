@@ -46,10 +46,10 @@
           
 
           <li class="nav-item">
-            <a href="{{ url('plantasasoc') }}" class="nav-link">
+            <a href="{{ url('municipios') }}" class="nav-link">
             <i class="nav-icon fa fa-recycle" aria-hidden="true"></i>
               <p>
-                Plantas
+                Municipios
               </p>
             </a>
           </li>
@@ -71,15 +71,6 @@
          
 
           
-          
-          <!--<li class="nav-item">
-            <a href="{{url('configuracion')}}" class="nav-link">
-            <i class="nav-icon fa fa-cogs" aria-hidden="true"></i>
-              <p>
-                Configuración
-              </p>
-            </a>
-          </li>-->
 
 
           <li class="nav-item">

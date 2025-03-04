@@ -10,7 +10,7 @@ use App\Models\Planta;
 use App\Models\Configuracion;
 use Redirect;
 
-class PlantaController extends Controller
+class MunicipioController extends Controller
 {
 
     public function __construct(){
@@ -18,10 +18,18 @@ class PlantaController extends Controller
     }
     
     function index(Request $request){
-        $plantas = DB::table('plantas')
-        ->whereraw("planta like '%".$request->planta."%' ")
-        ->paginate(10);
-        return view('asociados.plantas.index',['plantas'=>$plantas]);
+        $paginas = 15;
+        if(isset($request->entidad)){
+            $paginas = 1000;
+        }
+        $municipios = DB::table('entidades')
+        ->join('municipios','municipios.id_entidad','=','entidades.id')
+        ->whereraw("municipio like '%".$request->municipio."%' ")
+        ->whereraw("entidad like '%".$request->entidad."%' ")
+        ->orderby('entidades.entidad','asc')
+        ->orderby('municipios.municipio','asc')
+        ->paginate($paginas);
+        return view('asociados.municipios.index',['municipios'=>$municipios,'filtros'=>$request]);
     }
 
     function show($id){
@@ -35,7 +43,7 @@ class PlantaController extends Controller
         ->orderby('administrador','asc')
         ->get();
 
-        return view('asociados.plantas.planta',['planta'=>$planta,'administradores'=>$administradores]);
+        return view('asociados.municipios.planta',['planta'=>$planta,'administradores'=>$administradores]);
     }
 
     function update(Request $request,$id){
@@ -46,16 +54,16 @@ class PlantaController extends Controller
         $planta->codigo=$request->codigo;
         $planta->plantaauto=$request->plantaauto;
         if($planta->save()){
-            return redirect('plantasasoc/'.$id)->with('success', 'Se actializ&oacute; la informaci&oacute;n.');
+            return redirect('municipios/'.$id)->with('success', 'Se actializ&oacute; la informaci&oacute;n.');
         }else{
-            return redirect('plantasasoc/'.$id)->with('error', 'Error al guardar.');
+            return redirect('municipios/'.$id)->with('error', 'Error al guardar.');
         }
     }
 
     function PlantaReg(Request $request){
         $administrador=Administrador::where('mail',$request->mail)->first(); 
         if($administrador){            
-            return redirect('plantasasoc')->with('error', 'El correo de administrador ya está registrado, debe utilizar otro.');
+            return redirect('municipios')->with('error', 'El correo de administrador ya está registrado, debe utilizar otro.');
         }  
 
 
@@ -69,7 +77,7 @@ class PlantaController extends Controller
         $planta->tipo=$request->tipo;
 
         if(!$planta->save()){
-            return redirect('plantasasoc')->with('error', 'Error al registrar la planta.');            
+            return redirect('municipios')->with('error', 'Error al registrar la planta.');            
         }
 
 
@@ -82,7 +90,7 @@ class PlantaController extends Controller
         $administrador->principal=1;
         $administrador->pass=password_hash($request->pass,PASSWORD_DEFAULT);
         if(!$administrador->save()){
-            return redirect('plantasasoc')->with('error', 'Error al registrar al administrador.');  
+            return redirect('municipios')->with('error', 'Error al registrar al administrador.');  
         }
 
 
@@ -91,10 +99,10 @@ class PlantaController extends Controller
         $configuracion->id_municipio=$planta->id;
 
         if(!$configuracion->save()){
-            return redirect('plantasasoc')->with('error', 'Error la configurar.');  
+            return redirect('municipios')->with('error', 'Error la configurar.');  
         }
         
-        return redirect('plantasasoc')->with('success', 'La planta se registr&oacute; correctamente.');
+        return redirect('municipios')->with('success', 'La planta se registr&oacute; correctamente.');
     }
 
     

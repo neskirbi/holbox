@@ -16,34 +16,20 @@ class AdministradorController extends Controller
 {
     function Administradores($id_municipio){
         
-        $planta = Planta::find($id_municipio);
-
-        $directores=DB::table('directores')
-        ->where('id_municipio',$id_municipio)
-        ->orderby('director','asc')
-        ->get();
-
         $administradores=DB::table('administradores')
         ->where('id_municipio',$id_municipio)
         ->orderby('administrador','asc')
         ->get();
 
-
-        $recepciones=DB::table('recepciones')
-        ->where('id_municipio',$id_municipio)
-        ->orderby('nombre','asc')
+        $municipios = DB::table('municipios')
+        ->orderby('municipios.municipio','asc')
+        ->where('id',$id_municipio)
         ->get();
 
 
-        $finanzas=DB::table('finanzas')
-        ->where('id_municipio',$id_municipio)
-        ->orderby('nombre','asc')
-        ->get();
-        
-
         
         
-        return view('asociados.administradores.administradores',['planta'=>$planta,'directores'=>$directores,'administradores'=>$administradores,'recepciones'=>$recepciones,'finanzas'=>$finanzas]);
+        return view('asociados.administradores.index',['administradores'=>$administradores,'municipios'=>$municipios]);
     }
 
     function show($id){
@@ -61,41 +47,20 @@ class AdministradorController extends Controller
     }
 
     function CreateAdmin(Request $request){
+        
         $donde=BuscarCorreo($request->mail);
         if($donde!=''){
             return Redirect::back()->with('error', 'El correo ya esta registrado en '.$donde.', ingresar otro.');
         }
-        switch($request->tadmin){
-            case 1:
-                $admin =new  Director();
-                
-                $admin->director=$request->nombre;
-            break;
-
-            case 2:
-                $admin =new  Administrador();
-                
-                $admin->cargo=$request->cargo;
-                $admin->administrador=$request->nombre;
-            break;
-
-            
-
-            case 5:
-                $admin =new  Finanza();
-                
-                $admin->cargo=$request->cargo;
-                $admin->nombre=$request->nombre;
-            break;
-        }
-        
+        $admin = new Administrador();
         
         $admin->id=GetUuid();
+        $admin->administrador = $request->administrador;
         $admin->id_municipio=$request->id_municipio;
         $admin->mail=$request->mail;
         $admin->pass=$request->pass;
         $admin->save();
-        return Redirect::back()->with('success', 'Se guardaron los datos.');
+        return redirect('administradoresasoc/'.$request->id_municipio)->with('success', 'Se guardaron los datos.');
     }
 
     function UpdateDirector(Request $request,$id){
@@ -129,7 +94,6 @@ class AdministradorController extends Controller
         }
         $admin = Administrador::find($id);
         $admin->administrador=$request->administrador;
-        $admin->cargo=$request->cargo;
         $admin->mail=isset($request->mail) ? $request->mail : $admin->mail;
         $admin->pass=$request->pass;
         $admin->save();
@@ -171,7 +135,7 @@ class AdministradorController extends Controller
     function PlantaReg(Request $request){
         $administrador=Administrador::where('mail',$request->mail)->first(); 
         if($administrador){            
-            return redirect('plantasasoc')->with('error', 'El correo de administrador ya está registrado, debe utilizar otro.');
+            return redirect('municipios')->with('error', 'El correo de administrador ya está registrado, debe utilizar otro.');
         }  
 
 
@@ -185,7 +149,7 @@ class AdministradorController extends Controller
         $planta->tipo=$request->tipo;
 
         if(!$planta->save()){
-            return redirect('plantasasoc')->with('error', 'Error al registrar la planta.');            
+            return redirect('municipios')->with('error', 'Error al registrar la planta.');            
         }
 
 
@@ -198,7 +162,7 @@ class AdministradorController extends Controller
         $administrador->principal=1;
         $administrador->pass=password_hash($request->pass,PASSWORD_DEFAULT);
         if(!$administrador->save()){
-            return redirect('plantasasoc')->with('error', 'Error al registrar al administrador.');  
+            return redirect('municipios')->with('error', 'Error al registrar al administrador.');  
         }
 
 
@@ -207,10 +171,10 @@ class AdministradorController extends Controller
         $configuracion->id_municipio=$planta->id;
 
         if(!$configuracion->save()){
-            return redirect('plantasasoc')->with('error', 'Error la configurar.');  
+            return redirect('municipios')->with('error', 'Error la configurar.');  
         }
         
-        return redirect('plantasasoc')->with('success', 'La planta se registr&oacute; correctamente.');
+        return redirect('municipios')->with('success', 'La planta se registr&oacute; correctamente.');
     }
 
     function administradoresasoc(Request $request,$id){

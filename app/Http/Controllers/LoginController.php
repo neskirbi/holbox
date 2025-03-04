@@ -39,7 +39,7 @@ class LoginController extends Controller
         {
             Auth::guard('asociados')->login($asociado);
 
-            return redirect('plantasasoc');
+            return redirect('municipios');
         }
         return redirect('acceso')->with('error', '¡Error en los los datos!');
     }

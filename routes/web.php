@@ -32,7 +32,7 @@ Route::get('home', function () {
     }   
 
     if(Auth::guard('administradores')->check()){
-        return redirect('generador');
+        return redirect('establecimientos');
     }  
 
     if(Auth::guard('vendedores')->check()){
@@ -169,7 +169,7 @@ Route::resource('catalogosasoc', 'App\Http\Controllers\Asociacion\CatalogosContr
 
 
 
-Route::resource('plantasasoc','App\Http\Controllers\Asociacion\PlantaController');
+Route::resource('municipios','App\Http\Controllers\Asociacion\MunicipioController');
 Route::get('administradoresasoc/{id}','App\Http\Controllers\Asociacion\AdministradorController@Administradores');
 
 Route::post('CreateAdmin','App\Http\Controllers\Asociacion\AdministradorController@CreateAdmin');

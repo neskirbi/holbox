@@ -36,7 +36,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Datos de la Planta</h3>                            
                         </div>
-                        <form action="{{url('plantasasoc').'/'.$planta->id}}" id="{{$planta->id}}" method="post">
+                        <form action="{{url('municipios').'/'.$planta->id}}" id="{{$planta->id}}" method="post">
                         @csrf
                         <input id="_method" name="_method" type="hidden" value="PUT">
                         <div class="card-body">
