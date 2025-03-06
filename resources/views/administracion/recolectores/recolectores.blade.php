@@ -66,12 +66,22 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">                            
-                               
+                            <div class="row">
+                                
                                 <div class="col-sm-3">
                                     <div class='form-group'>
                                         <label for="mail">Correo</label>
                                         <input type="text" class="form-control" id="mail" onkeyup="Cambio(this)" data-mail="{{$recolector->mail}}" value="{{$recolector->mail}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">                            
+                               
+
+                                <div class="col-sm-4">
+                                    <div class='form-group'>
+                                        <label for="mail">Teléfono</label>
+                                        <input required type="number" class="form-control" id="telefono" name="telefono" placeholder="Teléfono" value="{{$recolector->telefono}}">
                                     </div>
                                 </div>
                                
