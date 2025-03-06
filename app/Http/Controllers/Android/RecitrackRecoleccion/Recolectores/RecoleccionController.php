@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Recoleccion;
 use App\Models\Negocio;
-use App\Models\Planta;
 use App\Models\Multa;
 use App\Models\Pago;
 use App\Models\Residuo;
@@ -26,7 +25,6 @@ class RecoleccionController extends Controller
             }else{
 
                 $negocio=Negocio::find($recoleccion['id_negocio']);
-                $planta=Planta::find($negocio->id_municipio);
                 $configuracion=Configuracion::where('id_municipio',$negocio->id_municipio)->first();
 
                 $folio=$configuracion->folio;
