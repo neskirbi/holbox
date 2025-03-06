@@ -17,6 +17,7 @@ class RecoleccionController extends Controller
    function CargarRecoleccion(Request $request){
        $recolecciones=PostmanAndroid($request);
        $correctos=array();
+       //return $recolecciones;
        
        foreach($recolecciones as $recoleccion){
 
