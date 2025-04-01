@@ -446,3 +446,9 @@ Route::resource('empresassoporte', 'App\Http\Controllers\Soporte\EmpresaControll
 
 Route::post('loginsoporte','App\Http\Controllers\Soporte\LoginController@LoginSoporte');
 Route::resource('vehiculossoporte','App\Http\Controllers\Soporte\VehiculoController');
+
+
+
+
+
+Route::resource('registrot','App\Http\Controllers\WebApp\Transportista\RegistroTController');

@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Models\PreVerificacion;
+use App\Models\Chofer;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -138,3 +140,32 @@ Route::post('CargarRecoleccion','App\Http\Controllers\Android\RecitrackRecolecci
 
 
 Route::post('MunicipiosApi','App\Http\Controllers\Api\ApiController@MunicipiosApi');
+
+
+
+Route::post('EnviarCodigo',function(Request $request){
+    
+    $length = 5;
+    $codigo = substr(str_repeat(0, $length).rand(1,9999), - $length);
+    //return EnviarMensaje($request->telefono,'Su numero se ha registrado en reci-track.mx, para confirmar el registro de su número vaya al siguiente link reci-track.mx/ValidacionChofer/'.$id.' .');
+
+    if(Chofer::where('telefono',$request->telefono)->first()){
+        return 3;
+    }
+    if(EnviarMensaje("+52".$request->telefono,'Su numero se ha registrado en reci-trash.mx, Codigo: '.$codigo)){
+
+        
+        $pre=new PreVerificacion();
+        $pre->id=GetUuid();
+        $pre->telefono=$request->telefono;
+        $pre->codigo = $codigo;
+        $pre->save();
+        return 1;
+    }else{
+        return 0;
+    }
+    return 0;
+
+
+
+});

@@ -5,10 +5,11 @@ use App\Models\Historial;
 use App\Models\Cita;
 use App\Models\Planta;
 use App\Models\Vehiculo;
+use App\Models\Chofer;
 use Kreait\Firebase\Factory;
 
 function Version(){
-    return 3;
+    return 4;
 }
 
 function GetSiglas($opcion){
@@ -194,10 +195,15 @@ function GetMail(){
 }
 
 function EnviarMensaje($numeros,$mensaje){
-
+    
     $instasentClient = new Instasent\SmsClient("8b7953a5fe24c0c838830616ae4dc24db98a8945");
     $response = $instasentClient->sendUnicodeSms('Recitrack', $numeros, $mensaje);
-    return $response['response_code'];
+    //return $response['response_code'];
+    if(intval($response['response_code'])>=199 && intval($response['response_code'])<=300){
+        return 1;
+    }else{
+        return 0;
+    }
 }
 
 function RevisarSesiones($sesiones){

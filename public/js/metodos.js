@@ -3009,3 +3009,39 @@ function LlenarTipoObra(tipoobra){
         $('#municipio').html(html);
     });
 }
+
+
+function EnviarCodigo(_this){
+    if(!confirm('¿El número de teléfono es correcto?. Se enviará un código de verificación al teléfono.')){
+        return;
+    }
+    var telefono=$('#telefono').val();
+    var confirmacion=$('#confirmacion');    
+    if(telefono.length!= 10){
+        alert('El numero debe ser de 10 digitos.');
+        return;
+    }
+    
+    BloquearT(_this);
+    var data={telefono:telefono};
+    $.ajax({
+            
+        headers: { "APP-KEY": AppKey() },
+        method:'post',
+        url: Url()+"api/EnviarCodigo",
+        data:data,
+        context: document.body
+    }).done(function(data) {
+       
+        console.log(data);
+        if (data==3){
+            alert('El teléfono ya fue registrado anteriormente');
+        }
+        if(data==1){
+            alert('Se ha enviado un mensajes al numero con el codigo de verificación.');
+        }
+    }).fail(function(xhr, status, error) {
+        console.log(error);
+        
+    });
+}
