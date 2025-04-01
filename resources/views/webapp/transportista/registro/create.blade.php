@@ -57,7 +57,7 @@
           <div class="card-header">
             <h3 class="card-title"><i class="fas fa-truck mr-2"></i>Registro de Transportista</h3>
           </div>
-          <form action="{{url('RegistroChofer')}}" method="POST" id="RegistroChofer" enctype="multipart/form-data" novalidate>
+          <form action="{{url('registrot')}}" method="POST"  enctype="multipart/form-data" >
             @csrf 
             <div class="card-body">
               
@@ -316,7 +316,7 @@
                   <label for="codigo" class="required-field">Código de verificación</label>
                   <div class="input-group">
                     <input type="text" name="codigo" class="form-control" id="codigo" 
-                           placeholder="Ingrese el código recibido" maxlength="6" pattern="[0-9]{6}" required>
+                           placeholder="Ingrese el código recibido" maxlength="10"  required>
                     <div class="input-group-append">
                       <span class="input-group-text">
                         <i class="fas fa-key"></i>

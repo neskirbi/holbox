@@ -405,7 +405,7 @@ Route::get('TCRecitrackTrasporte',function(){
     Route::get('ConfirmacionRecolector/{id}','App\Http\Controllers\Android\Recolector\LoginController@ConfirmacionRecolector');
 
     
-    Route::resource('RegistroChofer','App\Http\Controllers\Android\RecitrackTransporte\Choferes\ChoferController');
+    
 
 
 
@@ -451,4 +451,9 @@ Route::resource('vehiculossoporte','App\Http\Controllers\Soporte\VehiculoControl
 
 
 
+
+
+/**
+ * Transportistas
+ */
 Route::resource('registrot','App\Http\Controllers\WebApp\Transportista\RegistroTController');
