@@ -14,12 +14,25 @@ class CreateRecolectores extends Migration
     public function up()
     {
         Schema::create('recolectores', function (Blueprint $table) {
-            $table->string('id',32)->unique();
+            $table->string("id",32)->unique();
+            
             $table->string('id_municipio',32);
-            $table->string('recolector',150);
-            $table->string('mail',150);
-            $table->string('telefono',150);            
-            $table->string('pass',255);
+            
+            $table->string('razonsocial',250); 
+            $table->string("ramir",100);            
+            $table->string("regsct",100)->default('');   
+            $table->string('giro',250); 
+            $table->longtext('domicilio');
+
+
+            $table->string("nombres",150);
+            $table->string("apellidos",150);
+            $table->string("licencia",150);
+            $table->string('telefono',50)->default('');
+            $table->string('pass',255)->default('');
+            $table->boolean('verificado')->default(0);
+            $table->integer('tipo')->default(0);
+            
             $table->timestamps();
         });
     }

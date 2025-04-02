@@ -551,11 +551,40 @@ function PostmanAndroid($request){
     return json_decode($request,1);
 }
 
-function TipoPlanta(){
-    $planta=Planta::where('id',Auth::guard('administradores')->user()->id_municipio)->first();
-    return $planta->tipo;
+
+
+
+function ArchivoPorNombre($directorio, $nombreSinExtension) {
+    // Verificar si el directorio existe
+    if (!is_dir($directorio)) {
+        return null;
+    }
+    
+    // Escanear el directorio
+    $archivos = scandir($directorio);
+    
+    foreach ($archivos as $archivo) {
+        // Ignorar directorios especiales . y ..
+        if ($archivo === '.' || $archivo === '..') {
+            continue;
+        }
+        
+        // Obtener el nombre sin extensión y comparar
+        $nombreArchivo = pathinfo($archivo, PATHINFO_FILENAME);
+        
+        if ($nombreArchivo === $nombreSinExtension) {
+            return $archivo; // Devuelve el nombre completo con extensión
+        }
+    }
+    
+    return null; // No se encontró el archivo
 }
 
 
 
+
+function TipoPlanta(){
+    $planta=Planta::where('id',Auth::guard('administradores')->user()->id_municipio)->first();
+    return $planta->tipo;
+}
 ?>
