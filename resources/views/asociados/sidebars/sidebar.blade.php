@@ -46,13 +46,25 @@
           
 
           <li class="nav-item">
-            <a href="{{ url('municipios') }}" class="nav-link">
-            <i class="nav-icon fa fa-recycle" aria-hidden="true"></i>
+            <a href="{{ url('etransporte') }}" class="nav-link">
+            <i class="nav-icon fa fa-truck" aria-hidden="true"></i>
               <p>
-                Municipios
+                E. Transporte
               </p>
             </a>
           </li>
+
+
+          <li class="nav-item">
+            <a href="{{ url('recolectores') }}" class="nav-link">
+            <i class="nav-icon fa fa-group" aria-hidden="true"></i>
+              <p>
+                Recolectores
+              </p>
+            </a>
+          </li>
+
+
 
 
           

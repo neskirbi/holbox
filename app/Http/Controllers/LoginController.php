@@ -39,7 +39,7 @@ class LoginController extends Controller
         {
             Auth::guard('asociados')->login($asociado);
 
-            return redirect('municipios');
+            return redirect('etransporte');
         }
         return redirect('acceso')->with('error', '¡Error en los los datos!');
     }

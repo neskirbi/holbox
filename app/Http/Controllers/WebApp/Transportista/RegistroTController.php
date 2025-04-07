@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Recolector;
 
-use App\Models\Entidad;
+use App\Models\EmpresaTransporte;
 
 class RegistroTController extends Controller
 {
     function index(){
-        $entidades=Entidad::All();
-        return view('webapp.transportista.registro.create',['entidades'=>$entidades]);
+        $empresas = EmpresaTransporte::orderby('razonsocial')
+        ->get(); 
+        return view('webapp.transportista.registro.create',['empresas'=>$empresas]);
     }
 
 
@@ -33,14 +34,9 @@ class RegistroTController extends Controller
         $recolector=new Recolector();
         $recolector->id=GetUuid();
 
-        $recolector->razonsocial=$request->razonsocial;
-        $recolector->regsct=$request->regsct;
-        $recolector->giro=$request->giro;
-        $recolector->ramir=$request->ramir;
-        $recolector->id_municipio=$request->municipio;
-        $recolector->domicilio=$request->calle.', '.$request->numeroint.', '.$request->numeroext.', Colonia '.$request->colonia.', '.$request->municipio.', Ciudad '.$request->entidad.', C.P.'.$request->cp;
 
         
+        $recolector->id_etransporte=$request->etransporte;
         $recolector->nombres=$request->nombres;        
         $recolector->apellidos=$request->apellidos;
         $recolector->telefono=$request->telefono;

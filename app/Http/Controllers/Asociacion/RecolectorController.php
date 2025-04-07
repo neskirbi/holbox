@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Administracion;
+namespace App\Http\Controllers\Asociacion;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,8 +13,6 @@ use Redirect;
 
 class RecolectorController extends Controller
 {
-
-      
     public function __construct(){
         //$this->middleware('administradorlogged');
     }
@@ -26,12 +24,11 @@ class RecolectorController extends Controller
     public function index()
     {
         $recolectores=DB::table('recolectores')
-        ->where('id_municipio',Auth::guard('administradores')->user()->id_municipio)
         ->orderby('created_at','asc')
         ->get();
 
         
-        return view('administracion.recolectores.recolectores',['recolectores'=>$recolectores]);
+        return view('asociados.recolectores.index',['recolectores'=>$recolectores]);
     }
 
     /**

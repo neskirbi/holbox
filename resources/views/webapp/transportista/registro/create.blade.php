@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   @include('transportistas.header')
-  <title>{{GetSiglas(0)}} | Vehículos</title>
+  <title> Recolectores</title>
   <style>
     .form-section {
       margin-bottom: 2rem;
@@ -61,137 +61,27 @@
             @csrf 
             <div class="card-body">
               
-              <!-- Sección 1: Datos de la Empresa -->
-              <div class="form-section">
-                <div class="form-section-title">
-                  <i class="fas fa-building mr-2"></i>Datos de la Empresa
-                </div>
-                
-                <div class="form-group">
-                  <label for="razonsocial" class="required-field">Razón social</label>
-                  <input type="text" name="razonsocial" class="form-control" id="razonsocial" 
-                         placeholder="Ingrese la razón social" maxlength="250" required>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="ramir" class="required-field">RAMIR</label>
-                      <input type="text" name="ramir" class="form-control" id="ramir" 
-                             placeholder="Ingrese el RAMIR" maxlength="100" required>
-                    </div>                      
-                  </div>
-
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="giro" class="required-field">Giro</label>
-                      <input type="text" name="giro" class="form-control" id="giro" 
-                             placeholder="Ingrese el giro" maxlength="250" required>
-                    </div>
-                  </div>
-                
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="regsct" class="required-field">Registro SCT</label>
-                      <input type="text" name="regsct" class="form-control" id="regsct" 
-                             placeholder="Ingrese registro SCT" maxlength="100" required>
-                    </div>
-                  </div>
-                </div>  
-              </div>
               
-              <!-- Sección 2: Dirección -->
-              <div class="form-section">
-                <div class="form-section-title">
-                  <i class="fas fa-map-marker-alt mr-2"></i>Dirección
-                </div>
-                
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="calle" class="required-field">Calle</label>
-                      <input type="text" name="calle" class="form-control" id="calle" 
-                             placeholder="Ingrese la calle" maxlength="500" required>
-                    </div>
-                  </div>
-                
-                  <div class="col-md-3">                                    
-                    <div class="form-group">
-                      <label for="numeroext" class="required-field">Número exterior</label>
-                      <input type="text" name="numeroext" class="form-control" id="numeroext" 
-                             placeholder="Núm. ext." maxlength="20" required>
-                    </div>
-                  </div>
-                      
-                  <div class="col-md-3"> 
-                    <div class="form-group">
-                      <label for="numeroint">Número interior</label>
-                      <input type="text" name="numeroint" class="form-control" id="numeroint" 
-                             placeholder="Núm. int." maxlength="20">
-                    </div>
-                  </div>
-                </div>                        
-                
-                <div class="form-group">
-                  <label for="colonia" class="required-field">Colonia</label>
-                  <input type="text" name="colonia" class="form-control" id="colonia" 
-                         placeholder="Ingrese la colonia" maxlength="50" required>
-                </div>
-
-                <div class="row">
-                    
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="entidad"><i class="fas fa-flag"></i> Entidad Federativa</label>
-                        <select name="entidad" class="form-control" id="entidad" onchange="MunicipiosApi(this,2);" required>
-                          <option value="">--Entidad Federativa--</option>
-                          @foreach($entidades as $entidad)
-                            <option value="{{$entidad->id}}">{{$entidad->entidad}}</option>
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="municipio"><i class="fas fa-city"></i> Alcaldía/Municipio</label>
-                        <select  name="municipio" class="form-control" id="municipio" aria-invalid="false" data-mun="municipio" >
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-
-                <div class="row">
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="cp" class="required-field">Código Postal</label>
-                      <input type="text" name="cp" class="form-control" id="cp" 
-                             placeholder="C.P." maxlength="5" pattern="[0-9]{5}" required>
-                      <small class="form-text text-muted">5 dígitos</small>
-                    </div>
-                  </div>
-                  
-                  <div class="col-md-5">
-                    <div class="form-group">
-                      <label for="telefono" class="required-field">Teléfono</label>
-                      <input type="tel" name="telefono_empresa" class="form-control" id="telefono_empresa" 
-                             placeholder="Teléfono de la empresa" maxlength="15" required>
-                    </div>
-                  </div>
-                  
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="mail" class="required-field">Correo electrónico</label>
-                      <input type="email" name="mail" class="form-control" id="mail" 
-                             placeholder="correo@empresa.com" maxlength="50" required>
-                    </div>    
-                  </div>
-                </div>
-              </div>
               
               <!-- Sección 3: Datos del Chofer -->
               <div class="form-section">
                 <div class="form-section-title">
                   <i class="fas fa-user mr-2"></i>Datos del Chofer
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="nombres" class="required-field">Empresa</label>
+                      <select required name="etransporte" id="etransporte" class="form-control">
+                        <option value="">---Seleccione una empresa---</option>
+                        <optgroup> </optgroup>
+                        @foreach($empresas as $empresa)
+                        <option value="{{$empresa->id}}">{{$empresa->razonsocial}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
                 </div>
                 
                 <div class="row">
@@ -217,12 +107,12 @@
                       <label for="licencia" class="required-field">Tipo de licencia</label>
                       <select class="form-control" id="licencia" name="licencia" required>
                         <option value="">-- Seleccione tipo de licencia --</option>
-                        <option value="A">A - Motocicletas</option>
-                        <option value="B">B - Automóviles</option>
-                        <option value="C">C - Camiones ligeros</option>
-                        <option value="D">D - Camiones pesados</option>
-                        <option value="E">E - Remolques</option>
-                        <option value="F">F - Transporte de pasajeros</option>
+                        <option value="A - Motocicletas">A - Motocicletas</option>
+                        <option value="B - Automóviles">B - Automóviles</option>
+                        <option value="C - Camiones ligeros">C - Camiones ligeros</option>
+                        <option value="D - Camiones pesados">D - Camiones pesados</option>
+                        <option value="E - Remolques">E - Remolques</option>
+                        <option value="F - Transporte de pasajeros">F - Transporte de pasajeros</option>
                       </select>
                     </div>
                   </div>

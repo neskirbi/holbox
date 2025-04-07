@@ -162,12 +162,15 @@ Route::resource('recolecciones','App\Http\Controllers\Cliente\RecoleccionControl
 /**
  * Rutas Asociacion
  */
+
+Route::resource('etransporte', 'App\Http\Controllers\Asociacion\ETransporteController');
+
 Route::resource('generadorasoc', 'App\Http\Controllers\Asociacion\GeneradorController');
 Route::resource('catalogosasoc', 'App\Http\Controllers\Asociacion\CatalogosController');
 
 
 
-
+Route::resource('recolectores','App\Http\Controllers\Asociacion\RecolectorController');
 
 Route::resource('municipios','App\Http\Controllers\Asociacion\MunicipioController');
 Route::get('administradoresasoc/{id}','App\Http\Controllers\Asociacion\AdministradorController@Administradores');
@@ -206,6 +209,44 @@ Route::resource('configuracionasoc','App\Http\Controllers\Asociacion\Configuraci
 
 
 /**
+ * Rutas para guardar catalogo que todas apuntan al controlador Asociacion\CatalogosController.
+ */
+
+
+
+
+
+
+Route::post('guardarcategoriamaterial', 'App\Http\Controllers\Asociacion\CatalogosController@GuardarCategoriaMaterial');
+Route::get('borrarcategoriamaterial/{id}', 'App\Http\Controllers\Asociacion\CatalogosController@BorrarCategoriaMaterial');
+
+Route::post('guardarmaterial', 'App\Http\Controllers\Asociacion\CatalogosController@GuardarMaterial');
+Route::put('actualizamaterial/{id}', 'App\Http\Controllers\Asociacion\CatalogosController@ActualizaMaterial');
+Route::get('borrarmaterial/{id}', 'App\Http\Controllers\Asociacion\CatalogosController@BorrarMaterial');
+
+Route::post('guardarcondicion', 'App\Http\Controllers\Asociacion\CatalogosController@GuardarCondicion');
+Route::get('borrarcondicion/{id}', 'App\Http\Controllers\Asociacion\CatalogosController@BorrarCondicion');
+
+
+Route::put('GuardarDatosPlantaAsoc/{id}', 'App\Http\Controllers\Asociacion\ConfiguracionController@GuardarDatosPlanta');
+
+Route::post('GuardarDatosBancoAsoc/{id}', 'App\Http\Controllers\Asociacion\ConfiguracionController@GuardarDatosBancoAsoc');
+
+/**
+ * Confirmaciones de generadores, obras y no se que mas vaya a haber
+ */
+
+Route::get('confirmargenerador/{id}', 'App\Http\Controllers\Asociacion\GeneradorController@ConfirmarGenerador');
+
+Route::resource('generador', 'App\Http\Controllers\Asociacion\GeneradorController');
+
+
+Route::get('BorrarGenerador/{id}', 'App\Http\Controllers\Asociacion\GeneradorController@BorrarGenerador');
+
+
+
+
+/**
  * Rutas para administradores
  */
 
@@ -229,7 +270,7 @@ Route::resource('catalogos', 'App\Http\Controllers\Administracion\CatalogoContro
 
 
 
-Route::resource('recolectores','App\Http\Controllers\Administracion\RecolectorController');
+
 Route::get('BorrarRecolector/{id}','App\Http\Controllers\Administracion\RecolectorController@BorrarRecolector');
 
 
@@ -307,42 +348,6 @@ Route::get('AdminPass/{id}',function($id){
 Route::post('GuardarPassAdmin/{id}','App\Http\Controllers\LoginController@GuardarPassAdmin');
 
 
-
-
-/**
- * Rutas para guardar catalogo que todas apuntan al controlador Asociacion\CatalogosController.
- */
-
-
-
-
-
-
-Route::post('guardarcategoriamaterial', 'App\Http\Controllers\Asociacion\CatalogosController@GuardarCategoriaMaterial');
-Route::get('borrarcategoriamaterial/{id}', 'App\Http\Controllers\Asociacion\CatalogosController@BorrarCategoriaMaterial');
-
-Route::post('guardarmaterial', 'App\Http\Controllers\Asociacion\CatalogosController@GuardarMaterial');
-Route::put('actualizamaterial/{id}', 'App\Http\Controllers\Asociacion\CatalogosController@ActualizaMaterial');
-Route::get('borrarmaterial/{id}', 'App\Http\Controllers\Asociacion\CatalogosController@BorrarMaterial');
-
-Route::post('guardarcondicion', 'App\Http\Controllers\Asociacion\CatalogosController@GuardarCondicion');
-Route::get('borrarcondicion/{id}', 'App\Http\Controllers\Asociacion\CatalogosController@BorrarCondicion');
-
-
-Route::put('GuardarDatosPlantaAsoc/{id}', 'App\Http\Controllers\Asociacion\ConfiguracionController@GuardarDatosPlanta');
-
-Route::post('GuardarDatosBancoAsoc/{id}', 'App\Http\Controllers\Asociacion\ConfiguracionController@GuardarDatosBancoAsoc');
-
-/**
- * Confirmaciones de generadores, obras y no se que mas vaya a haber
- */
-
-Route::get('confirmargenerador/{id}', 'App\Http\Controllers\Asociacion\GeneradorController@ConfirmarGenerador');
-
-Route::resource('generador', 'App\Http\Controllers\Asociacion\GeneradorController');
-
-
-Route::get('BorrarGenerador/{id}', 'App\Http\Controllers\Asociacion\GeneradorController@BorrarGenerador');
 
 
 
