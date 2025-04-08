@@ -43,7 +43,7 @@
                                                 <th>Apellidos</th>
                                                 <th>Licencia</th>
                                                 <th>Teléfono</th>
-                                                <th colspan="2">Documentos</th>
+                                                <th>Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -55,20 +55,9 @@
                                                 <td>{{ $recolector->licencia }}</td>
                                                 <td>{{ $recolector->telefono }}</td>
                                                 <td>
-                                                    <div class="btn-group">
-                                                        <a target="_blank" class="btn btn-sm btn-info" href="{{asset('documentos/transportistas/recolectores/inefrente').'/'.ArchivoPorNombre('documentos/transportistas/recolectores/inefrente',$recolector->id)}}">
-                                                            <i class="fas fa-id-card"></i> INE Frente
-                                                        </a>
-                                                       
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                <div class="btn-group">
-                                                       
-                                                        <a target="_blank" class="btn btn-sm btn-info" href="{{asset('documentos/transportistas/recolectores/inereverso').'/'.ArchivoPorNombre('documentos/transportistas/recolectores/inefrente',$recolector->id)}}">
-                                                            <i class="fas fa-id-card"></i> INE Reverso
-                                                        </a>
-                                                    </div>
+                                                    <a class="btn btn-block btn-info" href="{{url('recolectores')}}/{{$recolector->id}}">
+                                                        <i class="fa fa-eye"></i> Ver 
+                                                    </a>
                                                 </td>
                                                
                                             </tr>

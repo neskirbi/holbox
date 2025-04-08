@@ -38,7 +38,7 @@ class RecolectorController extends Controller
      */
     public function create()
     {
-        //
+       
     }
 
     /**
@@ -86,7 +86,8 @@ class RecolectorController extends Controller
      */
     public function show($id)
     {
-        //
+        $recolector = Recolector::find($id);
+        return view('asociados.recolectores.show',['recolector'=>$recolector]);
     }
 
     /**
@@ -119,21 +120,13 @@ class RecolectorController extends Controller
 
         $recolector=Recolector::find($id);
         
-        $recolector->recolector=$request->nombre;
-        $recolector->mail=isset($request->mail) ? $request->mail : $recolector->mail;                       
-        //$recolector->telefono=$request->telefono;       
-        $recolector->pass=$request->pass;
-
-        if($request->telefono!=null){
-            $response=EnviarMensaje("+52".$request->telefono,'Su numero se ha registrado en reci-trash.mx, para confirmar el registro de su número vaya al siguiente link reci-trash.mx/ConfirmacionRecolector/'.$recolector->id.' .');
-            if(intval($response)>=400){
-                return Redirect::back()->with('error','Error, el numero es invalido.');
-            }
-        }
+        $recolector->nombres=$request->nombres;
+        $recolector->apellidos=$request->apellidos;  
+        $recolector->licencia=$request->licencia;      
 
 
         if($recolector->save()){
-            return redirect('recolectores')->with('success','Registro guardado.');
+            return Redirect::back()->with('success','Registro actualizado.');
         }else{
             return Redirect::back()->with('error','Error al guardar el registro.');
         }
