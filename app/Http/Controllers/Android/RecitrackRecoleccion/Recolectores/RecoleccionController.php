@@ -70,7 +70,7 @@ class RecoleccionController extends Controller
                 $recol->subtotal=$subtotal;
                 $recol->iva=$iva;
                 $recol->total=$total;
-                //$recol->folio=$folio;
+                $recol->folio=$folio;
 
                 
                 $recol->fehcallegada=date('Y-m-d H:i:s');
