@@ -132,7 +132,7 @@
               
                     <tr>
                         <td>
-                            AUTORIZACIÓN RAMIR: <b>{{$planta->plantaauto}}</b>
+                            AUTORIZACIÓN RAMIR: <b></b>
                         </td>
                         <td>
                             NO. DE REGISTRO S.C.T. <b>{{$recoleccion->regsct}}</b>
@@ -190,13 +190,13 @@
               
                     <tr>
                         <td>
-                            AUTORIZACIÓN RAMIR: <b>{{$planta->plantaauto}}</b>
+                            AUTORIZACIÓN RAMIR: <b></b>
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            DOMICILIO FISCAL: <b>{{$planta->direccion}}</b>
+                            DOMICILIO FISCAL: <b></b>
                         </td>
                         <td>
                             TELÉFONO: <b>{{$configuracion->telefono}}</b>
@@ -211,13 +211,13 @@
                 <table style="border-collapse: collapse;" class="probable100">
                     <tr>
                         <td>NOMBRE:</td>
-                        <td><b>{{$administrador->administrador}}</b></td>
+                        <td><b>Emiliano</b></td>
                         <td>FIRMA: </td>
-                        <td><img src="{{$administrador->firma}}" width="70px" alt=""></td>
+                        <td><img src="" width="70px" alt=""></td>
                     </tr>
                     <tr>
                         <td>CARGO:</td>
-                        <td>{{$administrador->cargo}}</td>
+                        <td>Recepcion</td>
                         <td>FECHA DE EMBARQUE:</td>
                         <td><b>{{FechaFormateada($recoleccion->created_at)}}</b></td>
                     </tr>
