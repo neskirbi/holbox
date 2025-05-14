@@ -48,16 +48,6 @@
             </a>
           </li>
 
-             
-          <li class="nav-item">
-            <a href="{{ url('recolectores') }}" class="nav-link">
-              <i class="nav-icon fa fa-user" aria-hidden="true"></i>
-              <p>
-                Recolectores
-              </p>
-            </a>
-          </li>
-
           
           
 
