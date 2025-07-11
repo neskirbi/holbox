@@ -41,7 +41,7 @@
                
           <li class="nav-item">
             <a href="{{ url('establecimientos') }}" class="nav-link">
-              <i class="nav-icon fa fa-industry" aria-hidden="true"></i>
+              <i class="nav-icon fa fa-briefcase" aria-hidden="true"></i>
               <p>
                 Establecimientos
               </p>
@@ -59,6 +59,28 @@
               </p>
             </a>
           </li>
+
+
+           <li class="nav-item">
+            <a href="{{ url('recolectoresadm') }}" class="nav-link">
+              <i class="nav-icon fa fa-group" aria-hidden="true"></i>
+              <p>
+                Recolectores
+              </p>
+            </a>
+          </li>
+
+
+
+           <li class="nav-item">
+            <a href="{{ url('residuos') }}" class="nav-link">
+              <i class="nav-icon fa fa-recycle" aria-hidden="true"></i>
+              <p>
+                Residuos
+              </p>
+            </a>
+          </li>
+
 
 
          

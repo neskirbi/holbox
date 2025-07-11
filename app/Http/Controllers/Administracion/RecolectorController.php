@@ -15,23 +15,24 @@ class RecolectorController extends Controller
 {
 
       
+    
     public function __construct(){
         //$this->middleware('administradorlogged');
     }
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $filtros)
     {
         $recolectores=DB::table('recolectores')
-        ->where('id_municipio',Auth::guard('administradores')->user()->id_municipio)
-        ->orderby('created_at','asc')
-        ->get();
-
+        ->orderby('apellidos','asc')
+        ->whereraw(" nombres like '%$filtros->recolector%' or apellidos like '%$filtros->recolector%' ")
+        ->paginate(36);
         
-        return view('administracion.recolectores.recolectores',['recolectores'=>$recolectores]);
+        return view('administracion.recolectores.index',['recolectores'=>$recolectores,'filtros'=>$filtros]);
     }
 
     /**
@@ -41,7 +42,7 @@ class RecolectorController extends Controller
      */
     public function create()
     {
-        //
+        return view('administracion.recolectores.create');
     }
 
     /**
@@ -52,18 +53,20 @@ class RecolectorController extends Controller
      */ 
     public function store(Request $request)
     {
-        $recolector = Recolector::where('mail','=',$request->mail)->first();
-        if($recolector){
-            return Redirect::back()->with('error','El correo ya fue registrado anteriormente.');
+        //return $request;
+        $telefono = Recolector::where('telefono','=',$request->telefono)->first();
+        if($telefono !=''){
+            return Redirect::back()->with('error','El teléfono ya fue registrado anteriormente.');
         }
+
         
         $recolector=new Recolector();
 
-        $recolector->id=GetUuid();
-        $recolector->id_municipio=GetIdMunicipio();        
-        $recolector->recolector=$request->nombre;
-        $recolector->mail=$request->mail;                        
-        $recolector->telefono=$request->telefono;             
+        $recolector->id=GetUuid();        
+        $recolector->nombres=$request->nombres;
+        $recolector->apellidos=$request->apellidos;
+        $recolector->telefono=$request->telefono;                        
+        $recolector->licencia=$request->licencia;             
         $recolector->pass=$request->pass;
 
         if($request->telefono!=null){
@@ -75,7 +78,7 @@ class RecolectorController extends Controller
 
 
         if($recolector->save()){
-            return redirect('recolectores')->with('success','Registro guardado.');
+            return redirect('recolectoresadm')->with('success','Registro guardado.');
         }else{
             return Redirect::back()->with('error','Error al guardar el registro.');
         }
@@ -89,7 +92,8 @@ class RecolectorController extends Controller
      */
     public function show($id)
     {
-        //
+        $recolector = Recolector::find($id);
+        return view('administracion.recolectores.show',['recolector'=>$recolector]);
     }
 
     /**
@@ -113,30 +117,32 @@ class RecolectorController extends Controller
     public function update(Request $request, $id)
     {
         
-        if(isset($request->mail)){
-            $recolector = Recolector::where('mail','=',$request->mail)->first();
-            if($recolector){
-                return Redirect::back()->with('error','El correo ya fue registrado anteriormente.');
-            }
+       $telefono = Recolector::where('telefono','=',$request->telefono)->first();
+        if($telefono !=''){
+            return Redirect::back()->with('error','El teléfono ya fue registrado anteriormente. ');
         }
 
         $recolector=Recolector::find($id);
         
-        $recolector->recolector=$request->nombre;
-        $recolector->mail=isset($request->mail) ? $request->mail : $recolector->mail;                       
-        //$recolector->telefono=$request->telefono;       
-        $recolector->pass=$request->pass;
+        $recolector->nombres=$request->nombres;
+        $recolector->apellidos=$request->apellidos;
+        $recolector->telefono=isset($request->telefono) ? $request->telefono : $recolector->telefono;    
+                     
+        $recolector->licencia=$request->licencia;   
+        $recolector->pass=(isset($request->pass) ? $request->pass : $recolector->pass);
 
+        //No se entra por que no validamos celulares ahorita 
+        if(0)
         if($request->telefono!=null){
-            $response=EnviarMensaje("+52".$request->telefono,'Su numero se ha registrado en reci-trash.mx, para confirmar el registro de su número vaya al siguiente link reci-trash.mx/ConfirmacionRecolector/'.$recolector->id.' .');
+            /*$response=EnviarMensaje("+52".$request->telefono,'Su numero se ha registrado en reci-trash.mx, para confirmar el registro de su número vaya al siguiente link reci-trash.mx/ConfirmacionRecolector/'.$recolector->id.' .');
             if(intval($response)>=400){
                 return Redirect::back()->with('error','Error, el numero es invalido.');
-            }
+            }*/
         }
 
 
         if($recolector->save()){
-            return redirect('recolectores')->with('success','Registro guardado.');
+            return redirect('recolectoresadm/'.$id)->with('success','Registro actualizado.');
         }else{
             return Redirect::back()->with('error','Error al guardar el registro.');
         }

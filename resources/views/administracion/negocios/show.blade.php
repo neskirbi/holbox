@@ -31,7 +31,7 @@
         
             <div class="card card-default">
                 <div class="card-header">
-                    <h3 class="card-title"><i class="fas fa-store"></i> Negocio</h3>            
+                    <h3 class="card-title"><i class="fas fa-briefcase"></i> Negocio</h3>            
                 </div>
                 <!-- /.card-header -->
                 <form method="POST" action="{{url('establecimientos')}}/{{$negocio->id}}" id="formnegocio" enctype="multipart/form-data">
@@ -41,7 +41,7 @@
 
                         <div class="card card-info">
                             <div class="card-header">
-                                <h3 class="card-title"><i class="fas fa-building"></i> Datos del Establecimiento</h3>
+                                <h3 class="card-title"><i class="fa fa-building"></i> Datos del Establecimiento</h3>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -90,7 +90,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="numeroint"><i class="fas fa-home"></i> Número Int.</label>
-                                            <input type="text" name="numeroint" class="form-control" id="numeroint" placeholder="Número Int." value="{{ $negocio->numeroint }}">
+                                            <input type="text" name="numeroint" class="form-control" id="numeroint" placeholder="Número Int." value="{{ $negocio->numeroint }}" required>
                                         </div>
                                     </div>
                                 </div>

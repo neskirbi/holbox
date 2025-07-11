@@ -250,52 +250,27 @@ Route::get('BorrarGenerador/{id}', 'App\Http\Controllers\Asociacion\GeneradorCon
  * Rutas para administradores
  */
 
- Route::resource('planta','App\Http\Controllers\Administracion\PlantaController');
-
-Route::post('EditarAdmin/{id}','App\Http\Controllers\Administracion\PlantaController@EditarAdmin');
-Route::get('BorrarAdmin/{id}','App\Http\Controllers\Administracion\PlantaController@BorrarAdmin');
-
-
-Route::resource('pagos', 'App\Http\Controllers\Administracion\PagoController');
-Route::post('CancelarPago/{id}', 'App\Http\Controllers\Administracion\PagoController@CancelarPago');
-Route::post('VerificarPago/{id}', 'App\Http\Controllers\Administracion\PagoController@VerificarPago');
-Route::post('CargarPagos', 'App\Http\Controllers\Administracion\PagoController@CargarPagos');
-
-
-Route::resource('catalogos', 'App\Http\Controllers\Administracion\CatalogoController');
 
 
 
 
 
 
-
-
-Route::get('BorrarRecolector/{id}','App\Http\Controllers\Administracion\RecolectorController@BorrarRecolector');
+Route::resource('recolectoresadm','App\Http\Controllers\Administracion\RecolectorController');
 
 
 Route::resource('vehiculos','App\Http\Controllers\Administracion\VehiculoController');
 Route::get('BorrarRecolector/{id}','App\Http\Controllers\Administracion\RecolectorController@BorrarRecolector');
 
 Route::resource('recoleccion','App\Http\Controllers\Administracion\RecoleccionController');
+Route::resource('residuos','App\Http\Controllers\Administracion\ResiduoController');
 
 
-Route::resource('citasfecha', 'App\Http\Controllers\Administracion\CitasFechaController');
-
-Route::resource('configuracion', 'App\Http\Controllers\Administracion\ConfiguracionController');
-
-Route::post('configuracioncuenta', 'App\Http\Controllers\Administracion\ConfiguracionController@ConfiguracionCuenta');
-Route::post('ConfiguracionRepresentante', 'App\Http\Controllers\Administracion\ConfiguracionController@ConfiguracionRepresentante');
-Route::post('configuracionbanco', 'App\Http\Controllers\Administracion\ConfiguracionController@ConfiguracionBanco');
-Route::post('configuracionboleta', 'App\Http\Controllers\Administracion\ConfiguracionController@ConfiguracionBoleta');
-Route::put('GuardarDatosPlanta/{id}', 'App\Http\Controllers\Administracion\ConfiguracionController@GuardarDatosPlanta');
-Route::post('CambioPass/{id}', 'App\Http\Controllers\Administracion\ConfiguracionController@CambioPass');
 
 Route::post('GuardarEmpresaTransporte', 'App\Http\Controllers\Administracion\ConfiguracionController@GuardarEmpresaTransporte');
 
 
-Route::post('Residuo', 'App\Http\Controllers\Administracion\ConfiguracionController@Residuo');
-Route::post('BorrarResiduo/{id}', 'App\Http\Controllers\Administracion\ConfiguracionController@BorrarResiduo');
+
 
 Route::post('Contenedor', 'App\Http\Controllers\Administracion\ConfiguracionController@Contenedor');
 Route::post('BorrarContenedor/{id}', 'App\Http\Controllers\Administracion\ConfiguracionController@BorrarContenedor');

@@ -33,7 +33,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title"><i class="fa fa-bars" aria-hidden="true"></i> Recolecciones </h3>
+                <h3 class="card-title"><i class="fa fa-trash-alt" aria-hidden="true"></i> Recolecciones </h3>
 
                 <!--<div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
@@ -59,10 +59,7 @@
                       <thead>
                         <tr>
                           <th>Establecimientos</th>
-                          <th>Tipo</th>                    
-                          <th>Residuo</th>                  
-                          <th>Cantidad</th>
-                          <th>Día</th>
+                          <th>Fecha</th>
                           <th>Opciones</th>
                           
                         </tr>
@@ -72,12 +69,7 @@
                         @foreach($recolecciones as $recoleccion)
                         <tr>
                           <td>{{$recoleccion->negocio}}</td>
-                          <td>{{$recoleccion->tiponegocio}}</td>
-                          <td>{{$recoleccion->residuo}}</td>
-                          <td>{{$recoleccion->contenedor.' '.$recoleccion->cantidad}}</td>
-                          <td>{{FechaFormateada($recoleccion->created_at)}}</td>
-                          
-                          
+                          <td>{{FechaFormateada($recoleccion->created_at)}}</td>                          
                           <td>
                             <a href="{{url('Manifiesto')}}/{{$recoleccion->id}}" target="_blank" class="btn btn-info "><i class="fa fa-download" aria-hidden="true"></i> Manifiesto</a>                            
                           </td>

@@ -16,11 +16,13 @@ use Redirect;
 
 class NegocioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
+    
+    
+    public function __construct(){
+        $this->middleware('administradorlogged');
+    }
+    
     public function index(Request $filtros)
     {
         $negocios = DB::table('negocios')
