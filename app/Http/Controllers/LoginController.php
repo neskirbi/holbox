@@ -134,8 +134,8 @@ class LoginController extends Controller
         if( Auth::guard('finanzas')->check()){
             Auth::guard('finanzas')->logout();
         }
-        if( Auth::guard('sedemas')->check()){
-            Auth::guard('sedemas')->logout();
+        if( Auth::guard('recolectores')->check()){
+            Auth::guard('recolectores')->logout();
         }   
         if( Auth::guard('clientes')->check()){
             Auth::guard('clientes')->logout();
