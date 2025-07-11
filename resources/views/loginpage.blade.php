@@ -90,7 +90,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></div>
                             </div>
-                            <input required type="email" class="form-control" id="mail" name="mail" placeholder="Correo">
+                            <input required type="text" class="form-control" id="mail" name="mail" placeholder="Correo">
                         </div>
                     </div>
 

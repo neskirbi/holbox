@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     @include('recolectores.header')
-    <title>Recitur | Recolección de Residuos</title>
+    <title>Recitrash | Recolección de Residuos</title>
     <style>
         .required-field {
             border: 1px solid #dc3545 !important;

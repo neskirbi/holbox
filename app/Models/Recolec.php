@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Recolector extends Authenticatable
+class Recolec extends Authenticatable
 {
     use HasFactory;
-    protected $table = 'recolectores';
+    protected $table = 'recoleccion';
     protected $primaryKey = 'id';
     public $incrementing = false;
 }

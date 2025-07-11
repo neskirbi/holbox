@@ -2,13 +2,13 @@
 <html lang="es">
 <head>
     @include('recolectores.header')
-    <title>Recitur | Recolectar</title>
+    <title>Recitrash | Recolectar</title>
     <style>
         .cedula-body {
             position: relative;
             width: 100%;
-            height: 500px;
-            background-image: url('{{ asset('images/cedulas/acapulco/bodycedula.png') }}');
+            height: 800px;
+            background-image: url('{{ asset('images/cedulas/fondos/cedulaFondo1.jpg') }}');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -128,7 +128,7 @@ function abrirCamara() {
 
             const instrucciones = document.querySelector(".qr-instructions");
             instrucciones.innerHTML = `
-                <a href="{{ url('hacerrecolleccion') }}/${qrCodeMessage}" class="btn btn-theme-primary mt-3">
+                <a href="{{ url('hacerrecolleccion') }}/${qrCodeMessage}" class="btn btn-danger mt-3">
                     Realizar la recolección
                 </a>
             `;

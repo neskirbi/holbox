@@ -15,6 +15,7 @@ use App\Models\Token;
 use App\Mail\MailRecuperar;
 use App\Models\Director;
 use App\Models\Sedema;
+use App\Models\Recolector;
 use App\Models\Transportista;
  
 
@@ -94,19 +95,19 @@ class LoginController extends Controller
             return redirect('home');
         }
 
-        $sedema = Sedema::where([
-            'mail' => $request->mail
+        $recolector = Recolector::where([
+            'telefono' => $request->mail
         ])->first();
 
-        if($sedema){
-            if($request->pass!=$sedema->pass){
+        if($recolector){
+            if($request->pass!=$recolector->pass){
                 return redirect('loginpage')->with('error', '¡Error de contraseña!');
             }
-            Auth::guard('sedemas')->login($sedema);
+            Auth::guard('recolectores')->login($recolector);
             return redirect('home');
         }
 
-        return redirect('loginpage')->with('error', '¡Correo no registrado!');
+        return redirect('loginpage')->with('error', '¡Correo o teléfono no registrado!');
     }
 
 

@@ -95,6 +95,11 @@ return [
             'driver' => 'session',
             'provider' => 'soporte',
         ],
+        
+        'recolectores' => [
+            'driver' => 'session',
+            'provider' => 'recolectores',
+        ],
 
         'api' => [
             'driver' => 'token',
@@ -169,6 +174,11 @@ return [
         'soporte' => [
             'driver' => 'eloquent',
             'model' => App\Models\Soporte::class,
+        ],
+
+        'recolectores' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Recolector::class,
         ],
 
         'sedemas' => [

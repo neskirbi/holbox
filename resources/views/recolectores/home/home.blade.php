@@ -2,7 +2,7 @@
 <html lang="es"> <!-- Cambiado a "es" para español -->
 <head>
     @include('recolectores.header')
-    <title>Recitur | Home</title>
+    <title>Recitrash | Home</title>
     
 </head>
 <body>

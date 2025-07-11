@@ -35,8 +35,8 @@ Route::get('home', function () {
         return redirect('establecimientos');
     }  
 
-    if(Auth::guard('vendedores')->check()){
-        return redirect('ventas');
+    if(Auth::guard('recolectores')->check()){
+        return redirect('homer');
     } 
 
     if(Auth::guard('recepciones')->check()){
@@ -384,7 +384,17 @@ Route::get('TCRecitrackTrasporte',function(){
      
     Route::get('ConfirmacionRecolector/{id}','App\Http\Controllers\Android\Recolector\LoginController@ConfirmacionRecolector');
 
-    
+
+
+    Route::resource('homer','App\Http\Controllers\Recolectores\HomeController');
+    Route::resource('recolectar','App\Http\Controllers\Recolectores\RecolectarController');
+    Route::get('hacerrecolleccion/{id}','App\Http\Controllers\Recolectores\RecolectarController@HacerRecoleccion');
+    Route::post('GuardarRecoleccion','App\Http\Controllers\Recolectores\RecolectarController@GuardarRecoleccion');
+
+    Route::resource('recoleccionesr','App\Http\Controllers\Recolectores\RecoleccionController');
+
+    Route::get('manifiestorecoleccion/{fecha}','App\Http\Controllers\Recolectores\RecoleccionController@ManifiestoRecolector');
+ 
     
 
 
