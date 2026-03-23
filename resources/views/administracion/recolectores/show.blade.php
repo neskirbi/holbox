@@ -45,15 +45,13 @@
                                         <div class="row">
                                           <div class="col-md-12">                                        
                                               <div class="row">
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
                                                   <div class="form-group">
                                                       <label for="nombres">Nombre(s)</label>
                                                       <input required type="text" name="nombres" class="form-control" id="nombres" placeholder="Nombre(s)" aria-invalid="false"maxlength="150"  value="{{$recolector->nombres}}">
                                                   </div>                     
                                                 </div>
-                                              </div>
-                                              <div class="row">
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
                                                   <div class="form-group">
                                                       <label for="ramir">Apellidos</label>
                                                       <input required type="text" name="apellidos" class="form-control" id="apellidos" placeholder="Apellidos" aria-invalid="false" maxlength="150"  value="{{$recolector->apellidos}}">
@@ -64,7 +62,7 @@
                                               
                                               <div class="row">
 
-                                                  <div class="col-md-12">
+                                                  <div class="col-md-6">
                                                       <div class="form-group">
                                                           <label for="licencia">Licencia</label>
                                                           
@@ -79,10 +77,8 @@
                                                           </select>
                                                       </div>
                                                   </div>
-                                              </div>
-                                              
-                                              <div class="row">
-                                                <div class="col-md-12">
+                                                  
+                                                <div class="col-md-6">
                                                   <div class="form-group">
                                                     <label for="telefono">Teléfono</label>
                                                     <div class="input-group mb-3">
@@ -96,7 +92,7 @@
                                               </div>
                                               
                                               <div class="row">                          
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
                                                   <div class="form-group">
                                                       <label for="pass">Contraseña</label>
                                                       <input required type="text" name="pass" class="form-control" id="pass" placeholder="Contraseña" aria-invalid="false" maxlength="255"  value="{{$recolector->pass}}">

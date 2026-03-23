@@ -405,7 +405,7 @@ Route::get('TCRecitrackTrasporte',function(){
  */
 
  Route::get('Fotos','App\Http\Controllers\Desarrollo\TareasController@Fotos');
- Route::get('Pass123','App\Http\Controllers\Desarrollo\TareasController@Pass123');
+ //Route::get('Pass123','App\Http\Controllers\Desarrollo\TareasController@Pass123');
  
  Route::get('Contratos','App\Http\Controllers\Desarrollo\TareasController@Contratos');
 
